@@ -11,10 +11,10 @@ package BUS;
  */
 import DAO.daoBaoCao;
 import DAO.daoKhuVuc;
-import DAO.daoNguonCungCap;
+import DAO.daoNhaCungCap;
 import DAO.daoNhanVien;
 import DTO.KhuVuc;
-import DTO.NguonCungCap;
+import DTO.NhaCungCap;
 import DTO.NhanVien;
 import com.mysql.jdbc.Driver;
 import java.sql.Connection;
@@ -175,8 +175,8 @@ public class busReport {
         ArrayList<KhuVuc> arr = daoKhuVuc.getInstance().getListKhuVuc();
         daoKhuVuc.getInstance().ExcelKhuVuc(arr);
     }
-    public void excelNguonCungCap(){
-        ArrayList<NguonCungCap> arr = daoNguonCungCap.getInstance().getListNguonCungCap();
-        daoNguonCungCap.getInstance().ExcelNguonCungCap(arr);
+    public void excelNhaCungCap(){
+        ArrayList<NhaCungCap> arr = daoNhaCungCap.getInstance().getListNhaCungCap();
+        daoNhaCungCap.getInstance().ExcelNhaCungCap(arr);
     }
 }

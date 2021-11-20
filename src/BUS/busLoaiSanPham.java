@@ -4,38 +4,46 @@
  * and open the template in the editor.
  */
 package BUS;
-import DAO.daoTraNhaCungCap;
-import DTO.PhieuTraKho;
+import DAO.daoLoaiSanPham;
+import DTO.LoaiSanPham;
 import java.util.ArrayList;
 /**
  *
  * @author Dinh Tien
  */
-public class busTraNhaCungCap {
-    private static busTraNhaCungCap instance;
+public class busLoaiSanPham {
+    private static busLoaiSanPham instance;
 
-    public static busTraNhaCungCap getInstance() {
+    public static busLoaiSanPham getInstance() {
         if (instance == null) {
-            instance = new busTraNhaCungCap();
+            instance = new busLoaiSanPham();
         }
         return instance;
     }
 
-    public busTraNhaCungCap() {
+    public busLoaiSanPham() {
     }
-    public ArrayList<PhieuTraKho> getListTraKho() {
-        return daoTraNhaCungCap.getInstance().getListTraKho();
+    public ArrayList<LoaiSanPham> getListLoaiSanPham() {
+        return daoLoaiSanPham.getInstance().getListLoaiSanPham();
     }
-    public PhieuTraKho getTraKho(int id_pt) {
-        return daoTraNhaCungCap.getInstance().getTraKho(id_pt);
+    public LoaiSanPham getTraKho(String MaLSP) {
+        return daoLoaiSanPham.getInstance().getLoaiSanPham(MaLSP);
     }
-    public boolean InsertPhieuTra(int id_kho, int id_nv) {
-        return daoTraNhaCungCap.getInstance().InsertPhieuTra(id_kho,id_nv);
+    public void ThemLoaiSanPham(String TenLSP, String MaLSP, String Mota, String maNV) {
+        daoLoaiSanPham.getInstance().ThemLoaiSanPham(TenLSP,MaLSP, Mota, maNV);
     }
-    public ArrayList<PhieuTraKho> FindListTraKho(ArrayList<PhieuTraKho> DuLieuMau, String ValToSearch) {
-        return daoTraNhaCungCap.getInstance().FindListTraKho(DuLieuMau,ValToSearch);
+    
+    public void UpdateLoaiSanPham (String TenLSP, String MaLSP, String Mota) {
+        daoLoaiSanPham.getInstance().UpdateLoaiSanPham(TenLSP,MaLSP, Mota);
     }
-    public ArrayList<PhieuTraKho> get20PhieuTraKho(ArrayList<PhieuTraKho> arr, long Trang) {
-        return daoTraNhaCungCap.getInstance().get20PhieuTraKho(arr,Trang);
+    
+    public void DeleteLoaiSanPham(String MaLSP) {
+        daoLoaiSanPham.getInstance().DeleteLoaiSanPham(MaLSP);
+    }
+    public ArrayList<LoaiSanPham> FindListLoaiSanPham(ArrayList<LoaiSanPham> DuLieuMau, String ValToSearch) {
+        return daoLoaiSanPham.getInstance().FindListLoaiSanPham(DuLieuMau,ValToSearch);
+    }
+    public ArrayList<LoaiSanPham> get20LoaiSanPham(ArrayList<LoaiSanPham> arr, long Trang) {
+        return daoLoaiSanPham.getInstance().get20LoaiSanPham(arr,Trang);
     }
 }

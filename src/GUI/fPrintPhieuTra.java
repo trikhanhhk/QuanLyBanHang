@@ -11,7 +11,7 @@ import DTO.Kho;
 import DTO.KhuVuc;
 import DTO.LoSanPham;
 import DTO.LoaiSanPham;
-import DTO.NguonCungCap;
+import DTO.NhaCungCap;
 import DTO.NhanVien;
 import DTO.PhieuTraKho;
 import DTO.SanPham;
@@ -65,7 +65,7 @@ public class fPrintPhieuTra extends javax.swing.JFrame {
         LoaiSanPham loaisp = DAO.daoLoaiSanPham.getInstance().getLoaiSanPham(sp.id_loai_sp);
         LoSanPham lsp = DAO.daoLoSanPham.getInstance().getLoSanPham(px.id_lo_sp);
         ChiTietPhieuNhap ctpn = DAO.daoChiTietPhieuNhap.getInstance().getChiTietPhieuNhap(lsp.id_phieu_nhap);
-        NguonCungCap ncc = DAO.daoNguonCungCap.getInstance().getNguonCungCap(ctpn.id_nguon_cc);
+        NhaCungCap ncc = DAO.daoNhaCungCap.getInstance().getNhaCungCap(ctpn.id_nguon_cc);
         Kho kho = DAO.daoKho.getInstance().getLoKho(lsp.id_lo_sp);
         KhuVuc kv = DAO.daoKhuVuc.getInstance().getKhuVuc(kho.id_khu_vuc);
         jLabelTenNhaCungCap.setText(ncc.ten_nha_cc);

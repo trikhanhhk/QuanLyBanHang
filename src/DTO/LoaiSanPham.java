@@ -10,18 +10,36 @@ import java.lang.*;
  * @author nghia
  */
 public class LoaiSanPham {
-    public int id_loai_sp;
-    public String ten_loai_sp;
-    public String dvt;
-    public int id_exist;
-    public int id_khu_vuc;
+    String MaLSP, TenLSP, MoTa;
+    
+    public LoaiSanPham(String MaLSP, String TenLSP, String MoTa) {
+        this.MaLSP = MaLSP;
+        this.TenLSP = TenLSP;
+        this.MoTa = MoTa;
+    }
 
-    public LoaiSanPham(int id_loai_sp,String ten_loai_sp,String dvt, int id_exist, int id_khu_vuc) {
-        this.id_loai_sp = id_loai_sp;
-        this.ten_loai_sp = ten_loai_sp;
-        this.dvt = dvt;
-        this.id_exist = id_exist;
-        this.id_khu_vuc = id_khu_vuc;
+    public String getMoTa() {
+        return MoTa;
+    }
+
+    public void setMoTa(String MoTa) {
+        this.MoTa = MoTa;
+    }
+
+    public String getMaLSP() {
+        return MaLSP;
+    }
+
+    public void setMaLSP(String MaLSP) {
+        this.MaLSP = MaLSP;
+    }
+
+    public String getTenLSP() {
+        return TenLSP;
+    }
+
+    public void setTenLSP(String TenLSP) {
+        this.TenLSP = TenLSP;
     }
     
 }

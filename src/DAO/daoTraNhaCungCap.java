@@ -130,7 +130,7 @@ public class daoTraNhaCungCap {
             String sl_sp = String.valueOf(DuLieuMau.get(i).sl_san_pham);
             LoSanPham lsp = DAO.daoLoSanPham.getInstance().getLoSanPham(DuLieuMau.get(i).id_lo_sp);
             ChiTietPhieuNhap ctpn = DAO.daoChiTietPhieuNhap.getInstance().getChiTietPhieuNhap(lsp.id_phieu_nhap);
-            NguonCungCap ncc = DAO.daoNguonCungCap.getInstance().getNguonCungCap(ctpn.id_nguon_cc);
+            NhaCungCap ncc = DAO.daoNhaCungCap.getInstance().getNhaCungCap(ctpn.id_nguon_cc);
             if (DuLieuMau.get(i).thoi_gian_tra.contains(ValToSearch)
                     || tensp.contains(ValToSearch)
                     || sl_sp.contains(ValToSearch)

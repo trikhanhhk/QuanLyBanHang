@@ -40,24 +40,24 @@ public class fNhacungcap extends javax.swing.JFrame {
     /**
      * Creates new form fNhacungcap
      */
-    public int id_nv;
-    public ArrayList<NguonCungCap> DanhSachXuatKho;
+    public String maNV;
+    public ArrayList<NhaCungCap> DanhSachXuatKho;
     public long count, SoTrang, Trang = 1;
-    public ArrayList<NguonCungCap> DuLieuMau;
+    public ArrayList<NhaCungCap> DuLieuMau;
 
     public fNhacungcap() {
         initComponents();
         setIcon();
-        build();
+//        build();
     }
 
-    public fNhacungcap(int id) {
-        id_nv = id;
+    public fNhacungcap(String id) {
+        maNV = id;
         initComponents();
         setIcon();
-        DanhSachXuatKho = daoNguonCungCap.getInstance().getListNguonCungCap();
+        DanhSachXuatKho = daoNhaCungCap.getInstance().getListNhaCungCap();
         DuLieuMau = DanhSachXuatKho;
-        build();
+//        build();
     }
 
     private void setIcon() {
@@ -79,16 +79,16 @@ public class fNhacungcap extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        ArrayList<NguonCungCap> DuLieuMau = daoNguonCungCap.getInstance().getListNguonCungCap();
-        String[] columnName = {"STT", "Tên nhà cung cấp", "Địa chỉ", "Số điện thoại", "Email", "Người đại diện"};
+        ArrayList<NhaCungCap> DuLieuMau = daoNhaCungCap.getInstance().getListNhaCungCap();
+        String[] columnName = {"STT", "Mã nhà cung cấp", "Tên nhà cung cấp", "Địa chỉ", "Số điện thoại", "FAX"};
         Object[][] rows = new Object[DuLieuMau.size()][7];
         for(int i = 0; i < DuLieuMau.size(); i++){
-            rows[i][0] = DuLieuMau.get(i).id_nguon_cc;
-            rows[i][1] = DuLieuMau.get(i).ten_nha_cc;
-            rows[i][2] = DuLieuMau.get(i).dia_chi;
-            rows[i][3] = DuLieuMau.get(i).sdt;
-            rows[i][4] = DuLieuMau.get(i).email;
-            rows[i][5] = DuLieuMau.get(i).ten_dai_dien;
+            rows[i][0] = i+1;
+            rows[i][1] = DuLieuMau.get(i).getMaNCC();
+            rows[i][2] = DuLieuMau.get(i).getTenNCC();
+            rows[i][3] = DuLieuMau.get(i).getDiaChi();
+            rows[i][4] = DuLieuMau.get(i).getSDT();
+            rows[i][5] = DuLieuMau.get(i).getFax();
             /*
             if(DuLieuMau.get(i).hinh_anh != null){
                 ImageIcon image = new ImageIcon(new ImageIcon(DuLieuMau.get(i).hinh_anh).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH) );
@@ -121,7 +121,7 @@ public class fNhacungcap extends javax.swing.JFrame {
                 return false;
             }
         };
-        jTableNguonCungCap = new javax.swing.JTable(model);
+        jTableNhaCungCap = new javax.swing.JTable(model);
         jButtonThem = new javax.swing.JButton();
         jTextFieldTimKiem = new javax.swing.JTextField();
         jButtonExcel = new javax.swing.JButton();
@@ -160,36 +160,36 @@ public class fNhacungcap extends javax.swing.JFrame {
         jPanel13.setAlignmentX(0.2F);
 
         /*
-        jTableNguonCungCap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTableNguonCungCap.setModel(new javax.swing.table.DefaultTableModel(
+        jTableNhaCungCap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTableNhaCungCap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên nhà cung cấp", "Địa chỉ", "Số điện thoại", "Email", "Người đại diện"
+                "STT", "Tên nhà cung cấp", "Mã nhà cung cấp", "Tên nhà cung cấp", "Địa chỉ", "Số điện thoại", "Fax"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -197,20 +197,20 @@ public class fNhacungcap extends javax.swing.JFrame {
             }
         });
         */
-        jTableNguonCungCap.setRequestFocusEnabled(false);
-        jTableNguonCungCap.setRowHeight(50);
-        jTableNguonCungCap.setRowSelectionAllowed(true);
-        jTableNguonCungCap.setAutoCreateRowSorter(true);
-        jTableNguonCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableNhaCungCap.setRequestFocusEnabled(false);
+        jTableNhaCungCap.setRowHeight(50);
+        jTableNhaCungCap.setRowSelectionAllowed(true);
+        jTableNhaCungCap.setAutoCreateRowSorter(true);
+        jTableNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableNguonCungCapMouseClicked(evt);
+                jTableNhaCungCapMouseClicked(evt);
             }
         });
-        jScrollPane7.setViewportView(jTableNguonCungCap);
-        if (jTableNguonCungCap.getColumnModel().getColumnCount() > 0) {
-            jTableNguonCungCap.getColumnModel().getColumn(0).setMinWidth(30);
-            jTableNguonCungCap.getColumnModel().getColumn(0).setPreferredWidth(30);
-            jTableNguonCungCap.getColumnModel().getColumn(0).setMaxWidth(30);
+        jScrollPane7.setViewportView(jTableNhaCungCap);
+        if (jTableNhaCungCap.getColumnModel().getColumnCount() > 0) {
+            jTableNhaCungCap.getColumnModel().getColumn(0).setMinWidth(30);
+            jTableNhaCungCap.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jTableNhaCungCap.getColumnModel().getColumn(0).setMaxWidth(30);
         }
 
         jButtonThem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -511,7 +511,7 @@ public class fNhacungcap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonThemjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemjButton2ActionPerformed
-        JFrame Them = new fCreateNhaCungCap(id_nv);
+        JFrame Them = new fCreateNhaCungCap(maNV);
         Them.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonThemjButton2ActionPerformed
@@ -526,12 +526,12 @@ public class fNhacungcap extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemnhacungcap
 
-    private void jTableNguonCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableNguonCungCapMouseClicked
+    private void jTableNhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableNhaCungCapMouseClicked
         if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             evt.consume();
-            int selectedRowIndex = jTableNguonCungCap.getSelectedRow();
-            int id = jTableNguonCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewNhaCungCap(id_nv, id,false);
+            int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
+            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
+            JFrame Xem = new fViewNhaCungCap(maNV, id,false);
             Xem.setVisible(true);
             //System.out.print("Nhap dup chuot");
         }
@@ -539,7 +539,7 @@ public class fNhacungcap extends javax.swing.JFrame {
         jButtonHuy.setEnabled(true);
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTableNguonCungCapMouseClicked
+    }//GEN-LAST:event_jTableNhaCungCapMouseClicked
 
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed
         String valueIn = String.valueOf(jComboBoxNhanVien.getSelectedItem());
@@ -549,12 +549,13 @@ public class fNhacungcap extends javax.swing.JFrame {
             dispose();
         }
         if ("Thông tin".equals(valueIn)) {
-            JFrame nv = new fViewNhanVien(id_nv, id_nv);
+            JFrame nv = new fViewNhanVien(maNV, maNV);
             nv.setVisible(true);
         }
         jComboBoxNhanVien.setSelectedIndex(0);
     }//GEN-LAST:event_jComboBoxNhanVienActionPerformed
 
+    
     private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
         // TODO add your handling code here:
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -565,38 +566,38 @@ public class fNhacungcap extends javax.swing.JFrame {
 
         row = sheet.createRow(rownum);
         cell = row.createCell(0);
-        cell.setCellValue("Tên nhà cung cấp");
+        cell.setCellValue("Mã nhà cung cấp");
 
         cell = row.createCell(1);
-        cell.setCellValue("Địa chỉ");
+        cell.setCellValue("Tên nhà cung cấp");
 
         cell = row.createCell(2);
-        cell.setCellValue("Sđt");
+        cell.setCellValue("Địa chỉ");
 
         cell = row.createCell(3);
-        cell.setCellValue("Email");
+        cell.setCellValue("Số điện thoại");
 
         cell = row.createCell(4);
-        cell.setCellValue("Đại diện");
+        cell.setCellValue("Số Fax");
 
         for (int i = 0; i < DuLieuMau.size(); i++) {
             rownum++;
             row = sheet.createRow(rownum);
             //
             cell = row.createCell(0);
-            cell.setCellValue(DuLieuMau.get(i).ten_nha_cc);
+            cell.setCellValue(DuLieuMau.get(i).getMaNCC());
             //
             cell = row.createCell(1);
-            cell.setCellValue(DuLieuMau.get(i).dia_chi);
+            cell.setCellValue(DuLieuMau.get(i).getTenNCC());
             //
             cell = row.createCell(2);
-            cell.setCellValue(DuLieuMau.get(i).sdt);
+            cell.setCellValue(DuLieuMau.get(i).getDiaChi());
             //
             cell = row.createCell(3);
-            cell.setCellValue(DuLieuMau.get(i).email);
+            cell.setCellValue(DuLieuMau.get(i).getSDT());
             //
             cell = row.createCell(4);
-            cell.setCellValue(DuLieuMau.get(i).ten_dai_dien);
+            cell.setCellValue(DuLieuMau.get(i).getFax());
             //
 
         }
@@ -625,8 +626,8 @@ public class fNhacungcap extends javax.swing.JFrame {
 
     private void jButtonNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoMaxActionPerformed
         Trang = 1;
-        ArrayList<NguonCungCap> table = DAO.daoNguonCungCap.getInstance().get20NguonCungCap(DanhSachXuatKho, Trang);
-        listDanhSachNguonCungCap(table);
+        ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachXuatKho, Trang);
+        listDanhSachNhaCungCap(table);
         jLabelTrang.setText("1");
         jLabelSoTrang.setText("1/" + SoTrang);
     }//GEN-LAST:event_jButtonNhoMaxActionPerformed
@@ -634,8 +635,8 @@ public class fNhacungcap extends javax.swing.JFrame {
     private void jButtonNhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoActionPerformed
         if (Trang > 1) {
             Trang--;
-            ArrayList<NguonCungCap> table = DAO.daoNguonCungCap.getInstance().get20NguonCungCap(DanhSachXuatKho, Trang);
-            listDanhSachNguonCungCap(table);
+            ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachXuatKho, Trang);
+            listDanhSachNhaCungCap(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
         }
@@ -644,8 +645,8 @@ public class fNhacungcap extends javax.swing.JFrame {
     private void jButtonLonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonActionPerformed
         if (Trang < SoTrang) {
             Trang++;
-            ArrayList<NguonCungCap> table = DAO.daoNguonCungCap.getInstance().get20NguonCungCap(DanhSachXuatKho, Trang);
-            listDanhSachNguonCungCap(table);
+            ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachXuatKho, Trang);
+            listDanhSachNhaCungCap(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
         }
@@ -653,8 +654,8 @@ public class fNhacungcap extends javax.swing.JFrame {
 
     private void jButtonLonMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonMaxActionPerformed
         Trang = SoTrang;
-        ArrayList<NguonCungCap> table = DAO.daoNguonCungCap.getInstance().get20NguonCungCap(DanhSachXuatKho, Trang);
-        listDanhSachNguonCungCap(table);
+        ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachXuatKho, Trang);
+        listDanhSachNhaCungCap(table);
         jLabelTrang.setText("" + SoTrang);
         jLabelSoTrang.setText(SoTrang + "/" + SoTrang);
     }//GEN-LAST:event_jButtonLonMaxActionPerformed
@@ -663,7 +664,7 @@ public class fNhacungcap extends javax.swing.JFrame {
         invalidate();
         validate();
         repaint();
-        DuLieuMau = daoNguonCungCap.getInstance().getListNguonCungCap();
+        DuLieuMau = daoNhaCungCap.getInstance().getListNhaCungCap();
         build();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLamMoiActionPerformed
@@ -686,27 +687,27 @@ public class fNhacungcap extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
-        int selectedRowIndex = jTableNguonCungCap.getSelectedRow();
-            int id = jTableNguonCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewNhaCungCap(id_nv, id,true);
+        int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
+            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
+            JFrame Xem = new fViewNhaCungCap(maNV, id,true);
             Xem.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
-         int selectedRowIndex = jTableNguonCungCap.getSelectedRow();
-            int id = jTableNguonCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-        JFrame ThongBao = new fThongBaoHuy("NhaCungCap",id,id_nv);
+         int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
+            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
+        JFrame ThongBao = new fThongBaoHuy("NhaCungCap",id,maNV);
         ThongBao.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonHuyActionPerformed
     //
     // 
     public void NhanVienDangNhap() {
-        if (id_nv != 0) {
-            TaiKhoan tk = DAO.daoTaiKhoan.getInstance().getTaiKhoan(id_nv);
-            NhanVien nv = DAO.daoTaiKhoan.getInstance().getNhanVien(tk.id_nv);
-            jComboBoxNhanVien.addItem(nv.ten_nv);
+        if (maNV.length() > 0) {
+            TaiKhoan tk = DAO.daoTaiKhoan.getInstance().getTaiKhoan(maNV);
+            NhanVien nv = DAO.daoTaiKhoan.getInstance().getNhanVien(tk.getMaNV());
+            jComboBoxNhanVien.addItem(nv.getTenNV());
             jComboBoxNhanVien.addItem("Thông tin");
             jComboBoxNhanVien.addItem("Thoát");
         } else {
@@ -747,7 +748,7 @@ public class fNhacungcap extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame ncc = new fNhacungcap(1);
+                JFrame ncc = new fNhacungcap("NV12");
                 ncc.setVisible(true);
             }
         });
@@ -766,19 +767,19 @@ public class fNhacungcap extends javax.swing.JFrame {
         }
         jLabelSoTrang.setText("1/" + SoTrang);
         jLabelTrang.setText("1");
-        ArrayList<NguonCungCap> table = DAO.daoNguonCungCap.getInstance().get20NguonCungCap(DanhSachXuatKho, 1);
-        listDanhSachNguonCungCap(table);
+        ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachXuatKho, 1);
+        listDanhSachNhaCungCap(table);
         NhanVienDangNhap();
     }
 
     public void FindList() {
-        this.DanhSachXuatKho = DAO.daoNguonCungCap.getInstance().FindListNguonCungCap(DuLieuMau, jTextFieldTimKiem.getText());
+        this.DanhSachXuatKho = DAO.daoNhaCungCap.getInstance().FindListNhaCungCap(DuLieuMau, jTextFieldTimKiem.getText());
         if (DanhSachXuatKho.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "Không có dữ liệu nhà cung cấp",
                     "Lỗi",
                     JOptionPane.ERROR_MESSAGE);
-            build();
+//            build();
         } else {
             this.count = this.DanhSachXuatKho.size();
             jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
@@ -789,19 +790,19 @@ public class fNhacungcap extends javax.swing.JFrame {
             }
             jLabelSoTrang.setText("1/" + SoTrang);
             jLabelTrang.setText("1");
-            ArrayList<NguonCungCap> table = DAO.daoNguonCungCap.getInstance().get20NguonCungCap(DanhSachXuatKho, 1);
-            listDanhSachNguonCungCap(table);
+            ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachXuatKho, 1);
+            listDanhSachNhaCungCap(table);
         }
     }
 
-    public void listDanhSachNguonCungCap(ArrayList<NguonCungCap> arr) {
-        DefaultTableModel model = (DefaultTableModel) jTableNguonCungCap.getModel();
-        while (jTableNguonCungCap.getRowCount() > 0) {
+    public void listDanhSachNhaCungCap(ArrayList<NhaCungCap> arr) {
+        DefaultTableModel model = (DefaultTableModel) jTableNhaCungCap.getModel();
+        while (jTableNhaCungCap.getRowCount() > 0) {
             model.removeRow(0);
         }
         arr.stream().forEach((item) -> {
-            ImageIcon icon = new ImageIcon(item.hinh_anh);
-            model.addRow(new Object[]{item.id_nguon_cc, item.ten_nha_cc, item.dia_chi, item.sdt, item.email, item.ten_dai_dien});
+//            ImageIcon icon = new ImageIcon(item.hinh_anh);
+            model.addRow(new Object[]{item.getMaNCC(), item.getTenNCC(), item.getDiaChi(), item.getSDT(), item.getFax()});
         });
     }
 
@@ -829,7 +830,7 @@ public class fNhacungcap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTableNguonCungCap;
+    private javax.swing.JTable jTableNhaCungCap;
     private javax.swing.JTextField jTextFieldTimKiem;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,9 +7,9 @@ package GUI;
 
 
 import DAO.DateTimeNow;
-import DAO.daoNguonCungCap;
+import DAO.daoNhaCungCap;
 import DAO.daoSanPham;
-import DTO.NguonCungCap;
+import DTO.NhaCungCap;
 import DTO.SanPham;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class jCreateNHang extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextFieldNguonCungCap = new javax.swing.JTextField();
+        jTextFieldNhaCungCap = new javax.swing.JTextField();
         jTextFieldNguoiPhuTrach = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
@@ -65,7 +65,7 @@ public class jCreateNHang extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextFieldTenSanPham = new javax.swing.JTextField();
         jComboBoxTenSanPham = new javax.swing.JComboBox<>();
-        jComboBoxNguonCungCap = new javax.swing.JComboBox<>();
+        jComboBoxNhaCungCap = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
 
@@ -76,10 +76,10 @@ public class jCreateNHang extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(1350, 400));
 
-        jTextFieldNguonCungCap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldNguonCungCap.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldNhaCungCap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldNhaCungCap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldNguonCungCapKeyReleased(evt);
+                jTextFieldNhaCungCapKeyReleased(evt);
             }
         });
 
@@ -187,15 +187,15 @@ public class jCreateNHang extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxNguonCungCap.setMaximumRowCount(10);
-        jComboBoxNguonCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
+        jComboBoxNhaCungCap.setMaximumRowCount(10);
+        jComboBoxNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBoxNguonCungCapMouseClicked(evt);
+                jComboBoxNhaCungCapMouseClicked(evt);
             }
         });
-        jComboBoxNguonCungCap.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxNhaCungCap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxNguonCungCapActionPerformed(evt);
+                jComboBoxNhaCungCapActionPerformed(evt);
             }
         });
 
@@ -237,9 +237,9 @@ public class jCreateNHang extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextFieldNguonCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxNguonCungCap, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jComboBoxNhaCungCap, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -269,8 +269,8 @@ public class jCreateNHang extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jTextFieldThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel26)
-                    .addComponent(jTextFieldNguonCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxNguonCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNguoiPhuTrach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,27 +346,27 @@ public class jCreateNHang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void jTextFieldNguonCungCapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNguonCungCapKeyReleased
-        ArrayList<NguonCungCap> arr = daoNguonCungCap.getInstance().FindListNguonCungCap(jTextFieldNguonCungCap.getText());
-        jComboBoxNguonCungCap.removeAllItems();
+    private void jTextFieldNhaCungCapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNhaCungCapKeyReleased
+        ArrayList<NhaCungCap> arr = daoNhaCungCap.getInstance().FindListNhaCungCap(jTextFieldNhaCungCap.getText());
+        jComboBoxNhaCungCap.removeAllItems();
         for(int i=0;i< arr.size();i++){
             
-            jComboBoxNguonCungCap.addItem(arr.get(i).ten_nha_cc);
+            jComboBoxNhaCungCap.addItem(arr.get(i).ten_nha_cc);
         }
-        jComboBoxNguonCungCap.showPopup();
-    }//GEN-LAST:event_jTextFieldNguonCungCapKeyReleased
+        jComboBoxNhaCungCap.showPopup();
+    }//GEN-LAST:event_jTextFieldNhaCungCapKeyReleased
 
-    private void jComboBoxNguonCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNguonCungCapActionPerformed
-        ArrayList<NguonCungCap> arr = daoNguonCungCap.getInstance().FindListNguonCungCap(jComboBoxNguonCungCap.getSelectedItem().toString());
-        jTextFieldNguonCungCap.setText(arr.get(0).ten_nha_cc);
+    private void jComboBoxNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhaCungCapActionPerformed
+        ArrayList<NhaCungCap> arr = daoNhaCungCap.getInstance().FindListNhaCungCap(jComboBoxNhaCungCap.getSelectedItem().toString());
+        jTextFieldNhaCungCap.setText(arr.get(0).ten_nha_cc);
         jTextFieldNguoiPhuTrach.setText(arr.get(0).ten_dai_dien);
-    }//GEN-LAST:event_jComboBoxNguonCungCapActionPerformed
+    }//GEN-LAST:event_jComboBoxNhaCungCapActionPerformed
 
-    private void jComboBoxNguonCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxNguonCungCapMouseClicked
-        ArrayList<NguonCungCap> arr = daoNguonCungCap.getInstance().FindListNguonCungCap(jComboBoxNguonCungCap.getSelectedItem().toString());
-        jTextFieldNguonCungCap.setText(arr.get(0).ten_nha_cc);
+    private void jComboBoxNhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxNhaCungCapMouseClicked
+        ArrayList<NhaCungCap> arr = daoNhaCungCap.getInstance().FindListNhaCungCap(jComboBoxNhaCungCap.getSelectedItem().toString());
+        jTextFieldNhaCungCap.setText(arr.get(0).ten_nha_cc);
         jTextFieldNguoiPhuTrach.setText(arr.get(0).ten_dai_dien);
-    }//GEN-LAST:event_jComboBoxNguonCungCapMouseClicked
+    }//GEN-LAST:event_jComboBoxNhaCungCapMouseClicked
 
     /**
      * @param args the command line arguments
@@ -413,7 +413,7 @@ public class jCreateNHang extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBoxNguonCungCap;
+    private javax.swing.JComboBox<String> jComboBoxNhaCungCap;
     private javax.swing.JComboBox<String> jComboBoxTenSanPham;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -432,7 +432,7 @@ public class jCreateNHang extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextFieldNgayNhap;
     private javax.swing.JTextField jTextFieldNguoiPhuTrach;
-    private javax.swing.JTextField jTextFieldNguonCungCap;
+    private javax.swing.JTextField jTextFieldNhaCungCap;
     private javax.swing.JTextField jTextFieldTenSanPham;
     private javax.swing.JTextField jTextFieldThoiGian;
     // End of variables declaration//GEN-END:variables

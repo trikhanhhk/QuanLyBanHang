@@ -5,11 +5,13 @@
  */
 package GUI;
 
+import BUS.busLoaiSanPham;
 import DTO.ChiTietLoSanPham;
 import DTO.ChiTietPhieuNhap;
 import DTO.Kho;
 import DTO.LoSanPham;
-import DTO.NguonCungCap;
+import DTO.LoaiSanPham;
+import DTO.NhaCungCap;
 import DTO.PhieuNhap;
 import DTO.SanPham;
 import GROUP.infoList_fTraHang_Kho;
@@ -21,62 +23,45 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import java.lang.*;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Dinh Tien
  */
-public class fTraHang_Kho extends javax.swing.JFrame {
+public class fSuaLoaiSP extends javax.swing.JFrame {
 
     /**
-     * Creates new form fTraHang_Kho
+     * Creates new form fThemLoaiSp
      */
     public String maNV;
+    public LoaiSanPham lspSua;
 
-    public fTraHang_Kho() {
+    public fSuaLoaiSP() {
         initComponents();
         setIcon();
     }
 
-    public fTraHang_Kho(String maNV) {
+    public fSuaLoaiSP(LoaiSanPham lspSua) {
+        this.lspSua = lspSua;
         initComponents();
         setIcon();
-        this.maNV = maNV;
-        build();
+        setData();
     }
 
     private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));        
     }
+    
+    private void setData() {
+        txMalsp.setText(this.lspSua.getMaLSP());
+        txTenlsp.setText(this.lspSua.getTenLSP());
+        txMota.setText(this.lspSua.getMoTa());
 
-    public void build() {
-        listDanhSachKho();
+        txMalsp.setEditable(false);
     }
-
-    public void listDanhSachKho() {
-        DefaultTableModel model = (DefaultTableModel) jTableLo.getModel();
-        while (jTableLo.getRowCount() > 0) {
-            model.removeRow(0);
-        }
-        
-        // code của Tiến
-//        ArrayList<Kho> arr = DAO.daoKho.getInstance().getListKho();
-//        arr.stream().forEach((item) -> {
-//            //System.out.print(item.id_lo_sp);
-//            ChiTietLoSanPham ctlsp = DAO.daoChiTietLoSanPham.getInstance().getChiTietLoSanPham(item.id_lo_sp);
-//            SanPham sp = DAO.daoSanPham.getInstance().getSanPham(ctlsp.id_sp);
-//            LoSanPham lsp = DAO.daoLoSanPham.getInstance().getLoSanPham(item.id_lo_sp);
-//            PhieuNhap pn = DAO.daoPhieuNhap.getInstance().getPhieuNhap(lsp.id_phieu_nhap);
-//            ChiTietPhieuNhap ctpn = DAO.daoChiTietPhieuNhap.getInstance().getChiTietPhieuNhap(pn.id_phieu_nhap);
-//            NguonCungCap ncc = DAO.daoNguonCungCap.getInstance().getNguonCungCap(ctpn.id_nguon_cc);
-//            model.addRow(new Object[]{item.id_lo_sp, ncc.ten_nha_cc, sp.ten_sp, item.sl_san_pham});
-//        });
-           ArrayList<infoList_fTraHang_Kho> arr  = DAO.daoLoSanPham.getInstance().getListInfoList_fTraHang_Kho();
-           arr.stream().forEach((item) -> {
-               model.addRow(new Object[]{item.id_lo_sp, item.ten_nha_cc, item.ten_sp, item.sl_san_pham});
-           });
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,61 +72,22 @@ public class fTraHang_Kho extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableLo = new javax.swing.JTable();
         jButtonThoat = new javax.swing.JButton();
         jButtonLuu = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldTimKiem = new javax.swing.JTextField();
-        jButtonTimKiem = new javax.swing.JButton();
+        txTenlsp = new javax.swing.JTextField();
+        txMalsp = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txMota = new javax.swing.JTextArea();
+        labelMalsp = new javax.swing.JLabel();
+        labelTenlsp = new javax.swing.JLabel();
+        labelMota = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thông tin sản phẩm trong kho");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-
-        jTableLo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTableLo.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID lô", "Nhà cung cấp", "Tên sản phẩm", "SL lô"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableLo.setAutoCreateRowSorter(true);
-        jTableLo.setRowHeight(30);
-        jTableLo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableLoMouseClicked(evt);
-            }
-        });
-        jTableLo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTableLoKeyTyped(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTableLo);
-        if (jTableLo.getColumnModel().getColumnCount() > 0) {
-            jTableLo.getColumnModel().getColumn(0).setMinWidth(60);
-            jTableLo.getColumnModel().getColumn(0).setPreferredWidth(60);
-            jTableLo.getColumnModel().getColumn(0).setMaxWidth(60);
-            jTableLo.getColumnModel().getColumn(3).setMinWidth(110);
-            jTableLo.getColumnModel().getColumn(3).setPreferredWidth(110);
-            jTableLo.getColumnModel().getColumn(3).setMaxWidth(110);
-        }
 
         jButtonThoat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonThoat.setText("Thoát");
@@ -152,8 +98,8 @@ public class fTraHang_Kho extends javax.swing.JFrame {
         });
 
         jButtonLuu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonLuu.setText("Tiếp tục");
-        jButtonLuu.setEnabled(false);
+        jButtonLuu.setText("Sửa");
+        jButtonLuu.setEnabled(true);
         jButtonLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLuuActionPerformed(evt);
@@ -163,48 +109,54 @@ public class fTraHang_Kho extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CHỌN SẢN PHẨM");
+        jLabel1.setText("SỬA LOẠI SẢN PHẨM");
 
-        jTextFieldTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFieldTimKiemKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldTimKiemKeyReleased(evt);
-            }
-        });
-
-        ImageIcon imgTimKiem = new ImageIcon(getClass().getResource("/icon/icons8-search.png"));
-        ImageIcon ImgTimKiem = new ImageIcon(imgTimKiem.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
-        jButtonTimKiem.setIcon(ImgTimKiem);
-        jButtonTimKiem.setText("Tìm kiếm");
-        jButtonTimKiem.addActionListener(new java.awt.event.ActionListener() {
+        txTenlsp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTimKiemActionPerformed(evt);
+                txTenlspActionPerformed(evt);
             }
         });
+
+        txMota.setColumns(20);
+        txMota.setRows(5);
+        jScrollPane1.setViewportView(txMota);
+
+        labelMalsp.setText("Mã Loại sản phẩm");
+
+        labelTenlsp.setText("Tên loại sản phẩm");
+
+        labelMota.setText("Mô tả");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 310, Short.MAX_VALUE)
                                 .addComponent(jButtonLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
-                                .addComponent(jButtonThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonTimKiem)))))
+                                .addComponent(jButtonThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelMota)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txMalsp, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(labelMalsp))
+                                    .addGap(76, 76, 76)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(labelTenlsp)
+                                        .addComponent(txTenlsp, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -212,17 +164,23 @@ public class fTraHang_Kho extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonTimKiem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMalsp)
+                    .addComponent(labelTenlsp))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txTenlsp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txMalsp))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelMota)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -242,101 +200,55 @@ public class fTraHang_Kho extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTableLoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLoMouseClicked
-        jButtonLuu.setEnabled(true);
-        // fCreate_PhieuXuat.getInstance().setText(tensp, hsd,sl,nsx,loaisp,hinh_anh,id_lo);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTableLoMouseClicked
-
     private void jButtonThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThoatActionPerformed
         dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonThoatActionPerformed
 
     private void jButtonLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLuuActionPerformed
-
-        int selectrow = jTableLo.getSelectedRow();
-        String id_lo = jTableLo.getValueAt(selectrow, 0).toString();
-        Kho kho = DAO.daoKho.getInstance().getLoKho(Integer.parseInt(id_lo));
-        JFrame TraHang = new fCreateTraHang(maNV, kho.id_kho);
-        TraHang.setVisible(true);
-        dispose();
-        // TODO add your handling code here:
+         if (checkEmpty()) {
+            String malsp = txMalsp.getText();
+            String tenlsp = txTenlsp.getText();
+            String mota = txMota.getText();
+            busLoaiSanPham.getInstance().UpdateLoaiSanPham(tenlsp, malsp, mota);
+      
+            JOptionPane.showMessageDialog(this, "Sửa" + malsp + " thành công!");
+        }
     }//GEN-LAST:event_jButtonLuuActionPerformed
 
-    private void jTextFieldTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyReleased
-
-        if ("".equals(jTextFieldTimKiem.getText())) {
-            build();
-        }
+    private void txTenlspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txTenlspActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTimKiemKeyReleased
+    }//GEN-LAST:event_txTenlspActionPerformed
 
-    private void jTableLoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableLoKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTableLoKeyTyped
+     private Boolean checkEmpty() {
+        String malsp = txMalsp.getText();
+        String tenlsp = txTenlsp.getText();
+        String mota = txMota.getText();
 
-    private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTableLo.getModel();
-                while (jTableLo.getRowCount() > 0) {
-                    model.removeRow(0);
-                }
-        String[][] Data;
-        //System.out.println("Giai doan 1");
-        Data = DAO.daoKho.getInstance().FindListKhoTra(jTextFieldTimKiem.getText());
-        // System.out.println("Giai doan 2");
-        //DefaultTableModel model = (DefaultTableModel) jTableLo.getModel();
-        while (jTableLo.getRowCount() > 0) {
-            model.removeRow(0);
+        if (malsp.trim().equals("")) {
+            return showErrorTx(txMalsp, "Mã loại sp không được để trống");
+
+        } else if (tenlsp.trim().equals("")) {
+            return showErrorTx(txTenlsp, "Tên loại không được để trống");
+
+        } else if (mota.trim().equals("")) {
+            return showErrorTx(txMota, "Mô tả không được để trống");
         }
-        int i = 0;
-        while (Data[i][0] != null) {
-            //System.out.println("Giai doan 3");
-            model.addRow(new Object[]{
-                Data[i][0],
-                Data[i][1],
-                Data[i][2],
-                Data[i][3]});
-            i++;
-        }
-        
-//        String timkiem = jTextFieldTimKiem.getText();
-//        ArrayList<infoList_fTraHang_Kho> arr  = DAO.daoLoSanPham.getInstance().getListInfoList_fTraHang_Kho();
-//           arr.stream().forEach((item) -> {
-//               model.addRow(new Object[]{item.id_lo_sp, item.ten_nha_cc, item.ten_sp, item.sl_san_pham});
-//           });
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
-    private void jTextFieldTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyPressed
-        
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            DefaultTableModel model = (DefaultTableModel) jTableLo.getModel();
-                while (jTableLo.getRowCount() > 0) {
-                    model.removeRow(0);
-                }
-            String[][] Data;
-            //System.out.println("Giai doan 1");
-            Data = DAO.daoKho.getInstance().FindListKhoTra(jTextFieldTimKiem.getText());
-            // System.out.println("Giai doan 2");
-            //DefaultTableModel model = (DefaultTableModel) jTableLo.getModel();
-            while (jTableLo.getRowCount() > 0) {
-                model.removeRow(0);
-            }
-            int i = 0;
-            while (Data[i][0] != null) {
-                //System.out.println("Giai doan 3");
-                model.addRow(new Object[]{
-                    Data[i][0],
-                    Data[i][1],
-                    Data[i][2],
-                    Data[i][3]});
-                i++;
-            };
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTimKiemKeyPressed
+        return true;
+    }
+     
+      private Boolean showErrorTx(JTextField tx, String errorInfo) {
+        JOptionPane.showMessageDialog(tx, errorInfo);
+        tx.requestFocus();
+        return false;
+    }
 
+    private Boolean showErrorTx(JTextArea tx, String errorInfo) {
+        JOptionPane.showMessageDialog(tx, errorInfo);
+        tx.requestFocus();
+        return false;
+    }
     /**
      * @param args the command line arguments
      */
@@ -354,20 +266,23 @@ public class fTraHang_Kho extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fTraHang_Kho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaLoaiSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fTraHang_Kho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaLoaiSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fTraHang_Kho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaLoaiSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fTraHang_Kho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaLoaiSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fTraHang_Kho("1").setVisible(true);
+                new fSuaLoaiSP().setVisible(true);
             }
         });
     }
@@ -375,11 +290,14 @@ public class fTraHang_Kho extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLuu;
     private javax.swing.JButton jButtonThoat;
-    private javax.swing.JButton jButtonTimKiem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableLo;
-    private javax.swing.JTextField jTextFieldTimKiem;
+    private javax.swing.JLabel labelMalsp;
+    private javax.swing.JLabel labelMota;
+    private javax.swing.JLabel labelTenlsp;
+    private javax.swing.JTextField txMalsp;
+    private javax.swing.JTextArea txMota;
+    private javax.swing.JTextField txTenlsp;
     // End of variables declaration//GEN-END:variables
 }

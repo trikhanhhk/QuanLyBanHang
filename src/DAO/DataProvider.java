@@ -101,7 +101,7 @@ public class DataProvider {
         return rs;
     }
 
-    public int excuteUpdate(String sql, ArrayList<Object> arr) {// danh cho cau lenh secect 
+    public int excuteUpdate(String sql, ArrayList<Object> arr) {// danh cho cau lenh update 
         int rs = 1;
         try {
             PreparedStatement stm;

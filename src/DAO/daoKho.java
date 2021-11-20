@@ -9,7 +9,7 @@ import DTO.ChiTietPhieuNhap;
 import DTO.Kho;
 import DTO.LoSanPham;
 import GROUP.LoaiSanPham_jTreeChart;
-import DTO.NguonCungCap;
+import DTO.NhaCungCap;
 import DTO.PhieuTraKho;
 import GROUP.ThongTinKhoHienTai;
 import GROUP.ThongTinTon;
@@ -289,7 +289,7 @@ public ArrayList<ThongTinKhoHienTai> getListThongTinKhoHienTaiTheoLoai(int id_lo
 //            String sl_sp = String.valueOf(DuLieuKhoTra.get(i).sl_san_pham);
 //            LoSanPham lsp = DAO.daoLoSanPham.getInstance().getLoSanPham(DuLieuKhoTra.get(i).id_lo_sp);
 //            ChiTietPhieuNhap ctpn = DAO.daoChiTietPhieuNhap.getInstance().getChiTietPhieuNhap(lsp.id_phieu_nhap);
-//            NguonCungCap ncc = DAO.daoNguonCungCap.getInstance().getNguonCungCap(ctpn.id_nguon_cc);
+//            NhaCungCap ncc = DAO.daoNhaCungCap.getInstance().getNhaCungCap(ctpn.id_nguon_cc);
             if (String.valueOf(arr.get(i).id_lo_sp).contains(ValToSearch)
                     || arr.get(i).ten_nha_cc.contains(ValToSearch)
                     || arr.get(i).ten_sp.contains(ValToSearch)
@@ -322,7 +322,7 @@ public ArrayList<ThongTinKhoHienTai> getListThongTinKhoHienTaiTheoLoai(int id_lo
 //            String sl_sp = String.valueOf(DuLieuKhoXuat.get(i).sl_san_pham);
 //            LoSanPham lsp = DAO.daoLoSanPham.getInstance().getLoSanPham(DuLieuKhoXuat.get(i).id_lo_sp);
 //            ChiTietPhieuNhap ctpn = DAO.daoChiTietPhieuNhap.getInstance().getChiTietPhieuNhap(lsp.id_phieu_nhap);
-//            NguonCungCap ncc = DAO.daoNguonCungCap.getInstance().getNguonCungCap(ctpn.id_nguon_cc);
+//            NhaCungCap ncc = DAO.daoNhaCungCap.getInstance().getNhaCungCap(ctpn.id_nguon_cc);
 //            if (String.valueOf(DuLieuKhoXuat.get(i).id_lo_sp).contains(ValToSearch)
 //                    || tensp.contains(ValToSearch)
 //                    || sl_sp.contains(ValToSearch)
@@ -347,7 +347,7 @@ public ArrayList<ThongTinKhoHienTai> getListThongTinKhoHienTaiTheoLoai(int id_lo
 //            String sl_sp = String.valueOf(DuLieuKhoTra.get(i).sl_san_pham);
 //            LoSanPham lsp = DAO.daoLoSanPham.getInstance().getLoSanPham(DuLieuKhoTra.get(i).id_lo_sp);
 //            ChiTietPhieuNhap ctpn = DAO.daoChiTietPhieuNhap.getInstance().getChiTietPhieuNhap(lsp.id_phieu_nhap);
-//            NguonCungCap ncc = DAO.daoNguonCungCap.getInstance().getNguonCungCap(ctpn.id_nguon_cc);
+//            NhaCungCap ncc = DAO.daoNhaCungCap.getInstance().getNhaCungCap(ctpn.id_nguon_cc);
             if (String.valueOf(arr.get(i).id_lo_sp).contains(ValToSearch)
                     || arr.get(i).ten_nha_cc.contains(ValToSearch)
                     || arr.get(i).ten_sp.contains(ValToSearch)

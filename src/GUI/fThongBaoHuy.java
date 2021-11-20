@@ -145,7 +145,7 @@ public class fThongBaoHuy extends javax.swing.JFrame {
         if ("NhaCungCap".equals(type))
         {
             this.setVisible(false);
-            DAO.daoNguonCungCap.getInstance().HuyNguonCungCap(id, maNV);
+            DAO.daoNhaCungCap.getInstance().HuyNhaCungCap(id, maNV);
         }
         if("KhuVuc".equals(type))
         {

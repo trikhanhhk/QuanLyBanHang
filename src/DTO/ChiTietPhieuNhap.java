@@ -26,6 +26,14 @@ public class ChiTietPhieuNhap {
         this.id_nguon_cc = id_nguon_cc;
         this.id_phieu_nhap = id_phieu_nhap;
     }
+
+    public Object getSoLuong() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public float getDonGia() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

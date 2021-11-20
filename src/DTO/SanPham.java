@@ -7,20 +7,77 @@ package DTO;
 import java.lang.*;
 /**
  *
- * @author nghia
+ * @author tk0038
  */
 public class SanPham {
-    public int id_sp;
-    public String ten_sp;
-    public byte[] hinh_anh;
-    public int id_exist;
-    public int id_loai_sp;
+
+    String MaSP, MaLSP, TenSP, fileNameHinhAnh;
+    float DonGia;
+    int SoLuong, TrangThai;
+
+    public SanPham(String MaSP, String MaLSP, String TenSP, float DonGia, int SoLuong, String url, int TrangThai) {
+        this.MaSP = MaSP;
+        this.MaLSP = MaLSP;
+        this.TenSP = TenSP;
+        this.DonGia = DonGia;
+        this.SoLuong = SoLuong;
+        this.fileNameHinhAnh = url;
+        this.TrangThai = TrangThai;
+    }
+
+    public String getFileNameHinhAnh() {
+        return fileNameHinhAnh;
+    }
+
+    public void setFileNameHinhAnh(String fileNameHinhAnh) {
+        this.fileNameHinhAnh = fileNameHinhAnh;
+    }
     
-    public SanPham(int id_sp,String ten_sp,byte[] hinh_anh,int id_exist,int id_loai_sp) {
-        this.id_sp = id_sp;
-        this.ten_sp = ten_sp;
-        this.hinh_anh = hinh_anh;
-        this.id_exist = id_exist;
-        this.id_loai_sp = id_loai_sp;
+    public String getMaSP() {
+        return MaSP;
+    }
+
+    public void setMaSP(String MaSP) {
+        this.MaSP = MaSP;
+    }
+
+    public String getMaLSP() {
+        return MaLSP;
+    }
+
+    public void setMaLSP(String MaLSP) {
+        this.MaLSP = MaLSP;
+    }
+
+    public String getTenSP() {
+        return TenSP;
+    }
+
+    public void setTenSP(String TenSP) {
+        this.TenSP = TenSP;
+    }
+
+    public float getDonGia() {
+        return DonGia;
+    }
+
+    public void setDonGia(float DonGia) {
+        this.DonGia = DonGia;
+    }
+
+    public int getSoLuong() {
+        return SoLuong;
+    }
+
+    public void setSoLuong(int SoLuong) {
+        this.SoLuong = SoLuong;
+    }
+
+    public int getTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(int TrangThai) {
+        this.TrangThai = TrangThai;
     }
 }

@@ -107,14 +107,14 @@
                           <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jTextFieldTimKiem" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButtonTimKiem" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabelKetQua" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabelKetQua" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jButtonThemNV" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jTextFieldTimKiem" min="-2" pref="260" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonTimKiem" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -129,6 +129,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextFieldTimKiem" alignment="3" max="32767" attributes="0"/>
                           <Component id="jButtonTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonThemNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabelKetQua" min="-2" max="-2" attributes="0"/>
@@ -250,6 +251,14 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="C&#xf3; t&#x1ed5;ng c&#x1ed9;ng 000 k&#x1ebf;t qu&#x1ea3;"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonThemNV">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonThemNVActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

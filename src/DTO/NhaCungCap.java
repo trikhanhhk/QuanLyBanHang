@@ -7,27 +7,74 @@ package DTO;
 import java.lang.*;
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
-public class NguonCungCap {
-    public int id_nguon_cc;
-    public String ten_nha_cc;
-    public String ten_dai_dien;
-    public String sdt;
-    public String dia_chi;
-    public String email;
-    public int id_exist;
-    public byte[] hinh_anh;
+public class NhaCungCap {
+    private String maNCC;
+    private String tenNCC;
+    private String diaChi;
+    private String SDT;
+    private String Fax;
     
-    public NguonCungCap(int id,String ten,String tendd,String sdt,String diachi,String email,int exist,byte[] hinhanh)
-    {
-        this.id_nguon_cc=id;
-        this.ten_nha_cc=ten;
-        this.ten_dai_dien=tendd;
-        this.sdt=sdt;
-        this.dia_chi=diachi;
-        this.email=email;
-        this.id_exist=exist;
-        this.hinh_anh=hinhanh;
+    public NhaCungCap(){
+        
     }
+    public NhaCungCap(String maNCC,String tenNCC, String diaChi, String SDT, String Fax)
+    {
+        this.maNCC=maNCC;
+        this.tenNCC=tenNCC;
+        this.diaChi=diaChi;
+        this.SDT=SDT;
+        this.Fax=Fax;
+    }
+    public NhaCungCap(NhaCungCap n)
+    {
+        this.maNCC=n.maNCC;
+        this.tenNCC=n.tenNCC;
+        this.diaChi=n.diaChi;
+        this.SDT=n.SDT;
+        this.Fax=n.Fax;
+    }
+
+    public String getMaNCC() {
+        return maNCC;
+    }
+
+    public String getTenNCC() {
+        return tenNCC;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public String getSDT() {
+        return SDT;
+    }
+
+    public String getFax() {
+        return Fax;
+    }
+
+    public void setMaNCC(String maNCC) {
+        this.maNCC = maNCC;
+    }
+
+    public void setTenNCC(String tenNCC) {
+        this.tenNCC = tenNCC;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
+    public void setSDT(String SDT) {
+        this.SDT = SDT;
+    }
+
+    public void setFax(String Fax) {
+        this.Fax = Fax;
+    }
+        
+    
 }

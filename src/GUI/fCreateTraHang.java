@@ -53,7 +53,7 @@ public class fCreateTraHang extends javax.swing.JFrame {
         ChiTietLoSanPham ctlsp = DAO.daoChiTietLoSanPham.getInstance().getChiTietLoSanPham(kho.id_lo_sp);
         LoSanPham lsp = DAO.daoLoSanPham.getInstance().getLoSanPham(kho.id_lo_sp);
         ChiTietPhieuNhap pn = DAO.daoChiTietPhieuNhap.getInstance().getChiTietPhieuNhap(lsp.id_phieu_nhap);
-        NguonCungCap ncc = DAO.daoNguonCungCap.getInstance().getNguonCungCap(pn.id_nguon_cc);
+        NhaCungCap ncc = DAO.daoNhaCungCap.getInstance().getNhaCungCap(pn.id_nguon_cc);
         SanPham sp = DAO.daoSanPham.getInstance().getSanPham(ctlsp.id_sp);
         LoaiSanPham loaisp = DAO.daoLoaiSanPham.getInstance().getLoaiSanPham(sp.id_loai_sp);
         NhanVien nv = DAO.daoTaiKhoan.getInstance().getNhanVien(maNV);
@@ -407,7 +407,7 @@ public class fCreateTraHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jXDatePickerThoiGianPropertyChange
 
     private void jButtonChonSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChonSanPhamActionPerformed
-        JFrame ex = new fTraHang_Kho(maNV);
+        JFrame ex = new fThemLoaiSp(maNV);
         ex.setVisible(true);
         dispose();
         // TODO add your handling code here:

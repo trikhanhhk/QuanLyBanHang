@@ -6,7 +6,7 @@
 package DAO;
 
 import DTO.Kho;
-import DTO.NguonCungCap;
+import DTO.NhaCungCap;
 import DTO.NhanVien;
 import DTO.SanPham;
 import DTO.XuatKho;

@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import DTO.NguonCungCap;
+import DTO.NhaCungCap;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -22,38 +22,36 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
      * Creates new form fViewNhaCungCap
      */
     public String maNV;
-    public int id_ncc;
+    public int maNCC;
 
     public fViewNhaCungCap() {
         initComponents();
         setIcon();
     }
 
-    /*public fViewNhaCungCap(int maNV, int id_ncc) {
+    /*public fViewNhaCungCap(int maNV, int maNCC) {
     this.maNV = maNV;
-    this.id_ncc = id_ncc;
+    this.maNCC = maNCC;
     initComponents();
     setIcon();
     build();
     
     }*/
 
-    public fViewNhaCungCap(String maNV, int id_ncc, boolean edit) {
+    public fViewNhaCungCap(String maNV, int maNCC, boolean edit) {
         this.maNV = maNV;
-        this.id_ncc = id_ncc;
+        this.maNCC = maNCC;
         initComponents();
         setIcon();
         build();
         if (edit == true) {
             jTextFieldTenNhaCungCap.setEditable(true);
-            jTextFieldTenDaiDien.setEditable(true);
             jTextFieldSdt.setEditable(true);
-            jTextFieldEmail.setEditable(true);
+            jTextFieldFax.setEditable(true);
             jTextFieldDiaChi.setEditable(true);
             jTextFieldTenNhaCungCap.setBackground(Color.WHITE);
-            jTextFieldTenDaiDien.setBackground(Color.WHITE);
             jTextFieldSdt.setBackground(Color.WHITE);
-            jTextFieldEmail.setBackground(Color.WHITE);
+            jTextFieldFax.setBackground(Color.WHITE);
             jTextFieldDiaChi.setBackground(Color.WHITE);
             jButtonLuu.setVisible(true);
             jButtonSua.setVisible(false);
@@ -70,23 +68,17 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
     }
 
     public void ShowNhaCungCap() {
-        NguonCungCap ncc = DAO.daoNguonCungCap.getInstance().getNguonCungCap(id_ncc);
-        jTextFieldTenNhaCungCap.setText(ncc.ten_nha_cc);
-        jTextFieldTenDaiDien.setText(ncc.ten_dai_dien);
-        jTextFieldSdt.setText(ncc.sdt);
-        jTextFieldEmail.setText(ncc.email);
-        jTextFieldDiaChi.setText(ncc.dia_chi);
-        ImageIcon imageIcon = new ImageIcon(
-                new ImageIcon(ncc.hinh_anh).getImage().getScaledInstance(
-                        jLabelHinhAnh.getWidth(), jLabelHinhAnh.getHeight(), Image.SCALE_DEFAULT));
-        jLabelHinhAnh.setText("");
-        jLabelHinhAnh.setIcon(imageIcon);
-        jLabelNhapKho.setText(String.valueOf(DAO.daoNguonCungCap.getInstance().GetSoLanNhapKho(id_ncc)));
-        jLabelXuatKho.setText(String.valueOf(DAO.daoNguonCungCap.getInstance().GetSoLanXuatKho(id_ncc)));
-        jLabelTraKho.setText(String.valueOf(DAO.daoNguonCungCap.getInstance().GetSoLanTraKho(id_ncc)));
-        jLabelSoLuongNhap.setText(String.valueOf(DAO.daoNguonCungCap.getInstance().GetSoLuongNhapKho(id_ncc)));
-        jLabelSoLuongXuat.setText(String.valueOf(DAO.daoNguonCungCap.getInstance().GetSoLuongXuatKho(id_ncc)));
-        jLabelSoLuongTra.setText(String.valueOf(DAO.daoNguonCungCap.getInstance().GetSoLuongTraKho(id_ncc)));
+        NhaCungCap ncc = DAO.daoNhaCungCap.getInstance().getNhaCungCap(maNCC);
+        jTextFieldTenNhaCungCap.setText(ncc.getTenNCC());
+        jTextFieldSdt.setText(ncc.getSDT());
+        jTextFieldFax.setText(ncc.getFax());
+        jTextFieldDiaChi.setText(ncc.getDiaChi());
+        jLabelNhapKho.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLanNhapKho(maNCC)));
+        jLabelXuatKho.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLanXuatKho(maNCC)));
+        jLabelTraKho.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLanTraKho(maNCC)));
+        jLabelSoLuongNhap.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLuongNhapKho(maNCC)));
+        jLabelSoLuongXuat.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLuongXuatKho(maNCC)));
+        jLabelSoLuongTra.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLuongTraKho(maNCC)));
     }
 
     /**
@@ -103,11 +95,9 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabelHinhAnh = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -124,11 +114,12 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
         jButtonSua = new javax.swing.JButton();
         jButtonThoat = new javax.swing.JButton();
         jTextFieldTenNhaCungCap = new javax.swing.JTextField();
-        jTextFieldTenDaiDien = new javax.swing.JTextField();
         jTextFieldSdt = new javax.swing.JTextField();
-        jTextFieldEmail = new javax.swing.JTextField();
+        jTextFieldFax = new javax.swing.JTextField();
         jTextFieldDiaChi = new javax.swing.JTextField();
         jButtonLuu = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFIeldMaNCC = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thông tin nhà cung cấp");
@@ -154,10 +145,6 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Tên nhà cung cấp:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Tên đại diện: ");
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("SDT: ");
@@ -169,14 +156,6 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Địa chỉ: ");
-
-        jLabelHinhAnh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelHinhAnh.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelHinhAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelHinhAnh.setText("Hình ảnh");
-        jLabelHinhAnh.setMaximumSize(new java.awt.Dimension(187, 187));
-        jLabelHinhAnh.setMinimumSize(new java.awt.Dimension(187, 187));
-        jLabelHinhAnh.setPreferredSize(new java.awt.Dimension(187, 187));
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -308,17 +287,13 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
         jTextFieldTenNhaCungCap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFieldTenNhaCungCap.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jTextFieldTenDaiDien.setEditable(false);
-        jTextFieldTenDaiDien.setBackground(new java.awt.Color(204, 204, 204));
-        jTextFieldTenDaiDien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jTextFieldSdt.setEditable(false);
         jTextFieldSdt.setBackground(new java.awt.Color(204, 204, 204));
         jTextFieldSdt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextFieldEmail.setEditable(false);
-        jTextFieldEmail.setBackground(new java.awt.Color(204, 204, 204));
-        jTextFieldEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldFax.setEditable(false);
+        jTextFieldFax.setBackground(new java.awt.Color(204, 204, 204));
+        jTextFieldFax.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jTextFieldDiaChi.setEditable(false);
         jTextFieldDiaChi.setBackground(new java.awt.Color(204, 204, 204));
@@ -333,67 +308,66 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Mã nhà cung cấp: ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonLuu)
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButtonLuu)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonSua)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonThoat))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonSua)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonThoat))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabelHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldTenDaiDien, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextFieldTenNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextFieldSdt, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldTenNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldSdt, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldFax, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFIeldMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextFieldTenNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextFieldTenDaiDien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextFieldSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextFieldDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabelHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFIeldMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldTenNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldFax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(39, 39, 39)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -424,9 +398,9 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -448,14 +422,12 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
         jTextFieldTenNhaCungCap.setEditable(true);
-        jTextFieldTenDaiDien.setEditable(true);
         jTextFieldSdt.setEditable(true);
-        jTextFieldEmail.setEditable(true);
+        jTextFieldFax.setEditable(true);
         jTextFieldDiaChi.setEditable(true);
         jTextFieldTenNhaCungCap.setBackground(Color.WHITE);
-        jTextFieldTenDaiDien.setBackground(Color.WHITE);
         jTextFieldSdt.setBackground(Color.WHITE);
-        jTextFieldEmail.setBackground(Color.WHITE);
+        jTextFieldFax.setBackground(Color.WHITE);
         jTextFieldDiaChi.setBackground(Color.WHITE);
         jButtonLuu.setVisible(true);
         jButtonSua.setVisible(false);
@@ -468,12 +440,13 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonThoatActionPerformed
 
     private void jButtonLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLuuActionPerformed
-        String TenNhaCungCap = jTextFieldTenNhaCungCap.getText();
-        String TenDaiDien = jTextFieldTenDaiDien.getText();
-        String Sdt = jTextFieldSdt.getText();
-        String Email = jTextFieldEmail.getText();
-        String DiaChi = jTextFieldDiaChi.getText();
-        if (DAO.daoNguonCungCap.getInstance().UpdateNguonCungCap(id_ncc, TenNhaCungCap, TenDaiDien, Sdt, DiaChi, Email, this.maNV)) {
+        String maNCC = jTextFIeldMaNCC.getText();
+        String tenNCC = jTextFieldTenNhaCungCap.getText();
+        String SDT = jTextFieldSdt.getText();
+        String Fax = jTextFieldFax.getText();
+        String diaChi = jTextFieldDiaChi.getText();
+        //String maNCC, String tenNCC, String diaChi, String SDT, String Fax
+        if (DAO.daoNhaCungCap.getInstance().UpdateNhaCungCap(maNCC, tenNCC, diaChi, SDT, Fax, this.maNV)) {
             dispose();
         }
         // TODO add your handling code here:
@@ -509,7 +482,7 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fViewNhaCungCap(1, 1,false).setVisible(true);
+//                new fViewNhaCungCap(1, 1,false).setVisible(true);
             }
         });
     }
@@ -531,7 +504,6 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelHinhAnh;
     private javax.swing.JLabel jLabelNhapKho;
     private javax.swing.JLabel jLabelSoLuongNhap;
     private javax.swing.JLabel jLabelSoLuongTra;
@@ -541,10 +513,10 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTextFIeldMaNCC;
     private javax.swing.JTextField jTextFieldDiaChi;
-    private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldFax;
     private javax.swing.JTextField jTextFieldSdt;
-    private javax.swing.JTextField jTextFieldTenDaiDien;
     private javax.swing.JTextField jTextFieldTenNhaCungCap;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,24 +21,24 @@ import java.lang.*;
  *
  * @author Dinh Tien
  */
-public class fTraHang_Ncc extends javax.swing.JFrame {
+public class fLoaiSanPham extends javax.swing.JFrame {
 
     /**
-     * Creates new form fTraHang_Ncc
+     * Creates new form fLoaiSanPham
      */
     public String maNV;
-    public ArrayList<PhieuTraKho> DanhSachTraKho;
-    public ArrayList<PhieuTraKho> DuLieuMau = DanhSachTraKho;
+    public ArrayList<LoaiSanPham> DanhSachLoaiSanPham;
+    public ArrayList<LoaiSanPham> DuLieuMau = DanhSachLoaiSanPham;
     public long count, SoTrang, Trang = 1;
 
-    public fTraHang_Ncc() {
+    public fLoaiSanPham() {
         initComponents();
         setIcon();
     }
-    public fTraHang_Ncc(String maNV) {
+    public fLoaiSanPham(String maNV) {
         this.maNV=maNV;
-        DanhSachTraKho = BUS.busTraNhaCungCap.getInstance().getListTraKho();
-        DuLieuMau = DanhSachTraKho;
+        DanhSachLoaiSanPham = BUS.busLoaiSanPham.getInstance().getListLoaiSanPham();
+        DuLieuMau = DanhSachLoaiSanPham;
         initComponents();
         setIcon();
         build();
@@ -49,9 +49,9 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
     public void build()
     {
         jButtonSua.setEnabled(false);
-        jButtonHuy.setEnabled(false);
-        DanhSachTraKho = DuLieuMau;
-        this.count = this.DanhSachTraKho.size();
+        jButtonXoa.setEnabled(false);
+        DanhSachLoaiSanPham = DuLieuMau;
+        this.count = this.DanhSachLoaiSanPham.size();
         jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
         if (count % 20 == 0) {
             SoTrang = count / 20;
@@ -60,27 +60,23 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
         }
         jLabelSoTrang.setText("1/" + SoTrang);
         jLabelTrang.setText("1");
-        ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraKho(DanhSachTraKho, 1);
-        ShowListTraKho(table);
+        ArrayList<LoaiSanPham> table = BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
+        ShowListLoaiSanPham(table);
         NhanVienDangNhap();
     }
-    public void ShowListTraKho(ArrayList<PhieuTraKho> arr)
+    public void ShowListLoaiSanPham(ArrayList<LoaiSanPham> arr)
     {
-        DefaultTableModel model = (DefaultTableModel) jTableXuatKho.getModel();
-        while (jTableXuatKho.getRowCount() > 0) {
+        int i = 1;
+        DefaultTableModel model = (DefaultTableModel) jTableLoaiSanPham.getModel();
+        while (jTableLoaiSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
         if(arr.isEmpty()==false)
         {
-        arr.stream().forEach((item) -> {
-        ChiTietLoSanPham ctlsp = DAO.daoChiTietLoSanPham.getInstance().getChiTietLoSanPham(item.id_lo_sp);
-        LoSanPham lsp = DAO.daoLoSanPham.getInstance().getLoSanPham(item.id_lo_sp);
-        ChiTietPhieuNhap pn = DAO.daoChiTietPhieuNhap.getInstance().getChiTietPhieuNhap(lsp.id_phieu_nhap);
-        NguonCungCap ncc = DAO.daoNguonCungCap.getInstance().getNguonCungCap(pn.id_nguon_cc);
-        SanPham sp = DAO.daoSanPham.getInstance().getSanPham(ctlsp.id_sp);
-        NhanVien nv = DAO.daoTaiKhoan.getInstance().getNhanVien(item.maNV);
-            model.addRow(new Object[]{item.id_phieu_tra_kho,item.thoi_gian_tra,ncc.ten_nha_cc,sp.ten_sp,item.sl_san_pham,nv.getTenNV()});
-        });
+            for (LoaiSanPham lsp : arr) {
+            model.addRow(new String[]{String.valueOf(i), lsp.getMaLSP(), lsp.getTenLSP(), lsp.getMoTa()});
+            i++;
+            }
         }
     }
     /**
@@ -94,10 +90,9 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableXuatKho = new javax.swing.JTable();
+        jTableLoaiSanPham = new javax.swing.JTable();
         jButtonTaoMoi = new javax.swing.JButton();
         jTextFieldTimKiem = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -105,7 +100,7 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
         jButtonTimKiem = new javax.swing.JButton();
         jLabelKetQua = new javax.swing.JLabel();
         jButtonSua = new javax.swing.JButton();
-        jButtonHuy = new javax.swing.JButton();
+        jButtonXoa = new javax.swing.JButton();
         jComboBoxNhanVien = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jButtonNhoMax = new javax.swing.JButton();
@@ -125,43 +120,39 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Phần mềm quản lý kho");
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("siêu thị S.O.S");
+        jLabel1.setText("Siêu thị điện thoại");
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel2.setPreferredSize(new java.awt.Dimension(980, 444));
 
-        jTableXuatKho.setModel(new javax.swing.table.DefaultTableModel(
+        jTableLoaiSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Thời gian trả", "Tên nhà cung cấp", "Tên sản phẩm", "Số lượng", "Nhân viên phụ trách"
+                "Thứ tự", "Mã Loại", "Tên loại sản phẩm", "Mô tả"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTableXuatKho.setRowHeight(30);
-        jTableXuatKho.setAutoCreateRowSorter(true);
-        jTableXuatKho.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableLoaiSanPham.setRowHeight(30);
+        jTableLoaiSanPham.setAutoCreateRowSorter(true);
+        jTableLoaiSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableXuatKhoMouseClicked(evt);
+                jTableLoaiSanPhamMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTableXuatKho);
+        jScrollPane1.setViewportView(jTableLoaiSanPham);
 
         jButtonTaoMoi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ImageIcon imgTaoMoi = new ImageIcon(getClass().getResource("/icon/icons8-plus-48.png"));
@@ -187,7 +178,7 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("DANH SÁCH PHIẾU TRẢ NHÀ CUNG CẤP");
+        jLabel2.setText("Danh sách loại sản phẩm");
 
         jButtonTaiLai.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ImageIcon imgLamMoi = new ImageIcon(getClass().getResource("/icon/icons8-synchronize-30.png"));
@@ -220,12 +211,22 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
         ImageIcon ImgSua = new ImageIcon(imgSua.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
         jButtonSua.setText("Sửa");
         jButtonSua.setIcon(ImgSua);
+        jButtonSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSuaActionPerformed(evt);
+            }
+        });
 
-        jButtonHuy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonXoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ImageIcon imgHuy = new ImageIcon(getClass().getResource("/icon/icons8-waste-48.png"));
         ImageIcon ImgHuy = new ImageIcon(imgHuy.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
-        jButtonHuy.setText("Huỷ");
-        jButtonHuy.setIcon(ImgHuy);
+        jButtonXoa.setText("Xóa");
+        jButtonXoa.setIcon(ImgHuy);
+        jButtonXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonXoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -241,7 +242,7 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonHuy)
+                        .addComponent(jButtonXoa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -265,7 +266,7 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
                     .addComponent(jTextFieldTimKiem)
                     .addComponent(jButtonTaiLai)
                     .addComponent(jButtonTimKiem)
-                    .addComponent(jButtonHuy)
+                    .addComponent(jButtonXoa)
                     .addComponent(jButtonSua))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelKetQua)
@@ -359,24 +360,18 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBoxNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBoxNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(329, 329, 329)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(329, Short.MAX_VALUE))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,10 +379,8 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBoxNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addGap(56, 56, 56)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -412,22 +405,22 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTableXuatKhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableXuatKhoMouseClicked
+    private void jTableLoaiSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLoaiSanPhamMouseClicked
         if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             evt.consume();
-            int selectedRowIndex = jTableXuatKho.getSelectedRow();
-            int id = jTableXuatKho.getValueAt(selectedRowIndex, 0).hashCode();
+            int selectedRowIndex = jTableLoaiSanPham.getSelectedRow();
+            int id = jTableLoaiSanPham.getValueAt(selectedRowIndex, 0).hashCode();
             JFrame Xem = new fPrintPhieuXuat(maNV,id);
             Xem.setVisible(true);
         }
         jButtonSua.setEnabled(true);
-        jButtonHuy.setEnabled(true);
+        jButtonXoa.setEnabled(true);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTableXuatKhoMouseClicked
+    }//GEN-LAST:event_jTableLoaiSanPhamMouseClicked
 
     private void jButtonTaoMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTaoMoiActionPerformed
-        JFrame XuatKho = new fTraHang_Kho(maNV);
-        XuatKho.setVisible(true);
+        JFrame themLoaiSP = new fThemLoaiSp(maNV);
+        themLoaiSP.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTaoMoiActionPerformed
 
@@ -463,10 +456,10 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
         invalidate();
         validate();
         repaint();
-        DuLieuMau=BUS.busTraNhaCungCap.getInstance().getListTraKho();
+        DuLieuMau=BUS.busLoaiSanPham.getInstance().getListLoaiSanPham();
        //build();
-        DanhSachTraKho = DuLieuMau;
-        this.count = this.DanhSachTraKho.size();
+        DanhSachLoaiSanPham = DuLieuMau;
+        this.count = this.DanhSachLoaiSanPham.size();
         jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
         if (count % 20 == 0) {
             SoTrang = count / 20;
@@ -475,20 +468,20 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
         }
         jLabelSoTrang.setText("1/" + SoTrang);
         jLabelTrang.setText("1");
-        ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraKho(DanhSachTraKho, 1);
-        ShowListTraKho(table);
+        ArrayList<LoaiSanPham> table = BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
+        ShowListLoaiSanPham(table);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTaiLaiActionPerformed
         public void FindList() {
-        this.DanhSachTraKho = BUS.busTraNhaCungCap.getInstance().FindListTraKho(DuLieuMau, jTextFieldTimKiem.getText());
-        if (DanhSachTraKho.isEmpty()) {
+        this.DanhSachLoaiSanPham = BUS.busLoaiSanPham.getInstance().FindListLoaiSanPham(DuLieuMau, jTextFieldTimKiem.getText());
+        if (DanhSachLoaiSanPham.isEmpty()) {
             JOptionPane.showMessageDialog(null,
             "Không có dữ liệu phiếu trả",
             "Lỗi",
             JOptionPane.ERROR_MESSAGE);
             build();
         } else {
-            this.count = this.DanhSachTraKho.size();
+            this.count = this.DanhSachLoaiSanPham.size();
             jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
             if (count % 20 == 0) {
                 SoTrang = count / 20;
@@ -497,12 +490,12 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
             }
             jLabelSoTrang.setText("1/" + SoTrang);
             jLabelTrang.setText("1");
-            ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraKho(DanhSachTraKho, 1);
-            ShowListTraKho(table);
+            ArrayList<LoaiSanPham> table = BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
+            ShowListLoaiSanPham(table);
         }
     }
      public void NhanVienDangNhap() {
-        if (!maNV.endsWith("")) {
+        if (maNV.length()>0) {
             TaiKhoan tk = DAO.daoTaiKhoan.getInstance().getTaiKhoan(maNV);
             NhanVien nv = DAO.daoTaiKhoan.getInstance().getNhanVien(tk.getMaNV());
             jComboBoxNhanVien.addItem(nv.getTenNV());
@@ -529,8 +522,8 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
 
     private void jButtonNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoMaxActionPerformed
         Trang = 1;
-        ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraKho(DanhSachTraKho, Trang);
-        ShowListTraKho(table);
+        ArrayList<LoaiSanPham> table = BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
+        ShowListLoaiSanPham(table);
         jLabelTrang.setText("1");
         jLabelSoTrang.setText("1/" + SoTrang);
     }//GEN-LAST:event_jButtonNhoMaxActionPerformed
@@ -538,8 +531,8 @@ public class fTraHang_Ncc extends javax.swing.JFrame {
     private void jButtonNhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoActionPerformed
         if (Trang > 1) {
             Trang--;
-ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraKho(DanhSachTraKho, Trang);
-        ShowListTraKho(table);
+ArrayList<LoaiSanPham> table = BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
+        ShowListLoaiSanPham(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
         }
@@ -548,8 +541,8 @@ ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraK
     private void jButtonLonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonActionPerformed
         if (Trang < SoTrang) {
             Trang++;
-            ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraKho(DanhSachTraKho, Trang);
-        ShowListTraKho(table);
+            ArrayList<LoaiSanPham> table = BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
+        ShowListLoaiSanPham(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
         }
@@ -557,25 +550,40 @@ ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraK
 
     private void jButtonLonMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonMaxActionPerformed
         Trang = SoTrang;
-        ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraKho(DanhSachTraKho, Trang);
-        ShowListTraKho(table);
+        ArrayList<LoaiSanPham> table = BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
+        ShowListLoaiSanPham(table);
         jLabelTrang.setText("" + SoTrang);
         jLabelSoTrang.setText(SoTrang + "/" + SoTrang);
     }//GEN-LAST:event_jButtonLonMaxActionPerformed
 
     private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
-        DanhSachTraKho = BUS.busTraNhaCungCap.getInstance().getListTraKho();
+        DanhSachLoaiSanPham = BUS.busLoaiSanPham.getInstance().getListLoaiSanPham();
         FindList();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jTextFieldTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            DanhSachTraKho = BUS.busTraNhaCungCap.getInstance().getListTraKho();
+            DanhSachLoaiSanPham = BUS.busLoaiSanPham.getInstance().getListLoaiSanPham();
             FindList();
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTimKiemKeyPressed
+
+    private void jButtonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonXoaActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTableLoaiSanPham.getSelectedRow();
+        String maLoaiSP = jTableLoaiSanPham.getValueAt(selectedRowIndex, 1).toString();
+        BUS.busLoaiSanPham.getInstance().DeleteLoaiSanPham(maLoaiSP);
+    }//GEN-LAST:event_jButtonXoaActionPerformed
+
+    private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
+        int selectedRowIndex = jTableLoaiSanPham.getSelectedRow();
+        String maLoaiSP = jTableLoaiSanPham.getValueAt(selectedRowIndex, 1).toString();
+        LoaiSanPham lspSua = DAO.daoLoaiSanPham.getInstance().getLoaiSanPham(maLoaiSP);
+        JFrame fSualsp = new fSuaLoaiSP(lspSua);
+        fSualsp.setVisible(true);
+    }//GEN-LAST:event_jButtonSuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -594,26 +602,26 @@ ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraK
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fTraHang_Ncc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fLoaiSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fTraHang_Ncc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fLoaiSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fTraHang_Ncc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fLoaiSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fTraHang_Ncc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fLoaiSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fTraHang_Ncc("NV12").setVisible(true);
+                new fLoaiSanPham("NV12").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonHuy;
     private javax.swing.JButton jButtonLon;
     private javax.swing.JButton jButtonLonMax;
     private javax.swing.JButton jButtonNho;
@@ -622,10 +630,10 @@ ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraK
     private javax.swing.JButton jButtonTaiLai;
     private javax.swing.JButton jButtonTaoMoi;
     private javax.swing.JButton jButtonTimKiem;
+    private javax.swing.JButton jButtonXoa;
     private javax.swing.JComboBox<String> jComboBoxNhanVien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelKetQua;
     private javax.swing.JLabel jLabelSoTrang;
     private javax.swing.JLabel jLabelTrang;
@@ -633,7 +641,7 @@ ArrayList<PhieuTraKho> table = BUS.busTraNhaCungCap.getInstance().get20PhieuTraK
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableXuatKho;
+    private javax.swing.JTable jTableLoaiSanPham;
     private javax.swing.JTextField jTextFieldTimKiem;
     // End of variables declaration//GEN-END:variables
 }

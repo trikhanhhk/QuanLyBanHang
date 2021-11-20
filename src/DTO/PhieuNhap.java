@@ -6,22 +6,82 @@
 package DTO;
 import java.sql.Timestamp;
 import java.lang.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 /**
  *
  * @author nghia
  */
 public class PhieuNhap {
-    public int id_phieu_nhap;
-    public String thoi_gian;
-    public String ghi_chu;
-    public int id_exist;
-    public int id_nv;
 
-    public PhieuNhap(int id_phieu_nhap, String thoi_gian, String ghi_chu, int id_exist, int id_nv) {
-        this.id_phieu_nhap = id_phieu_nhap;
-        this.thoi_gian = thoi_gian;
-        this.ghi_chu = ghi_chu;
-        this.id_exist = id_exist;
-        this.id_nv = id_nv;
+    String maPN;
+    String maNCC;
+    String maNV;
+    LocalDate ngayNhap;
+    LocalTime gioNhap;
+    float tongTien = 0;
+
+    public PhieuNhap() {
+        this.ngayNhap = LocalDate.now();
+        this.gioNhap = LocalTime.now();
     }
+
+    public PhieuNhap(String maPN, String maNCC, String maNV, LocalDate ngayNhap, LocalTime gioNhap, float tongTien) {
+
+        this.maPN = maPN;
+        this.maNCC = maNCC;
+        this.maNV = maNV;
+        this.ngayNhap = ngayNhap;
+        this.gioNhap = gioNhap;
+        this.tongTien = tongTien;
+    }
+
+    public String getMaPN() {
+        return maPN;
+    }
+
+    public String getMaNCC() {
+        return maNCC;
+    }
+
+    public String getMaNV() {
+        return maNV;
+    }
+
+    public LocalDate getNgayNhap() {
+        return ngayNhap;
+    }
+
+    public LocalTime getGioNhap() {
+        return gioNhap;
+    }
+
+    public Float getTongTien() {
+        return tongTien;
+    }
+
+    public void setMaPN(String maPN) {
+        this.maPN = maPN;
+    }
+
+    public void setMaNCC(String maNCC) {
+        this.maNCC = maNCC;
+    }
+
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
+    }
+
+    public void setNgayNhap(LocalDate ngayNhap) {
+        this.ngayNhap = ngayNhap;
+    }
+
+    public void setGioNhap(LocalTime gioNhap) {
+        this.gioNhap = gioNhap;
+    }
+
+    public void setTongTien(float tongTien) {
+        this.tongTien = tongTien;
+    }
+
 }

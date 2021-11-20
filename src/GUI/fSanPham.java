@@ -7,6 +7,7 @@ package GUI;
 
 import DAO.*;
 import DTO.*;
+import Format.PriceFormatter;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class fSanPham extends javax.swing.JFrame {
         initComponents();
         setIcon();
         LoadThongTinSanPham();
-        //showComboboxLoaiSanPham();
+//        showComboboxLoaiSanPham();
     }
     public fSanPham(int idnv) { 
         initComponents();
@@ -39,24 +40,37 @@ public class fSanPham extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }
     public void LoadThongTinSanPham()
-    {
-        
+    {   
+        int stt = 1;
         DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
-        while (jTableThongTinSanPham.getRowCount() > 0)
-        {
+        while (jTableThongTinSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
-         ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
-         for(int i = 0 ;i<arr.size();i++)
-         {
-            String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).id_loai_sp).ten_loai_sp;
-            model.addRow(new Object[]{arr.get(i).id_sp,arr.get(i).ten_sp,Loai_sp});
-         }
+        ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
+        if(arr.isEmpty()==false)
+        {
+//            Boolean hienSanPhamAn = LoginForm.quyenLogin.getChiTietQuyen().contains("qlSanPham");
+            for (SanPham sp : arr) {
+    //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
+                    model.addRow(new String[]{
+                        String.valueOf(stt),
+                        sp.getMaSP(),
+                        sp.getMaLSP(),
+                        sp.getTenSP(),
+                        PriceFormatter.format(sp.getDonGia()),
+                        String.valueOf(sp.getSoLuong()),
+                        sp.getFileNameHinhAnh(),
+                        (sp.getTrangThai() == 0 ? "Hiện" : "Ẩn")
+                    });
+                    stt++;
+    //            }
+            }
+        }
         
     }
 //    public void showComboboxLoaiSanPham(){
-//        jComboBoxLoaiSanPhamTK.removeAllItems();
-//        jComboBoxLoaiSanPhamTK.addItem("Tất cả");
+//        jComboBoxLoaiSanPham.removeAllItems();
+//        jComboBoxLoaiSanPham.addItem("Tất cả");
 //        ArrayList<LoaiSanPham> arr = daoLoaiSanPham.getInstance().getListLoaiSanPham();
 //        for(int i=0;i< arr.size();i++){
 //            jComboBoxLoaiSanPhamTK.addItem(arr.get(i).ten_loai_sp);
@@ -67,7 +81,6 @@ public class fSanPham extends javax.swing.JFrame {
   
         if ("Tất cả".equals(ten_loai_sp)){
             listDanhSachSanPham();
-            //System.out.println("Tat ca");
         }
         else
         {
@@ -79,9 +92,9 @@ public class fSanPham extends javax.swing.JFrame {
             ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
             for(int i = 0 ;i<arr.size();i++)
             {
-                if(arr.get(i).id_loai_sp == daoLoaiSanPham.getInstance().getIDLoaiSanPham(ten_loai_sp).id_loai_sp){
-                    String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).id_loai_sp).ten_loai_sp;
-                    model.addRow(new Object[]{arr.get(i).id_sp,arr.get(i).ten_sp,Loai_sp});
+                if(arr.get(i).getMaLSP() == daoLoaiSanPham.getInstance().getIDLoaiSanPham(ten_loai_sp).getMaLSP()){
+                    String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).getMaLSP()).getTenLSP();
+                    model.addRow(new Object[]{arr.get(i).getMaSP(),arr.get(i).getTenSP(),Loai_sp});
                 
                 }
             }
@@ -96,8 +109,8 @@ public class fSanPham extends javax.swing.JFrame {
         ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
          for(int i = 0 ;i<arr.size();i++)
          {
-            String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).id_loai_sp).ten_loai_sp;
-            model.addRow(new Object[]{arr.get(i).id_sp,arr.get(i).ten_sp,Loai_sp});
+            String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).getMaLSP()).getTenLSP();
+            model.addRow(new Object[]{arr.get(i).getMaSP(),arr.get(i).getTenSP(),Loai_sp});
          }
     }
    
@@ -122,6 +135,10 @@ public class fSanPham extends javax.swing.JFrame {
         jLabelTenSanPham = new javax.swing.JLabel();
         jLabelIdSanpham = new javax.swing.JLabel();
         jLabelLoadIDSanPham = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        labelDonGia = new javax.swing.JLabel();
+        labelSoluong = new javax.swing.JLabel();
         jLabelLoadhinhAnh = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -135,22 +152,22 @@ public class fSanPham extends javax.swing.JFrame {
         jTableThongTinSanPham.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTableThongTinSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID ", "Tên Sản Phẩm", "Loại Sản Phẩm"
+                "STT", "Mã sản phẩm", "Mã Loại", "Tên", "Đơn giá", "Số lượng", "Hình ảnh", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -197,6 +214,11 @@ public class fSanPham extends javax.swing.JFrame {
         jButtonThem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonThemMouseClicked(evt);
+            }
+        });
+        jButtonThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonThemActionPerformed(evt);
             }
         });
 
@@ -262,9 +284,13 @@ public class fSanPham extends javax.swing.JFrame {
         jLabelTenSanPham.setText("Tên Sản Phẩm  :");
 
         jLabelIdSanpham.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelIdSanpham.setText("      ID         :");
+        jLabelIdSanpham.setText("Mã sản phẩm:");
 
         jLabelLoadIDSanPham.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel3.setText("Đơn giá");
+
+        jLabel4.setText("Số lượng");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -279,28 +305,42 @@ public class fSanPham extends javax.swing.JFrame {
                         .addComponent(jLabelLoadLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabelIdSanpham)
-                                .addGap(25, 25, 25))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabelTenSanPham)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabelTenSanPham)
+                            .addComponent(jLabelIdSanpham))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabelLoadTenSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelLoadIDSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelSoluong)
+                            .addComponent(labelDonGia))))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelLoadIDSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelIdSanpham))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelLoadTenSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTenSanPham))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelLoadIDSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelIdSanpham)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(labelDonGia)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelLoadTenSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTenSanPham)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(labelSoluong)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelLoaiSanPham)
@@ -320,7 +360,7 @@ public class fSanPham extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabelLoadhinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
@@ -420,17 +460,21 @@ public class fSanPham extends javax.swing.JFrame {
     private void jTableThongTinSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableThongTinSanPhamMouseClicked
        DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
        int row = jTableThongTinSanPham.getSelectedRow();
-       jLabelLoadIDSanPham.setText(model.getValueAt(row,0).toString());
-       jLabelLoadTenSanPham.setText(model.getValueAt(row, 1).toString());
-       jLabelLoadLoaiSanPham.setText(model.getValueAt(row, 2).toString());
+       jLabelLoadIDSanPham.setText(model.getValueAt(row,1).toString());
+       jLabelLoadTenSanPham.setText(model.getValueAt(row, 2).toString());
+       jLabelLoadLoaiSanPham.setText(model.getValueAt(row, 3).toString());
+       labelDonGia.setText(model.getValueAt(row, 4).toString());
+       labelSoluong.setText(model.getValueAt(row, 5).toString());
        //ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPhamTheoID(jLabelLoadIDSanPham.getText().toString());        
        int id = Integer.parseInt(model.getValueAt(row,0).toString());
        SanPham sp = daoSanPham.getInstance().getSanPham(id);
-       ImageIcon imageIcon = new ImageIcon(
-                new ImageIcon(sp.hinh_anh).getImage().getScaledInstance(
-                        jLabelLoadhinhAnh.getWidth(), jLabelLoadhinhAnh.getHeight(), Image.SCALE_DEFAULT));
+       ImageIcon img = new ImageIcon(getClass().getResource("/Image/ProductImages/" + model.getValueAt(row, 6).toString()));
+//       ImageIcon imageIcon = new ImageIcon(
+//                new ImageIcon(sp.getFileNameHinhAnh()).getImage().getScaledInstance(
+//                        jLabelLoadhinhAnh.getWidth(), jLabelLoadhinhAnh.getHeight(), Image.SCALE_DEFAULT));
+        Image imgScaled = img.getImage().getScaledInstance(jLabelLoadhinhAnh.getWidth(), jLabelLoadhinhAnh.getHeight(), Image.SCALE_DEFAULT);
         jLabelLoadhinhAnh.setText("");
-        jLabelLoadhinhAnh.setIcon(imageIcon);
+        jLabelLoadhinhAnh.setIcon(new ImageIcon(imgScaled));
     }//GEN-LAST:event_jTableThongTinSanPhamMouseClicked
 
     private void jButtonThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonThemMouseClicked
@@ -453,11 +497,26 @@ public class fSanPham extends javax.swing.JFrame {
         }
         String timkiem = jTextFieldTimKiem.getText().toString();
         ArrayList<SanPham> arr = daoSanPham.getInstance().FindListSanPham(timkiem);
-         for(int i = 0 ;i<arr.size();i++)
-         {
-            String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).id_loai_sp).ten_loai_sp;
-            model.addRow(new Object[]{arr.get(i).id_sp,arr.get(i).ten_sp,Loai_sp});
-         }
+        if(arr.isEmpty()==false)
+        {
+            int stt = 1;
+//            Boolean hienSanPhamAn = LoginForm.quyenLogin.getChiTietQuyen().contains("qlSanPham");
+            for (SanPham sp : arr) {
+    //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
+                    model.addRow(new String[]{
+                        String.valueOf(stt),
+                        sp.getMaSP(),
+                        sp.getMaLSP(),
+                        sp.getTenSP(),
+                        PriceFormatter.format(sp.getDonGia()),
+                        String.valueOf(sp.getSoLuong()),
+                        sp.getFileNameHinhAnh(),
+                        (sp.getTrangThai() == 0 ? "Hiện" : "Ẩn")
+                    });
+                    stt++;
+    //            }
+            }
+        }
     }//GEN-LAST:event_jButtonTimKiemMouseClicked
 
     private void jTextFieldTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyReleased
@@ -468,11 +527,26 @@ public class fSanPham extends javax.swing.JFrame {
         }
         String timkiem = jTextFieldTimKiem.getText().toString();
         ArrayList<SanPham> arr = daoSanPham.getInstance().FindListSanPham(timkiem);
-         for(int i = 0 ;i<arr.size();i++)
-         {
-            String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).id_loai_sp).ten_loai_sp;
-            model.addRow(new Object[]{arr.get(i).id_sp,arr.get(i).ten_sp,Loai_sp});
-         }
+         if(arr.isEmpty()==false)
+        {
+//            Boolean hienSanPhamAn = LoginForm.quyenLogin.getChiTietQuyen().contains("qlSanPham");
+            int stt = 1;
+            for (SanPham sp : arr) {
+    //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
+                    model.addRow(new String[]{
+                        String.valueOf(stt),
+                        sp.getMaSP(),
+                        sp.getMaLSP(),
+                        sp.getTenSP(),
+                        PriceFormatter.format(sp.getDonGia()),
+                        String.valueOf(sp.getSoLuong()),
+                        sp.getFileNameHinhAnh(),
+                        (sp.getTrangThai() == 0 ? "Hiện" : "Ẩn")
+                    });
+                    stt++;
+    //            }
+            }
+        }
     }//GEN-LAST:event_jTextFieldTimKiemKeyReleased
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
@@ -482,10 +556,15 @@ public class fSanPham extends javax.swing.JFrame {
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
         int selectedRowIndex = jTableThongTinSanPham.getSelectedRow();
         int id = jTableThongTinSanPham.getValueAt(selectedRowIndex, 0).hashCode();
-        JFrame ThongBao = new fThongBaoHuy("NhaCungCap", id, id_nv);
-        ThongBao.setVisible(true);
+//        JFrame ThongBao = new fThongBaoHuy("NhaCungCap", id, id_nv);
+//        ThongBao.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonHuyActionPerformed
+
+    private void jButtonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonThemActionPerformed
     
     /**
      * @param args the command line arguments
@@ -532,6 +611,8 @@ public class fSanPham extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTimKiem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelIdSanpham;
     private javax.swing.JLabel jLabelLoadIDSanPham;
     private javax.swing.JLabel jLabelLoadLoaiSanPham;
@@ -547,5 +628,7 @@ public class fSanPham extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTableThongTinSanPham;
     private javax.swing.JTextField jTextFieldTimKiem;
+    private javax.swing.JLabel labelDonGia;
+    private javax.swing.JLabel labelSoluong;
     // End of variables declaration//GEN-END:variables
 }

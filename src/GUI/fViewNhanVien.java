@@ -34,6 +34,8 @@ public class fViewNhanVien extends javax.swing.JFrame {
         setIcon();
         build();
     }
+
+
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }

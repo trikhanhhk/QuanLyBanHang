@@ -82,7 +82,7 @@ public class fDangNhap extends javax.swing.JFrame {
         jLabel2.setText("Tên đăng nhập:");
 
         jTextFieldTenDangNhap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldTenDangNhap.setText("nhanvien1");
+        jTextFieldTenDangNhap.setText("admin");
         jTextFieldTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTenDangNhapActionPerformed(evt);
@@ -94,7 +94,7 @@ public class fDangNhap extends javax.swing.JFrame {
         jLabel3.setText("Mật khẩu:");
 
         jPasswordFieldMatKhau.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPasswordFieldMatKhau.setText("nhanvien1");
+        jPasswordFieldMatKhau.setText("admin");
         jPasswordFieldMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordFieldMatKhauActionPerformed(evt);

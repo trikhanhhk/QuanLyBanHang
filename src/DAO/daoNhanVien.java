@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import DTO.NguonCungCap;
+import DTO.NhaCungCap;
 import DTO.NhanVien;
 import DTO.SanPham;
 import GUI.fNhacungcap;
@@ -23,6 +23,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import java.lang.*;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +33,7 @@ import java.lang.*;
 public class daoNhanVien {
 
     private static daoNhanVien instance;
+    private ArrayList<NhanVien> listNV;
 
     public static daoNhanVien getInstance() {
         if (instance == null) {
@@ -40,6 +43,7 @@ public class daoNhanVien {
     }
 
     public daoNhanVien() {
+        this.listNV = this.getListNhanVien();
     }
 
     //Lấy danh sách thông tin từ bảng nhân viên
@@ -66,6 +70,24 @@ public class daoNhanVien {
         }
 
         return result;
+    }
+    
+    public String getNextID() {
+        return "SP" + String.valueOf(this.listNV.size() + 1);
+    }
+    
+    public void insertNhanVien(String MaNV, String TenNV, String NgaySinh, String DiaChi, String SDT, int trangThai) {
+        String query = "INSERT INTO `nhanvien`(`MaNV`, `TenNV`, `NgaySinh`, `DiaChi`, `SDT`, `TrangThai`) VALUES ('" + MaNV + "','" + TenNV + "','" + NgaySinh + "','" + DiaChi + "','" + SDT + "','" + trangThai + ")";
+        System.out.println(query);
+        try {
+            DataProvider.getIntance().open();
+            DataProvider.getIntance().excuteQuery(query);
+            DataProvider.getIntance().close();
+            JOptionPane.showMessageDialog(null, "Đã thêm nhân viên " + TenNV + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).getTenNV() + " đã thêm loại sản phẩm mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Thêm loại nhân viên " + TenNV + " Thất bại", "Thông báo", 1);
+        }
     }
 
     //Tìm kiếm trong bảng nhân viên (cũ)

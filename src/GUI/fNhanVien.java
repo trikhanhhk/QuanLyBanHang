@@ -6,10 +6,10 @@
 package GUI;
 
 import DAO.daoLoaiSanPham;
-import DAO.daoNguonCungCap;
+import DAO.daoNhaCungCap;
 import DAO.daoNhanVien;
 import DAO.daoSanPham;
-import DTO.NguonCungCap;
+import DTO.NhaCungCap;
 import DTO.NhanVien;
 import DTO.SanPham;
 import DTO.TaiKhoan;
@@ -104,6 +104,7 @@ public class fNhanVien extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableNhanVien = new javax.swing.JTable();
         jLabelKetQua = new javax.swing.JLabel();
+        jButtonThemNV = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -181,6 +182,13 @@ public class fNhanVien extends javax.swing.JFrame {
         jLabelKetQua.setForeground(new java.awt.Color(255, 255, 255));
         jLabelKetQua.setText("Có tổng cộng 000 kết quả");
 
+        jButtonThemNV.setText("Thêm");
+        jButtonThemNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonThemNVActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -192,12 +200,13 @@ public class fNhanVien extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonTimKiem))
-                            .addComponent(jLabelKetQua, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addComponent(jLabelKetQua))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButtonThemNV)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonTimKiem)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -207,7 +216,8 @@ public class fNhanVien extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldTimKiem)
-                    .addComponent(jButtonTimKiem))
+                    .addComponent(jButtonTimKiem)
+                    .addComponent(jButtonThemNV))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelKetQua)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -436,6 +446,11 @@ public class fNhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableNhanVienMouseClicked
 
+    private void jButtonThemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemNVActionPerformed
+        JFrame them = new fThemNhanVien(maNV);
+        them.setVisible(true);
+    }//GEN-LAST:event_jButtonThemNVActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -507,6 +522,7 @@ public class fNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton jButtonLonMax;
     private javax.swing.JButton jButtonNho;
     private javax.swing.JButton jButtonNhoMax;
+    private javax.swing.JButton jButtonThemNV;
     private javax.swing.JButton jButtonTimKiem;
     private javax.swing.JComboBox<String> jComboBoxNhanVien;
     private javax.swing.JLabel jLabel1;

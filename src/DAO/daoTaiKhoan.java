@@ -118,7 +118,7 @@ public class daoTaiKhoan {
                 "Sửa mật khẩu thành công",
                 "Thông báo",
                 JOptionPane.INFORMATION_MESSAGE);
-        DAO.daoThongBao.getInstance().insertThongBao("[Tài khoản] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(MaNV).getTenNV() + " đã sửa mật khẩu vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
+        //DAO.daoThongBao.getInstance().insertThongBao("[Tài khoản] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(MaNV).getTenNV() + " đã sửa mật khẩu vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
 
         return 0;
     }
@@ -148,9 +148,9 @@ public class daoTaiKhoan {
     }
 
     //Lấy thông tin tài khoản bằng id nhân viên
-    public TaiKhoan getTaiKhoan(String id_nhanvien) {
+    public TaiKhoan getTaiKhoan(String maNV) {
         TaiKhoan result = null;
-        String query = "SELECT * FROM `taiKhoan` WHERE MaNV='" + id_nhanvien + "'";
+        String query = "SELECT * FROM `taiKhoan` WHERE MaNV='" + maNV + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
             DataProvider.getIntance().open();

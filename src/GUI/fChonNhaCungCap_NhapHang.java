@@ -5,8 +5,8 @@
  */
 package GUI;
 
-import DAO.daoNguonCungCap;
-import DTO.NguonCungCap;
+import DAO.daoNhaCungCap;
+import DTO.NhaCungCap;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -43,14 +43,14 @@ public class fChonNhaCungCap_NhapHang extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }
     public void build(){
-        listNguonCungCap();
+        listNhaCungCap();
     }
-    public void listNguonCungCap(){
+    public void listNhaCungCap(){
         DefaultTableModel model = (DefaultTableModel) jTableNguonCC.getModel();
         while (jTableNguonCC.getRowCount() > 0) {
             model.removeRow(0);
         }
-        ArrayList<NguonCungCap> arr = daoNguonCungCap.getInstance().getListNguonCungCap();
+        ArrayList<NhaCungCap> arr = daoNhaCungCap.getInstance().getListNhaCungCap();
         for(int i=0 ;i< arr.size();i++){
             model.addRow(new Object[]{arr.get(i).id_nguon_cc,arr.get(i).ten_nha_cc,arr.get(i).ten_dai_dien,arr.get(i).sdt});
         }
@@ -314,7 +314,7 @@ public class fChonNhaCungCap_NhapHang extends javax.swing.JFrame {
         while (jTableNguonCC.getRowCount() > 0) {
             model.removeRow(0);
         }
-        ArrayList<NguonCungCap> arr = daoNguonCungCap.getInstance().FindListNguonCungCap(jTextFieldTimKiemNhaCungCap.getText());
+        ArrayList<NhaCungCap> arr = daoNhaCungCap.getInstance().FindListNhaCungCap(jTextFieldTimKiemNhaCungCap.getText());
         for(int i=0;i<arr.size();i++){
             model.addRow(new Object[]{arr.get(i).id_nguon_cc,arr.get(i).ten_nha_cc,arr.get(i).ten_dai_dien,arr.get(i).sdt});
         }

@@ -73,6 +73,10 @@ public class fKiemKe extends javax.swing.JFrame {
         build();
     }
 
+    fKiemKe(String maNV) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }
