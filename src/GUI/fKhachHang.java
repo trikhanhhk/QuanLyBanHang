@@ -35,28 +35,28 @@ import java.lang.*;
  *
  * @author Xoan Tran
  */
-public class fNhacungcap extends javax.swing.JFrame {
+public class fKhachHang extends javax.swing.JFrame {
 
     /**
      * Creates new form fNhacungcap
      */
     public String maNV;
-    public ArrayList<NhaCungCap> DanhSachNhaCungCap;
+    public ArrayList<KhachHang> DanhSachKhachHang;
     public long count, SoTrang, Trang = 1;
-    public ArrayList<NhaCungCap> DuLieuMau;
+    public ArrayList<KhachHang> DuLieuMau;
 
-    public fNhacungcap() {
+    public fKhachHang() {
         initComponents();
         setIcon();
 //        build();
     }
 
-    public fNhacungcap(String id) {
+    public fKhachHang(String id) {
         maNV = id;
         initComponents();
         setIcon();
-        DanhSachNhaCungCap = daoNhaCungCap.getInstance().getListNhaCungCap();
-        DuLieuMau = DanhSachNhaCungCap;
+        DanhSachKhachHang = daoKhachHang.getInstance().getListKhachHang();
+        DuLieuMau = DanhSachKhachHang;
 //        build();
     }
 
@@ -120,7 +120,7 @@ public class fNhacungcap extends javax.swing.JFrame {
                 return false;
             }
         };
-        jTableNhaCungCap = new javax.swing.JTable(model);
+        jTableKhachHang = new javax.swing.JTable(model);
         jButtonThem = new javax.swing.JButton();
         jTextFieldTimKiem = new javax.swing.JTextField();
         jButtonExcel = new javax.swing.JButton();
@@ -155,8 +155,8 @@ public class fNhacungcap extends javax.swing.JFrame {
         jPanel13.setAlignmentX(0.2F);
 
         /*
-        jTableNhaCungCap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTableNhaCungCap.setModel(new javax.swing.table.DefaultTableModel(
+        jTableKhachHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTableKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -192,20 +192,20 @@ public class fNhacungcap extends javax.swing.JFrame {
             }
         });
         */
-        jTableNhaCungCap.setRequestFocusEnabled(false);
-        jTableNhaCungCap.setRowHeight(50);
-        jTableNhaCungCap.setRowSelectionAllowed(true);
-        jTableNhaCungCap.setAutoCreateRowSorter(true);
-        jTableNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableKhachHang.setRequestFocusEnabled(false);
+        jTableKhachHang.setRowHeight(50);
+        jTableKhachHang.setRowSelectionAllowed(true);
+        jTableKhachHang.setAutoCreateRowSorter(true);
+        jTableKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableNhaCungCapMouseClicked(evt);
+                jTableKhachHangMouseClicked(evt);
             }
         });
-        jScrollPane7.setViewportView(jTableNhaCungCap);
-        if (jTableNhaCungCap.getColumnModel().getColumnCount() > 0) {
-            jTableNhaCungCap.getColumnModel().getColumn(0).setMinWidth(30);
-            jTableNhaCungCap.getColumnModel().getColumn(0).setPreferredWidth(30);
-            jTableNhaCungCap.getColumnModel().getColumn(0).setMaxWidth(30);
+        jScrollPane7.setViewportView(jTableKhachHang);
+        if (jTableKhachHang.getColumnModel().getColumnCount() > 0) {
+            jTableKhachHang.getColumnModel().getColumn(0).setMinWidth(30);
+            jTableKhachHang.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jTableKhachHang.getColumnModel().getColumn(0).setMaxWidth(30);
         }
 
         jButtonThem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -498,7 +498,7 @@ public class fNhacungcap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonThemjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemjButton2ActionPerformed
-        JFrame Them = new fCreateNhaCungCap(maNV);
+        JFrame Them = new fCreateKhachHang(maNV);
         Them.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonThemjButton2ActionPerformed
@@ -513,12 +513,12 @@ public class fNhacungcap extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemnhacungcap
 
-    private void jTableNhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableNhaCungCapMouseClicked
+    private void jTableKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableKhachHangMouseClicked
         if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             evt.consume();
-            int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
-            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewNhaCungCap(maNV, id,false);
+            int selectedRowIndex = jTableKhachHang.getSelectedRow();
+            int id = jTableKhachHang.getValueAt(selectedRowIndex, 0).hashCode();
+            JFrame Xem = new fViewKhachHang(maNV, id,false);
             Xem.setVisible(true);
             //System.out.print("Nhap dup chuot");
         }
@@ -526,7 +526,7 @@ public class fNhacungcap extends javax.swing.JFrame {
         jButtonHuy.setEnabled(true);
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTableNhaCungCapMouseClicked
+    }//GEN-LAST:event_jTableKhachHangMouseClicked
 
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed
         String valueIn = String.valueOf(jComboBoxNhanVien.getSelectedItem());
@@ -588,7 +588,7 @@ public class fNhacungcap extends javax.swing.JFrame {
             //
 
         }
-        File file = new File("C:/demo/NhaCungCap.xls");
+        File file = new File("C:/demo/KhachHang.xls");
         file.getParentFile().mkdirs();
 
         FileOutputStream outFile;
@@ -596,13 +596,13 @@ public class fNhacungcap extends javax.swing.JFrame {
             outFile = new FileOutputStream(file);
             workbook.write(outFile);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(fNhacungcap.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(fKhachHang.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(fNhacungcap.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(fKhachHang.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         JOptionPane.showMessageDialog(rootPane,
-                "Đã lưu file Excel NhaCungCap trong C:/demo.",
+                "Đã lưu file Excel KhachHang trong C:/demo.",
                 "Thông báo",
                 JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonExcelActionPerformed
@@ -613,8 +613,8 @@ public class fNhacungcap extends javax.swing.JFrame {
 
     private void jButtonNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoMaxActionPerformed
         Trang = 1;
-        ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-        listDanhSachNhaCungCap(table);
+        ArrayList<KhachHang> table = DAO.daoKhachHang.getInstance().get20KhachHang(DanhSachKhachHang, Trang);
+        listDanhSachKhachHang(table);
         jLabelTrang.setText("1");
         jLabelSoTrang.setText("1/" + SoTrang);
     }//GEN-LAST:event_jButtonNhoMaxActionPerformed
@@ -622,8 +622,8 @@ public class fNhacungcap extends javax.swing.JFrame {
     private void jButtonNhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoActionPerformed
         if (Trang > 1) {
             Trang--;
-            ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-            listDanhSachNhaCungCap(table);
+            ArrayList<KhachHang> table = DAO.daoKhachHang.getInstance().get20KhachHang(DanhSachKhachHang, Trang);
+            listDanhSachKhachHang(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
         }
@@ -632,8 +632,8 @@ public class fNhacungcap extends javax.swing.JFrame {
     private void jButtonLonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonActionPerformed
         if (Trang < SoTrang) {
             Trang++;
-            ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-            listDanhSachNhaCungCap(table);
+            ArrayList<KhachHang> table = DAO.daoKhachHang.getInstance().get20KhachHang(DanhSachKhachHang, Trang);
+            listDanhSachKhachHang(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
         }
@@ -641,8 +641,8 @@ public class fNhacungcap extends javax.swing.JFrame {
 
     private void jButtonLonMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonMaxActionPerformed
         Trang = SoTrang;
-        ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-        listDanhSachNhaCungCap(table);
+        ArrayList<KhachHang> table = DAO.daoKhachHang.getInstance().get20KhachHang(DanhSachKhachHang, Trang);
+        listDanhSachKhachHang(table);
         jLabelTrang.setText("" + SoTrang);
         jLabelSoTrang.setText(SoTrang + "/" + SoTrang);
     }//GEN-LAST:event_jButtonLonMaxActionPerformed
@@ -651,14 +651,14 @@ public class fNhacungcap extends javax.swing.JFrame {
         invalidate();
         validate();
         repaint();
-        DuLieuMau = daoNhaCungCap.getInstance().getListNhaCungCap();
+        DuLieuMau = daoKhachHang.getInstance().getListKhachHang();
         build();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLamMoiActionPerformed
 
     private void jTextFieldTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            DanhSachNhaCungCap = DuLieuMau;
+            DanhSachKhachHang = DuLieuMau;
             FindList();
             jButtonSua.setEnabled(false);
             jButtonHuy.setEnabled(false);
@@ -666,7 +666,7 @@ public class fNhacungcap extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldTimKiemKeyPressed
 
     private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
-        DanhSachNhaCungCap = DuLieuMau;
+        DanhSachKhachHang = DuLieuMau;
         FindList();
         jButtonSua.setEnabled(false);
         jButtonHuy.setEnabled(false);
@@ -674,17 +674,17 @@ public class fNhacungcap extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
-        int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
-            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewNhaCungCap(maNV, id,true);
+        int selectedRowIndex = jTableKhachHang.getSelectedRow();
+            int id = jTableKhachHang.getValueAt(selectedRowIndex, 0).hashCode();
+            JFrame Xem = new fViewKhachHang(maNV, id,true);
             Xem.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
-         int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
-            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-        JFrame ThongBao = new fThongBaoHuy("NhaCungCap",id,maNV);
+         int selectedRowIndex = jTableKhachHang.getSelectedRow();
+            int id = jTableKhachHang.getValueAt(selectedRowIndex, 0).hashCode();
+        JFrame ThongBao = new fThongBaoHuy("KhachHang",id,maNV);
         ThongBao.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonHuyActionPerformed
@@ -719,14 +719,18 @@ public class fNhacungcap extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fNhacungcap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fNhacungcap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fNhacungcap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fNhacungcap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -735,7 +739,7 @@ public class fNhacungcap extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame ncc = new fNhacungcap("NV12");
+                JFrame ncc = new fKhachHang("NV12");
                 ncc.setVisible(true);
             }
         });
@@ -744,8 +748,8 @@ public class fNhacungcap extends javax.swing.JFrame {
     public void build() {
         jButtonSua.setEnabled(false);
         jButtonHuy.setEnabled(false);
-        DanhSachNhaCungCap = DuLieuMau;
-        this.count = this.DanhSachNhaCungCap.size();
+        DanhSachKhachHang = DuLieuMau;
+        this.count = this.DanhSachKhachHang.size();
         jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
         if (count % 20 == 0) {
             SoTrang = count / 20;
@@ -754,21 +758,21 @@ public class fNhacungcap extends javax.swing.JFrame {
         }
         jLabelSoTrang.setText("1/" + SoTrang);
         jLabelTrang.setText("1");
-        ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, 1);
-        listDanhSachNhaCungCap(table);
+        ArrayList<KhachHang> table = DAO.daoKhachHang.getInstance().get20KhachHang(DanhSachKhachHang, 1);
+        listDanhSachKhachHang(table);
         NhanVienDangNhap();
     }
 
     public void FindList() {
-        this.DanhSachNhaCungCap = DAO.daoNhaCungCap.getInstance().FindListNhaCungCap(DuLieuMau, jTextFieldTimKiem.getText());
-        if (DanhSachNhaCungCap.isEmpty()) {
+        this.DanhSachKhachHang = DAO.daoKhachHang.getInstance().FindListKhachHang(DuLieuMau, jTextFieldTimKiem.getText());
+        if (DanhSachKhachHang.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "Không có dữ liệu nhà cung cấp",
                     "Lỗi",
                     JOptionPane.ERROR_MESSAGE);
 //            build();
         } else {
-            this.count = this.DanhSachNhaCungCap.size();
+            this.count = this.DanhSachKhachHang.size();
             jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
             if (count % 20 == 0) {
                 SoTrang = count / 20;
@@ -777,14 +781,14 @@ public class fNhacungcap extends javax.swing.JFrame {
             }
             jLabelSoTrang.setText("1/" + SoTrang);
             jLabelTrang.setText("1");
-            ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, 1);
-            listDanhSachNhaCungCap(table);
+            ArrayList<KhachHang> table = DAO.daoKhachHang.getInstance().get20KhachHang(DanhSachKhachHang, 1);
+            listDanhSachKhachHang(table);
         }
     }
 
-    public void listDanhSachNhaCungCap(ArrayList<NhaCungCap> arr) {
-        DefaultTableModel model = (DefaultTableModel) jTableNhaCungCap.getModel();
-        while (jTableNhaCungCap.getRowCount() > 0) {
+    public void listDanhSachKhachHang(ArrayList<KhachHang> arr) {
+        DefaultTableModel model = (DefaultTableModel) jTableKhachHang.getModel();
+        while (jTableKhachHang.getRowCount() > 0) {
             model.removeRow(0);
         }
         arr.stream().forEach((item) -> {
@@ -816,7 +820,7 @@ public class fNhacungcap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTableNhaCungCap;
+    private javax.swing.JTable jTableKhachHang;
     private javax.swing.JTextField jTextFieldTimKiem;
     // End of variables declaration//GEN-END:variables
 }

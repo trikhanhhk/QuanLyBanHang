@@ -35,28 +35,28 @@ import java.lang.*;
  *
  * @author Xoan Tran
  */
-public class fNhacungcap extends javax.swing.JFrame {
+public class fKhuyenMai extends javax.swing.JFrame {
 
     /**
      * Creates new form fNhacungcap
      */
     public String maNV;
-    public ArrayList<NhaCungCap> DanhSachNhaCungCap;
+    public ArrayList<KhuyenMai> DanhSachKhuyenMai;
     public long count, SoTrang, Trang = 1;
-    public ArrayList<NhaCungCap> DuLieuMau;
+    public ArrayList<KhuyenMai> DuLieuMau;
 
-    public fNhacungcap() {
+    public fKhuyenMai() {
         initComponents();
         setIcon();
 //        build();
     }
 
-    public fNhacungcap(String id) {
+    public fKhuyenMai(String id) {
         maNV = id;
         initComponents();
         setIcon();
-        DanhSachNhaCungCap = daoNhaCungCap.getInstance().getListNhaCungCap();
-        DuLieuMau = DanhSachNhaCungCap;
+        DanhSachKhuyenMai = daoKhuyenMai.getInstance().getListKhuyenMai();
+        DuLieuMau = DanhSachKhuyenMai;
 //        build();
     }
 
@@ -120,7 +120,7 @@ public class fNhacungcap extends javax.swing.JFrame {
                 return false;
             }
         };
-        jTableNhaCungCap = new javax.swing.JTable(model);
+        jTableKhuyenMai = new javax.swing.JTable(model);
         jButtonThem = new javax.swing.JButton();
         jTextFieldTimKiem = new javax.swing.JTextField();
         jButtonExcel = new javax.swing.JButton();
@@ -155,36 +155,36 @@ public class fNhacungcap extends javax.swing.JFrame {
         jPanel13.setAlignmentX(0.2F);
 
         /*
-        jTableNhaCungCap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTableNhaCungCap.setModel(new javax.swing.table.DefaultTableModel(
+        jTableKhuyenMai.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTableKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên nhà cung cấp", "Mã nhà cung cấp", "Tên nhà cung cấp", "Địa chỉ", "Số điện thoại", "Fax"
+                "STT", "Mã KM", "Tên KM", "Điều kiên", "Giảm giá (%)", "Ngày bắt đầu", "Ngày kết thúc", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -192,20 +192,20 @@ public class fNhacungcap extends javax.swing.JFrame {
             }
         });
         */
-        jTableNhaCungCap.setRequestFocusEnabled(false);
-        jTableNhaCungCap.setRowHeight(50);
-        jTableNhaCungCap.setRowSelectionAllowed(true);
-        jTableNhaCungCap.setAutoCreateRowSorter(true);
-        jTableNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableKhuyenMai.setRequestFocusEnabled(false);
+        jTableKhuyenMai.setRowHeight(50);
+        jTableKhuyenMai.setRowSelectionAllowed(true);
+        jTableKhuyenMai.setAutoCreateRowSorter(true);
+        jTableKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableNhaCungCapMouseClicked(evt);
+                jTableKhuyenMaiMouseClicked(evt);
             }
         });
-        jScrollPane7.setViewportView(jTableNhaCungCap);
-        if (jTableNhaCungCap.getColumnModel().getColumnCount() > 0) {
-            jTableNhaCungCap.getColumnModel().getColumn(0).setMinWidth(30);
-            jTableNhaCungCap.getColumnModel().getColumn(0).setPreferredWidth(30);
-            jTableNhaCungCap.getColumnModel().getColumn(0).setMaxWidth(30);
+        jScrollPane7.setViewportView(jTableKhuyenMai);
+        if (jTableKhuyenMai.getColumnModel().getColumnCount() > 0) {
+            jTableKhuyenMai.getColumnModel().getColumn(0).setMinWidth(30);
+            jTableKhuyenMai.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jTableKhuyenMai.getColumnModel().getColumn(0).setMaxWidth(30);
         }
 
         jButtonThem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -279,7 +279,7 @@ public class fNhacungcap extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("DANH SÁCH NHÀ CUNG CẤP");
+        jLabel3.setText("Danh sách khuyến mãi");
 
         jButtonSua.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonSua.setText("Sửa");
@@ -447,7 +447,7 @@ public class fNhacungcap extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -498,7 +498,7 @@ public class fNhacungcap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonThemjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemjButton2ActionPerformed
-        JFrame Them = new fCreateNhaCungCap(maNV);
+        JFrame Them = new fCreateKhuyenMai(maNV);
         Them.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonThemjButton2ActionPerformed
@@ -513,12 +513,12 @@ public class fNhacungcap extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemnhacungcap
 
-    private void jTableNhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableNhaCungCapMouseClicked
+    private void jTableKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableKhuyenMaiMouseClicked
         if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             evt.consume();
-            int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
-            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewNhaCungCap(maNV, id,false);
+            int selectedRowIndex = jTableKhuyenMai.getSelectedRow();
+            int id = jTableKhuyenMai.getValueAt(selectedRowIndex, 0).hashCode();
+            JFrame Xem = new fViewKhuyenMai(maNV, id,false);
             Xem.setVisible(true);
             //System.out.print("Nhap dup chuot");
         }
@@ -526,7 +526,7 @@ public class fNhacungcap extends javax.swing.JFrame {
         jButtonHuy.setEnabled(true);
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTableNhaCungCapMouseClicked
+    }//GEN-LAST:event_jTableKhuyenMaiMouseClicked
 
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed
         String valueIn = String.valueOf(jComboBoxNhanVien.getSelectedItem());
@@ -546,49 +546,61 @@ public class fNhacungcap extends javax.swing.JFrame {
     private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
         // TODO add your handling code here:
         HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("Employees sheet");
+        HSSFSheet sheet = workbook.createSheet("Khuyến mãi");
         int rownum = 0;
         Cell cell;
         Row row;
 
         row = sheet.createRow(rownum);
         cell = row.createCell(0);
-        cell.setCellValue("Mã nhà cung cấp");
+        cell.setCellValue("Mã khuyến mãi");
 
         cell = row.createCell(1);
-        cell.setCellValue("Tên nhà cung cấp");
+        cell.setCellValue("Tên khuyến mãi");
 
         cell = row.createCell(2);
-        cell.setCellValue("Địa chỉ");
+        cell.setCellValue("Điều kiện");
 
         cell = row.createCell(3);
-        cell.setCellValue("Số điện thoại");
+        cell.setCellValue("Phần trăm");
 
         cell = row.createCell(4);
-        cell.setCellValue("Số Fax");
+        cell.setCellValue("Ngày bắt đầu");
+        
+        cell = row.createCell(5);
+        cell.setCellValue("Ngày kết thúc");
+        
+        cell = row.createCell(6);
+        cell.setCellValue("Trạng thái");
 
         for (int i = 0; i < DuLieuMau.size(); i++) {
             rownum++;
             row = sheet.createRow(rownum);
             //
             cell = row.createCell(0);
-            cell.setCellValue(DuLieuMau.get(i).getMaNCC());
+            cell.setCellValue(DuLieuMau.get(i).getMaKM());
             //
             cell = row.createCell(1);
-            cell.setCellValue(DuLieuMau.get(i).getTenNCC());
+            cell.setCellValue(DuLieuMau.get(i).getTenKM());
             //
             cell = row.createCell(2);
-            cell.setCellValue(DuLieuMau.get(i).getDiaChi());
+            cell.setCellValue(DuLieuMau.get(i).getDieuKienKM());
             //
             cell = row.createCell(3);
-            cell.setCellValue(DuLieuMau.get(i).getSDT());
+            cell.setCellValue(DuLieuMau.get(i).getPhanTramKM());
             //
             cell = row.createCell(4);
-            cell.setCellValue(DuLieuMau.get(i).getFax());
+            cell.setCellValue(DuLieuMau.get(i).getNgayBD().toString());
+            
+            cell = row.createCell(5);
+            cell.setCellValue(DuLieuMau.get(i).getNgayKT().toString());
+            
+            cell = row.createCell(6);
+            cell.setCellValue(DuLieuMau.get(i).getTrangThai());
             //
 
         }
-        File file = new File("C:/demo/NhaCungCap.xls");
+        File file = new File("C:/demo/KhuyenMai.xls");
         file.getParentFile().mkdirs();
 
         FileOutputStream outFile;
@@ -596,13 +608,13 @@ public class fNhacungcap extends javax.swing.JFrame {
             outFile = new FileOutputStream(file);
             workbook.write(outFile);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(fNhacungcap.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(fKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(fNhacungcap.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(fKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         JOptionPane.showMessageDialog(rootPane,
-                "Đã lưu file Excel NhaCungCap trong C:/demo.",
+                "Đã lưu file Excel KhuyenMai trong C:/demo.",
                 "Thông báo",
                 JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonExcelActionPerformed
@@ -613,8 +625,8 @@ public class fNhacungcap extends javax.swing.JFrame {
 
     private void jButtonNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoMaxActionPerformed
         Trang = 1;
-        ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-        listDanhSachNhaCungCap(table);
+        ArrayList<KhuyenMai> table = DAO.daoKhuyenMai.getInstance().get20KhuyenMai(DanhSachKhuyenMai, Trang);
+        listDanhSachKhuyenMai(table);
         jLabelTrang.setText("1");
         jLabelSoTrang.setText("1/" + SoTrang);
     }//GEN-LAST:event_jButtonNhoMaxActionPerformed
@@ -622,8 +634,8 @@ public class fNhacungcap extends javax.swing.JFrame {
     private void jButtonNhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoActionPerformed
         if (Trang > 1) {
             Trang--;
-            ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-            listDanhSachNhaCungCap(table);
+            ArrayList<KhuyenMai> table = DAO.daoKhuyenMai.getInstance().get20KhuyenMai(DanhSachKhuyenMai, Trang);
+            listDanhSachKhuyenMai(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
         }
@@ -632,8 +644,8 @@ public class fNhacungcap extends javax.swing.JFrame {
     private void jButtonLonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonActionPerformed
         if (Trang < SoTrang) {
             Trang++;
-            ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-            listDanhSachNhaCungCap(table);
+            ArrayList<KhuyenMai> table = DAO.daoKhuyenMai.getInstance().get20KhuyenMai(DanhSachKhuyenMai, Trang);
+            listDanhSachKhuyenMai(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
         }
@@ -641,8 +653,8 @@ public class fNhacungcap extends javax.swing.JFrame {
 
     private void jButtonLonMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonMaxActionPerformed
         Trang = SoTrang;
-        ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-        listDanhSachNhaCungCap(table);
+        ArrayList<KhuyenMai> table = DAO.daoKhuyenMai.getInstance().get20KhuyenMai(DanhSachKhuyenMai, Trang);
+        listDanhSachKhuyenMai(table);
         jLabelTrang.setText("" + SoTrang);
         jLabelSoTrang.setText(SoTrang + "/" + SoTrang);
     }//GEN-LAST:event_jButtonLonMaxActionPerformed
@@ -651,14 +663,14 @@ public class fNhacungcap extends javax.swing.JFrame {
         invalidate();
         validate();
         repaint();
-        DuLieuMau = daoNhaCungCap.getInstance().getListNhaCungCap();
+        DuLieuMau = daoKhuyenMai.getInstance().getListKhuyenMai();
         build();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLamMoiActionPerformed
 
     private void jTextFieldTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            DanhSachNhaCungCap = DuLieuMau;
+            DanhSachKhuyenMai = DuLieuMau;
             FindList();
             jButtonSua.setEnabled(false);
             jButtonHuy.setEnabled(false);
@@ -666,7 +678,7 @@ public class fNhacungcap extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldTimKiemKeyPressed
 
     private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
-        DanhSachNhaCungCap = DuLieuMau;
+        DanhSachKhuyenMai = DuLieuMau;
         FindList();
         jButtonSua.setEnabled(false);
         jButtonHuy.setEnabled(false);
@@ -674,17 +686,17 @@ public class fNhacungcap extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
-        int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
-            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewNhaCungCap(maNV, id,true);
+        int selectedRowIndex = jTableKhuyenMai.getSelectedRow();
+            int id = jTableKhuyenMai.getValueAt(selectedRowIndex, 0).hashCode();
+            JFrame Xem = new fViewKhuyenMai(maNV, id,true);
             Xem.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
-         int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
-            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-        JFrame ThongBao = new fThongBaoHuy("NhaCungCap",id,maNV);
+         int selectedRowIndex = jTableKhuyenMai.getSelectedRow();
+            int id = jTableKhuyenMai.getValueAt(selectedRowIndex, 0).hashCode();
+        JFrame ThongBao = new fThongBaoHuy("KhuyenMai",id,maNV);
         ThongBao.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonHuyActionPerformed
@@ -719,14 +731,18 @@ public class fNhacungcap extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fNhacungcap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fKhuyenMai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fNhacungcap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fKhuyenMai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fNhacungcap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fKhuyenMai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fNhacungcap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fKhuyenMai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -735,7 +751,7 @@ public class fNhacungcap extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame ncc = new fNhacungcap("NV12");
+                JFrame ncc = new fKhuyenMai("NV12");
                 ncc.setVisible(true);
             }
         });
@@ -744,8 +760,8 @@ public class fNhacungcap extends javax.swing.JFrame {
     public void build() {
         jButtonSua.setEnabled(false);
         jButtonHuy.setEnabled(false);
-        DanhSachNhaCungCap = DuLieuMau;
-        this.count = this.DanhSachNhaCungCap.size();
+        DanhSachKhuyenMai = DuLieuMau;
+        this.count = this.DanhSachKhuyenMai.size();
         jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
         if (count % 20 == 0) {
             SoTrang = count / 20;
@@ -754,21 +770,21 @@ public class fNhacungcap extends javax.swing.JFrame {
         }
         jLabelSoTrang.setText("1/" + SoTrang);
         jLabelTrang.setText("1");
-        ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, 1);
-        listDanhSachNhaCungCap(table);
+        ArrayList<KhuyenMai> table = DAO.daoKhuyenMai.getInstance().get20KhuyenMai(DanhSachKhuyenMai, 1);
+        listDanhSachKhuyenMai(table);
         NhanVienDangNhap();
     }
 
     public void FindList() {
-        this.DanhSachNhaCungCap = DAO.daoNhaCungCap.getInstance().FindListNhaCungCap(DuLieuMau, jTextFieldTimKiem.getText());
-        if (DanhSachNhaCungCap.isEmpty()) {
+        this.DanhSachKhuyenMai = DAO.daoKhuyenMai.getInstance().FindListKhuyenMai(DuLieuMau, jTextFieldTimKiem.getText());
+        if (DanhSachKhuyenMai.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "Không có dữ liệu nhà cung cấp",
                     "Lỗi",
                     JOptionPane.ERROR_MESSAGE);
 //            build();
         } else {
-            this.count = this.DanhSachNhaCungCap.size();
+            this.count = this.DanhSachKhuyenMai.size();
             jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
             if (count % 20 == 0) {
                 SoTrang = count / 20;
@@ -777,14 +793,14 @@ public class fNhacungcap extends javax.swing.JFrame {
             }
             jLabelSoTrang.setText("1/" + SoTrang);
             jLabelTrang.setText("1");
-            ArrayList<NhaCungCap> table = DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, 1);
-            listDanhSachNhaCungCap(table);
+            ArrayList<KhuyenMai> table = DAO.daoKhuyenMai.getInstance().get20KhuyenMai(DanhSachKhuyenMai, 1);
+            listDanhSachKhuyenMai(table);
         }
     }
 
-    public void listDanhSachNhaCungCap(ArrayList<NhaCungCap> arr) {
-        DefaultTableModel model = (DefaultTableModel) jTableNhaCungCap.getModel();
-        while (jTableNhaCungCap.getRowCount() > 0) {
+    public void listDanhSachKhuyenMai(ArrayList<KhuyenMai> arr) {
+        DefaultTableModel model = (DefaultTableModel) jTableKhuyenMai.getModel();
+        while (jTableKhuyenMai.getRowCount() > 0) {
             model.removeRow(0);
         }
         arr.stream().forEach((item) -> {
@@ -816,7 +832,7 @@ public class fNhacungcap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTableNhaCungCap;
+    private javax.swing.JTable jTableKhuyenMai;
     private javax.swing.JTextField jTextFieldTimKiem;
     // End of variables declaration//GEN-END:variables
 }

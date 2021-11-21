@@ -23,16 +23,16 @@ import java.lang.*;
 import javax.swing.table.DefaultTableModel;
 public class fThemSanPham extends javax.swing.JFrame {
     String nameImg;
-    int id_nv;
+    String maNV;
     
     /**
      * Creates new form fThemSanPham
      */
 
-    public fThemSanPham(int id){
-        this.id_nv=id;
-        this.txtMaSP.setText(DAO.daoSanPham.getInstance().getNextID());
+    public fThemSanPham(String id){
+        this.maNV=id;
         initComponents();
+        this.txtMaSP.setText(DAO.daoSanPham.getInstance().getNextID());
         setIcon();
         showComboboxLoaiSanPham();
         showComboboxTrangThai();
@@ -396,7 +396,7 @@ public class fThemSanPham extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fThemSanPham(1).setVisible(true);
+                new fThemSanPham("NV12").setVisible(true);
             }
         });
     }
