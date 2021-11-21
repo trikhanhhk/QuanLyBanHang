@@ -6,7 +6,7 @@
 package DAO;
 
 import DTO.KhuyenMai;
-import GUI.fNhacungcap;
+import GUI.fKhuyenMai;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ import org.apache.poi.ss.usermodel.Row;
  */
 public class daoKhuyenMai {
     private static daoKhuyenMai instance;
+    private ArrayList<KhuyenMai> listKM;
 
     public static daoKhuyenMai getInstance() {
         if (instance == null) {
@@ -38,9 +40,14 @@ public class daoKhuyenMai {
     }
 
     public daoKhuyenMai() {
+        this.listKM = this.getListKhuyenMai();
+    }
+    
+    public String getNextID() {
+        return "KM" + String.valueOf(this.listKM.size() + 1);
     }
 
-    //Lấy danh sách thông tin từ bảng nhà cung cấp
+    //Lấy danh sách thông tin từ bảng khuyến mãi
     public ArrayList<KhuyenMai> getListKhuyenMai() {
         ArrayList<KhuyenMai> result = new ArrayList<>();
         String query = "select *from khuyenmai";
@@ -49,12 +56,13 @@ public class daoKhuyenMai {
             DataProvider.getIntance().open();
             ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
-                //String maNCC,String tenNCC, String diaChi, String SDT, String Fax
-                result.add(new KhuyenMai(rs.getString("MaNCC"),
-                        rs.getString("TenNCC"),
-                        rs.getString("DiaChi"),
-                        rs.getString("SDT"),
-                        rs.getString("FAX")));
+                //String makm, String tenkm, float dkkm, float phantramkm, LocalDate ngaybd, LocalDate ngaykt
+                result.add(new KhuyenMai(rs.getString("MaKM"),
+                        rs.getString("TenKM"),
+                        rs.getFloat("DieuKienKM"),
+                        rs.getFloat("PhanTramKM"),
+                        rs.getDate("NgayBD").toLocalDate(),
+                        rs.getDate("NgayKT").toLocalDate()));
             }
 
             DataProvider.getIntance().close();
@@ -66,8 +74,8 @@ public class daoKhuyenMai {
     }
 
     //Thêm nguồn cung cấp mới
-    public boolean insertKhuyenMai(String maNCC,String tenNCC, String diaChi, String SDT, String Fax, String maNV) {
-        if ("".equals(maNCC) || "".equals(tenNCC) || "".equals(diaChi) || "".equals(SDT) || "".equals(Fax)) {
+    public boolean insertKhuyenMai(String makm, String tenkm, float dkkm, float phantramkm, String ngaybd, String ngaykt, String maNV) {
+        if ("".equals(tenkm) || "".equals(dkkm) || "".equals(phantramkm) || "".equals(ngaybd) || "".equals(ngaykt)) {
             JOptionPane.showMessageDialog(null,
                     "Chưa điền đầy đủ thông tin",
                     "Lỗi",
@@ -76,20 +84,21 @@ public class daoKhuyenMai {
         }
         try {
             DAO.DataProvider.getIntance().open();
-            PreparedStatement ps = DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO `khuyenmai`(`MaNCC`, `TenNCC`, `DiaChi`, `SDT`, `Fax`) VALUES (?,?,?,?,?)");
-            ps.setString(1, maNCC);
-            ps.setString(2, tenNCC);
-            ps.setString(3, diaChi);
-            ps.setString(4, SDT);
-            ps.setString(5, Fax);
+            PreparedStatement ps = DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO `khuyenmai`(`MaKM`, `TenKM`, `DieuKienKM`, `PhanTramKM`, `NgayBD`, `NgayKT`) VALUES (?,?,?,?,?,?)");
+            ps.setString(1, makm);
+            ps.setString(2, tenkm);
+            ps.setFloat(3, dkkm);
+            ps.setFloat(4, phantramkm);
+            ps.setString(5, ngaybd);
+            ps.setString(6, ngaykt);
             ps.executeUpdate();
             DAO.DataProvider.getIntance().close();
             JOptionPane.showMessageDialog(null,
-                    "Thêm nhà cung cấp mới thành công.",
+                    "Thêm khuyến mãi mới thành công.",
                     "Thông báo",
                     JOptionPane.INFORMATION_MESSAGE);
 
-           // DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).getTenNV() + " đã thêm nhà cung cấp mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
+           // DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).getTenNV() + " đã thêm khuyến mãi mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -97,19 +106,20 @@ public class daoKhuyenMai {
     }
 
     //Lấy ra 1 khuyến mãi bằng id
-    public KhuyenMai getKhuyenMai(int maNCC) {
-        String query = "SELECT * FROM `khuyenmai` WHERE MaNCC='" + maNCC + "'";
+    public KhuyenMai getKhuyenMai(int makm) {
+        String query = "SELECT * FROM `khuyenmai` WHERE MaNCC='" + makm + "'";
         ArrayList<Object> arr = new ArrayList<>();
         KhuyenMai ncc = null;
         try {
             DataProvider.getIntance().open();
             ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
-                ncc = new KhuyenMai(rs.getString("MaNCC"),
-                        rs.getString("TenNCC"),
-                        rs.getString("DiaChi"),
-                        rs.getString("SDT"),
-                        rs.getString("FAX"));
+                ncc = new KhuyenMai(rs.getString("MaKM"),
+                        rs.getString("TenKM"),
+                        rs.getFloat("DieuKienKM"),
+                        rs.getFloat("PhanTramKM"),
+                        rs.getDate("NgayBD").toLocalDate(),
+                        rs.getDate("NgayKT").toLocalDate());
 
             } else {
                 return null;
@@ -123,175 +133,42 @@ public class daoKhuyenMai {
     }
 
     //Update thông tin nguồn cung cấp
-    public boolean UpdateKhuyenMai(String maNCC, String tenNCC, String diaChi, String SDT, String Fax, String maNV) {
-        if ("".equals(tenNCC) || "".equals(diaChi) || "".equals(SDT) || "".equals(Fax)) {
+    public boolean UpdateKhuyenMai(String makm, String tenkm, float dkkm, float phantramkm, String ngaybd, String ngaykt, String maNV) {
+        if ("".equals(tenkm) || "".equals(dkkm) || "".equals(phantramkm) || "".equals(ngaybd) || "".equals(ngaykt)) {
             JOptionPane.showMessageDialog(null,
                     "Chưa điền đầy đủ thông tin",
                     "Lỗi",
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        String query = "UPDATE `khuyenmai` SET `TenNCC`='" + tenNCC + "',`DiaChi`='" + diaChi + "',`SDT`='" + SDT + "',`FAX`='" + Fax + "' WHERE `MaNCC`='" + maNCC + "'";
+        String query = "UPDATE `khuyenmai` SET `MaKM`='" + makm + "',`DieuKienKM`=" + dkkm + ",`phantramkm`=" + phantramkm + ",`NgayBD`='" + ngaybd + ",`NgayKT`='"+ ngaykt + "' WHERE `MaKM`='" + makm + "'";
         //System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
         DataProvider.getIntance().open();
         DataProvider.getIntance().excuteUpdate(query, arr);
         DataProvider.getIntance().close();
         JOptionPane.showMessageDialog(null,
-                "Sửa thông tin nhà cung cấp thành công",
+                "Sửa thông tin khuyến mãi thành công",
                 "Thông báo",
                 JOptionPane.INFORMATION_MESSAGE);
-        //DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(IdNhanVien).getTenNV() + " đã sửa thông tin của nhà cung cấp vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
+        //DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(IdNhanVien).getTenNV() + " đã sửa thông tin của khuyến mãi vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         return true;
     }
-    public boolean HuyKhuyenMai(int maNCC, int maNV)
-    {
-        String query = "UPDATE `khuyenmai` SET `id_exist`=0 WHERE `MaNCC`=" + maNCC;
-        //System.out.println(query);
-        ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
-        JOptionPane.showMessageDialog(null,
-                "Xóa thông tin nhà cung cấp thành công",
-                "Thông báo",
-                JOptionPane.INFORMATION_MESSAGE);
-        //DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).ten_nv + " đã xóa thông tin của nhà cung cấp vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
-        return true;
-    }
-
-    //Tìm số lần nhập kho của 1 nhà cung cấp
-    public int GetSoLanNhapKho(int maNCC) {
-        int SoLanNhapKho = 0;
-        String query = "SELECT * FROM `Chi_tiet_phieu_nhap` WHERE MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                SoLanNhapKho++;
-            }
-            DataProvider.getIntance().close();
-        } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
-        }
-        return SoLanNhapKho;
-
-    }
-
-    //Tìm số lần xuất kho của một nhà cung cấp
-    public int GetSoLanXuatKho(int maNCC) {
-        int SoLanXuatKho = 0;
-        String query = "SELECT `phieu_xuat_kho`.`id_xuat_kho`, `lo_san_pham`.`id_phieu_nhap`,`chi_tiet_phieu_nhap`.`MaNCC` "
-                + "FROM `phieu_xuat_kho`,`lo_san_pham`,`chi_tiet_phieu_nhap` "
-                + "WHERE `phieu_xuat_kho`.`id_lo_sp`=`lo_san_pham`.`id_lo_sp` and `chi_tiet_phieu_nhap`.`id_phieu_nhap`=`lo_san_pham`.`id_phieu_nhap` and MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                ++SoLanXuatKho;
-            }
-            DataProvider.getIntance().close();
-        } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
-        }
-
-        return SoLanXuatKho;
-
-    }
-    public int GetSoLanTraKho(int maNCC)
-    {
-        int SoLanTraKho = 0;
-        String query = "SELECT `phieu_tra_kho`.`id_phieu_tra_kho`, `lo_san_pham`.`id_phieu_nhap`,`chi_tiet_phieu_nhap`.`MaNCC` "
-                + "FROM `phieu_tra_kho`,`lo_san_pham`,`chi_tiet_phieu_nhap` "
-                + "WHERE `phieu_tra_kho`.`id_lo_sp`=`lo_san_pham`.`id_lo_sp` and `chi_tiet_phieu_nhap`.`id_phieu_nhap`=`lo_san_pham`.`id_phieu_nhap` and MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                ++SoLanTraKho;
-            }
-            DataProvider.getIntance().close();
-        } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
-        }
-
-        return SoLanTraKho;
-    }
-    //Tìm số lượng lô nhập kho của một nhà cung cấp
-    public int GetSoLuongTraKho(int maNCC)
-    {
-        int SoLuongXuatKho = 0;
-        String query = "SELECT * "
-                + "FROM `phieu_tra_kho`,`lo_san_pham`,`chi_tiet_phieu_nhap` "
-                + "WHERE `phieu_tra_kho`.`id_lo_sp`=`lo_san_pham`.`id_lo_sp` and `chi_tiet_phieu_nhap`.`id_phieu_nhap`=`lo_san_pham`.`id_phieu_nhap` and MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                SoLuongXuatKho = SoLuongXuatKho + rs.getInt("sl_san_pham");
-            }
-            DataProvider.getIntance().close();
-        } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
-        }
-
-        return SoLuongXuatKho;
-    }
-    public int GetSoLuongNhapKho(int maNCC) {
-        int SoLuongNhapKho = 0;
-        String query = "SELECT * FROM `Chi_tiet_phieu_nhap` WHERE MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                SoLuongNhapKho = SoLuongNhapKho + rs.getInt("so_luong_lo");
-            }
-            DataProvider.getIntance().close();
-        } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
-        }
-        return SoLuongNhapKho;
-    }
-
-    //Tìm số lượng lô xuất kho của một nhà cung cấp
-    public int GetSoLuongXuatKho(int maNCC) {
-        int SoLuongXuatKho = 0;
-        String query = "SELECT * "
-                + "FROM `phieu_xuat_kho`,`lo_san_pham`,`chi_tiet_phieu_nhap` "
-                + "WHERE `phieu_xuat_kho`.`id_lo_sp`=`lo_san_pham`.`id_lo_sp` and `chi_tiet_phieu_nhap`.`id_phieu_nhap`=`lo_san_pham`.`id_phieu_nhap` and MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                SoLuongXuatKho = SoLuongXuatKho + rs.getInt("sl_san_pham");
-            }
-            DataProvider.getIntance().close();
-        } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
-        }
-
-        return SoLuongXuatKho;
-
-    }
-
+//    public boolean HuyKhuyenMai(int makm, int maNV)
+//    {
+//        String query = "UPDATE `khuyenmai` SET `id_exist`=0 WHERE `MaNCC`=" + makm;
+//        //System.out.println(query);
+//        ArrayList<Object> arr = new ArrayList<>();
+//        DataProvider.getIntance().open();
+//        DataProvider.getIntance().excuteUpdate(query, arr);
+//        DataProvider.getIntance().close();
+//        JOptionPane.showMessageDialog(null,
+//                "Xóa thông tin khuyến mãi thành công",
+//                "Thông báo",
+//                JOptionPane.INFORMATION_MESSAGE);
+//        //DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).ten_nv + " đã xóa thông tin của khuyến mãi vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
+//        return true;
+//    }
     //Tìm kiếm trong bảng nguồn cung cấp (mới)
     public ArrayList<KhuyenMai> FindListKhuyenMai(ArrayList<KhuyenMai> arr, String ValToSearch) {
         ArrayList<KhuyenMai> result = new ArrayList<>();
@@ -387,9 +264,9 @@ public class daoKhuyenMai {
             outFile = new FileOutputStream(file);
             workbook.write(outFile);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(fNhacungcap.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(fKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(fNhacungcap.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(fKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         System.out.println("Created file: " + file.getAbsolutePath());

@@ -57,7 +57,7 @@ public class fKhuyenMai extends javax.swing.JFrame {
         setIcon();
         DanhSachKhuyenMai = daoKhuyenMai.getInstance().getListKhuyenMai();
         DuLieuMau = DanhSachKhuyenMai;
-//        build();
+        build();
     }
 
     private void setIcon() {
@@ -78,49 +78,49 @@ public class fKhuyenMai extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        ArrayList<NhaCungCap> DuLieuMau = daoNhaCungCap.getInstance().getListNhaCungCap();
-        String[] columnName = {"STT", "Mã nhà cung cấp", "Tên nhà cung cấp", "Địa chỉ", "Số điện thoại", "FAX"};
-        Object[][] rows = new Object[DuLieuMau.size()][7];
-        for(int i = 0; i < DuLieuMau.size(); i++){
-            rows[i][0] = i+1;
-            rows[i][1] = DuLieuMau.get(i).getMaNCC();
-            rows[i][2] = DuLieuMau.get(i).getTenNCC();
-            rows[i][3] = DuLieuMau.get(i).getDiaChi();
-            rows[i][4] = DuLieuMau.get(i).getSDT();
-            rows[i][5] = DuLieuMau.get(i).getFax();
-            /*
-            if(DuLieuMau.get(i).hinh_anh != null){
-                ImageIcon image = new ImageIcon(new ImageIcon(DuLieuMau.get(i).hinh_anh).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH) );
-                //ImageIcon image = new ImageIcon(DuLieuMau.get(i).hinh_anh);
-                //ImageIcon image = new ImageIcon(getClass().getResource("/Image/fXuatKho.jpg"));
-                rows[i][6] = image;
-
-            }
-            else{
-                rows[i][6] = "Chưa có hình ảnh";
-            }
-            */
-        }
-        DefaultTableModel model = new DefaultTableModel (rows,columnName)
-        {
-            @Override
-            public Class getColumnClass(int c) {
-                switch (c)
-
-                {
-                    //case 6:
-                    //return ImageIcon.class;
-                    default:
-                    return Object.class;
-                }
-            }
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                //all cells false
-                return false;
-            }
-        };
-        jTableKhuyenMai = new javax.swing.JTable(model);
+        //ArrayList<KhuyenMai> DuLieuMau = daoKhuyenMai.getInstance().getListKhuyenMai();
+        //String[] columnName = {"STT", "Mã khuyến mãi", "Tên khuyến mãi", "Điều kiện", "Giảm giá (%)", "Ngày bắt đầu", "Ngày kết thúc", "Trạng thái"};
+        //Object[][] rows = new Object[DuLieuMau.size()][7];
+        //        for(int i = 0; i < DuLieuMau.size(); i++){
+            //            rows[i][0] = i+1;
+            //            rows[i][1] = DuLieuMau.get(i).getMaNCC();
+            //            rows[i][2] = DuLieuMau.get(i).getTenNCC();
+            //            rows[i][3] = DuLieuMau.get(i).getDiaChi();
+            //            rows[i][4] = DuLieuMau.get(i).getSDT();
+            //            rows[i][5] = DuLieuMau.get(i).getFax();
+            //            /*
+            //            if(DuLieuMau.get(i).hinh_anh != null){
+                //            ImageIcon image = new ImageIcon(new ImageIcon(DuLieuMau.get(i).hinh_anh).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH) );
+                //            //ImageIcon image = new ImageIcon(DuLieuMau.get(i).hinh_anh);
+                //            //ImageIcon image = new ImageIcon(getClass().getResource("/Image/fXuatKho.jpg"));
+                //            rows[i][6] = image;
+                //
+                //            }
+            //            else{
+                //                rows[i][6] = "Chưa có hình ảnh";
+                //            }
+            //*/
+            //        }
+        //DefaultTableModel model = new DefaultTableModel (rows,columnName)
+        //{
+            //    @Override
+            //    public Class getColumnClass(int c) {
+                //        switch (c)
+                //
+                //    {
+                    //        //case 6:
+                    //        //return ImageIcon.class;
+                    //        default:
+                    //        return Object.class;
+                    //    }
+                //        }
+            //        @Override
+            //    public boolean isCellEditable(int row, int column) {
+                //       //all cells false
+                //       return false;
+                //    }
+            //};
+        jTableKhuyenMai = new javax.swing.JTable();
         jButtonThem = new javax.swing.JButton();
         jTextFieldTimKiem = new javax.swing.JTextField();
         jButtonExcel = new javax.swing.JButton();
@@ -154,7 +154,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
         jPanel13.setBackground(new java.awt.Color(0, 153, 153));
         jPanel13.setAlignmentX(0.2F);
 
-        /*
         jTableKhuyenMai.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTableKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -191,7 +190,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        */
         jTableKhuyenMai.setRequestFocusEnabled(false);
         jTableKhuyenMai.setRowHeight(50);
         jTableKhuyenMai.setRowSelectionAllowed(true);
@@ -311,7 +309,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabelKetQua))
@@ -323,13 +320,14 @@ public class fKhuyenMai extends javax.swing.JFrame {
                         .addComponent(jButtonHuy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonExcel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonTimKiem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonLamMoi)))
                 .addContainerGap())
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1011, Short.MAX_VALUE)
         );
 
         jPanel13Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonExcel, jButtonHuy, jButtonSua, jButtonThem});
@@ -518,8 +516,8 @@ public class fKhuyenMai extends javax.swing.JFrame {
             evt.consume();
             int selectedRowIndex = jTableKhuyenMai.getSelectedRow();
             int id = jTableKhuyenMai.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewKhuyenMai(maNV, id,false);
-            Xem.setVisible(true);
+//            JFrame Xem = new fViewKhuyenMai(maNV, id,false);
+//            Xem.setVisible(true);
             //System.out.print("Nhap dup chuot");
         }
         jButtonSua.setEnabled(true);
@@ -688,8 +686,8 @@ public class fKhuyenMai extends javax.swing.JFrame {
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
         int selectedRowIndex = jTableKhuyenMai.getSelectedRow();
             int id = jTableKhuyenMai.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewKhuyenMai(maNV, id,true);
-            Xem.setVisible(true);
+//            JFrame Xem = new fViewKhuyenMai(maNV, id,true);
+//            Xem.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
@@ -803,10 +801,11 @@ public class fKhuyenMai extends javax.swing.JFrame {
         while (jTableKhuyenMai.getRowCount() > 0) {
             model.removeRow(0);
         }
-        arr.stream().forEach((item) -> {
-//            ImageIcon icon = new ImageIcon(item.hinh_anh);
-            model.addRow(new Object[]{item.getMaNCC(), item.getTenNCC(), item.getDiaChi(), item.getSDT(), item.getFax()});
-        });
+        int stt = 1;        
+        for (KhuyenMai item : arr) {
+            model.addRow(new Object[]{stt,item.getMaKM(), item.getTenKM(), item.getDieuKienKM(), item.getPhanTramKM(), item.getNgayBD(), item.getNgayKT(),item.getTrangThai()});
+            stt++;
+            }
     }
 
 
