@@ -20,4 +20,8 @@ public class busQuanLyHoaDon {
         return instance;
     }
     
+    public String getNextID() {
+        return DAO.daoQuanLyHoaDon.getInstance().getNextID();
+    }
+    
 }

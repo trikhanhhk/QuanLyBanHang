@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class daoQuanLyHoaDon {
     
     private static daoQuanLyHoaDon instance;
-    private ArrayList<HoaDon> listSP;
+    private ArrayList<HoaDon> listHD;
     public static daoQuanLyHoaDon getInstance() {
         if (instance == null) {
             instance = new daoQuanLyHoaDon();
@@ -30,7 +30,7 @@ public class daoQuanLyHoaDon {
     }
 
     public daoQuanLyHoaDon() {
-        this.listSP = this.getListHoaDon();
+        this.listHD = this.getListHoaDon();
     }
 
     //Lấy ra danh sách thông tin từ bảng hóa đơn
@@ -50,7 +50,7 @@ public class daoQuanLyHoaDon {
                         rs.getString("MaKH"),
                         rs.getString("MaKM"), 
                         rs.getDate("NgayLap").toLocalDate(), 
-                        LocalTime.parse(rs.getDate("GioLap").toString()),
+                        LocalTime.parse(rs.getString("GioLap")),
                         rs.getFloat("TongTien")
                 ));
             }
@@ -61,6 +61,14 @@ public class daoQuanLyHoaDon {
         }
 
         return result;
+    }
+    
+    public Boolean updateTongTien(String _mahd,float _tongTien){
+        String query = "UPDATE hoadon SET TongTien='" + _tongTien + "' WHERE MaHD='" +_mahd + "';";
+        DataProvider.getIntance().open();
+        int result = DataProvider.getIntance().excuteQueryUpdate(query);
+        DataProvider.getIntance().close();
+        return result > 0;
     }
 
     //Tìm kiếm trong bảng hóa đơn
@@ -154,7 +162,7 @@ public class daoQuanLyHoaDon {
     }
     
     public String getNextID() {
-        return "SP" + String.valueOf(this.listSP.size() + 1);
+        return "HD" + String.valueOf(this.listHD.size() + 1);
     }
 
     //Thêm hóa đơn mới
@@ -194,22 +202,17 @@ public class daoQuanLyHoaDon {
                 + "', GioLap='" + gioNhap
                 + "', TongTien='" + tongTien
                 + "' WHERE MaHD='" + maHoaDon + "';";
-        ArrayList<Object> arr = new ArrayList<>();
-        arr.add(MaSP);
-        arr.add(TenSP);
-        arr.add(hinh_anh);
-        arr.add(id_exist);
-        arr.add(MaLSP);
+      
         DataProvider.getIntance().open();
-        int result = DataProvider.getIntance().excuteUpdate(query, arr);
+        int result = DataProvider.getIntance().excuteQueryUpdate(query);
         DataProvider.getIntance().close();
         return result > 0;
     }
 
     //Lấy 1 hóa đơn từ id hóa đơn
-    public HoaDon getHoaDon(String MaSP) {
+    public HoaDon getHoaDon(String MaHD) {
         HoaDon result = null;
-        String query = "select * from hoadon where MaSP='" + MaSP + "'";
+        String query = "select * from hoadon where MaHD='" + MaHD + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
             DataProvider.getIntance().open();

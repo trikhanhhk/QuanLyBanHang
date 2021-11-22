@@ -138,7 +138,7 @@ public class DataProvider {
         this.close();
         return rs;
     }
-         public void excuteQuery(String sql) {// danh cho cau lenh secect 
+    public void excuteQuery(String sql) {// danh cho cau lenh secect 
         try {
             PreparedStatement stm;
             stm = conn.prepareStatement(sql);
@@ -147,6 +147,24 @@ public class DataProvider {
         } catch (SQLException ex) {
             displayError(ex);
         }
+    }
+    
+    public int excuteQueryUpdate(String sql) {
+        int result = 0;
+        try {
+            PreparedStatement stm;
+            stm = conn.prepareStatement(sql);
+            result = stm.executeUpdate();
+            return result;
+
+        } catch (SQLException ex) {
+            displayError(ex);
+        }
+        return result;
+    }
+
+    int excuteUpdate(String query) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 
