@@ -51,10 +51,9 @@ public class daoKhachHang {
             DataProvider.getIntance().open();
             ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
-                //String MaNV, String TenNV, LocalDate NgaySinh, String DiaChi, String SDT, int trangtha
-                result.add(new KhachHang(rs.getString("MaNV"),
-                        rs.getString("TenNV"),
-                        rs.getDate("NgaySinh").toLocalDate(),
+                //String MaKH, String TenKH, String DiaChi, String SDT, int TrangThai
+                result.add(new KhachHang(rs.getString("MaKH"),
+                        rs.getString("TenKH"),
                         rs.getString("DiaChi"),
                         rs.getString("SDT"),
                         rs.getInt("TrangThai")));
@@ -72,8 +71,8 @@ public class daoKhachHang {
         return "NV" + String.valueOf(this.listNV.size() + 1);
     }
     
-    public void insertKhachHang(String MaNV, String TenNV, String NgaySinh, String DiaChi, String SDT, int trangThai) {
-        String query = "INSERT INTO `khachhang`(`MaNV`, `TenNV`, `NgaySinh`, `DiaChi`, `SDT`, `TrangThai`) VALUES ('" + MaNV + "','" + TenNV + "','" + NgaySinh + "','" + DiaChi + "','" + SDT + "'," + trangThai + ")";
+    public void insertKhachHang(String MaKH, String TenNV, String NgaySinh, String DiaChi, String SDT, int trangThai) {
+        String query = "INSERT INTO `khachhang`(`MaKH`, `TenKH`, `DiaChi`, `SDT`, `TrangThai`) VALUES ('" + MaKH + "','" + TenNV + "','" + NgaySinh + "','" + DiaChi + "','" + SDT + "'," + trangThai + ")";
         System.out.println(query);
         try {
             DataProvider.getIntance().open();
@@ -90,16 +89,15 @@ public class daoKhachHang {
     public ArrayList<KhachHang> FindListKhachHang(String ValToSearch) {
         ArrayList<KhachHang> khachhangList = new ArrayList<>();
         ArrayList<Object> arr = new ArrayList<>();
-        String searchQuery = "SELECT * FROM `khachhang` WHERE CONCAT(`MaNV`, `TenNV`,`NgaySinh`,`DiaChi`,`SDT`) LIKE '%" + ValToSearch + "%'";
+        String searchQuery = "SELECT * FROM `khachhang` WHERE CONCAT(`MaKH`, `TenNV`,`NgaySinh`,`DiaChi`,`SDT`) LIKE '%" + ValToSearch + "%'";
         try {
             DataProvider.getIntance().open();
             ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
             KhachHang khachhang;
 
             while (rs.next()) {
-                khachhang = new KhachHang(rs.getString("MaNV"),
-                        rs.getString("TenNV"),
-                        rs.getDate("NgaySinh").toLocalDate(),
+                khachhang = new KhachHang(rs.getString("MaKH"),
+                        rs.getString("TenKH"),
                         rs.getString("DiaChi"),
                         rs.getString("SDT"),
                         rs.getInt("TrangThai")
@@ -124,37 +122,40 @@ public class daoKhachHang {
         //
         row = sheet.createRow(rownum);
         cell = row.createCell(0);
-        cell.setCellValue("Tên Nhân Viên");
+        cell.setCellValue("Mã Khách hàng");
         //
         row = sheet.createRow(rownum);
         cell = row.createCell(1);
-        cell.setCellValue("Ngày Sinh");
+        cell.setCellValue("Tên khách hàng");
         //
         row = sheet.createRow(rownum);
         cell = row.createCell(2);
-        cell.setCellValue("Trạng thái");
+        cell.setCellValue("Địa chỉ");
         //
         row = sheet.createRow(rownum);
         cell = row.createCell(3);
         cell.setCellValue("SĐT");
 
         cell = row.createCell(4);
-        cell.setCellValue("SĐT");
+        cell.setCellValue("Trạng thái");
         for (int i = 0; i < arr.size(); i++) {
             rownum++;
             row = sheet.createRow(rownum);
             //
             cell = row.createCell(0);
-            cell.setCellValue(arr.get(i).getTenNV());
+            cell.setCellValue(arr.get(i).getMaKH());
             //
             cell = row.createCell(1);
-            cell.setCellValue(arr.get(i).getNgaySinh().toString());
-            //
-            cell = row.createCell(2);
-            cell.setCellValue(arr.get(i).getTrangThai());
+            cell.setCellValue(arr.get(i).getTenKH());
             //
             cell = row.createCell(3);
+            cell.setCellValue(arr.get(i).getDiaChi());
+            //
+            cell = row.createCell(5);
             cell.setCellValue(arr.get(i).getSDT());
+            //
+            cell = row.createCell(4);
+            cell.setCellValue(arr.get(i).getTrangThai());
         }
         File file = new File("C:/demo/khachhang.xls");
         file.getParentFile().mkdirs();
@@ -176,11 +177,10 @@ public class daoKhachHang {
     public ArrayList<KhachHang> FindListKhachHang(ArrayList<KhachHang> DuLieuMau, String ValToSearch) {
         ArrayList<KhachHang> result = new ArrayList<>();
         for (int i = 0; i < DuLieuMau.size(); i++) {
-            if (DuLieuMau.get(i).getTenNV().contains(ValToSearch)
-                    || String.valueOf(DuLieuMau.get(i).getMaNV()).contains(ValToSearch)
+            if (DuLieuMau.get(i).getMaKH().contains(ValToSearch)
+                    || String.valueOf(DuLieuMau.get(i).getTenKH()).contains(ValToSearch)
                     || DuLieuMau.get(i).getSDT().contains(ValToSearch)
-                    || DuLieuMau.get(i).getNgaySinh().toString().contains(ValToSearch)
-                    || DuLieuMau.get(i).getDiaChi().contains(ValToSearch)) {
+                    || DuLieuMau.get(i).getDiaChi().toString().contains(ValToSearch)) {
                 result.add(DuLieuMau.get(i));
             }
         }

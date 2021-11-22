@@ -23,6 +23,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import java.lang.*;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -88,6 +89,26 @@ public class daoNhanVien {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Thêm loại nhân viên " + TenNV + " Thất bại", "Thông báo", 1);
         }
+    }
+    
+    public String getNVByID(String ID) {
+        String result = "";
+        String query = "select TenNV from nhanvien where MaNV = ?";
+        ArrayList<Object> arr = new ArrayList<>();
+        arr.add(ID);
+        try {
+            DataProvider.getIntance().open();
+            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            if (rs.next()) {
+                result = rs.getString("TenNV");
+            }
+
+            DataProvider.getIntance().close();
+        } catch (SQLException ex) {
+            DataProvider.getIntance().displayError(ex);
+        }
+
+        return result;
     }
 
     //Tìm kiếm trong bảng nhân viên (cũ)

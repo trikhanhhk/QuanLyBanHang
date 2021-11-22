@@ -201,9 +201,9 @@ public class daoSanPham {
     }
 
     //Lấy 1 sản phẩm từ id sản phẩm
-    public SanPham getSanPham(int MaSP) {
+    public SanPham getSanPham(String MaSP) {
         SanPham result = null;
-        String query = "select * from sanpham where MaSP=" + MaSP;
+        String query = "select * from sanpham where MaSP='" + MaSP + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
             DataProvider.getIntance().open();
