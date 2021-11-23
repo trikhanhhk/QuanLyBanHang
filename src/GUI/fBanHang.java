@@ -53,9 +53,9 @@ public class fBanHang extends javax.swing.JFrame {
         comboboxKhuyenMai.removeAllItems();
         ArrayList<KhuyenMai> arr = daoKhuyenMai.getInstance().getListKhuyenMai();
         for(int i=0;i< arr.size();i++){
-            if("Đang diễn ra".equals(arr.get(i).getTrangThai())) {
+//            if("Đang diễn ra".equals(arr.get(i).getTrangThai())) {
                 comboboxKhuyenMai.addItem(arr.get(i).getMaKM() + " " + arr.get(i).getTenKM());
-            }
+//            }
         }
     }
     
@@ -74,6 +74,8 @@ public class fBanHang extends javax.swing.JFrame {
     private void setData() {
         txtNguoiBan.setText(daoNhanVien.getInstance().getNVByID(id_nv));
         txtNguoiBan.setEditable(false);       
+        txtMaHĐ.setText(daoQuanLyHoaDon.getInstance().getNextID());
+        txtMaHĐ.setEditable(false);
          new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -823,16 +825,39 @@ public class fBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelLoadLoaiSanPhamActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        KhachHang kh = 
+        String idKhachHang = (comboboxKhachHang.getSelectedItem().toString()).split(" ")[0];
+//        KhachHang khachHang = daoKhachHang.getInstance().getKhachHangByID(idKhachHang);
+        String idKhuyenMai = (comboboxKhuyenMai.getSelectedItem().toString()).split(" ")[0];
         HoaDon hd = new HoaDon(
                 txtMaHĐ.getText(),
                 this.id_nv,
-                ,
-                khuyenMai.getMaKM(),
-                LocalDate.parse(txNgayLap.getText()),
-                LocalTime.parse(txGioLap.getText()),
-                Float.parseFloat(txTongTien.getText()));
-//        qlhdBUS.add(hd);        // TODO add your handling code here:
+                idKhachHang,
+                idKhuyenMai,
+                LocalDate.parse(txtNgayLap.getText()),
+                LocalTime.parse(txtGioLap.getText()),
+                Float.parseFloat(txtTongtien.getText()));
+        daoQuanLyHoaDon.getInstance().insertHoaDon(
+                txtMaHĐ.getText(),
+                this.id_nv,
+                idKhachHang,
+                idKhuyenMai,
+                LocalDate.parse(txtNgayLap.getText()),
+                LocalTime.parse(txtGioLap.getText()),
+                Float.parseFloat(txtTongtien.getText()));
+
+        for (ChiTietHoaDon ct : dscthd) {
+            daoQuanLyChiTietHoaDon.getInstance().insertQuanLyChiTietHoaDon(ct.getMaHoaDon(), ct.getMaSanPham(), ct.getSoLuong(), ct.getDonGia());
+        }
+        
+        int reply = JOptionPane.showConfirmDialog(getRootPane(),
+                        "Thanh toán thành công, bạn có muốn IN HÓA ĐƠN?", "Thành công",
+                        JOptionPane.YES_NO_OPTION);
+//        if(reply == JOptionPane.OK_OPTION) {
+//            new WritePDF().writeHoaDon(txMaHoaDon.getText());
+//        }
+//        txMaHoaDon.setText(qlhdBUS.getNextID());
+//        clear();
+//        this.target.refreshAll();
     }//GEN-LAST:event_btnThanhToanActionPerformed
     
     public void refreshAll() {
