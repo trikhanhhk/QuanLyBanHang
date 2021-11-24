@@ -45,9 +45,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="350" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="610" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jComboBoxNhanVien" min="-2" pref="163" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -78,7 +78,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ph&#x1ea7;n m&#x1ec1;m qu&#x1ea3;n l&#xfd; kho"/>
+            <Property name="text" type="java.lang.String" value="Ph&#x1ea7;n m&#x1ec1;m qu&#x1ea3;n l&#xfd; b&#xe1;n h&#xe0;ng &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -197,24 +197,18 @@
                           <Font name="Tahoma" size="14" style="0"/>
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="*/">
-                          <Table columnCount="7" rowCount="20">
+                          <Table columnCount="6" rowCount="20">
                             <Column editable="false" title="STT" type="java.lang.Object"/>
-                            <Column editable="false" title="T&#xea;n nh&#xe0; cung c&#x1ea5;p" type="java.lang.Object"/>
-                            <Column editable="false" title="M&#xe3; nh&#xe0; cung c&#x1ea5;p" type="java.lang.Object"/>
-                            <Column editable="false" title="T&#xea;n nh&#xe0; cung c&#x1ea5;p" type="java.lang.Object"/>
+                            <Column editable="false" title="M&#xe3; kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
+                            <Column editable="false" title="T&#xea;n kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
                             <Column editable="false" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.Object"/>
                             <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.Object"/>
-                            <Column editable="true" title="Fax" type="java.lang.Object"/>
+                            <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
                             <Column maxWidth="30" minWidth="30" prefWidth="30" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -256,13 +250,14 @@
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
+                        <Property name="updateSelectionOnSort" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableKhachHangMouseClicked"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(model)"/>
-                        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ArrayList&lt;NhaCungCap&gt; DuLieuMau = daoNhaCungCap.getInstance().getListNhaCungCap();&#xa;String[] columnName = {&quot;STT&quot;, &quot;M&#xe3; nh&#xe0; cung c&#x1ea5;p&quot;, &quot;T&#xea;n nh&#xe0; cung c&#x1ea5;p&quot;, &quot;&#x110;&#x1ecb;a ch&#x1ec9;&quot;, &quot;S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i&quot;, &quot;FAX&quot;};&#xa;Object[][] rows = new Object[DuLieuMau.size()][7];&#xa;        for(int i = 0; i &lt; DuLieuMau.size(); i++){&#xa;            rows[i][0] = i+1;&#xa;            rows[i][1] = DuLieuMau.get(i).getMaNCC();&#xa;            rows[i][2] = DuLieuMau.get(i).getTenNCC();&#xa;            rows[i][3] = DuLieuMau.get(i).getDiaChi();&#xa;            rows[i][4] = DuLieuMau.get(i).getSDT();&#xa;            rows[i][5] = DuLieuMau.get(i).getFax();&#xa;            /*&#xa;            if(DuLieuMau.get(i).hinh_anh != null){&#xa;            ImageIcon image = new ImageIcon(new ImageIcon(DuLieuMau.get(i).hinh_anh).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH) );     &#xa;            //ImageIcon image = new ImageIcon(DuLieuMau.get(i).hinh_anh);   &#xa;            //ImageIcon image = new ImageIcon(getClass().getResource(&quot;/Image/fXuatKho.jpg&quot;));  &#xa;            rows[i][6] = image;&#xa;            &#xa;            }&#xa;            else{&#xa;                rows[i][6] = &quot;Ch&#x1b0;a c&#xf3; h&#xec;nh &#x1ea3;nh&quot;;&#xa;            }&#xa;*/&#xa;        }&#xa;DefaultTableModel model = new DefaultTableModel (rows,columnName)&#xa;{&#xa;    @Override&#xa;    public Class getColumnClass(int c) {&#xa;        switch (c)&#xa;    &#xa;    {&#xa;        //case 6:&#xa;        //return ImageIcon.class;&#xa;        default:&#xa;        return Object.class;&#xa;    }&#xa;        }&#xa;        @Override&#xa;    public boolean isCellEditable(int row, int column) {&#xa;       //all cells false&#xa;       return false;&#xa;    }&#xa;};"/>
+                        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ArrayList&lt;KhachHang&gt; DuLieuMau = daoKhachHang.getInstance().getListKhachHang();&#xa;String[] columnName = {&quot;STT&quot;, &quot;M&#xe3; kh&#xe1;ch h&#xe0;ng&quot;, &quot;T&#xea;n kh&#xe1;ch h&#xe0;ng&quot;, &quot;&#x110;&#x1ecb;a ch&#x1ec9;&quot;, &quot;S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i&quot;, &quot;Tr&#x1ea1;ng th&#xe1;i&quot;};&#xa;Object[][] rows = new Object[DuLieuMau.size()][7];&#xa;        for(int i = 0; i &lt; DuLieuMau.size(); i++){&#xa;            rows[i][0] = i+1;&#xa;            rows[i][1] = DuLieuMau.get(i).getMaKH();&#xa;            rows[i][2] = DuLieuMau.get(i).getTenKH();&#xa;            rows[i][3] = DuLieuMau.get(i).getDiaChi();&#xa;            rows[i][4] = DuLieuMau.get(i).getSDT();&#xa;            rows[i][5] = DuLieuMau.get(i).getTrangThai();&#xa;            /*&#xa;            if(DuLieuMau.get(i).hinh_anh != null){&#xa;            ImageIcon image = new ImageIcon(new ImageIcon(DuLieuMau.get(i).hinh_anh).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH) );     &#xa;            //ImageIcon image = new ImageIcon(DuLieuMau.get(i).hinh_anh);   &#xa;            //ImageIcon image = new ImageIcon(getClass().getResource(&quot;/Image/fXuatKho.jpg&quot;));  &#xa;            rows[i][6] = image;&#xa;            &#xa;            }&#xa;            else{&#xa;                rows[i][6] = &quot;Ch&#x1b0;a c&#xf3; h&#xec;nh &#x1ea3;nh&quot;;&#xa;            }&#xa;*/&#xa;        }&#xa;DefaultTableModel model = new DefaultTableModel (rows,columnName)&#xa;{&#xa;    @Override&#xa;    public Class getColumnClass(int c) {&#xa;        switch (c)&#xa;    &#xa;    {&#xa;        //case 6:&#xa;        //return ImageIcon.class;&#xa;        default:&#xa;        return Object.class;&#xa;    }&#xa;        }&#xa;        @Override&#xa;    public boolean isCellEditable(int row, int column) {&#xa;       //all cells false&#xa;       return false;&#xa;    }&#xa;};"/>
                         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*"/>
                       </AuxValues>
                     </Component>
@@ -348,7 +343,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="DANH S&#xc1;CH NH&#xc0; CUNG C&#x1ea4;P"/>
+                    <Property name="text" type="java.lang.String" value="DANH S&#xc1;CH KH&#xc1;CH H&#xc0;NG"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonSua">

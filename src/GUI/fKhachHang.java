@@ -48,7 +48,7 @@ public class fKhachHang extends javax.swing.JFrame {
     public fKhachHang() {
         initComponents();
         setIcon();
-//        build();
+        build();
     }
 
     public fKhachHang(String id) {
@@ -57,7 +57,7 @@ public class fKhachHang extends javax.swing.JFrame {
         setIcon();
         DanhSachKhachHang = daoKhachHang.getInstance().getListKhachHang();
         DuLieuMau = DanhSachKhachHang;
-//        build();
+        build();
     }
 
     private void setIcon() {
@@ -78,16 +78,16 @@ public class fKhachHang extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        ArrayList<NhaCungCap> DuLieuMau = daoNhaCungCap.getInstance().getListNhaCungCap();
-        String[] columnName = {"STT", "Mã nhà cung cấp", "Tên nhà cung cấp", "Địa chỉ", "Số điện thoại", "FAX"};
+        ArrayList<KhachHang> DuLieuMau = daoKhachHang.getInstance().getListKhachHang();
+        String[] columnName = {"STT", "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Số điện thoại", "Trạng thái"};
         Object[][] rows = new Object[DuLieuMau.size()][7];
         for(int i = 0; i < DuLieuMau.size(); i++){
             rows[i][0] = i+1;
-            rows[i][1] = DuLieuMau.get(i).getMaNCC();
-            rows[i][2] = DuLieuMau.get(i).getTenNCC();
+            rows[i][1] = DuLieuMau.get(i).getMaKH();
+            rows[i][2] = DuLieuMau.get(i).getTenKH();
             rows[i][3] = DuLieuMau.get(i).getDiaChi();
             rows[i][4] = DuLieuMau.get(i).getSDT();
-            rows[i][5] = DuLieuMau.get(i).getFax();
+            rows[i][5] = DuLieuMau.get(i).getTrangThai();
             /*
             if(DuLieuMau.get(i).hinh_anh != null){
                 ImageIcon image = new ImageIcon(new ImageIcon(DuLieuMau.get(i).hinh_anh).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH) );
@@ -147,7 +147,7 @@ public class fKhachHang extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Phần mềm quản lý kho");
+        jLabel1.setText("Phần mềm quản lý bán hàng điện thoại");
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -158,33 +158,33 @@ public class fKhachHang extends javax.swing.JFrame {
         jTableKhachHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTableKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên nhà cung cấp", "Mã nhà cung cấp", "Tên nhà cung cấp", "Địa chỉ", "Số điện thoại", "Fax"
+                "STT", "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Số điện thoại", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -196,6 +196,7 @@ public class fKhachHang extends javax.swing.JFrame {
         jTableKhachHang.setRowHeight(50);
         jTableKhachHang.setRowSelectionAllowed(true);
         jTableKhachHang.setAutoCreateRowSorter(true);
+        jTableKhachHang.setUpdateSelectionOnSort(false);
         jTableKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableKhachHangMouseClicked(evt);
@@ -279,7 +280,7 @@ public class fKhachHang extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("DANH SÁCH NHÀ CUNG CẤP");
+        jLabel3.setText("DANH SÁCH KHÁCH HÀNG");
 
         jButtonSua.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonSua.setText("Sửa");
@@ -465,7 +466,7 @@ public class fKhachHang extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jComboBoxNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -498,8 +499,8 @@ public class fKhachHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonThemjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemjButton2ActionPerformed
-        JFrame Them = new fCreateKhachHang(maNV);
-        Them.setVisible(true);
+//        JFrame Them = new fCreateKhachHang(maNV); tạo form fCreateKhachHang
+//        Them.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonThemjButton2ActionPerformed
 
@@ -518,8 +519,8 @@ public class fKhachHang extends javax.swing.JFrame {
             evt.consume();
             int selectedRowIndex = jTableKhachHang.getSelectedRow();
             int id = jTableKhachHang.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewKhachHang(maNV, id,false);
-            Xem.setVisible(true);
+//            JFrame Xem = new fViewKhachHang(maNV, id,false);
+//            Xem.setVisible(true); tạo form fViewKhachHang
             //System.out.print("Nhap dup chuot");
         }
         jButtonSua.setEnabled(true);
@@ -545,66 +546,66 @@ public class fKhachHang extends javax.swing.JFrame {
     
     private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
         // TODO add your handling code here:
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("Employees sheet");
-        int rownum = 0;
-        Cell cell;
-        Row row;
-
-        row = sheet.createRow(rownum);
-        cell = row.createCell(0);
-        cell.setCellValue("Mã nhà cung cấp");
-
-        cell = row.createCell(1);
-        cell.setCellValue("Tên nhà cung cấp");
-
-        cell = row.createCell(2);
-        cell.setCellValue("Địa chỉ");
-
-        cell = row.createCell(3);
-        cell.setCellValue("Số điện thoại");
-
-        cell = row.createCell(4);
-        cell.setCellValue("Số Fax");
-
-        for (int i = 0; i < DuLieuMau.size(); i++) {
-            rownum++;
-            row = sheet.createRow(rownum);
-            //
-            cell = row.createCell(0);
-            cell.setCellValue(DuLieuMau.get(i).getMaNCC());
-            //
-            cell = row.createCell(1);
-            cell.setCellValue(DuLieuMau.get(i).getTenNCC());
-            //
-            cell = row.createCell(2);
-            cell.setCellValue(DuLieuMau.get(i).getDiaChi());
-            //
-            cell = row.createCell(3);
-            cell.setCellValue(DuLieuMau.get(i).getSDT());
-            //
-            cell = row.createCell(4);
-            cell.setCellValue(DuLieuMau.get(i).getFax());
-            //
-
-        }
-        File file = new File("C:/demo/KhachHang.xls");
-        file.getParentFile().mkdirs();
-
-        FileOutputStream outFile;
-        try {
-            outFile = new FileOutputStream(file);
-            workbook.write(outFile);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(fKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(fKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        JOptionPane.showMessageDialog(rootPane,
-                "Đã lưu file Excel KhachHang trong C:/demo.",
-                "Thông báo",
-                JOptionPane.INFORMATION_MESSAGE);
+//        HSSFWorkbook workbook = new HSSFWorkbook();
+//        HSSFSheet sheet = workbook.createSheet("Employees sheet");
+//        int rownum = 0;
+//        Cell cell;
+//        Row row;
+//
+//        row = sheet.createRow(rownum);
+//        cell = row.createCell(0);
+//        cell.setCellValue("Mã nhà cung cấp");
+//
+//        cell = row.createCell(1);
+//        cell.setCellValue("Tên nhà cung cấp");
+//
+//        cell = row.createCell(2);
+//        cell.setCellValue("Địa chỉ");
+//
+//        cell = row.createCell(3);
+//        cell.setCellValue("Số điện thoại");
+//
+//        cell = row.createCell(4);
+//        cell.setCellValue("Số Fax");
+//
+//        for (int i = 0; i < DuLieuMau.size(); i++) {
+//            rownum++;
+//            row = sheet.createRow(rownum);
+//            //
+//            cell = row.createCell(0);
+//            cell.setCellValue(DuLieuMau.get(i).getMaNCC());
+//            //
+//            cell = row.createCell(1);
+//            cell.setCellValue(DuLieuMau.get(i).getTenNCC());
+//            //
+//            cell = row.createCell(2);
+//            cell.setCellValue(DuLieuMau.get(i).getDiaChi());
+//            //
+//            cell = row.createCell(3);
+//            cell.setCellValue(DuLieuMau.get(i).getSDT());
+//            //
+//            cell = row.createCell(4);
+//            cell.setCellValue(DuLieuMau.get(i).getFax());
+//            //
+//
+//        }
+//        File file = new File("C:/demo/KhachHang.xls");
+//        file.getParentFile().mkdirs();
+//
+//        FileOutputStream outFile;
+//        try {
+//            outFile = new FileOutputStream(file);
+//            workbook.write(outFile);
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(fKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(fKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        JOptionPane.showMessageDialog(rootPane,
+//                "Đã lưu file Excel KhachHang trong C:/demo.",
+//                "Thông báo",
+//                JOptionPane.INFORMATION_MESSAGE); Chỗ này phải sử lại cho hợp lệ hiển thị thông tin khách hàng thôi
     }//GEN-LAST:event_jButtonExcelActionPerformed
 
     private void jTextFieldTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemActionPerformed
@@ -625,8 +626,8 @@ public class fKhachHang extends javax.swing.JFrame {
             ArrayList<KhachHang> table = DAO.daoKhachHang.getInstance().get20KhachHang(DanhSachKhachHang, Trang);
             listDanhSachKhachHang(table);
             jLabelTrang.setText("" + Trang);
-            jLabelSoTrang.setText(Trang + "/" + SoTrang);
-        }
+            jLabelSoTrang.setText(Trang + "/" + SoTrang); // do thằng này custom code
+        } // đẩy lên đi, sau t đẩy code t viết cũng được
     }//GEN-LAST:event_jButtonNhoActionPerformed
 
     private void jButtonLonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonActionPerformed
@@ -676,8 +677,8 @@ public class fKhachHang extends javax.swing.JFrame {
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
         int selectedRowIndex = jTableKhachHang.getSelectedRow();
             int id = jTableKhachHang.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewKhachHang(maNV, id,true);
-            Xem.setVisible(true);
+//            JFrame Xem = new fViewKhachHang(maNV, id,true); //Thêm file fViewKhachHang
+//            Xem.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
@@ -739,9 +740,11 @@ public class fKhachHang extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame ncc = new fKhachHang("NV12");
-                ncc.setVisible(true);
-            }
+                JFrame kh = new fKhachHang("NV12"); //đây là hàm để chạy
+                kh.setVisible(true);
+            } // vì đang lấy lại form của nhà cung cấp nên nó hiển thị dât của nhà cung cấp
+            // có project ban đầu nữa k
+            // có 2 project luôn đấy// ok nhé  1 cột r
         });
     }
 
@@ -760,17 +763,17 @@ public class fKhachHang extends javax.swing.JFrame {
         jLabelTrang.setText("1");
         ArrayList<KhachHang> table = DAO.daoKhachHang.getInstance().get20KhachHang(DanhSachKhachHang, 1);
         listDanhSachKhachHang(table);
-        NhanVienDangNhap();
+        NhanVienDangNhap();//sau khi m sửa phân trang thì mất
     }
 
     public void FindList() {
         this.DanhSachKhachHang = DAO.daoKhachHang.getInstance().FindListKhachHang(DuLieuMau, jTextFieldTimKiem.getText());
         if (DanhSachKhachHang.isEmpty()) {
             JOptionPane.showMessageDialog(null,
-                    "Không có dữ liệu nhà cung cấp",
+                    "Không có dữ liệu khách hàng",
                     "Lỗi",
                     JOptionPane.ERROR_MESSAGE);
-//            build();
+            build();
         } else {
             this.count = this.DanhSachKhachHang.size();
             jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
@@ -791,10 +794,24 @@ public class fKhachHang extends javax.swing.JFrame {
         while (jTableKhachHang.getRowCount() > 0) {
             model.removeRow(0);
         }
-        arr.stream().forEach((item) -> {
-//            ImageIcon icon = new ImageIcon(item.hinh_anh);
-            model.addRow(new Object[]{item.getMaNCC(), item.getTenNCC(), item.getDiaChi(), item.getSDT(), item.getFax()});
-        });
+//        arr.stream().forEach((item) -> {
+////            ImageIcon icon = new ImageIcon(item.hinh_anh); phần này phải sử lại
+//            model.addRow(new Object[]{item.getMaKH(), item.getTenKH(), item.getDiaChi(), item.getSDT(), item.getTrangThai()});
+//        });
+        if(arr.isEmpty()==false)
+        {
+            int i = 0;
+            for (KhachHang item : arr) {
+            model.addRow(new String[]{
+                String.valueOf(i),
+                item.getMaKH(),
+                item.getTenKH(),
+                item.getDiaChi(),
+                item.getSDT(),
+                item.getTrangThai() == 1 ? "Ẩn" : "Hiện"});
+            i++;
+            }
+        }
     }
 
 
