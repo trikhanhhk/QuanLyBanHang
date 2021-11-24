@@ -499,8 +499,8 @@ public class fKhachHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonThemjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemjButton2ActionPerformed
-//        JFrame Them = new fCreateKhachHang(maNV); tạo form fCreateKhachHang
-//        Them.setVisible(true);
+        JFrame them = new fCreateKhachHang(maNV);
+        them.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonThemjButton2ActionPerformed
 

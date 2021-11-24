@@ -71,17 +71,17 @@ public class daoKhachHang {
         return "NV" + String.valueOf(this.listNV.size() + 1);
     }
     
-    public void insertKhachHang(String MaKH, String TenNV, String NgaySinh, String DiaChi, String SDT, int trangThai) {
-        String query = "INSERT INTO `khachhang`(`MaKH`, `TenKH`, `DiaChi`, `SDT`, `TrangThai`) VALUES ('" + MaKH + "','" + TenNV + "','" + NgaySinh + "','" + DiaChi + "','" + SDT + "'," + trangThai + ")";
+    public void insertKhachHang(String MaKH, String TenKH, String DiaChi, String SDT, int trangThai) {
+        String query = "INSERT INTO `khachhang`(`MaKH`, `TenKH`, `DiaChi`, `SDT`, `TrangThai`) VALUES ('" + MaKH + "','" + TenKH + "','"  + DiaChi + "','" + SDT + "'," + trangThai + ")";
         System.out.println(query);
         try {
             DataProvider.getIntance().open();
             DataProvider.getIntance().excuteQuery(query);
             DataProvider.getIntance().close();
-            JOptionPane.showMessageDialog(null, "Đã thêm nhân viên " + TenNV + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Đã thêm nhân viên " + TenKH + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getKhachHang(maNV).getTenNV() + " đã thêm loại sản phẩm mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Thêm loại nhân viên " + TenNV + " Thất bại", "Thông báo", 1);
+            JOptionPane.showMessageDialog(null, "Thêm loại nhân viên " + TenKH + " Thất bại", "Thông báo", 1);
         }
     }
 
