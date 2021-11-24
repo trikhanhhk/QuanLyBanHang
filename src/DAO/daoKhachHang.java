@@ -186,6 +186,31 @@ public class daoKhachHang {
         }
         return result;
     }
+    
+     public KhachHang getKhachHangByID(String ID) {
+        KhachHang result = null;
+        String query = "select khachhang from nhanvien where MaKH = ?";
+        ArrayList<Object> arr = new ArrayList<>();
+        arr.add(ID);
+        try {
+            DataProvider.getIntance().open();
+            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            if (rs.next()) {
+                result = new KhachHang(rs.getString("MaKH"),
+                        rs.getString("TenKH"),
+                        rs.getString("DiaChi"),
+                        rs.getString("SDT"),
+                        rs.getInt("TrangThai")
+                );
+            }
+
+            DataProvider.getIntance().close();
+        } catch (SQLException ex) {
+            DataProvider.getIntance().displayError(ex);
+        }
+
+        return result;
+    }
     //Lấy danh sách 20 nhân viên, để làm phân trang
 
     public ArrayList<KhachHang> get20KhachHang(ArrayList<KhachHang> arr, long Trang) {
