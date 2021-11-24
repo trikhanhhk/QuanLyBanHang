@@ -106,15 +106,15 @@ public class daoKhuyenMai {
     }
 
     //Lấy ra 1 khuyến mãi bằng id
-    public KhuyenMai getKhuyenMai(int makm) {
-        String query = "SELECT * FROM `khuyenmai` WHERE MaNCC='" + makm + "'";
+    public KhuyenMai getKhuyenMai(String makm) {
+        String query = "SELECT * FROM `khuyenmai` WHERE MaKM='" + makm + "'";
         ArrayList<Object> arr = new ArrayList<>();
-        KhuyenMai ncc = null;
+        KhuyenMai km = null;
         try {
             DataProvider.getIntance().open();
             ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
-                ncc = new KhuyenMai(rs.getString("MaKM"),
+                km = new KhuyenMai(rs.getString("MaKM"),
                         rs.getString("TenKM"),
                         rs.getFloat("DieuKienKM"),
                         rs.getFloat("PhanTramKM"),
@@ -129,7 +129,7 @@ public class daoKhuyenMai {
             DataProvider.getIntance().displayError(ex);
         }
 
-        return ncc;
+        return km;
     }
 
     //Update thông tin nguồn cung cấp
