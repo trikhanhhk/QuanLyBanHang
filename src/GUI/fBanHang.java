@@ -792,6 +792,7 @@ public class fBanHang extends javax.swing.JFrame {
                 return;
             }
             ChiTietHoaDon cthd = new ChiTietHoaDon(daoQuanLyHoaDon.getInstance().getNextID(), masp, soluong, sp.getDonGia());
+//            System.out.println(cthd.getDonGia() + " " + cthd.getMaHoaDon());
             dscthd.add(cthd);
         }
 
@@ -802,17 +803,35 @@ public class fBanHang extends javax.swing.JFrame {
             modelHoaDon.removeRow(0);
         }
         int stt = 1;
+        float tongtien = 0;
         for (ChiTietHoaDon cthd : dscthd) {
             SanPham spct = daoSanPham.getInstance().getSanPham(cthd.getMaSanPham());
+            float thanhtien = cthd.getDonGia()*cthd.getSoLuong();
             modelHoaDon.addRow(new String[]{
                         String.valueOf(stt),
                         cthd.getMaSanPham(),
                         spct.getTenSP(),
                         String.valueOf(cthd.getSoLuong()),
                         PriceFormatter.format(cthd.getDonGia()),
-                        String.valueOf(PriceFormatter.format(cthd.getDonGia()*cthd.getSoLuong()))
+                        String.valueOf(PriceFormatter.format(thanhtien))
                     });
+            tongtien += thanhtien;
             stt++;
+        }
+        String idKhuyenMai = (comboboxKhuyenMai.getSelectedItem().toString()).split(" ")[0];
+        KhuyenMai khuyenMai = daoKhuyenMai.getInstance().getKhuyenMai(idKhuyenMai);
+        
+        // check khuyến mãi
+        modelHoaDon.addRow(new String[]{"", "", "", "", "", ""});
+        modelHoaDon.addRow(new String[]{"", "", "", "", "Tổng tiền", PriceFormatter.format(tongtien)});
+        if (khuyenMai != null && khuyenMai.getPhanTramKM() > 0 && khuyenMai.getDieuKienKM() <= tongtien) {
+            float giaTriKhuyenMai = tongtien * khuyenMai.getPhanTramKM() / 100;
+            float tongTienSauKhuyenMai = tongtien - giaTriKhuyenMai;
+            modelHoaDon.addRow(new String[]{"", "", "", "", "Khuyến mãi", PriceFormatter.format(-giaTriKhuyenMai)});
+            modelHoaDon.addRow(new String[]{"", "", "", "", "Còn lại", PriceFormatter.format(tongTienSauKhuyenMai)});
+            txtTongtien.setText(String.valueOf(tongTienSauKhuyenMai));
+        } else {
+            txtTongtien.setText(String.valueOf(tongtien));
         }
     }
     

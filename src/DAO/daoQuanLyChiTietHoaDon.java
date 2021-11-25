@@ -73,7 +73,7 @@ public class daoQuanLyChiTietHoaDon {
     
     public void insertQuanLyChiTietHoaDon(String MaHD, String MaSP, int SoLuong, float DonGia) {
         try {
-            PreparedStatement ps = DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO chitiethoadon(MaHD,MaSP,SoLuong,DonGia) VALUES (?,?,?,?)");
+            PreparedStatement ps = DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO chitiethoadon(`MaHD`, `MaSP`, `SoLuong`, `DonGia`) VALUES (?,?,?,?)");
             ps.setString(1, MaHD);
             ps.setString(2, MaSP);
             ps.setInt(3, SoLuong);
