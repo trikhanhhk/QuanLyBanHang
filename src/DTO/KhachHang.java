@@ -21,6 +21,14 @@ public class KhachHang {
         this.TrangThai = TrangThai;
     }
 
+//    public KhachHang(String string, String string0, String string1) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public KhachHang(String string, String string0, String string1, String string2) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
     public String getMaKH() {
         return MaKH;
     }

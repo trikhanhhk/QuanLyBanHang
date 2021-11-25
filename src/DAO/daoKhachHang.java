@@ -29,7 +29,7 @@ import org.apache.poi.ss.usermodel.Row;
 public class daoKhachHang {
     
     private static daoKhachHang instance;
-    private ArrayList<KhachHang> listNV;
+    private ArrayList<KhachHang> listKH;
 
     public static daoKhachHang getInstance() {
         if (instance == null) {
@@ -39,7 +39,7 @@ public class daoKhachHang {
     }
 
     public daoKhachHang() {
-        this.listNV = this.getListKhachHang();
+        this.listKH = this.getListKhachHang();
     }
 
     //Lấy danh sách thông tin từ bảng nhân viên
@@ -68,9 +68,33 @@ public class daoKhachHang {
     }
     
     public String getNextID() {
-        return "NV" + String.valueOf(this.listNV.size() + 1);
+        return "KH" + String.valueOf(this.listKH.size() + 1);
     }
-    
+    public boolean UpdateKhachHang(
+            String MaKH,
+            String TenKH,
+            String DiaChi,
+            String SDT) {
+        if ("".equals(TenKH) || "".equals(SDT)|| "".equals(DiaChi)) {
+            JOptionPane.showMessageDialog(null,
+                    "Chưa điền đầy đủ thông tin",
+                    "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String query = "Update khachhang Set TenKH='" + TenKH + "', DiaChi='" + DiaChi + "', SDT='" + SDT + "' where MaKH='" + MaKH + "'";
+        System.out.println(query);
+        ArrayList<Object> arr = new ArrayList<>();
+        DataProvider.getIntance().open();
+        DataProvider.getIntance().excuteUpdate(query, arr);
+        DataProvider.getIntance().close();
+        JOptionPane.showMessageDialog(null,
+                "Sửa thông tin khách hàng thành công",
+                "Thông báo",
+                JOptionPane.INFORMATION_MESSAGE);
+        //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).getTenNV() + " đã sửa thông tin loại sản phẩm vào lúc" + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
+        return true;
+    }
     public void insertKhachHang(String MaKH, String TenKH, String DiaChi, String SDT, int trangThai) {
         String query = "INSERT INTO `khachhang`(`MaKH`, `TenKH`, `DiaChi`, `SDT`, `TrangThai`) VALUES ('" + MaKH + "','" + TenKH + "','"  + DiaChi + "','" + SDT + "'," + trangThai + ")";
         System.out.println(query);
@@ -78,7 +102,7 @@ public class daoKhachHang {
             DataProvider.getIntance().open();
             DataProvider.getIntance().excuteQuery(query);
             DataProvider.getIntance().close();
-            JOptionPane.showMessageDialog(null, "Đã thêm nhân viên " + TenKH + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Đã thêm khách hàng " + TenKH + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getKhachHang(maNV).getTenNV() + " đã thêm loại sản phẩm mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Thêm loại nhân viên " + TenKH + " Thất bại", "Thông báo", 1);
@@ -186,10 +210,31 @@ public class daoKhachHang {
         }
         return result;
     }
-    
+//    public KhachHang getKhachHang(String MaKH) {
+//        KhachHang result = null;
+//        String query = "select *from khachhang where MaKH = ?";
+//        ArrayList<Object> arr = new ArrayList<>();
+//        arr.add(MaKH);
+//        try {
+//            DataProvider.getIntance().open();
+//            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+//            if (rs.next()) {
+//                result = new KhachHang(
+//                        rs.getString("MaLSP"),
+//                        rs.getString("TenLSP"),
+//                        rs.getString("MoTa"));
+//            }
+//
+//            DataProvider.getIntance().close();
+//        } catch (SQLException ex) {
+//            DataProvider.getIntance().displayError(ex);
+//        }
+//
+//        return result;
+//    }
      public KhachHang getKhachHangByID(String ID) {
         KhachHang result = null;
-        String query = "select khachhang from nhanvien where MaKH = ?";
+        String query = "select *from khachhang where MaKH = ?";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(ID);
         try {
@@ -224,5 +269,9 @@ public class daoKhachHang {
         }
         return result;
     }
+
+//    public void UpdateKhachHang(String TenKH, String MaKH, String DiaChi, String SDT) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     
 }
