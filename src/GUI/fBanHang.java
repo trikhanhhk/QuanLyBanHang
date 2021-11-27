@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import BUS.WritePDF;
 import DAO.*;
 import DTO.*;
 import Format.PriceFormatter;
@@ -39,11 +40,11 @@ public class fBanHang extends javax.swing.JFrame {
 //        showComboboxLoaiSanPham();
     }
     public fBanHang(String idnv) { 
+        this.id_nv = idnv;
         initComponents();
         setIcon();
         LoadThongTinSanPham();
         //showComboboxLoaiSanPham();
-        this.id_nv = idnv;
          setData();
          showComboboxKhuyenMai();
          showComboboxKhachHang();
@@ -72,7 +73,9 @@ public class fBanHang extends javax.swing.JFrame {
     }
     
     private void setData() {
-        txtNguoiBan.setText(daoNhanVien.getInstance().getNVByID(id_nv));
+//        if(daoNhanVien.getInstance().getNVByID(this.id_nv)!=null) {
+        txtNguoiBan.setText(daoNhanVien.getInstance().getNameNVByID(this.id_nv));
+//        }
         txtNguoiBan.setEditable(false);       
         txtMaHĐ.setText(daoQuanLyHoaDon.getInstance().getNextID());
         txtMaHĐ.setEditable(false);
@@ -380,6 +383,11 @@ public class fBanHang extends javax.swing.JFrame {
 
         comboboxKhuyenMai.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboboxKhuyenMai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboboxKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxKhuyenMaiActionPerformed(evt);
+            }
+        });
 
         txtNguoiBan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -415,23 +423,22 @@ public class fBanHang extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboboxKhuyenMai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboboxKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addComponent(jLabel10)
                                         .addGap(15, 15, 15)))
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtTongtien)
-                                    .addComponent(comboboxKhachHang, 0, 174, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCreateKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(34, Short.MAX_VALUE))))))
+                                .addGap(17, 17, 17)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(comboboxKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnCreateKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtTongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(22, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,12 +580,11 @@ public class fBanHang extends javax.swing.JFrame {
                         .addComponent(jLabelLoadLoaiSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                         .addGap(2, 2, 2))
                     .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(labelDonGia, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)))
+                        .addComponent(labelDonGia, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
@@ -596,6 +602,11 @@ public class fBanHang extends javax.swing.JFrame {
 
         btnHuy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnHuy.setText("Hủy");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
 
         btnLamMoi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnLamMoi.setText("Làm mới");
@@ -761,11 +772,6 @@ public class fBanHang extends javax.swing.JFrame {
         int soluongMua = Integer.parseInt(txtSoLuong.getText());
 //        System.out.println(soluongMua);
         String masp = jLabelLoadIDSanPham.getText();
-//        SanPham sp = daoSanPham.getInstance().getSanPham(masp);
-//        int soluongCo = sp.getSoLuong();
-//        String mahd = txtMaHĐ.getText();
-        //(String mahd, String masp, int soluong, float dongia)
-//        ChiTietHoaDon cthd = new ChiTietHoaDon(mahd, masp, soluongMua, sp.getDonGia());
         addChiTiet(masp, soluongMua);
         refreshAll();
     }//GEN-LAST:event_jButtonThemActionPerformed
@@ -865,19 +871,80 @@ public class fBanHang extends javax.swing.JFrame {
                 Float.parseFloat(txtTongtien.getText()));
 
         for (ChiTietHoaDon ct : dscthd) {
-            daoQuanLyChiTietHoaDon.getInstance().insertQuanLyChiTietHoaDon(ct.getMaHoaDon(), ct.getMaSanPham(), ct.getSoLuong(), ct.getDonGia());
+            int a = daoQuanLyChiTietHoaDon.getInstance().insertQuanLyChiTietHoaDon(ct.getMaHoaDon(), ct.getMaSanPham(), ct.getSoLuong(), ct.getDonGia());
+            System.out.println("result " + a);
         }
         
         int reply = JOptionPane.showConfirmDialog(getRootPane(),
                         "Thanh toán thành công, bạn có muốn IN HÓA ĐƠN?", "Thành công",
                         JOptionPane.YES_NO_OPTION);
-//        if(reply == JOptionPane.OK_OPTION) {
-//            new WritePDF().writeHoaDon(txMaHoaDon.getText());
-//        }
-//        txMaHoaDon.setText(qlhdBUS.getNextID());
-//        clear();
+        if(reply == JOptionPane.OK_OPTION) {
+            new WritePDF().writeHoaDon(txtMaHĐ.getText());
+        }
+        txtMaHĐ.setText(daoQuanLyHoaDon.getInstance().getNextID());
+        clear();
 //        this.target.refreshAll();
     }//GEN-LAST:event_btnThanhToanActionPerformed
+
+    public void clear() {
+        txtMaHĐ.setText(daoQuanLyHoaDon.getInstance().getNextID());
+        comboboxKhachHang.setSelectedIndex(0);
+        comboboxKhuyenMai.setSelectedIndex(0);
+        DefaultTableModel modelHoaDon = (DefaultTableModel) jTableChitietHoaDon.getModel();
+        while (jTableChitietHoaDon.getRowCount() > 0)
+        {
+            modelHoaDon.removeRow(0);
+        }
+        txtTongtien.setText("");
+        
+    }    
+    
+    private void comboboxKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxKhuyenMaiActionPerformed
+        DefaultTableModel modelHoaDon = (DefaultTableModel) jTableChitietHoaDon.getModel();
+        while (jTableChitietHoaDon.getRowCount() > 0)
+        {
+            modelHoaDon.removeRow(0);
+        }
+        int stt = 1;
+        float tongtien = 0;
+        for (ChiTietHoaDon cthd : dscthd) {
+            SanPham spct = daoSanPham.getInstance().getSanPham(cthd.getMaSanPham());
+            float thanhtien = cthd.getDonGia()*cthd.getSoLuong();
+            modelHoaDon.addRow(new String[]{
+                        String.valueOf(stt),
+                        cthd.getMaSanPham(),
+                        spct.getTenSP(),
+                        String.valueOf(cthd.getSoLuong()),
+                        PriceFormatter.format(cthd.getDonGia()),
+                        String.valueOf(PriceFormatter.format(thanhtien))
+                    });
+            tongtien += thanhtien;
+            stt++;
+        }
+        KhuyenMai khuyenMai = null;
+        if(this.comboboxKhuyenMai.getSelectedIndex() >= 0) {
+        String idKhuyenMai = (this.comboboxKhuyenMai.getSelectedItem().toString()).split(" ")[0];
+        khuyenMai = daoKhuyenMai.getInstance().getKhuyenMai(idKhuyenMai);
+        }
+        
+        // check khuyến mãi
+        modelHoaDon.addRow(new String[]{"", "", "", "", "", ""});
+        modelHoaDon.addRow(new String[]{"", "", "", "", "Tổng tiền", PriceFormatter.format(tongtien)});
+        if (khuyenMai != null && khuyenMai.getPhanTramKM() > 0 && khuyenMai.getDieuKienKM() <= tongtien) {
+            float giaTriKhuyenMai = tongtien * khuyenMai.getPhanTramKM() / 100;
+            float tongTienSauKhuyenMai = tongtien - giaTriKhuyenMai;
+            modelHoaDon.addRow(new String[]{"", "", "", "", "Khuyến mãi", PriceFormatter.format(-giaTriKhuyenMai)});
+            modelHoaDon.addRow(new String[]{"", "", "", "", "Còn lại", PriceFormatter.format(tongTienSauKhuyenMai)});
+            txtTongtien.setText(String.valueOf(tongTienSauKhuyenMai));
+        } else {
+            txtTongtien.setText(String.valueOf(tongtien));
+        }
+    }//GEN-LAST:event_comboboxKhuyenMaiActionPerformed
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        clear();
+        
+    }//GEN-LAST:event_btnHuyActionPerformed
     
     public void refreshAll() {
 //        refreshTable();
@@ -892,31 +959,7 @@ public class fBanHang extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        
-        /* Create and display the form */
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new fBanHang("NV12").setVisible(true);

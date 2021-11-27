@@ -224,7 +224,7 @@ public class daoQuanLyHoaDon {
                         rs.getString("MaKH"),
                         rs.getString("MaKM"), 
                         rs.getDate("NgayLap").toLocalDate(), 
-                        LocalTime.parse(rs.getDate("GioLap").toString()),
+                        LocalTime.parse(rs.getString("GioLap")),
                         rs.getFloat("TongTien")
                 );
             }

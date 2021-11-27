@@ -5,6 +5,12 @@
  */
 package BUS;
 
+import DAO.daoKhachHang;
+import DAO.daoKhuyenMai;
+import DAO.daoNhanVien;
+import DAO.daoQuanLyChiTietHoaDon;
+import DAO.daoQuanLyHoaDon;
+import DAO.daoSanPham;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -36,6 +42,7 @@ import java.awt.FileDialog;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -148,35 +155,35 @@ public class WritePDF {
             
             setTitle("Thông tin hóa đơn");
             //Hien thong tin cua hoa don hien tai
-            QuanLyHoaDonBUS qlhdBUS = new QuanLyHoaDonBUS();
-            QuanLyKhachHangBUS qlkhBUS = new QuanLyKhachHangBUS();
-            QuanLyNhanVienBUS qlnvBUS = new QuanLyNhanVienBUS();
-            QuanLyKhuyenMaiBUS qlkmBUS = new QuanLyKhuyenMaiBUS();
-            QuanLySanPhamBUS qlspBUS = new QuanLySanPhamBUS();
-            QuanLyChiTietHoaDonBUS qlcthdBUS = new QuanLyChiTietHoaDonBUS();
+//            QuanLyHoaDonBUS qlhdBUS = new QuanLyHoaDonBUS();
+//            QuanLyKhachHangBUS qlkhBUS = new QuanLyKhachHangBUS();
+//            QuanLyNhanVienBUS qlnvBUS = new QuanLyNhanVienBUS();
+//            QuanLyKhuyenMaiBUS qlkmBUS = new QuanLyKhuyenMaiBUS();
+//            QuanLySanPhamBUS qlspBUS = new QuanLySanPhamBUS();
+//            QuanLyChiTietHoaDonBUS qlcthdBUS = new QuanLyChiTietHoaDonBUS();
 
-            HoaDon hd = qlhdBUS.getHoaDon(mahd);
+            HoaDon hd = daoQuanLyHoaDon.getInstance().getHoaDon(mahd);
 
             Chunk glue = new Chunk(new VerticalPositionMark());// Khoang trong giua hang
             Paragraph paraMaHoaDon = new Paragraph(new Phrase("Hóa đơn: " + String.valueOf(hd.getMaHoaDon()), fontData));
 
             Paragraph para1 = new Paragraph();
             para1.setFont(fontData);
-            para1.add(String.valueOf("Khách hàng: " + qlkhBUS.getKhachHang(hd.getMaKhachHang()).getTenKH() + "  -  " + hd.getMaKhachHang()));
+            para1.add(String.valueOf("Khách hàng: " + daoKhachHang.getInstance().getKhachHangByID(hd.getMaKhachHang()).getTenKH() + "  -  " + hd.getMaKhachHang()));
             para1.add(glue);
             para1.add("Ngày lập: " + String.valueOf(hd.getNgayLap()));
 
             Paragraph para2 = new Paragraph();
             para2.setPaddingTop(30);
             para2.setFont(fontData);
-            para2.add(String.valueOf("Nhân viên: " + qlnvBUS.getNhanVien(hd.getMaNhanVien()).getTenNV() + "  -  " + hd.getMaNhanVien()));
+            para2.add(String.valueOf("Nhân viên: " + daoNhanVien.getInstance().getNameNVByID(hd.getMaNhanVien()) + "  -  " + hd.getMaNhanVien()));
             para2.add(glue);
             para2.add("Giờ lập: " + String.valueOf(hd.getGioLap()));
 
             Paragraph paraKhuyenMai = new Paragraph();
             paraKhuyenMai.setPaddingTop(30);
             paraKhuyenMai.setFont(fontData);
-            paraKhuyenMai.add("Khuyến mãi: " + qlkmBUS.getKhuyenMai(hd.getMaKhuyenMai()).getTenKM());
+            paraKhuyenMai.add("Khuyến mãi: " + daoKhuyenMai.getInstance().getKhuyenMai(hd.getMaKhuyenMai()).getTenKM());
 
             document.add(paraMaHoaDon);
             document.add(para1);
@@ -200,14 +207,16 @@ public class WritePDF {
                 pdfTable.addCell(new PdfPCell(new Phrase("")));
             }
 
+            ArrayList<ChiTietHoaDon> allcthd = daoQuanLyChiTietHoaDon.getInstance().getAllChiTiet(mahd);
             //Truyen thong tin tung chi tiet vao table
-            for (ChiTietHoaDon cthd : qlcthdBUS.getAllChiTiet(mahd)) {
+            for (ChiTietHoaDon cthd : allcthd) {
 
                 String ma = cthd.getMaSanPham();
-                String ten = qlspBUS.getSanPham(cthd.getMaSanPham()).getTenSP();
+                String ten = daoSanPham.getInstance().getSanPham(cthd.getMaSanPham()).getTenSP();
                 String gia = PriceFormatter.format(cthd.getDonGia());
                 String soluong = String.valueOf(cthd.getSoLuong());
                 String thanhtien = PriceFormatter.format(cthd.getDonGia() * cthd.getSoLuong());
+                System.out.println("Ma: " + ma +"\nten: " + ten + "\ngia: "+ gia + "\nSoluong: " + soluong + "\nthanhtien: " + thanhtien );
 
                 pdfTable.addCell(new PdfPCell(new Phrase(ma, fontData)));
                 pdfTable.addCell(new PdfPCell(new Phrase(ten, fontData)));
@@ -240,90 +249,90 @@ public class WritePDF {
         }
     }
 
-    public void writePhieuNhap(String mapn) {
-        String url = "";
-        try {
-            fd.setTitle("In phiếu nhập");
-            url = getFile();
-            if (url == null) {
-                return;
-            }
-            file = new FileOutputStream(url);
-            document = new Document();
-            PdfWriter writer = PdfWriter.getInstance(document, file);
-            document.open();
-            
-            setTitle("Thông tin phiếu nhập");
-
-            QuanLyPhieuNhapBUS qlpnBUS = new QuanLyPhieuNhapBUS();
-            QuanLyChiTietPhieuNhapBUS qlctpnBUS = new QuanLyChiTietPhieuNhapBUS();
-            QuanLySanPhamBUS qlspBUS = new QuanLySanPhamBUS();
-            QuanLyNhaCungCapBUS qlnccBUS = new QuanLyNhaCungCapBUS();
-            QuanLyNhanVienBUS qlnvBUS = new QuanLyNhanVienBUS();
-
-            PhieuNhap pn = qlpnBUS.getPhieuNhap(mapn);
-
-            Chunk glue = new Chunk(new VerticalPositionMark());// Khoang trong giua hang
-            Paragraph paraMaHoaDon = new Paragraph(new Phrase("Phiếu nhập: " + String.valueOf(pn.getMaPN()), fontData));
-            Paragraph para1 = new Paragraph();
-            para1.setFont(fontData);
-            para1.add(String.valueOf("Nhà cung cấp: " + qlnccBUS.getNhaCungCap(pn.getMaNCC()).getTenNCC() + "  -  " + pn.getMaNCC()));
-            para1.add(glue);
-            para1.add("Ngày lập: " + String.valueOf(pn.getNgayNhap()));
-
-            Paragraph para2 = new Paragraph();
-            para2.setPaddingTop(30);
-            para2.setFont(fontData);
-            para2.add(String.valueOf("Nhân viên: " + qlnvBUS.getNhanVien(pn.getMaNV()).getTenNV() + "  -  " + pn.getMaNV()));
-            para2.add(glue);
-            para2.add("Giờ lập: " + String.valueOf(pn.getGioNhap()));
-
-            document.add(paraMaHoaDon);
-            document.add(para1);
-            document.add(para2);
-//            document.add(paraKhuyenMai);
-            document.add(Chunk.NEWLINE);//add hang trong de tao khoang cach
-
-            //Tao table cho cac chi tiet cua hoa don
-            PdfPTable pdfTable = new PdfPTable(5);
-            PdfPCell cell;
-
-            //Set headers cho table chi tiet
-            pdfTable.addCell(new PdfPCell(new Phrase("Mã sản phẩm", fontHeader)));
-            pdfTable.addCell(new PdfPCell(new Phrase("Tên sản phẩm", fontHeader)));
-            pdfTable.addCell(new PdfPCell(new Phrase("Đơn giá", fontHeader)));
-            pdfTable.addCell(new PdfPCell(new Phrase("Số lượng", fontHeader)));
-            pdfTable.addCell(new PdfPCell(new Phrase("Tổng tiền", fontHeader)));
-
-            for (int i = 0; i < 5; i++) {
-                cell = new PdfPCell(new Phrase(""));
-                pdfTable.addCell(cell);
-            }
-
-            //Truyen thong tin tung chi tiet vao table
-            for (ChiTietPhieuNhap ctpn : qlctpnBUS.getAllChiTiet(mapn)) {
-                pdfTable.addCell(new PdfPCell(new Phrase(ctpn.getMaSP(), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(qlspBUS.getSanPham(ctpn.getMaSP()).getTenSP(), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(PriceFormatter.format(ctpn.getDonGia()), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(String.valueOf(ctpn.getSoLuong()), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(PriceFormatter.format(ctpn.getDonGia() * ctpn.getSoLuong()), fontData)));
-            }
-
-            document.add(pdfTable);
-            document.add(Chunk.NEWLINE);
-
-            Paragraph paraTongThanhToan = new Paragraph(new Phrase("Tổng thanh toán: " + PriceFormatter.format(pn.getTongTien()), fontData));
-            paraTongThanhToan.setIndentationLeft(300);
-            document.add(paraTongThanhToan);
-            document.close();
-            
-            JOptionPane.showMessageDialog(null, "Ghi file thành công: " + url);
-
-        } catch (DocumentException | FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi khi ghi file " + url);
-        }
-
-    }
+//    public void writePhieuNhap(String mapn) {
+//        String url = "";
+//        try {
+//            fd.setTitle("In phiếu nhập");
+//            url = getFile();
+//            if (url == null) {
+//                return;
+//            }
+//            file = new FileOutputStream(url);
+//            document = new Document();
+//            PdfWriter writer = PdfWriter.getInstance(document, file);
+//            document.open();
+//            
+//            setTitle("Thông tin phiếu nhập");
+//
+////            QuanLyPhieuNhapBUS qlpnBUS = new QuanLyPhieuNhapBUS();
+////            QuanLyChiTietPhieuNhapBUS qlctpnBUS = new QuanLyChiTietPhieuNhapBUS();
+////            QuanLySanPhamBUS qlspBUS = new QuanLySanPhamBUS();
+////            QuanLyNhaCungCapBUS qlnccBUS = new QuanLyNhaCungCapBUS();
+////            QuanLyNhanVienBUS qlnvBUS = new QuanLyNhanVienBUS();
+//
+//            PhieuNhap pn = qlpnBUS.getPhieuNhap(mapn);
+//
+//            Chunk glue = new Chunk(new VerticalPositionMark());// Khoang trong giua hang
+//            Paragraph paraMaHoaDon = new Paragraph(new Phrase("Phiếu nhập: " + String.valueOf(pn.getMaPN()), fontData));
+//            Paragraph para1 = new Paragraph();
+//            para1.setFont(fontData);
+//            para1.add(String.valueOf("Nhà cung cấp: " + qlnccBUS.getNhaCungCap(pn.getMaNCC()).getTenNCC() + "  -  " + pn.getMaNCC()));
+//            para1.add(glue);
+//            para1.add("Ngày lập: " + String.valueOf(pn.getNgayNhap()));
+//
+//            Paragraph para2 = new Paragraph();
+//            para2.setPaddingTop(30);
+//            para2.setFont(fontData);
+//            para2.add(String.valueOf("Nhân viên: " + qlnvBUS.getNhanVien(pn.getMaNV()).getTenNV() + "  -  " + pn.getMaNV()));
+//            para2.add(glue);
+//            para2.add("Giờ lập: " + String.valueOf(pn.getGioNhap()));
+//
+//            document.add(paraMaHoaDon);
+//            document.add(para1);
+//            document.add(para2);
+////            document.add(paraKhuyenMai);
+//            document.add(Chunk.NEWLINE);//add hang trong de tao khoang cach
+//
+//            //Tao table cho cac chi tiet cua hoa don
+//            PdfPTable pdfTable = new PdfPTable(5);
+//            PdfPCell cell;
+//
+//            //Set headers cho table chi tiet
+//            pdfTable.addCell(new PdfPCell(new Phrase("Mã sản phẩm", fontHeader)));
+//            pdfTable.addCell(new PdfPCell(new Phrase("Tên sản phẩm", fontHeader)));
+//            pdfTable.addCell(new PdfPCell(new Phrase("Đơn giá", fontHeader)));
+//            pdfTable.addCell(new PdfPCell(new Phrase("Số lượng", fontHeader)));
+//            pdfTable.addCell(new PdfPCell(new Phrase("Tổng tiền", fontHeader)));
+//
+//            for (int i = 0; i < 5; i++) {
+//                cell = new PdfPCell(new Phrase(""));
+//                pdfTable.addCell(cell);
+//            }
+//
+//            //Truyen thong tin tung chi tiet vao table
+//            for (ChiTietPhieuNhap ctpn : qlctpnBUS.getAllChiTiet(mapn)) {
+//                pdfTable.addCell(new PdfPCell(new Phrase(ctpn.getMaSP(), fontData)));
+//                pdfTable.addCell(new PdfPCell(new Phrase(qlspBUS.getSanPham(ctpn.getMaSP()).getTenSP(), fontData)));
+//                pdfTable.addCell(new PdfPCell(new Phrase(PriceFormatter.format(ctpn.getDonGia()), fontData)));
+//                pdfTable.addCell(new PdfPCell(new Phrase(String.valueOf(ctpn.getSoLuong()), fontData)));
+//                pdfTable.addCell(new PdfPCell(new Phrase(PriceFormatter.format(ctpn.getDonGia() * ctpn.getSoLuong()), fontData)));
+//            }
+//
+//            document.add(pdfTable);
+//            document.add(Chunk.NEWLINE);
+//
+//            Paragraph paraTongThanhToan = new Paragraph(new Phrase("Tổng thanh toán: " + PriceFormatter.format(pn.getTongTien()), fontData));
+//            paraTongThanhToan.setIndentationLeft(300);
+//            document.add(paraTongThanhToan);
+//            document.close();
+//            
+//            JOptionPane.showMessageDialog(null, "Ghi file thành công: " + url);
+//
+//        } catch (DocumentException | FileNotFoundException ex) {
+//            JOptionPane.showMessageDialog(null, "Lỗi khi ghi file " + url);
+//        }
+//
+//    }
 
     public void closeFile() {
         document.close();

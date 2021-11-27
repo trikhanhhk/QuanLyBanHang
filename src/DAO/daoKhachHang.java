@@ -189,7 +189,7 @@ public class daoKhachHang {
     
      public KhachHang getKhachHangByID(String ID) {
         KhachHang result = null;
-        String query = "select khachhang from nhanvien where MaKH = ?";
+        String query = "select * from khachhang where MaKH = ?";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(ID);
         try {

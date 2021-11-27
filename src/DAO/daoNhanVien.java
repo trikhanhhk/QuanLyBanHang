@@ -91,8 +91,8 @@ public class daoNhanVien {
         }
     }
     
-    public String getNVByID(String ID) {
-        String result = "";
+    public NhanVien getNVByID(String ID) {
+        NhanVien result = null;
         String query = "select TenNV from nhanvien where MaNV = ?";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(ID);
@@ -100,7 +100,13 @@ public class daoNhanVien {
             DataProvider.getIntance().open();
             ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
-                result = rs.getString("TenNV");
+                result = new NhanVien(
+                        rs.getString("MaNV"),
+                        rs.getString("TenNV"),
+                        rs.getDate("NgaySinh").toLocalDate(),
+                        rs.getString("DiaChi"),
+                        rs.getString("SDT"),
+                        rs.getInt("TrangThai"));
             }
 
             DataProvider.getIntance().close();
@@ -111,6 +117,26 @@ public class daoNhanVien {
         return result;
     }
 
+    public String getNameNVByID(String ID) {
+        String result = "";
+        String query = "select TenNV from nhanvien where MaNV = ?";
+        ArrayList<Object> arr = new ArrayList<>();
+        arr.add(ID);
+        try {
+            DataProvider.getIntance().open();
+            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            if (rs.next()) {
+                result = rs.getString("TenNV");    
+            }
+
+            DataProvider.getIntance().close();
+        } catch (SQLException ex) {
+            DataProvider.getIntance().displayError(ex);
+        }
+
+        return result;
+    }
+    
     //Tìm kiếm trong bảng nhân viên (cũ)
     public ArrayList<NhanVien> FindListNhanVien(String ValToSearch) {
         ArrayList<NhanVien> nhanvienList = new ArrayList<>();
