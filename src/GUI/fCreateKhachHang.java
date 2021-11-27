@@ -20,7 +20,7 @@ public class fCreateKhachHang extends javax.swing.JFrame {
     String maNV;
     public fCreateKhachHang() {
        initComponents();
-        this.txtMaKH.setText(DAO.daoNhanVien.getInstance().getNextID());
+        this.txtMaKH.setText(DAO.daoKhachHang.getInstance().getNextID());
         setIcon();
         showComboboxTrangThai();
         this.txtMaKH.setEditable(false);
@@ -29,7 +29,7 @@ public class fCreateKhachHang extends javax.swing.JFrame {
     public fCreateKhachHang(String maKH) {
         initComponents();
         this.maNV=maKH;
-        this.txtMaKH.setText(DAO.daoNhanVien.getInstance().getNextID());
+        this.txtMaKH.setText(DAO.daoKhachHang.getInstance().getNextID());
         setIcon();
         showComboboxTrangThai();
         this.txtMaKH.setEditable(false);

@@ -675,11 +675,11 @@ public class fKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
-        int selectedRowIndex = jTableKhachHang.getSelectedRow();
-            int id = jTableKhachHang.getValueAt(selectedRowIndex, 0).hashCode();
-//            JFrame Xem = new fViewKhachHang(maNV, id,true); //Thêm file fViewKhachHang
-//            Xem.setVisible(true);
-        // TODO add your handling code here:
+int selectedRowIndex = jTableKhachHang.getSelectedRow();
+        String maKH = jTableKhachHang.getValueAt(selectedRowIndex, 1).toString();
+        KhachHang KHSua = DAO.daoKhachHang.getInstance().getKhachHangByID(maKH);
+        JFrame fSuaKH = new fSuaKhachHang(KHSua);
+        fSuaKH.setVisible(true);
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
