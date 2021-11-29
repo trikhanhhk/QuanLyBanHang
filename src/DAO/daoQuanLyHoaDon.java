@@ -100,6 +100,19 @@ public class daoQuanLyHoaDon {
 
         return hoadonList;
     }
+    
+     public ArrayList<HoaDon> FindListHoaDon(ArrayList<HoaDon> DuLieuMau, String ValToSearch) {
+        ArrayList<HoaDon> result = new ArrayList<>();
+        for (int i = 0; i < DuLieuMau.size(); i++) {
+            if (DuLieuMau.get(i).getMaHoaDon().contains(ValToSearch)
+                    || String.valueOf(DuLieuMau.get(i).getMaKhachHang()).contains(ValToSearch)
+                    || DuLieuMau.get(i).getMaKhuyenMai().contains(ValToSearch)
+                    || DuLieuMau.get(i).getMaNhanVien().toString().contains(ValToSearch)) {
+                result.add(DuLieuMau.get(i));
+            }
+        }
+        return result;
+    }
 
     //Lấy ra danh sách thông tin hóa đơn có cùng loại
     public ArrayList<HoaDon> getListHoaDonTheoLoai(int MaLSP) {
@@ -234,6 +247,19 @@ public class daoQuanLyHoaDon {
         }
         if (result == null) {
             System.out.print("hoa don bi null");
+        }
+        return result;
+    }
+    
+      //Lấy danh sách 20 nhân viên, để làm phân trang
+
+    public ArrayList<HoaDon> get20HoaDon(ArrayList<HoaDon> arr, long Trang) {
+        ArrayList<HoaDon> result = new ArrayList<>();
+        for (long i = (Trang * 20 - 20); i < (Trang * 20); i++) {
+            if (i == arr.size()) {
+                break;
+            }
+            result.add(arr.get((int) i));
         }
         return result;
     }

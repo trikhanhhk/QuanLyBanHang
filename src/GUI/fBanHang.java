@@ -208,7 +208,6 @@ public class fBanHang extends javax.swing.JFrame {
         labelDonGia = new javax.swing.JTextField();
         btnThanhToan = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
-        btnLamMoi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Danh Sách Thông Tin Sản Phẩm");
@@ -219,7 +218,7 @@ public class fBanHang extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Phần mềm quản lý kho");
+        jLabel1.setText("Quản lý cửa hàng");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -608,9 +607,6 @@ public class fBanHang extends javax.swing.JFrame {
             }
         });
 
-        btnLamMoi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnLamMoi.setText("Làm mới");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -636,8 +632,6 @@ public class fBanHang extends javax.swing.JFrame {
                         .addComponent(btnThanhToan)
                         .addGap(18, 18, 18)
                         .addComponent(btnHuy)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLamMoi)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -657,8 +651,7 @@ public class fBanHang extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnThanhToan)
-                            .addComponent(btnHuy)
-                            .addComponent(btnLamMoi))
+                            .addComponent(btnHuy))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -972,7 +965,6 @@ public class fBanHang extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateKhachHang;
     private javax.swing.JButton btnHuy;
-    private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JComboBox<String> comboboxKhachHang;
     private javax.swing.JComboBox<String> comboboxKhuyenMai;
