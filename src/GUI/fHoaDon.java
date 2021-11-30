@@ -129,7 +129,7 @@ public class fHoaDon extends javax.swing.JFrame {
         jButtonLamMoi = new javax.swing.JButton();
         jLabelKetQua = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButtonHuy = new javax.swing.JButton();
+        jButtonPDF = new javax.swing.JButton();
         btnXemChiTiet = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButtonNhoMax = new javax.swing.JButton();
@@ -269,14 +269,14 @@ public class fHoaDon extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("DANH SÁCH HÓA ĐƠN");
 
-        jButtonHuy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonHuy.setText("In PDF");
+        jButtonPDF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonPDF.setText("In PDF");
         ImageIcon imgHuy = new ImageIcon(getClass().getResource("/icon/icons8-waste-48.png"));
         ImageIcon ImgHuy = new ImageIcon(imgHuy.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
-        jButtonHuy.setIcon(ImgHuy);
-        jButtonHuy.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPDF.setIcon(ImgHuy);
+        jButtonPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonHuyActionPerformed(evt);
+                jButtonPDFActionPerformed(evt);
             }
         });
 
@@ -293,19 +293,16 @@ public class fHoaDon extends javax.swing.JFrame {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelKetQua)
-                            .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addComponent(jButtonHuy)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonExcel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnXemChiTiet))))
+                    .addComponent(jLabelKetQua, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jButtonPDF)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonExcel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnXemChiTiet))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,7 +314,7 @@ public class fHoaDon extends javax.swing.JFrame {
             .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
-        jPanel13Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonExcel, jButtonHuy});
+        jPanel13Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonExcel, jButtonPDF});
 
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,7 +327,7 @@ public class fHoaDon extends javax.swing.JFrame {
                     .addComponent(jButtonLamMoi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonHuy)
+                    .addComponent(jButtonPDF)
                     .addComponent(jButtonExcel)
                     .addComponent(btnXemChiTiet))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -421,9 +418,7 @@ public class fHoaDon extends javax.swing.JFrame {
                 .addGap(329, 329, 329)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(361, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,7 +526,7 @@ public class fHoaDon extends javax.swing.JFrame {
         jLabelSoTrang.setText(SoTrang + "/" + SoTrang);
     }//GEN-LAST:event_jButtonLonMaxActionPerformed
 
-    private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
+    private void jButtonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFActionPerformed
         int selectedRowIndex = jTableHoaDon.getSelectedRow();
         String id = jTableHoaDon.getValueAt(selectedRowIndex, 1).toString();
         if(selectedRowIndex>=0){
@@ -540,7 +535,7 @@ public class fHoaDon extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Chọn một hóa đơn để in");
         }
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonHuyActionPerformed
+    }//GEN-LAST:event_jButtonPDFActionPerformed
 
     private void jButtonLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLamMoiActionPerformed
         invalidate();
@@ -554,7 +549,7 @@ public class fHoaDon extends javax.swing.JFrame {
     private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
         DanhSachHoaDon = DuLieuMau;
         FindList();
-        jButtonHuy.setEnabled(false);
+        jButtonPDF.setEnabled(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
@@ -582,7 +577,7 @@ public class fHoaDon extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             DanhSachHoaDon = DuLieuMau;
             FindList();
-            jButtonHuy.setEnabled(false);
+            jButtonPDF.setEnabled(false);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTimKiemKeyPressed
 
@@ -599,7 +594,7 @@ public class fHoaDon extends javax.swing.JFrame {
             JFrame CtHoaDon = new fChiTietHoaDon(maNV, id);
             CtHoaDon.setVisible(true);
         }
-        jButtonHuy.setEnabled(true);
+        jButtonPDF.setEnabled(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableHoaDonMouseClicked
@@ -641,7 +636,7 @@ public class fHoaDon extends javax.swing.JFrame {
     }
 
     public void build() {
-        jButtonHuy.setEnabled(false);
+        jButtonPDF.setEnabled(false);
         DanhSachHoaDon = DuLieuMau;
         this.count = this.DanhSachHoaDon.size();
         jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
@@ -712,12 +707,12 @@ public class fHoaDon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnXemChiTiet;
     private javax.swing.JButton jButtonExcel;
-    private javax.swing.JButton jButtonHuy;
     private javax.swing.JButton jButtonLamMoi;
     private javax.swing.JButton jButtonLon;
     private javax.swing.JButton jButtonLonMax;
     private javax.swing.JButton jButtonNho;
     private javax.swing.JButton jButtonNhoMax;
+    private javax.swing.JButton jButtonPDF;
     private javax.swing.JButton jButtonTimKiem;
     private javax.swing.JComboBox<String> jComboBoxNhanVien;
     private javax.swing.JLabel jLabel1;

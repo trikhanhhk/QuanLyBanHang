@@ -135,7 +135,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabelKetQua" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jButtonHuy" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonPDF" linkSize="2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButtonExcel" linkSize="2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -168,7 +168,7 @@
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButtonHuy" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonPDF" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButtonExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnXemChiTiet" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -329,7 +329,7 @@
                     <Property name="text" type="java.lang.String" value="DANH S&#xc1;CH H&#xd3;A &#x110;&#x1a0;N"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButtonHuy">
+                <Component class="javax.swing.JButton" name="jButtonPDF">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -337,10 +337,10 @@
                     <Property name="text" type="java.lang.String" value="In PDF"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonHuyActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPDFActionPerformed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ImageIcon imgHuy = new ImageIcon(getClass().getResource(&quot;/icon/icons8-waste-48.png&quot;));&#xa;ImageIcon ImgHuy = new ImageIcon(imgHuy.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));&#xa;jButtonHuy.setIcon(ImgHuy);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ImageIcon imgHuy = new ImageIcon(getClass().getResource(&quot;/icon/icons8-waste-48.png&quot;));&#xa;ImageIcon ImgHuy = new ImageIcon(imgHuy.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));&#xa;jButtonPDF.setIcon(ImgHuy);"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnXemChiTiet">
