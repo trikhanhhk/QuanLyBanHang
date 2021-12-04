@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class fLoSanPham extends javax.swing.JFrame {
 

@@ -8,7 +8,7 @@ import java.lang.*;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class ThongTinXuat {
     public int id_xuat_kho;

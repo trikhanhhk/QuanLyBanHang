@@ -404,7 +404,10 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTabbedPane3" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane3" min="-2" pref="383" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -433,7 +436,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="406" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="355" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -455,7 +458,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="406" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="355" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -477,7 +480,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="406" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="355" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -508,7 +511,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <EmptySpace min="0" pref="434" max="32767" attributes="0"/>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                          <Component id="jTabbedPane2" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="46" max="32767" attributes="0"/>
+                              <Component id="jTabbedPane2" min="-2" pref="388" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -551,7 +557,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="405" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="359" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -573,7 +579,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="405" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="359" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>

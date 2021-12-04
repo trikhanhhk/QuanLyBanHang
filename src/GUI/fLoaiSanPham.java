@@ -6,7 +6,6 @@
 package GUI;
 
 import DTO.*;
-import DAO.daoTraNhaCungCap;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -19,7 +18,7 @@ import java.lang.*;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class fLoaiSanPham extends javax.swing.JFrame {
 
@@ -410,8 +409,8 @@ public class fLoaiSanPham extends javax.swing.JFrame {
             evt.consume();
             int selectedRowIndex = jTableLoaiSanPham.getSelectedRow();
             int id = jTableLoaiSanPham.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fPrintPhieuXuat(maNV,id);
-            Xem.setVisible(true);
+//            JFrame Xem = new fPrintPhieuXuat(maNV,id);
+//            Xem.setVisible(true);
         }
         jButtonSua.setEnabled(true);
         jButtonXoa.setEnabled(true);
@@ -425,28 +424,7 @@ public class fLoaiSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTaoMoiActionPerformed
 
     private void jTextFieldTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyReleased
-        /*String [][] Data;
-        //System.out.println("Giai doan 1");
-        Data=DAO.daoTraNhaCungCap.getInstance().FindListTraKho(jTextFieldTimKiem.getText());
-        // System.out.println("Giai doan 2");
-        DefaultTableModel model = (DefaultTableModel) jTableXuatKho.getModel();
-        while (jTableXuatKho.getRowCount() > 0) {
-            model.removeRow(0);
-        }
-        int i=0;
-        while(Data[i][0]!=null)
-        {
-            //System.out.println("Giai doan 3");
-            model.addRow(new Object[]{
-                Data[i][0],
-                Data[i][1],
-                Data[i][2],
-                Data[i][3],
-                Data[i][4],
-                Data[i][5]});
-        i++;
-        }*/
-        // TODO add your handling code here:
+
         if ("".equals(jTextFieldTimKiem.getText())) {
             build();
         }
@@ -509,8 +487,6 @@ public class fLoaiSanPham extends javax.swing.JFrame {
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed
         String valueIn = String.valueOf(jComboBoxNhanVien.getSelectedItem());
         if ("Thoát".equals(valueIn)) {
-            JFrame dn = new fDangNhap();
-            dn.setVisible(true);
             dispose();
         }
         if ("Thông tin".equals(valueIn)) {

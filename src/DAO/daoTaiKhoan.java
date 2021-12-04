@@ -15,7 +15,7 @@ import java.lang.*;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class daoTaiKhoan {
 

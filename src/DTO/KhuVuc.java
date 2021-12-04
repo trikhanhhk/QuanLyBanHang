@@ -7,7 +7,7 @@ package DTO;
 import java.lang.*;
 /**
  *
- * @author nghia
+ * @author HoangAnh
  */
 public class KhuVuc {
     public int id_khu_vuc;

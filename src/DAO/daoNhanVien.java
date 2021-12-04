@@ -93,9 +93,8 @@ public class daoNhanVien {
     
     public NhanVien getNVByID(String ID) {
         NhanVien result = null;
-        String query = "select TenNV from nhanvien where MaNV = ?";
+        String query = "select * from nhanvien where MaNV = '" + ID + "'";
         ArrayList<Object> arr = new ArrayList<>();
-        arr.add(ID);
         try {
             DataProvider.getIntance().open();
             ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);

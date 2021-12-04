@@ -33,7 +33,7 @@ import java.lang.*;
 
 /**
  *
- * @author Xoan Tran
+ * @author HoaTran
  */
 public class fKhuyenMai extends javax.swing.JFrame {
 
@@ -529,8 +529,7 @@ public class fKhuyenMai extends javax.swing.JFrame {
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed
         String valueIn = String.valueOf(jComboBoxNhanVien.getSelectedItem());
         if ("Thoát".equals(valueIn)) {
-            JFrame dn = new fDangNhap();
-            dn.setVisible(true);
+    
             dispose();
         }
         if ("Thông tin".equals(valueIn)) {
@@ -694,8 +693,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
          int selectedRowIndex = jTableKhuyenMai.getSelectedRow();
             int id = jTableKhuyenMai.getValueAt(selectedRowIndex, 0).hashCode();
-        JFrame ThongBao = new fThongBaoHuy("KhuyenMai",id,maNV);
-        ThongBao.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonHuyActionPerformed
     //

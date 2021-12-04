@@ -7,7 +7,7 @@ package DTO;
 import java.lang.*;
 /**
  *
- * @author nghia
+ * @author HoangAnh
  */
 public class LoaiSanPham {
     String MaLSP, TenLSP, MoTa;

@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package GUI;
-
-import BUS.busKhachHang;
 import DTO.KhachHang;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -190,7 +188,7 @@ txDiaChi.setText(this.KHSua.getDiaChi());
             String tenKH = txTenKH.getText();
             String SDT = txSDT.getText();
             String DiaChi = txDiaChi.getText();
-            busKhachHang.getInstance().UpdateKhachHang(maKH, tenKH, DiaChi,SDT);
+//            busKhachHang.getInstance().UpdateKhachHang(maKH, tenKH, DiaChi,SDT); khi lam xong chuwcs nang update
 
             JOptionPane.showMessageDialog(this, "Sửa" + maKH + " thành công!");
         }

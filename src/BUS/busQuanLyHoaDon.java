@@ -25,6 +25,7 @@ import org.apache.poi.ss.usermodel.Row;
 public class busQuanLyHoaDon {
     
     private static busQuanLyHoaDon instance;
+    private ArrayList<HoaDon> dshd;
 
     public static busQuanLyHoaDon getInstance() {
         if (instance == null) {
@@ -37,7 +38,36 @@ public class busQuanLyHoaDon {
         return DAO.daoQuanLyHoaDon.getInstance().getNextID();
     }
     
-     public ArrayList<HoaDon> search(LocalDate _ngay1, LocalDate _ngay2, int _tong1, int _tong2) {
+    public ArrayList<HoaDon> searchNew(String keyword, LocalDate _ngay1, LocalDate _ngay2, int _tong1, int _tong2) {
+        ArrayList<HoaDon> result = new ArrayList<>();
+        dshd = daoQuanLyHoaDon.getInstance().getListHoaDon();
+        dshd.forEach((hd) -> {
+            if (hd.getMaHoaDon().toLowerCase().contains(keyword.toLowerCase())
+                            || hd.getMaNhanVien().toLowerCase().contains(keyword.toLowerCase())
+                            || hd.getMaKhachHang().toLowerCase().contains(keyword.toLowerCase())
+                            || hd.getMaKhachHang().toLowerCase().contains(keyword.toLowerCase())
+                            || hd.getNgayLap().toString().toLowerCase().contains(keyword.toLowerCase())
+                            || hd.getGioLap().toString().toLowerCase().contains(keyword.toLowerCase())
+                            || String.valueOf(hd.getTongTien()).toLowerCase().contains(keyword.toLowerCase())) {
+                        result.add(hd);
+                    }
+        });
+        for (int i = result.size() - 1; i >= 0; i--) {
+            HoaDon hd = result.get(i);
+            LocalDate ngaylap = hd.getNgayLap();
+            float tongtien = hd.getTongTien();
+
+            Boolean ngayKhongThoa = (_ngay1 != null && ngaylap.isBefore(_ngay1)) || (_ngay2 != null && ngaylap.isAfter(_ngay2));
+            Boolean tienKhongThoa = (_tong1 != -1 && tongtien < _tong1) || (_tong2 != -1 && tongtien > _tong2);
+
+            if (ngayKhongThoa || tienKhongThoa) {
+                result.remove(hd);
+            }
+        }
+        return result;
+    }
+    
+    public ArrayList<HoaDon> search(LocalDate _ngay1, LocalDate _ngay2, int _tong1, int _tong2) {
          ArrayList<HoaDon> result = daoQuanLyHoaDon.getInstance().getListHoaDon();
          for (int i = result.size() - 1; i >= 0; i--) {
             HoaDon hd = result.get(i);

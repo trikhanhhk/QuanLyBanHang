@@ -31,7 +31,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Xoan Tran
+ * @author HoaTran
  */
 public class fHoaDon extends javax.swing.JFrame {
 
@@ -478,8 +478,7 @@ public class fHoaDon extends javax.swing.JFrame {
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed
         String valueIn = String.valueOf(jComboBoxNhanVien.getSelectedItem());
         if ("Thoát".equals(valueIn)) {
-            JFrame dn = new fDangNhap();
-            dn.setVisible(true);
+    
             dispose();
         }
         if ("Thông tin".equals(valueIn)) {

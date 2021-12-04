@@ -7,7 +7,7 @@ package GROUP;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class ThongTinLo {
     //Lô

@@ -8,7 +8,7 @@ import java.lang.*;
 import java.sql.Timestamp;
 /**
  *
- * @author nghia
+ * @author HoangAnh
  */
 public class LoSanPham {
     public int id_lo_sp;

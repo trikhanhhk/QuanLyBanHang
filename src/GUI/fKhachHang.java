@@ -33,7 +33,7 @@ import java.lang.*;
 
 /**
  *
- * @author Xoan Tran
+ * @author HoaTran
  */
 public class fKhachHang extends javax.swing.JFrame {
 
@@ -147,7 +147,7 @@ public class fKhachHang extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Quản lý cửa hàng");
+        jLabel1.setText("Khách hàng");
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -532,8 +532,7 @@ public class fKhachHang extends javax.swing.JFrame {
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed
         String valueIn = String.valueOf(jComboBoxNhanVien.getSelectedItem());
         if ("Thoát".equals(valueIn)) {
-            JFrame dn = new fDangNhap();
-            dn.setVisible(true);
+    
             dispose();
         }
         if ("Thông tin".equals(valueIn)) {
@@ -546,66 +545,6 @@ public class fKhachHang extends javax.swing.JFrame {
     
     private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
         // TODO add your handling code here:
-//        HSSFWorkbook workbook = new HSSFWorkbook();
-//        HSSFSheet sheet = workbook.createSheet("Employees sheet");
-//        int rownum = 0;
-//        Cell cell;
-//        Row row;
-//
-//        row = sheet.createRow(rownum);
-//        cell = row.createCell(0);
-//        cell.setCellValue("Mã nhà cung cấp");
-//
-//        cell = row.createCell(1);
-//        cell.setCellValue("Tên nhà cung cấp");
-//
-//        cell = row.createCell(2);
-//        cell.setCellValue("Địa chỉ");
-//
-//        cell = row.createCell(3);
-//        cell.setCellValue("Số điện thoại");
-//
-//        cell = row.createCell(4);
-//        cell.setCellValue("Số Fax");
-//
-//        for (int i = 0; i < DuLieuMau.size(); i++) {
-//            rownum++;
-//            row = sheet.createRow(rownum);
-//            //
-//            cell = row.createCell(0);
-//            cell.setCellValue(DuLieuMau.get(i).getMaNCC());
-//            //
-//            cell = row.createCell(1);
-//            cell.setCellValue(DuLieuMau.get(i).getTenNCC());
-//            //
-//            cell = row.createCell(2);
-//            cell.setCellValue(DuLieuMau.get(i).getDiaChi());
-//            //
-//            cell = row.createCell(3);
-//            cell.setCellValue(DuLieuMau.get(i).getSDT());
-//            //
-//            cell = row.createCell(4);
-//            cell.setCellValue(DuLieuMau.get(i).getFax());
-//            //
-//
-//        }
-//        File file = new File("C:/demo/KhachHang.xls");
-//        file.getParentFile().mkdirs();
-//
-//        FileOutputStream outFile;
-//        try {
-//            outFile = new FileOutputStream(file);
-//            workbook.write(outFile);
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(fKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(fKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        JOptionPane.showMessageDialog(rootPane,
-//                "Đã lưu file Excel KhachHang trong C:/demo.",
-//                "Thông báo",
-//                JOptionPane.INFORMATION_MESSAGE); Chỗ này phải sử lại cho hợp lệ hiển thị thông tin khách hàng thôi
     }//GEN-LAST:event_jButtonExcelActionPerformed
 
     private void jTextFieldTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemActionPerformed
@@ -685,8 +624,8 @@ int selectedRowIndex = jTableKhachHang.getSelectedRow();
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
          int selectedRowIndex = jTableKhachHang.getSelectedRow();
             int id = jTableKhachHang.getValueAt(selectedRowIndex, 0).hashCode();
-        JFrame ThongBao = new fThongBaoHuy("KhachHang",id,maNV);
-        ThongBao.setVisible(true);
+//        JFrame ThongBao = new fThongBaoHuy("KhachHang",id,maNV);
+//        ThongBao.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonHuyActionPerformed
     //

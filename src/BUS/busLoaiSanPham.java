@@ -9,7 +9,7 @@ import DTO.LoaiSanPham;
 import java.util.ArrayList;
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class busLoaiSanPham {
     private static busLoaiSanPham instance;

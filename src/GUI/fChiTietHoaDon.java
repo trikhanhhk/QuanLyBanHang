@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Xoan Tran
+ * @author HoaTran
  */
 public class fChiTietHoaDon extends javax.swing.JFrame {
 
@@ -387,8 +387,8 @@ public class fChiTietHoaDon extends javax.swing.JFrame {
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed
         String valueIn = String.valueOf(jComboBoxNhanVien.getSelectedItem());
         if ("Thoát".equals(valueIn)) {
-            JFrame dn = new fDangNhap();
-            dn.setVisible(true);
+//            JFrame dn = new fDangNhap();
+//            dn.setVisible(true);
             dispose();
         }
         if ("Thông tin".equals(valueIn)) {

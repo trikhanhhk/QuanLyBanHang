@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class fCreateKhuVuc extends javax.swing.JFrame {
 

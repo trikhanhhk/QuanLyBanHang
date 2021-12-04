@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class daoLoaiKho {
     private static daoLoaiKho instance;

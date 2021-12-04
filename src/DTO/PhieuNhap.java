@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 /**
  *
- * @author nghia
+ * @author tk0038
  */
 public class PhieuNhap {
 

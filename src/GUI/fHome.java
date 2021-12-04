@@ -556,16 +556,16 @@ public class fHome extends javax.swing.JFrame {
     private void jLabelThongBaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelThongBaoMousePressed
         TocDoLoading = 5;
         running = new Thread() {
-            public synchronized void run() {
-                JFrame ThongBao = new fThongBao();
-                try {
-                    wait();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(fHome.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                ThongBao.setVisible(true);
-                jProgressBar1.setValue(0);
-            }
+//            public synchronized void run() {
+//                JFrame ThongBao = new fThongBao();
+//                try {
+//                    wait();
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(fHome.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                ThongBao.setVisible(true);
+//                jProgressBar1.setValue(0);
+//            }
         };
         Thread t = new Thread(loading);
         t.start();
@@ -600,16 +600,16 @@ public class fHome extends javax.swing.JFrame {
     private void jComboBoxDiaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaDiemActionPerformed
         String valueIn = String.valueOf(jComboBoxDiaDiem.getSelectedItem());
         if ("- Khu vực -".equals(valueIn)) {
-            JFrame kv = new fKhuVuc(maNV);
-            kv.setVisible(true);
+//            JFrame kv = new fKhuVuc(maNV);
+//            kv.setVisible(true);
         }
     }//GEN-LAST:event_jComboBoxDiaDiemActionPerformed
 
     private void jComboBoxTonKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTonKhoActionPerformed
         String valueIn = String.valueOf(jComboBoxTonKho.getSelectedItem());
         if ("- Kiểm tra tồn kho -".equals(valueIn)) {
-            JFrame tk = new fTonKho(maNV);
-            tk.setVisible(true);
+//            JFrame tk = new fTonKho(maNV);
+//            tk.setVisible(true);
         }
     }//GEN-LAST:event_jComboBoxTonKhoActionPerformed
 
@@ -627,13 +627,13 @@ public class fHome extends javax.swing.JFrame {
         TocDoLoading = 5;
         running = new Thread() {
             public synchronized void run() {
-                JFrame DanhSach = new fDanhSach_NhapHang(maNV);
+//                JFrame DanhSach = new fDanhSach_NhapHang(maNV);
                 try {
                     wait();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(fHome.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                DanhSach.setVisible(true);
+//                DanhSach.setVisible(true);
                 jProgressBar1.setValue(0);
             }
         };
@@ -695,13 +695,13 @@ public class fHome extends javax.swing.JFrame {
         TocDoLoading = 20;
         running = new Thread() {
             public synchronized void run() {
-                JFrame bc = new fBaoCao(maNV);
+//                JFrame bc = new fBaoCao(maNV);
                 try {
                     wait();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(fHome.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                bc.setVisible(true);
+//                bc.setVisible(true);
                 jProgressBar1.setValue(0);
             }
         };
@@ -773,13 +773,13 @@ public class fHome extends javax.swing.JFrame {
         TocDoLoading = 5;
         running = new Thread() {
             public synchronized void run() {
-                JFrame kiemke = new fKiemKe(maNV);
+//                JFrame kiemke = new fKiemKe(maNV);
                 try {
                     wait();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(fHome.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                kiemke.setVisible(true);
+//                kiemke.setVisible(true);
                 jProgressBar1.setValue(0);
             }
         };
@@ -794,13 +794,13 @@ public class fHome extends javax.swing.JFrame {
         TocDoLoading = 5;
         running = new Thread() {
             public synchronized void run() {
-                JFrame XuatKho = new fXuat_Kho(maNV);
+//                JFrame XuatKho = new fXuat_Kho(maNV);
                 try {
                     wait();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(fHome.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                XuatKho.setVisible(true);
+//                XuatKho.setVisible(true);
                 jProgressBar1.setValue(0);
             }
         };

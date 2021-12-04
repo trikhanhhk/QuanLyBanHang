@@ -18,7 +18,7 @@ import java.lang.*;
 
 /**
  *
- * @author nghia
+ * @author HoangAnh
  */
 public class daoSanPham {
 

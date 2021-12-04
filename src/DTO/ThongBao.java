@@ -8,7 +8,7 @@ import java.lang.*;
 
 /**
  *
- * @author nghia
+ * @author HoangAnh
  */
 public class ThongBao {
     public int id_thong_bao;

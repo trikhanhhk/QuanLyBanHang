@@ -14,7 +14,7 @@ import java.lang.*;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class fViewNhaCungCap extends javax.swing.JFrame {
 
@@ -22,7 +22,7 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
      * Creates new form fViewNhaCungCap
      */
     public String maNV;
-    public int maNCC;
+    public String maNCC;
 
     public fViewNhaCungCap() {
         initComponents();
@@ -38,7 +38,7 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
     
     }*/
 
-    public fViewNhaCungCap(String maNV, int maNCC, boolean edit) {
+    public fViewNhaCungCap(String maNV, String maNCC, boolean edit) {
         this.maNV = maNV;
         this.maNCC = maNCC;
         initComponents();
@@ -69,16 +69,16 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
 
     public void ShowNhaCungCap() {
         NhaCungCap ncc = DAO.daoNhaCungCap.getInstance().getNhaCungCap(maNCC);
-        jTextFieldTenNhaCungCap.setText(ncc.getTenNCC());
-        jTextFieldSdt.setText(ncc.getSDT());
-        jTextFieldFax.setText(ncc.getFax());
-        jTextFieldDiaChi.setText(ncc.getDiaChi());
-        jLabelNhapKho.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLanNhapKho(maNCC)));
-        jLabelXuatKho.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLanXuatKho(maNCC)));
-        jLabelTraKho.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLanTraKho(maNCC)));
-        jLabelSoLuongNhap.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLuongNhapKho(maNCC)));
-        jLabelSoLuongXuat.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLuongXuatKho(maNCC)));
-        jLabelSoLuongTra.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLuongTraKho(maNCC)));
+//        jTextFieldTenNhaCungCap.setText(ncc.getTenNCC());
+//        jTextFieldSdt.setText(ncc.getSDT());
+//        jTextFieldFax.setText(ncc.getFax());
+//        jTextFieldDiaChi.setText(ncc.getDiaChi());
+//        jLabelNhapKho.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLanNhapKho(maNCC)));
+//        jLabelXuatKho.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLanXuatKho(maNCC)));
+//        jLabelTraKho.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLanTraKho(maNCC)));
+//        jLabelSoLuongNhap.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLuongNhapKho(maNCC)));
+//        jLabelSoLuongXuat.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLuongXuatKho(maNCC)));
+//        jLabelSoLuongTra.setText(String.valueOf(DAO.daoNhaCungCap.getInstance().GetSoLuongTraKho(maNCC)));
     }
 
     /**
@@ -131,11 +131,10 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Phần mềm quản lý kho");
+        jLabel1.setText("Xem nhà cung cấp");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("siêu thị S.O.S");
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -342,12 +341,12 @@ public class fViewNhaCungCap extends javax.swing.JFrame {
                                 .addComponent(jTextFieldDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextFieldFax, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextFIeldMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFIeldMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))

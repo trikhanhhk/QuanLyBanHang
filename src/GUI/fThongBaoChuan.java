@@ -13,7 +13,7 @@ import java.lang.*;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class fThongBaoChuan extends javax.swing.JFrame {
 

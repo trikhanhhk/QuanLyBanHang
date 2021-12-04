@@ -12,7 +12,7 @@ import java.lang.*;
 
 /**
  *
- * @author nghia
+ * @author HoangAnh
  */
 public class DateTimeNow {
     private static DateTimeNow intance;

@@ -34,7 +34,7 @@ import java.lang.*;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class daoNhaCungCap {
 
@@ -133,7 +133,7 @@ public class daoNhaCungCap {
     }
 
     //Lấy ra 1 nhà cung cấp bằng id
-    public NhaCungCap getNhaCungCap(int maNCC) {
+    public NhaCungCap getNhaCungCap(String maNCC) {
         String query = "SELECT * FROM `nhacungcap` WHERE MaNCC='" + maNCC + "'";
         ArrayList<Object> arr = new ArrayList<>();
         NhaCungCap ncc = null;

@@ -406,7 +406,7 @@ public class fBaoCao extends javax.swing.JFrame {
         );
         jPanelBarChartThangLayout.setVerticalGroup(
             jPanelBarChartThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addGap(0, 355, Short.MAX_VALUE)
         );
 
         jTabbedPane3.addTab("  Tháng  ", jPanelBarChartThang);
@@ -419,7 +419,7 @@ public class fBaoCao extends javax.swing.JFrame {
         );
         jPanelBarChartQuiLayout.setVerticalGroup(
             jPanelBarChartQuiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addGap(0, 355, Short.MAX_VALUE)
         );
 
         jTabbedPane3.addTab("  Qúy  ", jPanelBarChartQui);
@@ -432,7 +432,7 @@ public class fBaoCao extends javax.swing.JFrame {
         );
         jPanelBarChartNamLayout.setVerticalGroup(
             jPanelBarChartNamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addGap(0, 355, Short.MAX_VALUE)
         );
 
         jTabbedPane3.addTab("  Năm  ", jPanelBarChartNam);
@@ -445,7 +445,9 @@ public class fBaoCao extends javax.swing.JFrame {
         );
         jPanelShowSoLuongTheoLoaiBarChartLayout.setVerticalGroup(
             jPanelShowSoLuongTheoLoaiBarChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelShowSoLuongTheoLoaiBarChartLayout.createSequentialGroup()
+                .addGap(0, 51, Short.MAX_VALUE)
+                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Khối lượng lô theo loại", jPanelShowSoLuongTheoLoaiBarChart);
@@ -464,7 +466,7 @@ public class fBaoCao extends javax.swing.JFrame {
         );
         jPanelTonKhoTheoNgayLayout.setVerticalGroup(
             jPanelTonKhoTheoNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Tồn kho theo ngày", jPanelTonKhoTheoNgay);
@@ -477,7 +479,7 @@ public class fBaoCao extends javax.swing.JFrame {
         );
         jPanelTonKhoTheoThangLayout.setVerticalGroup(
             jPanelTonKhoTheoThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Tồn kho theo tháng", jPanelTonKhoTheoThang);
@@ -494,7 +496,9 @@ public class fBaoCao extends javax.swing.JFrame {
             jPanelShowTonKhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 434, Short.MAX_VALUE)
             .addGroup(jPanelShowTonKhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTabbedPane2))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelShowTonKhoLayout.createSequentialGroup()
+                    .addGap(0, 46, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jTabbedPane1.addTab("Tồn kho", jPanelShowTonKho);

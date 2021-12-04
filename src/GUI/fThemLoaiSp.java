@@ -13,7 +13,6 @@ import DTO.LoSanPham;
 import DTO.NhaCungCap;
 import DTO.PhieuNhap;
 import DTO.SanPham;
-import GROUP.infoList_fTraHang_Kho;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -28,7 +27,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Dinh Tien
+ * @author tk0038
  */
 public class fThemLoaiSp extends javax.swing.JFrame {
 

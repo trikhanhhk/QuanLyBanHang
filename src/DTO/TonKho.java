@@ -7,7 +7,7 @@ package DTO;
 import java.lang.*;
 /**
  *
- * @author nghia
+ * @author HoangAnh
  */
 public class TonKho {
     public int id_ton;

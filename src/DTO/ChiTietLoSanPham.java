@@ -7,7 +7,7 @@ package DTO;
 import java.lang.*;
 /**
  *
- * @author nghia
+ * @author HoangAnh
  */
 public class ChiTietLoSanPham {
     public int id_chi_tiet_sp;

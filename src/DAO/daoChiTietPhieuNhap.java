@@ -32,17 +32,19 @@ public class daoChiTietPhieuNhap {
     //Lấy danh sách thông tin trong bảng chi tiết phiếu nhập
     public ArrayList<ChiTietPhieuNhap> getListChiTietPhieuNhap() {
         ArrayList<ChiTietPhieuNhap> result = new ArrayList<>();
-        String query = "SELECT * FROM `chi_tiet_phieu_nhap`";
+        String query = "SELECT * FROM `chitietphieunhap`";
         ArrayList<Object> arr = new ArrayList<>();
         try {
             DataProvider.getIntance().open();
             ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
-                result.add(new ChiTietPhieuNhap(rs.getInt("id_ctpn"),
-                        rs.getInt("so_tien_lo"),
-                        rs.getInt("so_luong_lo"),
-                        rs.getInt("id_nguon_cc"),
-                        rs.getInt("id_phieu_nhap")));
+                String ma = rs.getString(1);
+                    String maSP = rs.getString(2);
+                    Integer soLuong = rs.getInt(3);
+                    Float donGia = rs.getFloat(4);
+
+                    ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(ma, maSP, soLuong, donGia);
+                    result.add(ctpn);
             }
 
             DataProvider.getIntance().close();
@@ -55,7 +57,7 @@ public class daoChiTietPhieuNhap {
 
     //Thêm chi tiết phiếu nhập mới
     public boolean insertChiTietPhieuNhap(int so_tien_lo, int so_luong_lo, int id_nguon_cc, int id_phieu_nhap) {
-        String query = "INSERT INTO `chi_tiet_phieu_nhap`(`so_tien_lo`, `so_luong_lo`, `id_nguon_cc`, `id_phieu_nhap`) VALUES ('" + so_tien_lo + "','" + so_luong_lo + "','" + id_nguon_cc + "','" + id_phieu_nhap + "')";
+        String query = "INSERT INTO `chitietphieunhap`(`MaPN`, `MaSP`, `SoLuong`, `DonGia`) VALUES ('" + so_tien_lo + "','" + so_luong_lo + "','" + id_nguon_cc + "','" + id_phieu_nhap + "')";
         ArrayList<Object> arr = new ArrayList<>();
         DataProvider.getIntance().open();
         int result = DataProvider.getIntance().excuteUpdate(query, arr);
@@ -64,20 +66,22 @@ public class daoChiTietPhieuNhap {
     }
 
     // Lấy một chi tiết phiếu nhập từ id
-    public ChiTietPhieuNhap getChiTietPhieuNhap(int id_pn) {
+    public ChiTietPhieuNhap getChiTietPhieuNhap(String maPn, String maSp) {
         ChiTietPhieuNhap result = null;
-        String query = "SELECT * FROM `chi_tiet_phieu_nhap` WHERE id_phieu_nhap=" + id_pn;
+        String query = "SELECT * FROM `chitietphieunhap` WHERE MaPN='" + maPn + "' AND MaSP='" + maSp + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
             DataProvider.getIntance().open();
             ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
 
-                result = (new ChiTietPhieuNhap(rs.getInt("id_ctpn"),
-                        rs.getInt("so_tien_lo"),
-                        rs.getInt("so_luong_lo"),
-                        rs.getInt("id_nguon_cc"),
-                        rs.getInt("id_phieu_nhap")));
+                 String ma = rs.getString("MaPN");
+                    String maSP = rs.getString("MaSP");
+                    Integer soLuong = rs.getInt("SoLuong");
+                    Float donGia = rs.getFloat("DonGia");
+
+                    ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(ma, maSP, soLuong, donGia);
+                    result = ctpn;
 
             } else {
                 result = null;

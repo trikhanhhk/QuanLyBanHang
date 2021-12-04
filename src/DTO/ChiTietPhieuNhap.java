@@ -4,36 +4,59 @@
  * and open the template in the editor.
  */
 package DTO;
-import java.lang.*;
+
 /**
  *
- * @author admin
+ * @author Admin
  */
 public class ChiTietPhieuNhap {
-    public int id_ctpn;
-    public int so_tien_lo;
-    public int so_luong_lo;
-    public int id_nguon_cc;
-    public int id_phieu_nhap;
+
+    String ma;
+    String maSP;
+    Integer soLuong;
+    Float donGia;
 
     public ChiTietPhieuNhap() {
+
     }
 
-    public ChiTietPhieuNhap(int id_ctpn, int so_tien_lo, int so_luong_lo, int id_nguon_cc, int id_phieu_nhap) {
-        this.id_ctpn = id_ctpn;
-        this.so_tien_lo = so_tien_lo;
-        this.so_luong_lo = so_luong_lo;
-        this.id_nguon_cc = id_nguon_cc;
-        this.id_phieu_nhap = id_phieu_nhap;
+    public ChiTietPhieuNhap(String ma, String maSP, Integer soLuong, Float donGia) {
+        this.ma = ma;
+        this.maSP = maSP;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
     }
 
-    public Object getSoLuong() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getMa() {
+        return ma;
     }
 
-    public float getDonGia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getMaSP() {
+        return maSP;
     }
-    
-    
+
+    public Integer getSoLuong() {
+        return soLuong;
+    }
+
+    public Float getDonGia() {
+        return donGia;
+    }
+
+    public void setMa(String ma) {
+        this.ma = ma;
+    }
+
+    public void setMaSP(String maSP) {
+        this.maSP = maSP;
+    }
+
+    public void setSoLuong(Integer soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public void setDonGia(Float donGia) {
+        this.donGia = donGia;
+    }
+
 }

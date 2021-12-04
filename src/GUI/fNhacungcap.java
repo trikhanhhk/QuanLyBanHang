@@ -33,7 +33,7 @@ import java.lang.*;
 
 /**
  *
- * @author Xoan Tran
+ * @author HoaTran
  */
 public class fNhacungcap extends javax.swing.JFrame {
 
@@ -518,8 +518,8 @@ public class fNhacungcap extends javax.swing.JFrame {
             evt.consume();
             int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
             int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewNhaCungCap(maNV, id,false);
-            Xem.setVisible(true);
+//            JFrame Xem = new fViewNhaCungCap(maNV, id,false);
+//            Xem.setVisible(true);
             //System.out.print("Nhap dup chuot");
         }
         jButtonSua.setEnabled(true);
@@ -531,9 +531,9 @@ public class fNhacungcap extends javax.swing.JFrame {
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed
         String valueIn = String.valueOf(jComboBoxNhanVien.getSelectedItem());
         if ("Thoát".equals(valueIn)) {
-            JFrame dn = new fDangNhap();
-            dn.setVisible(true);
-            dispose();
+//            JFrame dn = new fDangNhap();
+//            dn.setVisible(true);
+//            dispose();
         }
         if ("Thông tin".equals(valueIn)) {
             JFrame nv = new fViewNhanVien(maNV, maNV);
@@ -676,16 +676,12 @@ public class fNhacungcap extends javax.swing.JFrame {
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
         int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
             int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-            JFrame Xem = new fViewNhaCungCap(maNV, id,true);
-            Xem.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
          int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
             int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-        JFrame ThongBao = new fThongBaoHuy("NhaCungCap",id,maNV);
-        ThongBao.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonHuyActionPerformed
     //

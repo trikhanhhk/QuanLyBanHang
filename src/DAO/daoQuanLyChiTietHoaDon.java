@@ -55,7 +55,29 @@ public class daoQuanLyChiTietHoaDon {
         return result;
     }
     
-    public ArrayList<ChiTietHoaDon> getAllChiTiet(String mahd) {
+    public ChiTietHoaDon getChiTiet(String mahd, String masp) {
+        ChiTietHoaDon result = null;
+        String query = "select *from chitiethoadon where MaHD= '" + mahd + "' AND MaSP='" + masp + "'";
+        ArrayList<Object> arr = new ArrayList<>();
+        try {
+            DataProvider.getIntance().open();
+            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            if(rs!=null && rs.next()) {
+                //String mahd, String masp, int soluong, float dongia
+                result = new ChiTietHoaDon(rs.getString("MaHD"),
+                        rs.getString("MaSP"),
+                        rs.getInt("SoLuong"),
+                        rs.getFloat("DonGia"));
+            }
+
+            DataProvider.getIntance().close();
+        } catch (SQLException ex) {
+            DataProvider.getIntance().displayError(ex);
+        }
+        return result;
+    }
+    
+     public ArrayList<ChiTietHoaDon> getAllChiTiet(String mahd) {
         ArrayList<ChiTietHoaDon> result = new ArrayList<>();
         String query = "select *from chitiethoadon where MaHD= '" + mahd + "'";
         ArrayList<Object> arr = new ArrayList<>();
