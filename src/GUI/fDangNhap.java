@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import DAO.daoTonKho;
 import DTO.NhanVien;
 import DTO.TaiKhoan;
 import java.awt.Toolkit;
@@ -50,7 +49,6 @@ public class fDangNhap extends javax.swing.JFrame {
         jCheckBoxHienMatKhau = new javax.swing.JCheckBox();
         jButtonDangNhap = new javax.swing.JButton();
         jButtonThoat = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -72,12 +70,12 @@ public class fDangNhap extends javax.swing.JFrame {
             }
         });
 
-        jDesktopPane2.setBackground(new java.awt.Color(0, 102, 102));
+        jDesktopPane2.setBackground(new java.awt.Color(51, 51, 51));
         jDesktopPane2.setForeground(new java.awt.Color(0, 102, 102));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/fDangNhap.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tên đăng nhập:");
 
@@ -89,7 +87,7 @@ public class fDangNhap extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Mật khẩu:");
 
@@ -101,6 +99,7 @@ public class fDangNhap extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxHienMatKhau.setBackground(new java.awt.Color(51, 51, 51));
         jCheckBoxHienMatKhau.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBoxHienMatKhau.setText("Hiện mật khẩu");
         jCheckBoxHienMatKhau.addActionListener(new java.awt.event.ActionListener() {
@@ -143,11 +142,14 @@ public class fDangNhap extends javax.swing.JFrame {
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane2Layout.createSequentialGroup()
                                 .addComponent(jCheckBoxHienMatKhau)
@@ -183,38 +185,28 @@ public class fDangNhap extends javax.swing.JFrame {
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jPasswordFieldMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBoxHienMatKhau)
-                .addGap(34, 34, 34)
+                .addGap(45, 45, 45)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jDesktopPane2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3});
 
         jDesktopPane2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonDangNhap, jButtonThoat});
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Logo.png"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(jLabel4)
-                .addContainerGap(63, Short.MAX_VALUE))
+            .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPane2)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -259,15 +251,8 @@ public class fDangNhap extends javax.swing.JFrame {
         String matkhau=jPasswordFieldMatKhau.getText();
         if(DAO.daoTaiKhoan.getInstance().KiemTraDangNhap(taikhoan, matkhau))
         {
-            //JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
-            // cập nhật tồn kho 
-             //daoTonKho.getInstance().CapNhatTonKho();
-             //System.out.println("GUI.fDangNhap.DangNhap()");
-            // lấy id_nv
             TaiKhoan tk = DAO.daoTaiKhoan.getInstance().getTaiKhoan(taikhoan, matkhau);
             NhanVien nv = DAO.daoTaiKhoan.getInstance().getNhanVien(tk.getMaNV());
-           
-            DAO.daoThongBao.getInstance().insertThongBao("[Đăng nhập] Nhân viên "+nv.getMaNV()+" đăng nhập vào "+ DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now,1);
             JFrame TrangChu = new fHome(tk.getMaNV());
             TrangChu.setVisible(true);
             this.setVisible(false);
@@ -343,7 +328,6 @@ public class fDangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordFieldMatKhau;
     private javax.swing.JTextField jTextFieldTenDangNhap;
     // End of variables declaration//GEN-END:variables

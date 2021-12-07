@@ -5,8 +5,6 @@
  */
 package GUI;
 
-import DAO.daoKhuVuc;
-import DTO.KhuVuc;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.lang.*;
@@ -173,7 +171,6 @@ public class fCreateLoaiSanPham extends javax.swing.JFrame {
     String ten = jTextFieldTenLoaiSanPham.getText();
     String dvt = jTextFieldDVT.getText();
     String khuvuc = String.valueOf(jComboBoxKhuVuc.getSelectedItem());
-    DAO.daoLoaiSanPham.getInstance().ThemLoaiSanPham(ten, dvt, khuvuc, this.id_nv);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLuuActionPerformed
 
@@ -219,16 +216,7 @@ public class fCreateLoaiSanPham extends javax.swing.JFrame {
     }
     public void build()
     {
-        showComboboxKhuVuc();
-    }
-    public void showComboboxKhuVuc()
-    {
-         jComboBoxKhuVuc.removeAllItems();
-        jComboBoxKhuVuc.addItem("Chọn khu vực");
-        ArrayList<KhuVuc> arr = daoKhuVuc.getInstance().getListKhuVuc();
-        for(int i=0;i< arr.size();i++){
-            jComboBoxKhuVuc.addItem(arr.get(i).ten_khu_vuc);
-        }
+       
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonHuy;

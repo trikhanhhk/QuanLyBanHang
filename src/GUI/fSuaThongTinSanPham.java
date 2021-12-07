@@ -48,7 +48,7 @@ public class fSuaThongTinSanPham extends javax.swing.JFrame {
         jComboBoxLoaiSanPham.removeAllItems();
         ArrayList<LoaiSanPham> arr = daoLoaiSanPham.getInstance().getListLoaiSanPham();
         for(int i=0;i< arr.size();i++){
-            jComboBoxLoaiSanPham.addItem(arr.get(i).ten_loai_sp);
+            jComboBoxLoaiSanPham.addItem(arr.get(i).getTenLSP());
         }
     }
     

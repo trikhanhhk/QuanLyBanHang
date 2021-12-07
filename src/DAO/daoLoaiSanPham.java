@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package DAO;
-
-import DTO.KhuVuc;
 import DTO.LoaiSanPham;
 import java.sql.ResultSet;
 import java.sql.SQLException;

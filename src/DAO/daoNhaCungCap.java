@@ -6,10 +6,8 @@
 package DAO;
 
 import DTO.ChiTietPhieuNhap;
-import DTO.KhuVuc;
 import DTO.NhaCungCap;
 import DTO.NhanVien;
-import DTO.XuatKho;
 import GUI.fNhacungcap;
 import java.io.File;
 import java.io.FileInputStream;

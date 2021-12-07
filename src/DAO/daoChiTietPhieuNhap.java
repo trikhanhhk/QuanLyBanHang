@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.lang.*;
+import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -56,14 +59,40 @@ public class daoChiTietPhieuNhap {
     }
 
     //Thêm chi tiết phiếu nhập mới
-    public boolean insertChiTietPhieuNhap(int so_tien_lo, int so_luong_lo, int id_nguon_cc, int id_phieu_nhap) {
-        String query = "INSERT INTO `chitietphieunhap`(`MaPN`, `MaSP`, `SoLuong`, `DonGia`) VALUES ('" + so_tien_lo + "','" + so_luong_lo + "','" + id_nguon_cc + "','" + id_phieu_nhap + "')";
-        ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        int result = DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
-        return result > 0;
+        public int insertChiTietPhieuNhap(String MaPN, String MaSP, int SoLuong, float DonGia) {
+        int a = -100;
+        try {
+            DAO.DataProvider.getIntance().open();
+            PreparedStatement ps = DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO `chitietphieunhap` (`MaPN`, `MaSP`, `SoLuong`, `DonGia`) VALUES (?,?,?,?)");
+            ps.setString(1, MaPN);
+            ps.setString(2, MaSP);
+            ps.setInt(3, SoLuong);
+            ps.setFloat(4, DonGia);
+            a = ps.executeUpdate();
+            System.out.println("Result " + a);
+            DAO.DataProvider.getIntance().close();
+            //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getQuanLyChiTietHoaDon(maNV).getTenNV() + " đã thêm loại sản phẩm mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
+        } catch (Exception e) {
+               System.err.println(e);
+        }
+        return a;
     }
+    
+    public void updateQuanLyChiTietHoaDon(String MaPN, String MaSP, int SoLuong, float DonGia) {
+        try {
+            String query = "UPDATE chitietphieunhap set SoLuong= ?, DonGia= ? WHERE MaPN= ? AND MaSP= ?";
+            PreparedStatement ps = DAO.DataProvider.getIntance().getconn().prepareStatement(query);
+            ps.setInt(1, SoLuong);
+            ps.setFloat(2, DonGia);
+            ps.setString(3, MaPN);
+            ps.setString(4, MaSP);
+            ps.executeUpdate();
+            DAO.DataProvider.getIntance().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(daoQuanLyChiTietHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 
     // Lấy một chi tiết phiếu nhập từ id
     public ChiTietPhieuNhap getChiTietPhieuNhap(String maPn, String maSp) {
