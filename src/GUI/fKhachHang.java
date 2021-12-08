@@ -614,7 +614,7 @@ public class fKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
-int selectedRowIndex = jTableKhachHang.getSelectedRow();
+        int selectedRowIndex = jTableKhachHang.getSelectedRow();
         String maKH = jTableKhachHang.getValueAt(selectedRowIndex, 1).toString();
         KhachHang KHSua = DAO.daoKhachHang.getInstance().getKhachHangByID(maKH);
         JFrame fSuaKH = new fSuaKhachHang(KHSua);

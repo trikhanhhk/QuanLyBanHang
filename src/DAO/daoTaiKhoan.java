@@ -122,6 +122,22 @@ public class daoTaiKhoan {
 
         return 0;
     }
+    
+        public void update(String username, String pass, String maNV, String maQuyen) {
+        String query = "Update taikhoan Set MatKhau='" + pass + "',MaNV='" + maNV
+                + "',MaQuyen='" + maQuyen + "' where TenTaiKhoan='" + username + "'";
+        if(this.getTaiKhoan(username, pass)!=null) {
+            JOptionPane.showMessageDialog(null,
+                    "Tài khoản đã tồn tại",
+                    "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ArrayList<Object> arr = new ArrayList<>();
+        DataProvider.getIntance().open();
+        DataProvider.getIntance().excuteQuery(query, arr);
+        JOptionPane.showMessageDialog(null, "Đã sửa tài khoản " + username + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     //Lấy thông tin tài khoản bằng User và Pass
     public TaiKhoan getTaiKhoan(String User, String Pass) {
@@ -199,4 +215,25 @@ public class daoTaiKhoan {
 
         return tk;
     }
+   
+    public void insertTaiKhoan(String username, String matKhau, String manv, String maquyen ) {
+        String query = "INSERT INTO `taikhoan` (`TenTaiKhoan`, `MatKhau`, `MaNV`, `MAQuyen`) VALUES ('" + username + "','" + matKhau + "','" + manv + "','" + maquyen + "')";
+        System.out.println(query);
+        try {
+            if(this.getTaiKhoan(username, matKhau)!=null) {
+            JOptionPane.showMessageDialog(null,
+                    "Tài khoản đã tồn tại",
+                    "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+            DataProvider.getIntance().open();
+            DataProvider.getIntance().excuteQuery(query);
+            DataProvider.getIntance().close();
+            JOptionPane.showMessageDialog(null, "Đã thêm tài khoan " + username + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Thêm loại tài khoản " + username + " Thất bại", "Thông báo", 1);
+        }
+    }
+
 }

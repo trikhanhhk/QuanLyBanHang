@@ -8,7 +8,6 @@ package GUI;
 import BUS.busLoaiSanPham;
 import DTO.ChiTietLoSanPham;
 import DTO.ChiTietPhieuNhap;
-import DTO.Kho;
 import DTO.LoSanPham;
 import DTO.LoaiSanPham;
 import DTO.NhaCungCap;

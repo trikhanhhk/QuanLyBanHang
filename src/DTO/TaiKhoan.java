@@ -50,5 +50,5 @@ public class TaiKhoan {
     public void setMaQuyen(String maQuyen) {
         this.maQuyen = maQuyen;
     }
-
+    
 }

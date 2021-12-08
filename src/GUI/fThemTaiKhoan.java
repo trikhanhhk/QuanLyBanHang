@@ -25,7 +25,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import javax.swing.table.DefaultTableModel;
-public class fThemNhanVien extends javax.swing.JFrame {
+public class fThemTaiKhoan extends javax.swing.JFrame {
     String nameImg;
     String maNV;
     
@@ -33,31 +33,39 @@ public class fThemNhanVien extends javax.swing.JFrame {
      * Creates new form fThemSanPham
      */
 
-    public fThemNhanVien(String id){
+    public fThemTaiKhoan(String id){
         initComponents();
         this.maNV=id;
-        this.txtMaNV.setText(DAO.daoNhanVien.getInstance().getNextID());
         setIcon();
-        showComboboxTrangThai();
-        this.txtMaNV.setEditable(false);
+        showComboboxQuyen();
+        showComboboxNhanVien();
     }
-    public fThemNhanVien() {
+    public fThemTaiKhoan() {
         initComponents();
-        this.txtMaNV.setText(DAO.daoNhanVien.getInstance().getNextID());
+        this.txtTenTk.setText(DAO.daoNhanVien.getInstance().getNextID());
         setIcon();
-        showComboboxTrangThai();
-        this.txtMaNV.setEditable(false);
+        showComboboxQuyen();
+        showComboboxNhanVien();
     }
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }
     
-    public void showComboboxTrangThai() {
-        comboboxTrangThai.removeAllItems();
-        comboboxTrangThai.addItem("Hiện");
-        comboboxTrangThai.addItem("Ẩn");
+    public void showComboboxQuyen() {
+        ArrayList<Quyen> dsq = daoQuyen.getInstance().getListQuyen();
+        comboboxQuyen.removeAllItems();
+        for(Quyen q : dsq) {
+            comboboxQuyen.addItem(q.getMaQuyen() + " " + q.getTenQuyen());
+        }
     }
     
+     public void showComboboxNhanVien() {
+        ArrayList<NhanVien> dsnv = daoNhanVien.getInstance().getListNhanVien();
+        comboboxNv.removeAllItems();
+        for(NhanVien nv : dsnv) {
+            comboboxNv.addItem(nv.getMaNV() + " " + nv.getTenNV());
+        }
+    }
     
     
     @SuppressWarnings("unchecked")
@@ -70,20 +78,16 @@ public class fThemNhanVien extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        txtSDT = new javax.swing.JTextField();
-        comboboxTrangThai = new javax.swing.JComboBox<>();
-        txtTenNV = new javax.swing.JTextField();
+        comboboxQuyen = new javax.swing.JComboBox<>();
+        txtMatKhau = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtMaNV = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtDiachi = new javax.swing.JTextField();
+        txtTenTk = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        dateNgaySinh = new org.jdesktop.swingx.JXDatePicker();
+        jLabel1 = new javax.swing.JLabel();
+        comboboxNv = new javax.swing.JComboBox<>();
 
         jInternalFrame1.setVisible(true);
 
@@ -152,46 +156,29 @@ public class fThemNhanVien extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Ngày sinh:");
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Tên nhân viên:");
+        jLabel2.setText("Mật khẩu");
 
-        comboboxTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboboxQuyen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        txtTenNV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMatKhau.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Mã nhân viên:");
+        jLabel10.setText("Tên tài khoản");
 
-        txtMaNV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtMaNV.addActionListener(new java.awt.event.ActionListener() {
+        txtTenTk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTenTk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaNVActionPerformed(evt);
+                txtTenTkActionPerformed(evt);
             }
         });
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("SDT:");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Địa chỉ:");
-
-        txtDiachi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Trạng thái:");
+        jLabel12.setText("Quyền");
 
-        dateNgaySinh.setFormats(new String[]{"yyyy-MM-dd"});
-        Date date = new Date();
-        dateNgaySinh.setDate(date);
-        dateNgaySinh.setBackground(new java.awt.Color(255, 255, 255));
-        dateNgaySinh.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                dateNgaySinhPropertyChange(evt);
-            }
-        });
+        jLabel1.setText("Mã nhân viên");
+
+        comboboxNv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -201,63 +188,48 @@ public class fThemNhanVien extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel12))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDiachi, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboboxTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                            .addComponent(txtTenTk)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(comboboxQuyen, javax.swing.GroupLayout.Alignment.LEADING, 0, 172, Short.MAX_VALUE)
+                                .addComponent(comboboxNv, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTenTk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(dateNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtDiachi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboboxTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(comboboxNv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboboxQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -299,28 +271,12 @@ public class fThemNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonHuyMouseClicked
 
     private void jButtonThemNVmoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonThemNVmoiMouseClicked
-        String MaNV = txtMaNV.getText();
-        String tenNV = txtTenNV.getText();
-        DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String ngaySinh = oDateFormat.format(dateNgaySinh.getDate()).toString();
-        System.out.println(ngaySinh);
-        String diaChi = txtDiachi.getText();
-        String sdt = txtSDT.getText();
-        String nameTrangThai = comboboxTrangThai.getSelectedItem().toString();
-        int TrangThai = 0;
-        if(nameTrangThai.equals("Hiện")) {
-            TrangThai=0;
-        }else {
-            TrangThai=1;
-        }
-       
-//       String MaNV, String TenNV, String NgaySinh, String DiaChi, String SDT, int trangThai
-        daoNhanVien.getInstance().insertNhanVien(MaNV, tenNV, ngaySinh, diaChi, sdt, TrangThai);
+        String tenTk = txtTenTk.getText();
+        String matKhau = txtMatKhau.getText();
+        String maNv = comboboxNv.getSelectedItem().toString().split(" ")[0];
+        String quyen = comboboxQuyen.getSelectedItem().toString().split(" ")[0];
+        daoTaiKhoan.getInstance().insertTaiKhoan(tenTk, matKhau, maNv,  quyen);
     }//GEN-LAST:event_jButtonThemNVmoiMouseClicked
-
-    private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaNVActionPerformed
 
     private void jButtonThemNVmoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemNVmoiActionPerformed
         // TODO add your handling code here:
@@ -330,10 +286,9 @@ public class fThemNhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonHuyActionPerformed
 
-    private void dateNgaySinhPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateNgaySinhPropertyChange
-
+    private void txtTenTkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenTkActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dateNgaySinhPropertyChange
+    }//GEN-LAST:event_txtTenTkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,45 +307,43 @@ public class fThemNhanVien extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fThemTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fThemTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fThemTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fThemTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fThemNhanVien("NV12").setVisible(true);
+                new fThemTaiKhoan("NV12").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboboxTrangThai;
-    private org.jdesktop.swingx.JXDatePicker dateNgaySinh;
+    private javax.swing.JComboBox<String> comboboxNv;
+    private javax.swing.JComboBox<String> comboboxQuyen;
     private javax.swing.JButton jButtonHuy;
     private javax.swing.JButton jButtonThemNVmoi;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField txtDiachi;
-    private javax.swing.JTextField txtMaNV;
-    private javax.swing.JTextField txtSDT;
-    private javax.swing.JTextField txtTenNV;
+    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JTextField txtTenTk;
     // End of variables declaration//GEN-END:variables
 }
