@@ -111,4 +111,32 @@ public class daoPhieuNhap {
         }
         return true;
     }
+    
+          //Lấy danh sách 20 nhân viên, để làm phân trang
+
+    public ArrayList<PhieuNhap> get20PhieuNhap(ArrayList<PhieuNhap> arr, long Trang) {
+        ArrayList<PhieuNhap> result = new ArrayList<>();
+        for (long i = (Trang * 20 - 20); i < (Trang * 20); i++) {
+            if (i == arr.size()) {
+                break;
+            }
+            result.add(arr.get((int) i));
+        }
+        return result;
+    }
+    
+    public ArrayList<PhieuNhap> FindListPhieuNhap(ArrayList<PhieuNhap> DuLieuMau, String ValToSearch) {
+        ArrayList<PhieuNhap> result = new ArrayList<>();
+        for (int i = 0; i < DuLieuMau.size(); i++) {
+            if (daoNhaCungCap.getInstance().getNhaCungCap(DuLieuMau.get(i).getMaNCC()).getTenNCC().contains(ValToSearch)
+                    || String.valueOf(DuLieuMau.get(i).getGioNhap()).contains(ValToSearch)
+                    || String.valueOf(DuLieuMau.get(i).getNgayNhap()).contains(ValToSearch)
+                    || String.valueOf(DuLieuMau.get(i).getTongTien()).contains(ValToSearch)
+                    || daoNhanVien.getInstance().getNameNVByID(DuLieuMau.get(i).getMaNV()).contains(ValToSearch)
+                    || DuLieuMau.get(i).getMaPN().contains(ValToSearch)) {
+                result.add(DuLieuMau.get(i));
+            }
+        }
+        return result;
+    }
 }

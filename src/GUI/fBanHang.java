@@ -214,7 +214,7 @@ public class fBanHang extends javax.swing.JFrame {
         setBackground(new java.awt.Color(204, 204, 204));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -766,6 +766,7 @@ public class fBanHang extends javax.swing.JFrame {
 //        System.out.println(soluongMua);
         String masp = jLabelLoadIDSanPham.getText();
         addChiTiet(masp, soluongMua);
+        txtMaHĐ.setText(daoQuanLyHoaDon.getInstance().getNextID());
         refreshAll();
     }//GEN-LAST:event_jButtonThemActionPerformed
 

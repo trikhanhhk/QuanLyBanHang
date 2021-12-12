@@ -24,7 +24,7 @@ import java.lang.*;
  */
 public class DataProvider {
 
-    private static String url = "jdbc:mysql://localhost:3306/quanlysieuthidienthoai?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false";
+    private static String url = "jdbc:mysql://localhost:3306/qlbanhang?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false";
     private static String user = "root";
     private static String pass = "";
     
@@ -61,7 +61,7 @@ public class DataProvider {
             DriverManager.registerDriver(driver);// dang ky driver 
 
             conn = DriverManager.getConnection(url, user, pass);//tao ket noi den co so du lieu 
-        } catch (SQLException ex) {// xu ly ngoai le 
+        } catch (SQLException ex) {
             displayError(ex);
         }
     }

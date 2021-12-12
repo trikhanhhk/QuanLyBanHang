@@ -175,7 +175,7 @@ public class daoQuanLyHoaDon {
     }
     
     public String getNextID() {
-        return "HD" + String.valueOf(this.listHD.size() + 1);
+        return "HD" + String.valueOf(getListHoaDon().size() + 1);
     }
 
     //Thêm hóa đơn mới
