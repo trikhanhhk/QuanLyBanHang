@@ -12,8 +12,7 @@ import model.DTO.NhaCungCap;
 import model.DAO.daoNhaCungCap;
 import model.DAO.daoPhieuNhap;
 import model.DAO.daoNhanVien;
-import model.BUS.WritePDF;
-import model.BUS.busQuanLyPhieuNhap;
+import model.DAO.WritePDF;
 import Format.PriceFormatter;
 import java.awt.Color;
 import java.awt.Image;
@@ -317,14 +316,15 @@ public class fPhieuNhap extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonTimKiem)
-                    .addComponent(jButtonLamMoi)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonPDF)
                         .addComponent(jButtonExcel)
-                        .addComponent(btnXemChiTiet)))
+                        .addComponent(btnXemChiTiet))
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonTimKiem)
+                        .addComponent(jButtonLamMoi)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelKetQua)
                 .addGap(19, 19, 19)

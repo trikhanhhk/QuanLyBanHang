@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.lang.*;
+import model.DAO.daoLoaiSanPham;
 
 /**
  *
@@ -38,7 +39,7 @@ public class fLoaiSanPham extends javax.swing.JFrame {
     }
     public fLoaiSanPham(String maNV) {
         this.maNV=maNV;
-        DanhSachLoaiSanPham = model.BUS.busLoaiSanPham.getInstance().getListLoaiSanPham();
+        DanhSachLoaiSanPham = daoLoaiSanPham.getInstance().getListLoaiSanPham();
         DuLieuMau = DanhSachLoaiSanPham;
         initComponents();
         setIcon();
@@ -61,7 +62,7 @@ public class fLoaiSanPham extends javax.swing.JFrame {
         }
         jLabelSoTrang.setText("1/" + SoTrang);
         jLabelTrang.setText("1");
-        ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
+        ArrayList<LoaiSanPham> table = daoLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
         ShowListLoaiSanPham(table);
         NhanVienDangNhap();
     }
@@ -436,7 +437,7 @@ public class fLoaiSanPham extends javax.swing.JFrame {
         invalidate();
         validate();
         repaint();
-        DuLieuMau=model.BUS.busLoaiSanPham.getInstance().getListLoaiSanPham();
+        DuLieuMau=daoLoaiSanPham.getInstance().getListLoaiSanPham();
        //build();
         DanhSachLoaiSanPham = DuLieuMau;
         this.count = this.DanhSachLoaiSanPham.size();
@@ -448,12 +449,12 @@ public class fLoaiSanPham extends javax.swing.JFrame {
         }
         jLabelSoTrang.setText("1/" + SoTrang);
         jLabelTrang.setText("1");
-        ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
+        ArrayList<LoaiSanPham> table = daoLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
         ShowListLoaiSanPham(table);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTaiLaiActionPerformed
         public void FindList() {
-        this.DanhSachLoaiSanPham = model.BUS.busLoaiSanPham.getInstance().FindListLoaiSanPham(DuLieuMau, jTextFieldTimKiem.getText());
+        this.DanhSachLoaiSanPham = daoLoaiSanPham.getInstance().FindListLoaiSanPham(DuLieuMau, jTextFieldTimKiem.getText());
         if (DanhSachLoaiSanPham.isEmpty()) {
             JOptionPane.showMessageDialog(null,
             "Không có dữ liệu phiếu trả",
@@ -470,7 +471,7 @@ public class fLoaiSanPham extends javax.swing.JFrame {
             }
             jLabelSoTrang.setText("1/" + SoTrang);
             jLabelTrang.setText("1");
-            ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
+            ArrayList<LoaiSanPham> table = daoLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
             ShowListLoaiSanPham(table);
         }
     }
@@ -500,7 +501,7 @@ public class fLoaiSanPham extends javax.swing.JFrame {
 
     private void jButtonNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoMaxActionPerformed
         Trang = 1;
-        ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
+        ArrayList<LoaiSanPham> table = daoLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
         ShowListLoaiSanPham(table);
         jLabelTrang.setText("1");
         jLabelSoTrang.setText("1/" + SoTrang);
@@ -509,7 +510,7 @@ public class fLoaiSanPham extends javax.swing.JFrame {
     private void jButtonNhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoActionPerformed
         if (Trang > 1) {
             Trang--;
-ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
+ArrayList<LoaiSanPham> table = daoLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
         ShowListLoaiSanPham(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
@@ -519,7 +520,7 @@ ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiS
     private void jButtonLonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonActionPerformed
         if (Trang < SoTrang) {
             Trang++;
-            ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
+            ArrayList<LoaiSanPham> table = daoLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
         ShowListLoaiSanPham(table);
             jLabelTrang.setText("" + Trang);
             jLabelSoTrang.setText(Trang + "/" + SoTrang);
@@ -528,21 +529,21 @@ ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiS
 
     private void jButtonLonMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonMaxActionPerformed
         Trang = SoTrang;
-        ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
+        ArrayList<LoaiSanPham> table = daoLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, Trang);
         ShowListLoaiSanPham(table);
         jLabelTrang.setText("" + SoTrang);
         jLabelSoTrang.setText(SoTrang + "/" + SoTrang);
     }//GEN-LAST:event_jButtonLonMaxActionPerformed
 
     private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
-        DanhSachLoaiSanPham = model.BUS.busLoaiSanPham.getInstance().getListLoaiSanPham();
+        DanhSachLoaiSanPham = daoLoaiSanPham.getInstance().getListLoaiSanPham();
         FindList();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jTextFieldTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            DanhSachLoaiSanPham = model.BUS.busLoaiSanPham.getInstance().getListLoaiSanPham();
+            DanhSachLoaiSanPham = daoLoaiSanPham.getInstance().getListLoaiSanPham();
             FindList();
         }
         // TODO add your handling code here:
@@ -552,7 +553,7 @@ ArrayList<LoaiSanPham> table = model.BUS.busLoaiSanPham.getInstance().get20LoaiS
         // TODO add your handling code here:
         int selectedRowIndex = jTableLoaiSanPham.getSelectedRow();
         String maLoaiSP = jTableLoaiSanPham.getValueAt(selectedRowIndex, 1).toString();
-        model.BUS.busLoaiSanPham.getInstance().DeleteLoaiSanPham(maLoaiSP);
+        daoLoaiSanPham.getInstance().DeleteLoaiSanPham(maLoaiSP);
     }//GEN-LAST:event_jButtonXoaActionPerformed
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed

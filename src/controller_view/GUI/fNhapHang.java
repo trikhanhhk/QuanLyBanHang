@@ -15,7 +15,7 @@ import model.DAO.daoLoaiSanPham;
 import model.DAO.daoChiTietPhieuNhap;
 import model.DAO.daoPhieuNhap;
 import model.DAO.daoNhanVien;
-import model.BUS.WritePDF;
+import model.DAO.WritePDF;
 import Format.PriceFormatter;
 import java.awt.Image;
 import java.awt.Toolkit;

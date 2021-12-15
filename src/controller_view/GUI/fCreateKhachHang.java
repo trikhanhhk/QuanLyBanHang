@@ -8,7 +8,7 @@ package controller_view.GUI;
 import model.DAO.daoKhachHang;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import model.BUS.WritePDF;
+import model.DAO.WritePDF;
 
 /**
  *

@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 public class daoChiTietPhieuNhap {
 
     private static daoChiTietPhieuNhap instance;
+    private ArrayList<ChiTietPhieuNhap> dsctpn;
 
     public static daoChiTietPhieuNhap getInstance() {
         if (instance == null) {
@@ -119,6 +120,58 @@ public class daoChiTietPhieuNhap {
         } catch (SQLException ex) {
             DataProvider.getIntance().displayError(ex);
         }
+        return result;
+    }
+    
+    public ArrayList<ChiTietPhieuNhap> getAllChiTiet(String mapn) {
+        ArrayList<ChiTietPhieuNhap> result = new ArrayList<>();
+        dsctpn = daoChiTietPhieuNhap.getInstance().getListChiTietPhieuNhap();
+        for (ChiTietPhieuNhap ctpn : dsctpn) {
+            if (ctpn.getMa().equals(mapn)) {
+                result.add(ctpn);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<ChiTietPhieuNhap> search(String type, String value) {
+        dsctpn = daoChiTietPhieuNhap.getInstance().getListChiTietPhieuNhap();
+        ArrayList<ChiTietPhieuNhap> result = new ArrayList<>();
+        dsctpn.forEach((ctpn) -> {
+            if (type.equals("Tất cả")) {
+                if (ctpn.getMa().toLowerCase().contains(value.toLowerCase())
+                        || ctpn.getMaSP().toLowerCase().contains(value.toLowerCase())
+                        || String.valueOf(ctpn.getDonGia()).toLowerCase().contains(value.toLowerCase())
+                        || String.valueOf(ctpn.getSoLuong()).toLowerCase().contains(value.toLowerCase())) {
+                    result.add(ctpn);
+                }
+            } else {
+                switch (type) {
+                    case "Mã phiếu nhập":
+                        if (ctpn.getMa().toLowerCase().contains(value.toLowerCase())) {
+                            result.add(ctpn);
+                        }
+                        break;
+                    case "Mã sản phẩm":
+                        if (ctpn.getMaSP().toLowerCase().contains(value.toLowerCase())) {
+                            result.add(ctpn);
+                        }
+                        break;
+                    case "Đơn giá":
+                        if (String.valueOf(ctpn.getDonGia()).toLowerCase().contains(value.toLowerCase())) {
+                            result.add(ctpn);
+                        }
+                        break;
+                    case "Số lượng":
+                        if (String.valueOf(ctpn.getSoLuong()).toLowerCase().contains(value.toLowerCase())) {
+                            result.add(ctpn);
+                        }
+                        break;
+                }
+            }
+
+        });
+
         return result;
     }
 }

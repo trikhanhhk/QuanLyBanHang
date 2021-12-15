@@ -17,7 +17,7 @@ import model.DAO.daoKhuyenMai;
 import model.DAO.daoQuanLyChiTietHoaDon;
 import model.DAO.daoQuanLyHoaDon;
 import model.DAO.daoNhanVien;
-import model.BUS.WritePDF;
+import model.DAO.WritePDF;
 import Format.PriceFormatter;
 import java.awt.Image;
 import java.awt.Toolkit;

@@ -144,14 +144,16 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextFieldTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButtonTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButtonLamMoi" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="jButtonPDF" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnXemChiTiet" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jTextFieldTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonLamMoi" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>

@@ -5,7 +5,6 @@
  */
 package controller_view.GUI;
 
-import model.BUS.busLoaiSanPham;
 import model.DTO.ChiTietLoSanPham;
 import model.DTO.ChiTietPhieuNhap;
 import model.DTO.LoSanPham;
@@ -23,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import model.DAO.daoLoaiSanPham;
 
 /**
  *
@@ -196,7 +196,7 @@ public class fThemLoaiSp extends javax.swing.JFrame {
             String malsp = txMalsp.getText();
             String tenlsp = txTenlsp.getText();
             String mota = txMota.getText();
-            busLoaiSanPham.getInstance().ThemLoaiSanPham(tenlsp, malsp, mota, maNV);
+             daoLoaiSanPham.getInstance().ThemLoaiSanPham(tenlsp, malsp, mota, maNV);
 //            if () {
 //                JOptionPane.showMessageDialog(this, "Thêm " + tenlsp + " thành công!");
 //            }

@@ -13,7 +13,7 @@ import model.DAO.daoSanPham;
 import model.DAO.daoKhachHang;
 import model.DAO.daoQuanLyChiTietHoaDon;
 import model.DAO.daoQuanLyHoaDon;
-import model.BUS.WritePDF;
+import model.DAO.WritePDF;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;

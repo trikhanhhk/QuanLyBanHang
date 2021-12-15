@@ -63,7 +63,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jComboBoxNhanVien" min="-2" pref="163" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jPanel2" alignment="0" pref="976" max="32767" attributes="0"/>
+                      <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -82,7 +82,7 @@
                       <Component id="jComboBoxNhanVien" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jPanel2" pref="440" max="32767" attributes="0"/>
+                  <Component id="jPanel2" pref="439" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>

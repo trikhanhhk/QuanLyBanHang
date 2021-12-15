@@ -7,8 +7,7 @@ package controller_view.GUI;
 
 import model.DTO.HoaDon;
 import model.DAO.daoQuanLyHoaDon;
-import model.BUS.WritePDF;
-import model.BUS.busQuanLyHoaDon;
+import model.DAO.WritePDF;
 import Format.PriceFormatter;
 import java.awt.Color;
 import java.awt.Image;
@@ -525,7 +524,7 @@ public class fHoaDon extends javax.swing.JFrame {
 
     private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
         try {
-            boolean result = busQuanLyHoaDon.getInstance().XuatExcel(DuLieuMau);
+            boolean result = daoQuanLyHoaDon.getInstance().XuatExcel(DuLieuMau);
             if(result) {
                 JOptionPane.showMessageDialog(this, "File Excel đã được lưu tại C:\\demo");
             }else {

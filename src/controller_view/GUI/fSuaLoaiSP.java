@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package controller_view.GUI;
-
-import model.BUS.busLoaiSanPham;
 import model.DTO.ChiTietLoSanPham;
 import model.DTO.ChiTietPhieuNhap;
 import model.DTO.LoSanPham;
@@ -24,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import model.DAO.daoLoaiSanPham;
 
 /**
  *
@@ -208,7 +207,7 @@ public class fSuaLoaiSP extends javax.swing.JFrame {
             String malsp = txMalsp.getText();
             String tenlsp = txTenlsp.getText();
             String mota = txMota.getText();
-            busLoaiSanPham.getInstance().UpdateLoaiSanPham(tenlsp, malsp, mota);
+            daoLoaiSanPham.getInstance().UpdateLoaiSanPham(tenlsp, malsp, mota);
       
             JOptionPane.showMessageDialog(this, "Sửa" + malsp + " thành công!");
         }

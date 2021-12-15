@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 package controller_view.GUI;
-
-import model.BUS.busChiTietPhieuNhap;
-import model.BUS.busQuanLyHoaDon;
-import model.BUS.busQuanLyPhieuNhap;
 import model.DAO.daoChiTietPhieuNhap;
 import model.DAO.daoKhachHang;
 import model.DAO.daoNhaCungCap;
@@ -55,6 +51,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import model.DAO.daoPhieuNhap;
 
 /**
  *
@@ -1293,7 +1290,7 @@ public class fThongKe extends javax.swing.JFrame {
             ArrayList<SanPham> dssp = new ArrayList<>(); // lưu các sản phẩm
 
             MyCheckDate mcd = new MyCheckDate(ngayBatDau, ngayKetThuc);
-            ArrayList<HoaDon> dshd = busQuanLyHoaDon.getInstance().searchNew("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1);
+            ArrayList<HoaDon> dshd = daoQuanLyHoaDon.getInstance().searchNew("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1);
             for (HoaDon hd : dshd) {
                 float tongTien = 0;
                 ArrayList<ChiTietHoaDon> dscthd = daoQuanLyChiTietHoaDon.getInstance().getAllChiTiet(hd.getMaHoaDon());
@@ -1397,10 +1394,10 @@ public class fThongKe extends javax.swing.JFrame {
             ArrayList<SanPham> dssp = new ArrayList<>(); // lưu các sản phẩm
 
             MyCheckDate mcd = new MyCheckDate(ngayBatDau, ngayKetThuc);
-            ArrayList<PhieuNhap> dspn = busQuanLyPhieuNhap.getInstance().search("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1);
+            ArrayList<PhieuNhap> dspn = daoPhieuNhap.getInstance().search("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1);
             for (PhieuNhap pn : dspn) {
                 float tongTien = 0;
-                ArrayList<ChiTietPhieuNhap> dsctpn = busChiTietPhieuNhap.getInstance().getAllChiTiet(pn.getMaPN());
+                ArrayList<ChiTietPhieuNhap> dsctpn = daoChiTietPhieuNhap.getInstance().getAllChiTiet(pn.getMaPN());
 
                 if (dsctpn.size() > 0) {
                     NhanVien nv = daoNhanVien.getInstance().getNVByID(pn.getMaNV());
@@ -1482,7 +1479,7 @@ public class fThongKe extends javax.swing.JFrame {
                 int tongSoLuong = 0;
                 float tongTienPhieuNhapCuaMoiSanPham = 0;
                 thongKeSpTbl.addRow(new String[]{sp.getMaSP(), sp.getTenSP(), "", "", "", "", String.valueOf(sp.getDonGia()), ""});
-                ArrayList<PhieuNhap> dspn = busQuanLyPhieuNhap.getInstance().search("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1);
+                ArrayList<PhieuNhap> dspn = daoPhieuNhap.getInstance().search("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1);
                 for (PhieuNhap pn : dspn) {
                     ChiTietPhieuNhap ctpn = daoChiTietPhieuNhap.getInstance().getChiTietPhieuNhap(pn.getMaPN(), sp.getMaSP());
 
@@ -1524,7 +1521,7 @@ public class fThongKe extends javax.swing.JFrame {
                 int tongSoLuong = 0;
                 float tongTienHoaDonTungSanPham = 0;
                 thongKeSpTbl.addRow(new String[]{sp.getMaSP(), sp.getTenSP(), "", "", "", "", String.valueOf(sp.getDonGia()), ""});
-                dshd = busQuanLyHoaDon.getInstance().searchNew("", mcd.getNgayTu(), mcd.getNgayTu(), -1, -1);
+                dshd = daoQuanLyHoaDon.getInstance().searchNew("", mcd.getNgayTu(), mcd.getNgayTu(), -1, -1);
                 for (HoaDon hd : dshd) {
                     ChiTietHoaDon cthd = daoQuanLyChiTietHoaDon.getInstance().getChiTiet(hd.getMaHoaDon(), sp.getMaSP());
                     if (cthd != null) {
@@ -1562,7 +1559,7 @@ public class fThongKe extends javax.swing.JFrame {
                 float tongTien = 0;
                 thongKeNvTbl.addRow(new String[]{nv.getMaNV(), nv.getTenNV(), "", ""});
 
-                for (HoaDon hd : busQuanLyHoaDon.getInstance().searchNew("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1)) {
+                for (HoaDon hd : daoQuanLyHoaDon.getInstance().searchNew("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1)) {
                     if (nv.getMaNV().equals(hd.getMaNhanVien())) {
                         thongKeNvTbl.addRow(new String[]{"", "",
                             hd.getMaHoaDon(),
@@ -1594,7 +1591,7 @@ public class fThongKe extends javax.swing.JFrame {
                 float tongTien = 0;
                 thongKekhTbl.addRow(new String[]{kh.getMaKH(), kh.getTenKH(), "", "", ""});
 
-                for (HoaDon hd : busQuanLyHoaDon.getInstance().searchNew("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1)) {
+                for (HoaDon hd : daoQuanLyHoaDon.getInstance().searchNew("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1)) {
                     if (kh.getMaKH().equals(hd.getMaKhachHang())) {
                         thongKekhTbl.addRow(new String[]{"", "",
                             hd.getMaHoaDon(),
@@ -1623,11 +1620,10 @@ public class fThongKe extends javax.swing.JFrame {
             for (NhaCungCap ncc : daoNhaCungCap.getInstance().getListNhaCungCap()) {
                 float tongTien = 0;
                 thongKeNccTbl.addRow(new String[]{ncc.getMaNCC(), ncc.getTenNCC(), "", "", "", "", "", ""});
-                for (PhieuNhap pn : busQuanLyPhieuNhap.getInstance().search("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1)) {
+                for (PhieuNhap pn : daoPhieuNhap.getInstance().search("", mcd.getNgayTu(), mcd.getNgayDen(), -1, -1)) {
                     if (pn.getMaNCC().equals(ncc.getMaNCC())) {
                         thongKeNccTbl.addRow(new String[]{"", "", pn.getMaPN(), String.valueOf(pn.getNgayNhap()), "", "", "", ""});
-
-                        for (ChiTietPhieuNhap ctpn : busChiTietPhieuNhap.getInstance().search("Mã phiếu nhập", pn.getMaPN())) {
+                        for (ChiTietPhieuNhap ctpn : daoChiTietPhieuNhap.getInstance().search("Mã phiếu nhập", pn.getMaPN())) {
                             tongTien += ctpn.getSoLuong() * ctpn.getDonGia();
                             thongKeNccTbl.addRow(new String[]{"", "", "", "",
                                 ctpn.getMaSP(),
