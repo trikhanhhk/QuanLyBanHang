@@ -15,7 +15,7 @@ import java.lang.*;
 
 /**
  *
- * @author Xoan Tran
+ * @author tatho
  */
 public class fDangNhap extends javax.swing.JFrame {
 
