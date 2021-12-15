@@ -20,9 +20,9 @@ import java.lang.*;
 
 /**
  *
- * @author tk0038
+ * @author trikh
  */
-public class DataProvider {
+public class ConnectDB {
 
     private static String url = "jdbc:mysql://localhost:3306/qlbanhang?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false";
     private static String user = "root";
@@ -34,11 +34,11 @@ public class DataProvider {
 //    private static String pass = "quanlykhosieuthi";
 
     private Connection conn = null;
-    private static DataProvider intance;
+    private static ConnectDB intance;
 
-    public static DataProvider getIntance() {
+    public static ConnectDB getIntance() {
         if (intance == null) {
-            intance = new DataProvider();
+            intance = new ConnectDB();
         }
         return intance;
     }

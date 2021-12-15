@@ -33,7 +33,7 @@ import java.lang.*;
 
 /**
  *
- * @author HoaTran
+ * @author tatho
  */
 public class fKhuyenMai extends javax.swing.JFrame {
 

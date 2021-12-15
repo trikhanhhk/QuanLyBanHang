@@ -21,7 +21,7 @@ import java.lang.*;
 
 /**
  *
- * @author tk0038
+ * @author trikh
  */
 public class fCreateNhaCungCap extends javax.swing.JFrame {
 

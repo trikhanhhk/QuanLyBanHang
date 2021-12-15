@@ -41,8 +41,8 @@ public class daoSanPham {
         String query = "select * from sanpham";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
 //                String MaSP, String MaLSP, String TenSP, float DonGia, int SoLuong, String url, int TrangThai
                 result.add(new SanPham(
@@ -56,9 +56,9 @@ public class daoSanPham {
                 ));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -70,8 +70,8 @@ public class daoSanPham {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `sanpham` WHERE CONCAT(`MaSP`, `TenSP`, `MaLSP`) LIKE '%" + ValToSearch + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             SanPham sanpham;
 
             while (rs.next()) {
@@ -100,8 +100,8 @@ public class daoSanPham {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `sanpham` WHERE MaLSP ='%" + MaLSP + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             SanPham sanpham;
 
             while (rs.next()) {
@@ -130,8 +130,8 @@ public class daoSanPham {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `sanpham` WHERE MaSP ='%" + MaSP + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             SanPham sanpham;
 
             while (rs.next()) {
@@ -161,9 +161,9 @@ public class daoSanPham {
     //Thêm sản phẩm mới
     public boolean insertSanPham(String MaSP, String MaLSP, String TenSP, float DonGia, int SoLuong, String HinhAnh, int TrangThai) {
         try {
-            model.DAO.DataProvider.getIntance().open();
+            model.DAO.ConnectDB.getIntance().open();
             //INSERT INTO `sanpham` (`MaSP`, `MaLSP`, `TenSP`, `DonGia`, `SoLuong`, `HinhAnh`, `TrangThai`) VALUES
-            PreparedStatement ps = model.DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO `sanpham`( `MaSP`, `MaLSP`, `TenSP`, `DonGia`, `SoLuong`, `HinhAnh`, `TrangThai`) VALUES (?,?,?,?,?,?,?)");
+            PreparedStatement ps = model.DAO.ConnectDB.getIntance().getconn().prepareStatement("INSERT INTO `sanpham`( `MaSP`, `MaLSP`, `TenSP`, `DonGia`, `SoLuong`, `HinhAnh`, `TrangThai`) VALUES (?,?,?,?,?,?,?)");
             ps.setString(1, MaSP);
             ps.setString(2, MaLSP);
             ps.setString(3, TenSP);
@@ -172,7 +172,7 @@ public class daoSanPham {
             ps.setString(6, HinhAnh);
             ps.setInt(7, TrangThai);
             ps.executeUpdate();
-            model.DAO.DataProvider.getIntance().close();
+            model.DAO.ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null,
                     "Thêm sản phẩm mới thành công.",
                     "Thông báo",
@@ -194,9 +194,9 @@ public class daoSanPham {
         arr.add(hinh_anh);
         arr.add(id_exist);
         arr.add(MaLSP);
-        DataProvider.getIntance().open();
-        int result = DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        int result = ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         return result > 0;
     }
 
@@ -206,8 +206,8 @@ public class daoSanPham {
         String query = "select * from sanpham where MaSP='" + MaSP + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 result = new SanPham(
                         rs.getString("MaSP"),
@@ -219,9 +219,9 @@ public class daoSanPham {
                         rs.getInt("TrangThai")
                 );
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         if (result == null) {
             System.out.print("san pham bi null");

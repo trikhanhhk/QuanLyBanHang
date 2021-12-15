@@ -7,7 +7,7 @@ package model.DTO;
 
 /**
  *
- * @author tk0038
+ * @author trikh
  */
 public class Quyen {
     

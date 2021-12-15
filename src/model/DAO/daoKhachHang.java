@@ -48,8 +48,8 @@ public class daoKhachHang {
         String query = "select *from khachhang";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 //String MaKH, String TenKH, String DiaChi, String SDT, int TrangThai
                 result.add(new KhachHang(rs.getString("MaKH"),
@@ -59,9 +59,9 @@ public class daoKhachHang {
                         rs.getInt("TrangThai")));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -85,9 +85,9 @@ public class daoKhachHang {
         String query = "Update khachhang Set TenKH='" + TenKH + "', DiaChi='" + DiaChi + "', SDT='" + SDT + "' where MaKH='" + MaKH + "'";
         System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null,
                 "Sửa thông tin khách hàng thành công",
                 "Thông báo",
@@ -98,9 +98,9 @@ public class daoKhachHang {
         String query = "INSERT INTO `khachhang`(`MaKH`, `TenKH`, `DiaChi`, `SDT`, `TrangThai`) VALUES ('" + MaKH + "','" + TenKH + "','"  + DiaChi + "','" + SDT + "'," + trangThai + ")";
         System.out.println(query);
         try {
-            DataProvider.getIntance().open();
-            DataProvider.getIntance().excuteQuery(query);
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().open();
+            ConnectDB.getIntance().excuteQuery(query);
+            ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null, "Đã thêm nhân viên " + TenKH + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Thêm loại nhân viên " + TenKH + " Thất bại", "Thông báo", 1);
@@ -113,8 +113,8 @@ public class daoKhachHang {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `khachhang` WHERE CONCAT(`MaKH`, `TenNV`,`NgaySinh`,`DiaChi`,`SDT`) LIKE '%" + ValToSearch + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             KhachHang khachhang;
 
             while (rs.next()) {
@@ -215,8 +215,8 @@ public class daoKhachHang {
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(ID);
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
                 result = new KhachHang(rs.getString("MaKH"),
                         rs.getString("TenKH"),
@@ -226,9 +226,9 @@ public class daoKhachHang {
                 );
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;

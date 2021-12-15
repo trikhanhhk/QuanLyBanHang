@@ -8,7 +8,7 @@ import java.lang.*;
 import java.time.LocalDate;
 /**
  *
- * @author tk0038
+ * @author trikh
  */
 public class NhanVien {
 

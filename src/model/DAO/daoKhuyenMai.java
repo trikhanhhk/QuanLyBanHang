@@ -26,7 +26,7 @@ import org.apache.poi.ss.usermodel.Row;
 
 /**
  *
- * @author trikh
+ * @author tatho
  */
 public class daoKhuyenMai {
     private static daoKhuyenMai instance;
@@ -53,8 +53,8 @@ public class daoKhuyenMai {
         String query = "select *from khuyenmai";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 //String makm, String tenkm, float dkkm, float phantramkm, LocalDate ngaybd, LocalDate ngaykt
                 result.add(new KhuyenMai(rs.getString("MaKM"),
@@ -65,9 +65,9 @@ public class daoKhuyenMai {
                         rs.getDate("NgayKT").toLocalDate()));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -83,8 +83,8 @@ public class daoKhuyenMai {
             return false;
         }
         try {
-            model.DAO.DataProvider.getIntance().open();
-            PreparedStatement ps = model.DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO `khuyenmai`(`MaKM`, `TenKM`, `DieuKienKM`, `PhanTramKM`, `NgayBD`, `NgayKT`) VALUES (?,?,?,?,?,?)");
+            model.DAO.ConnectDB.getIntance().open();
+            PreparedStatement ps = model.DAO.ConnectDB.getIntance().getconn().prepareStatement("INSERT INTO `khuyenmai`(`MaKM`, `TenKM`, `DieuKienKM`, `PhanTramKM`, `NgayBD`, `NgayKT`) VALUES (?,?,?,?,?,?)");
             ps.setString(1, makm);
             ps.setString(2, tenkm);
             ps.setFloat(3, dkkm);
@@ -92,7 +92,7 @@ public class daoKhuyenMai {
             ps.setString(5, ngaybd);
             ps.setString(6, ngaykt);
             ps.executeUpdate();
-            model.DAO.DataProvider.getIntance().close();
+            model.DAO.ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null,
                     "Thêm khuyến mãi mới thành công.",
                     "Thông báo",
@@ -111,8 +111,8 @@ public class daoKhuyenMai {
         ArrayList<Object> arr = new ArrayList<>();
         KhuyenMai km = null;
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
                 km = new KhuyenMai(rs.getString("MaKM"),
                         rs.getString("TenKM"),
@@ -124,9 +124,9 @@ public class daoKhuyenMai {
             } else {
                 return null;
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return km;
@@ -144,9 +144,9 @@ public class daoKhuyenMai {
         String query = "UPDATE `khuyenmai` SET `MaKM`='" + makm + "',`DieuKienKM`=" + dkkm + ",`phantramkm`=" + phantramkm + ",`NgayBD`='" + ngaybd + ",`NgayKT`='"+ ngaykt + "' WHERE `MaKM`='" + makm + "'";
         //System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null,
                 "Sửa thông tin khuyến mãi thành công",
                 "Thông báo",
@@ -159,9 +159,9 @@ public class daoKhuyenMai {
 //        String query = "UPDATE `khuyenmai` SET `id_exist`=0 WHERE `MaNCC`=" + makm;
 //        //System.out.println(query);
 //        ArrayList<Object> arr = new ArrayList<>();
-//        DataProvider.getIntance().open();
-//        DataProvider.getIntance().excuteUpdate(query, arr);
-//        DataProvider.getIntance().close();
+//        ConnectDB.getIntance().open();
+//        ConnectDB.getIntance().excuteUpdate(query, arr);
+//        ConnectDB.getIntance().close();
 //        JOptionPane.showMessageDialog(null,
 //                "Xóa thông tin khuyến mãi thành công",
 //                "Thông báo",

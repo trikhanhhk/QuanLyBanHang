@@ -21,7 +21,7 @@ import model.DAO.daoLoaiSanPham;
 
 /**
  *
- * @author tk0038
+ * @author trikh
  */
 public class fLoaiSanPham extends javax.swing.JFrame {
 

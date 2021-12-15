@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import java.lang.*;
 /**
  *
- * @author VIENTHONGA
+ * @author trikh
  */
 public class fViewNhanVien extends javax.swing.JFrame {
 

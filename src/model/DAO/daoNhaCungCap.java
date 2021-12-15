@@ -32,7 +32,7 @@ import java.lang.*;
 
 /**
  *
- * @author tk0038
+ * @author trikh
  */
 public class daoNhaCungCap {
 
@@ -54,8 +54,8 @@ public class daoNhaCungCap {
         String query = "select *from nhacungcap";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 //String maNCC,String tenNCC, String diaChi, String SDT, String Fax
                 result.add(new NhaCungCap(rs.getString("MaNCC"),
@@ -65,9 +65,9 @@ public class daoNhaCungCap {
                         rs.getString("FAX")));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -79,8 +79,8 @@ public class daoNhaCungCap {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `nhacungcap` WHERE CONCAT(`MaNCC`, `TenNCC`,`DiaChi`,`SDT`,`FAX`) LIKE '%" + ValToSearch + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             NhaCungCap Nguon;
 
             while (rs.next()) {
@@ -109,15 +109,15 @@ public class daoNhaCungCap {
             return false;
         }
         try {
-            model.DAO.DataProvider.getIntance().open();
-            PreparedStatement ps = model.DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO `nhacungcap`(`MaNCC`, `TenNCC`, `DiaChi`, `SDT`, `Fax`) VALUES (?,?,?,?,?)");
+            model.DAO.ConnectDB.getIntance().open();
+            PreparedStatement ps = model.DAO.ConnectDB.getIntance().getconn().prepareStatement("INSERT INTO `nhacungcap`(`MaNCC`, `TenNCC`, `DiaChi`, `SDT`, `Fax`) VALUES (?,?,?,?,?)");
             ps.setString(1, maNCC);
             ps.setString(2, tenNCC);
             ps.setString(3, diaChi);
             ps.setString(4, SDT);
             ps.setString(5, Fax);
             ps.executeUpdate();
-            model.DAO.DataProvider.getIntance().close();
+            model.DAO.ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null,
                     "Thêm nhà cung cấp mới thành công.",
                     "Thông báo",
@@ -136,8 +136,8 @@ public class daoNhaCungCap {
         ArrayList<Object> arr = new ArrayList<>();
         NhaCungCap ncc = null;
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
                 ncc = new NhaCungCap(rs.getString("MaNCC"),
                         rs.getString("TenNCC"),
@@ -148,9 +148,9 @@ public class daoNhaCungCap {
             } else {
                 return null;
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return ncc;
@@ -168,9 +168,9 @@ public class daoNhaCungCap {
         String query = "UPDATE `nhacungcap` SET `TenNCC`='" + tenNCC + "',`DiaChi`='" + diaChi + "',`SDT`='" + SDT + "',`FAX`='" + Fax + "' WHERE `MaNCC`='" + maNCC + "'";
         //System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null,
                 "Sửa thông tin nhà cung cấp thành công",
                 "Thông báo",
@@ -183,9 +183,9 @@ public class daoNhaCungCap {
         String query = "UPDATE `nhacungcap` SET `id_exist`=0 WHERE `MaNCC`=" + maNCC;
         //System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null,
                 "Xóa thông tin nhà cung cấp thành công",
                 "Thông báo",
@@ -201,15 +201,15 @@ public class daoNhaCungCap {
         ArrayList<Object> arr = new ArrayList<>();
 
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
 
             while (rs.next()) {
                 SoLanNhapKho++;
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         return SoLanNhapKho;
 
@@ -224,15 +224,15 @@ public class daoNhaCungCap {
         ArrayList<Object> arr = new ArrayList<>();
 
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
 
             while (rs.next()) {
                 ++SoLanXuatKho;
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return SoLanXuatKho;
@@ -247,15 +247,15 @@ public class daoNhaCungCap {
         ArrayList<Object> arr = new ArrayList<>();
 
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
 
             while (rs.next()) {
                 ++SoLanTraKho;
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return SoLanTraKho;
@@ -270,15 +270,15 @@ public class daoNhaCungCap {
         ArrayList<Object> arr = new ArrayList<>();
 
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
 
             while (rs.next()) {
                 SoLuongXuatKho = SoLuongXuatKho + rs.getInt("sl_san_pham");
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return SoLuongXuatKho;
@@ -289,15 +289,15 @@ public class daoNhaCungCap {
         ArrayList<Object> arr = new ArrayList<>();
 
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
 
             while (rs.next()) {
                 SoLuongNhapKho = SoLuongNhapKho + rs.getInt("so_luong_lo");
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         return SoLuongNhapKho;
     }
@@ -311,15 +311,15 @@ public class daoNhaCungCap {
         ArrayList<Object> arr = new ArrayList<>();
 
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
 
             while (rs.next()) {
                 SoLuongXuatKho = SoLuongXuatKho + rs.getInt("sl_san_pham");
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return SoLuongXuatKho;

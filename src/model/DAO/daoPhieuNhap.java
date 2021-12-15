@@ -37,8 +37,8 @@ public class daoPhieuNhap {
         String query = "select *from phieunhap";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 PhieuNhap pn = new PhieuNhap();
                 pn.setMaPN(rs.getString(1));
@@ -50,9 +50,9 @@ public class daoPhieuNhap {
                 result.add(pn);
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -70,18 +70,18 @@ public class daoPhieuNhap {
                 + "', GioNhap='" + pn.getGioNhap()
                 + "', TongTien='" + pn.getTongTien()
                 + "' WHERE MaPN='" + pn.getMaPN() + "';";
-        DataProvider.getIntance().open();
+        ConnectDB.getIntance().open();
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
     }
 
     public void updateTongTien(String _mapn, float _tongTien) {
         String query = "UPDATE phieunhap SET TongTien='" + _tongTien + "' WHERE MaPN='" + _mapn + "';";
-        DataProvider.getIntance().open();
+        ConnectDB.getIntance().open();
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
     }
 
     public boolean insertPN(String maPN, String MaNCC, String MaNV, String NgayNhap, String GioNhap, float TongTien) {
@@ -93,8 +93,8 @@ public class daoPhieuNhap {
             return false;
         }
         try {
-            model.DAO.DataProvider.getIntance().open();
-            PreparedStatement ps = model.DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO phieunhap(MaPN,MaNCC,MaNV,NgayNhap,GioNhap,TongTien) VALUES (?, ?, ?, ?, ?, ?)");
+            model.DAO.ConnectDB.getIntance().open();
+            PreparedStatement ps = model.DAO.ConnectDB.getIntance().getconn().prepareStatement("INSERT INTO phieunhap(MaPN,MaNCC,MaNV,NgayNhap,GioNhap,TongTien) VALUES (?, ?, ?, ?, ?, ?)");
             ps.setString(1, maPN);
             ps.setString(2, MaNCC);
             ps.setString(3, MaNV);
@@ -102,7 +102,7 @@ public class daoPhieuNhap {
             ps.setString(5, GioNhap);
             ps.setFloat(6, TongTien);
             ps.executeUpdate();
-            model.DAO.DataProvider.getIntance().close();
+            model.DAO.ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null,
                     "Thêm phiếu nhập mới thành công.",
                     "Thông báo",

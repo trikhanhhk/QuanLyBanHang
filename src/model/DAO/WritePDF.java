@@ -23,7 +23,6 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.draw.VerticalPositionMark;
-import Format.PriceFormatter;
 import model.DTO.ChiTietHoaDon;
 import model.DTO.HoaDon;
 //import giaodienchuan.model.BackEnd.QuanLyHoaDon.QuanLyHoaDonBUS;

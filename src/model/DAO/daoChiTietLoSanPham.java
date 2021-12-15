@@ -33,14 +33,14 @@ public class daoChiTietLoSanPham {
         String query = "select * from Chi_tiet_lo_sp";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 result.add(new ChiTietLoSanPham(rs.getInt("id_chi_tiet_sp"), rs.getInt("so_luong_sp"), rs.getInt("so_tien_sp"), rs.getInt("id_lo_sp"), rs.getInt("id_sp")));
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         return result;
     }
@@ -49,9 +49,9 @@ public class daoChiTietLoSanPham {
     public boolean insertChiTietLoSanPham(int so_luong_sp, int so_tien_sp, int id_lo_sp, int id_sp) {
         String query = "INSERT INTO `Chi_tiet_lo_sp`( `so_luong_sp`, `so_tien_sp`, `id_lo_sp`, `id_sp`) VALUES  ('" + so_luong_sp + "','" + so_tien_sp + "','" + id_lo_sp + "','" + id_sp + "')";
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        int result = DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        int result = ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         return result > 0;
     }
 
@@ -61,14 +61,14 @@ public class daoChiTietLoSanPham {
         String query = "select * from Chi_tiet_lo_sp where id_lo_sp=" + id_lo;
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 result = new ChiTietLoSanPham(rs.getInt("id_chi_tiet_sp"), rs.getInt("so_luong_sp"), rs.getInt("so_tien_sp"), rs.getInt("id_lo_sp"), rs.getInt("id_sp"));
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         if (result == null) {
             System.out.print("Chi tiet Lo san pham bi null");

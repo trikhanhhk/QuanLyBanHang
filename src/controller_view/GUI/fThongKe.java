@@ -20,7 +20,7 @@ import model.DTO.NhaCungCap;
 import model.DTO.NhanVien;
 import model.DTO.PhieuNhap;
 import model.DTO.SanPham;
-import Format.PriceFormatter;
+import model.DAO.PriceFormatter;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -55,7 +55,7 @@ import model.DAO.daoPhieuNhap;
 
 /**
  *
- * @author admin
+ * @author trikha
  */
 public class fThongKe extends javax.swing.JFrame {
 

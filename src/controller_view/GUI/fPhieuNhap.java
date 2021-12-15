@@ -13,7 +13,7 @@ import model.DAO.daoNhaCungCap;
 import model.DAO.daoPhieuNhap;
 import model.DAO.daoNhanVien;
 import model.DAO.WritePDF;
-import Format.PriceFormatter;
+import model.DAO.PriceFormatter;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;

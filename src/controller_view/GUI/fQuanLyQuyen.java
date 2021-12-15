@@ -20,7 +20,7 @@ import java.lang.*;
 
 /**
  *
- * @author VIENTHONGA
+ * @author trikh
  */
 public class fQuanLyQuyen extends javax.swing.JFrame {
 

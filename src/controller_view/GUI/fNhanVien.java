@@ -25,7 +25,7 @@ import java.lang.*;
 
 /**
  *
- * @author VIENTHONGA
+ * @author trikh
  */
 public class fNhanVien extends javax.swing.JFrame {
 

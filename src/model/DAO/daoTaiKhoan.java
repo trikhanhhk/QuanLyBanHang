@@ -15,7 +15,7 @@ import java.lang.*;
 
 /**
  *
- * @author tk0038
+ * @author trikh
  */
 public class daoTaiKhoan {
 
@@ -37,8 +37,8 @@ public class daoTaiKhoan {
         String query = "select *from taiKhoan";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 result.add(new TaiKhoan(rs.getString("TenTaiKhoan"),
                         rs.getString("MatKhau"),
@@ -47,9 +47,9 @@ public class daoTaiKhoan {
             }
             
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -61,15 +61,15 @@ public class daoTaiKhoan {
 
         String query = "SELECT * FROM `taikhoan` WHERE TenTaiKhoan='" + User + "' and MatKhau='" + Pass + "'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
                 return true;
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         return false;
     }
@@ -118,9 +118,9 @@ public class daoTaiKhoan {
         }
         String query = "UPDATE `taiKhoan` SET MatKhau='" + Mkmoi + "'WHERE TenTaiKhoan='" + User + "' and MatKhau='" + Pass + "'";
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null,
                 "Sửa mật khẩu thành công",
                 "Thông báo",
@@ -141,8 +141,8 @@ public class daoTaiKhoan {
             return;
         }
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteQuery(query, arr);
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteQuery(query, arr);
         JOptionPane.showMessageDialog(null, "Đã sửa tài khoản " + username + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -152,8 +152,8 @@ public class daoTaiKhoan {
         String query = "SELECT * FROM `taikhoan` WHERE TenTaiKhoan='" + User + "' and MatKhau='" + Pass + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
 
                 result = (new TaiKhoan(rs.getString("TenTaiKhoan"),
@@ -163,9 +163,9 @@ public class daoTaiKhoan {
             } else {
                 result = null;
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         return result;
     }
@@ -176,8 +176,8 @@ public class daoTaiKhoan {
         String query = "SELECT * FROM `taiKhoan` WHERE MaNV='" + maNV + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             //`TenTaiKhoan`, `MatKhau`, `MaNV`, `MaQuyen`
             if (rs.next()) {
                 result = (new TaiKhoan(rs.getString("TenTaiKhoan"),
@@ -187,10 +187,10 @@ public class daoTaiKhoan {
             } else {
                 return null;
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
 
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         return result;
     }
@@ -201,8 +201,8 @@ public class daoTaiKhoan {
         ArrayList<Object> arr = new ArrayList<>();
         NhanVien tk = null;
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
 //                String MaNV, String TenNV, LocalDate NgaySinh, String DiaChi, String SDT, int trangthai
                 tk = (new NhanVien(rs.getString("MaNV"),
@@ -215,9 +215,9 @@ public class daoTaiKhoan {
             } else {
                 return null;
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return tk;
@@ -234,9 +234,9 @@ public class daoTaiKhoan {
                     JOptionPane.ERROR_MESSAGE);
             return;
             }
-            DataProvider.getIntance().open();
-            DataProvider.getIntance().excuteQuery(query);
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().open();
+            ConnectDB.getIntance().excuteQuery(query);
+            ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null, "Đã thêm tài khoan " + username + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Thêm loại tài khoản " + username + " Thất bại", "Thông báo", 1);

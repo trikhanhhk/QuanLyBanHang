@@ -8,7 +8,7 @@ package controller_view.GUI;
 import model.DTO.SanPham;
 import model.DAO.daoSanPham;
 import model.DAO.daoLoaiSanPham;
-import Format.PriceFormatter;
+import model.DAO.PriceFormatter;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;

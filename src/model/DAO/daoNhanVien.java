@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author VIENTHONGA
+ * @author trikh
  */
 public class daoNhanVien {
 
@@ -53,8 +53,8 @@ public class daoNhanVien {
         String query = "select *from nhanVien";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 //String MaNV, String TenNV, LocalDate NgaySinh, String DiaChi, String SDT, int trangtha
                 result.add(new NhanVien(rs.getString("MaNV"),
@@ -65,9 +65,9 @@ public class daoNhanVien {
                         rs.getInt("TrangThai")));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -81,9 +81,9 @@ public class daoNhanVien {
         String query = "INSERT INTO `nhanvien`(`MaNV`, `TenNV`, `NgaySinh`, `DiaChi`, `SDT`, `TrangThai`) VALUES ('" + MaNV + "','" + TenNV + "','" + NgaySinh + "','" + DiaChi + "','" + SDT + "'," + trangThai + ")";
         System.out.println(query);
         try {
-            DataProvider.getIntance().open();
-            DataProvider.getIntance().excuteQuery(query);
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().open();
+            ConnectDB.getIntance().excuteQuery(query);
+            ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null, "Đã thêm nhân viên " + TenNV + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).getTenNV() + " đã thêm loại sản phẩm mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         } catch (Exception e) {
@@ -96,8 +96,8 @@ public class daoNhanVien {
         String query = "select * from nhanvien where MaNV = '" + ID + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
                 result = new NhanVien(
                         rs.getString("MaNV"),
@@ -108,9 +108,9 @@ public class daoNhanVien {
                         rs.getInt("TrangThai"));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -120,9 +120,9 @@ public class daoNhanVien {
         status = status == 0 ? 1 : 0;
         String query = "Update nhanvien set TrangThai = '" + status +"' where MaNV = '" + id +"'";
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null,
                 "Sửa thông tin nhân viên thành công",
                 "Thông báo",
@@ -135,15 +135,15 @@ public class daoNhanVien {
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(ID);
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
                 result = rs.getString("TenNV");    
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -155,8 +155,8 @@ public class daoNhanVien {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `nhanVien` WHERE CONCAT(`MaNV`, `TenNV`,`NgaySinh`,`DiaChi`,`SDT`) LIKE '%" + ValToSearch + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             NhanVien nhanvien;
 
             while (rs.next()) {

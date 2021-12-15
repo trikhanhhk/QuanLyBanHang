@@ -33,7 +33,7 @@ import java.lang.*;
 
 /**
  *
- * @author HoaTran
+ * @author DELL
  */
 public class fKhachHang extends javax.swing.JFrame {
 

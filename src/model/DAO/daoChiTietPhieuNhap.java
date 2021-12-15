@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author admin
+ * @author trikh
  */
 public class daoChiTietPhieuNhap {
 
@@ -39,8 +39,8 @@ public class daoChiTietPhieuNhap {
         String query = "SELECT * FROM `chitietphieunhap`";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 String ma = rs.getString(1);
                     String maSP = rs.getString(2);
@@ -51,9 +51,9 @@ public class daoChiTietPhieuNhap {
                     result.add(ctpn);
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -63,15 +63,15 @@ public class daoChiTietPhieuNhap {
         public int insertChiTietPhieuNhap(String MaPN, String MaSP, int SoLuong, float DonGia) {
         int a = -100;
         try {
-            model.DAO.DataProvider.getIntance().open();
-            PreparedStatement ps = model.DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO `chitietphieunhap` (`MaPN`, `MaSP`, `SoLuong`, `DonGia`) VALUES (?,?,?,?)");
+            model.DAO.ConnectDB.getIntance().open();
+            PreparedStatement ps = model.DAO.ConnectDB.getIntance().getconn().prepareStatement("INSERT INTO `chitietphieunhap` (`MaPN`, `MaSP`, `SoLuong`, `DonGia`) VALUES (?,?,?,?)");
             ps.setString(1, MaPN);
             ps.setString(2, MaSP);
             ps.setInt(3, SoLuong);
             ps.setFloat(4, DonGia);
             a = ps.executeUpdate();
             System.out.println("Result " + a);
-            model.DAO.DataProvider.getIntance().close();
+            model.DAO.ConnectDB.getIntance().close();
             //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getQuanLyChiTietHoaDon(maNV).getTenNV() + " đã thêm loại sản phẩm mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         } catch (Exception e) {
                System.err.println(e);
@@ -82,13 +82,13 @@ public class daoChiTietPhieuNhap {
     public void updateQuanLyChiTietHoaDon(String MaPN, String MaSP, int SoLuong, float DonGia) {
         try {
             String query = "UPDATE chitietphieunhap set SoLuong= ?, DonGia= ? WHERE MaPN= ? AND MaSP= ?";
-            PreparedStatement ps = model.DAO.DataProvider.getIntance().getconn().prepareStatement(query);
+            PreparedStatement ps = model.DAO.ConnectDB.getIntance().getconn().prepareStatement(query);
             ps.setInt(1, SoLuong);
             ps.setFloat(2, DonGia);
             ps.setString(3, MaPN);
             ps.setString(4, MaSP);
             ps.executeUpdate();
-            model.DAO.DataProvider.getIntance().close();
+            model.DAO.ConnectDB.getIntance().close();
         } catch (SQLException ex) {
             Logger.getLogger(daoQuanLyChiTietHoaDon.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -101,8 +101,8 @@ public class daoChiTietPhieuNhap {
         String query = "SELECT * FROM `chitietphieunhap` WHERE MaPN='" + maPn + "' AND MaSP='" + maSp + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
 
                  String ma = rs.getString("MaPN");
@@ -116,9 +116,9 @@ public class daoChiTietPhieuNhap {
             } else {
                 result = null;
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         return result;
     }

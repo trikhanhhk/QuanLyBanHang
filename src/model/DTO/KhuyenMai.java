@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author DELL
+ * @author tatho
  */
 public class KhuyenMai {
 

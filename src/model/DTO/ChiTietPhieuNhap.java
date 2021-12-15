@@ -7,7 +7,7 @@ package model.DTO;
 
 /**
  *
- * @author Admin
+ * @author trikh
  */
 public class ChiTietPhieuNhap {
 

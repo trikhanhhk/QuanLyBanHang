@@ -35,8 +35,8 @@ public class daoLoaiSanPham {
         String query = "select * from loaisanpham";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 //(String MaLSP, String TenLSP, String MoTa
                 result.add(new LoaiSanPham(
@@ -45,9 +45,9 @@ public class daoLoaiSanPham {
                         rs.getString("MoTa")));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -60,8 +60,8 @@ public class daoLoaiSanPham {
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(MaLSP);
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
                 result = new LoaiSanPham(
                         rs.getString("MaLSP"),
@@ -69,9 +69,9 @@ public class daoLoaiSanPham {
                         rs.getString("MoTa"));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -84,8 +84,8 @@ public class daoLoaiSanPham {
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(TenLSP);
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
                 result = new LoaiSanPham(
                         rs.getString("MaLSP"),
@@ -93,9 +93,9 @@ public class daoLoaiSanPham {
                         rs.getString("MoTa"));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -106,9 +106,9 @@ public class daoLoaiSanPham {
         String query = "INSERT INTO `loaisanpham`(`MaLSP`, `TenLSP`, `Mota`) VALUES ('" + MaLSP + "','" + TenLSP + "','" + Mota + "')";
         System.out.println(query);
         try {
-            DataProvider.getIntance().open();
-            DataProvider.getIntance().excuteQuery(query);
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().open();
+            ConnectDB.getIntance().excuteQuery(query);
+            ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null, "Đã thêm loại sản phẩm " + TenLSP + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).getTenNV() + " đã thêm loại sản phẩm mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         } catch (Exception e) {
@@ -131,9 +131,9 @@ public class daoLoaiSanPham {
         String query = "Update loaisanpham Set TenLSP='" + TenLSP + "', MoTa='" + Mota + "' where MaLSP='" + MaLSP + "'";
         System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null,
                 "Sửa thông tin loại sản phẩm thành công",
                 "Thông báo",
@@ -146,9 +146,9 @@ public class daoLoaiSanPham {
     public void DeleteLoaiSanPham(String MaLSP) {
         String query = "DELETE FROM `loaisanpham` WHERE `loaisanpham`.`MaLSP` = '" + MaLSP + "'";
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null,
                 "Xóa sản phẩm " + MaLSP + "Thành công",
                 "Thông báo",

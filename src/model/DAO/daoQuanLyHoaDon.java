@@ -47,8 +47,8 @@ public class daoQuanLyHoaDon {
         String query = "select * from hoadon";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
 //          String maHoaDon, String maNhanVien, String maKhachHang, String maKhuyenMai, LocalDate ngayNhap, LocalTime gioNhap, float tongTien
 //`MaHD`, `MaNV`, `MaKH`, `MaKM`, `NgayLap`, `GioLap`, `TongTien`
@@ -63,9 +63,9 @@ public class daoQuanLyHoaDon {
                 ));
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;
@@ -73,9 +73,9 @@ public class daoQuanLyHoaDon {
     
     public Boolean updateTongTien(String _mahd,float _tongTien){
         String query = "UPDATE hoadon SET TongTien='" + _tongTien + "' WHERE MaHD='" +_mahd + "';";
-        DataProvider.getIntance().open();
-        int result = DataProvider.getIntance().excuteQueryUpdate(query);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        int result = ConnectDB.getIntance().excuteQueryUpdate(query);
+        ConnectDB.getIntance().close();
         return result > 0;
     }
 
@@ -85,8 +85,8 @@ public class daoQuanLyHoaDon {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `hoadon` WHERE CONCAT(`MaSP`, `TenSP`, `MaLSP`) LIKE '%" + ValToSearch + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             HoaDon hoadon;
 
             while (rs.next()) {
@@ -128,8 +128,8 @@ public class daoQuanLyHoaDon {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `hoadon` WHERE MaLSP ='%" + MaLSP + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             HoaDon hoadon;
 
             while (rs.next()) {
@@ -158,8 +158,8 @@ public class daoQuanLyHoaDon {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `hoadon` WHERE MaSP ='%" + MaSP + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             HoaDon hoadon;
 
             while (rs.next()) {
@@ -308,9 +308,9 @@ public class daoQuanLyHoaDon {
     //Thêm hóa đơn mới
     public boolean insertHoaDon(String maHoaDon, String maNhanVien, String maKhachHang, String maKhuyenMai, LocalDate ngayNhap, LocalTime gioNhap, float tongTien) {
         try {
-            model.DAO.DataProvider.getIntance().open();
+            model.DAO.ConnectDB.getIntance().open();
             //INSERT INTO `hoadon` (`MaSP`, `MaLSP`, `TenSP`, `DonGia`, `SoLuong`, `HinhAnh`, `TrangThai`) VALUES
-            PreparedStatement ps = model.DAO.DataProvider.getIntance().getconn().prepareStatement("INSERT INTO `hoadon`( `MaHD`, `MaNV`, `MaKH`, `MaKM`, `NgayLap`, `GioLap`, `TongTien`) VALUES (?,?,?,?,?,?,?)");
+            PreparedStatement ps = model.DAO.ConnectDB.getIntance().getconn().prepareStatement("INSERT INTO `hoadon`( `MaHD`, `MaNV`, `MaKH`, `MaKM`, `NgayLap`, `GioLap`, `TongTien`) VALUES (?,?,?,?,?,?,?)");
             ps.setString(1, maHoaDon);
             ps.setString(2, maNhanVien);
             ps.setString(3, maKhachHang);
@@ -319,7 +319,7 @@ public class daoQuanLyHoaDon {
             ps.setString(6, gioNhap.toString());
             ps.setFloat(7, tongTien);
             ps.executeUpdate();
-            model.DAO.DataProvider.getIntance().close();
+            model.DAO.ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null,
                     "Thêm hóa đơn mới thành công.",
                     "Thông báo",
@@ -343,9 +343,9 @@ public class daoQuanLyHoaDon {
                 + "', TongTien='" + tongTien
                 + "' WHERE MaHD='" + maHoaDon + "';";
       
-        DataProvider.getIntance().open();
-        int result = DataProvider.getIntance().excuteQueryUpdate(query);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        int result = ConnectDB.getIntance().excuteQueryUpdate(query);
+        ConnectDB.getIntance().close();
         return result > 0;
     }
 
@@ -355,8 +355,8 @@ public class daoQuanLyHoaDon {
         String query = "select * from hoadon where MaHD='" + MaHD + "'";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 result = new HoaDon(
                         rs.getString("MaHD"),
@@ -368,9 +368,9 @@ public class daoQuanLyHoaDon {
                         rs.getFloat("TongTien")
                 );
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         if (result == null) {
             System.out.print("hoa don bi null");

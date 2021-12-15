@@ -15,7 +15,7 @@ import java.lang.*;
 
 /**
  *
- * @author tatho
+ * @author trikh
  */
 public class fDangNhap extends javax.swing.JFrame {
 
@@ -76,7 +76,7 @@ public class fDangNhap extends javax.swing.JFrame {
         jLabel2.setText("Tên đăng nhập:");
 
         jTextFieldTenDangNhap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldTenDangNhap.setText("admin");
+        jTextFieldTenDangNhap.setText("trikh");
         jTextFieldTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTenDangNhapActionPerformed(evt);
@@ -88,7 +88,7 @@ public class fDangNhap extends javax.swing.JFrame {
         jLabel3.setText("Mật khẩu:");
 
         jPasswordFieldMatKhau.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPasswordFieldMatKhau.setText("admin");
+        jPasswordFieldMatKhau.setText("trikh");
         jPasswordFieldMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordFieldMatKhauActionPerformed(evt);

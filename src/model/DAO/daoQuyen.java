@@ -21,7 +21,7 @@ import org.apache.poi.ss.usermodel.Row;
 
 /**
  *
- * @author tk0038
+ * @author trikh
  */
 public class daoQuyen {
     
@@ -42,8 +42,8 @@ public class daoQuyen {
         String query = "SELECT * FROM phanquyen";
         ArrayList<Object> arr = new ArrayList<>();
         try{
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while(rs.next()) {
                 result.add(new Quyen(
                     rs.getString("MaQuyen"),
@@ -51,9 +51,9 @@ public class daoQuyen {
                     rs.getString("ChiTietQuyen")
                 ));
             }
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
         return result;
     }
@@ -77,9 +77,9 @@ public class daoQuyen {
         String query = "Update phanquyen Set TenQuyen='" + tenQuyen + "', ChiTietQuyen='" + chitiet + "'where MaQuyen='" + maQuyen + "'";
         System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
-        DataProvider.getIntance().open();
-        DataProvider.getIntance().excuteUpdate(query, arr);
-        DataProvider.getIntance().close();
+        ConnectDB.getIntance().open();
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null,
                 "Sửa thông tin khách hàng thành công",
                 "Thông báo",
@@ -91,9 +91,9 @@ public class daoQuyen {
         String query = "INSERT INTO `phanquyen`(`MaQuyen`, `TenQuyen`, `ChiTietQuyen`) VALUES ('" + maQuyen + "','" + tenQuyen + "','"  + chitiet + "')";
         System.out.println(query);
         try {
-            DataProvider.getIntance().open();
-            DataProvider.getIntance().excuteQuery(query);
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().open();
+            ConnectDB.getIntance().excuteQuery(query);
+            ConnectDB.getIntance().close();
             JOptionPane.showMessageDialog(null, "Đã thêm quyền " + tenQuyen + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getQuyen(maNV).getTenNV() + " đã thêm loại sản phẩm mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         } catch (Exception e) {
@@ -107,8 +107,8 @@ public class daoQuyen {
         ArrayList<Object> arr = new ArrayList<>();
         String searchQuery = "SELECT * FROM `phanquyen` WHERE CONCAT(`MaQuyen`, `TenQuyen`, `ChiTietQuyen`) LIKE '%" + ValToSearch + "%'";
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(searchQuery, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
             Quyen phanquyen;
 
             while (rs.next()) {
@@ -198,8 +198,8 @@ public class daoQuyen {
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(ID);
         try {
-            DataProvider.getIntance().open();
-            ResultSet rs = DataProvider.getIntance().excuteQuery(query, arr);
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
                 result = new Quyen(
                     rs.getString("MaQuyen"),
@@ -208,9 +208,9 @@ public class daoQuyen {
                 );
             }
 
-            DataProvider.getIntance().close();
+            ConnectDB.getIntance().close();
         } catch (SQLException ex) {
-            DataProvider.getIntance().displayError(ex);
+            ConnectDB.getIntance().displayError(ex);
         }
 
         return result;

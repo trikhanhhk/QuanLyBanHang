@@ -23,7 +23,7 @@ import javax.swing.Timer;
 
 /**
  *
- * @author Xoan Tran
+ * @author tatho
  */
 public class fHome extends javax.swing.JFrame {
 

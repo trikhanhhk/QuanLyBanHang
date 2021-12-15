@@ -7,7 +7,7 @@ package model.DTO;
 import java.lang.*;
 /**
  *
- * @author tk0038
+ * @author trikh
  */
 public class TaiKhoan {
     String username, password, maNV, maQuyen;

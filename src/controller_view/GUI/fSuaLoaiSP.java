@@ -6,7 +6,6 @@
 package controller_view.GUI;
 import model.DTO.ChiTietLoSanPham;
 import model.DTO.ChiTietPhieuNhap;
-import model.DTO.LoSanPham;
 import model.DTO.LoaiSanPham;
 import model.DTO.NhaCungCap;
 import model.DTO.PhieuNhap;
@@ -26,7 +25,7 @@ import model.DAO.daoLoaiSanPham;
 
 /**
  *
- * @author tk0038
+ * @author trikh
  */
 public class fSuaLoaiSP extends javax.swing.JFrame {
 
