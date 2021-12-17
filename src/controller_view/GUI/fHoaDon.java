@@ -42,24 +42,25 @@ public class fHoaDon extends javax.swing.JFrame {
     public long count, SoTrang, Trang = 1;
     public ArrayList<HoaDon> DuLieuMau;
 
+    //khởi tạo không tham số
     public fHoaDon() {
-        initComponents();
-        setIcon();
-        build();
+        initComponents(); // khởi tạo giao diện
+        setIcon(); // setlog
+        build(); // khởi tạo data khi vào màn
     }
-
-    public fHoaDon(String id) {
-        maNV = id;
-        initComponents();
+    // khởi tạo có tham số, id là mã nhân viên
+    public fHoaDon(String id) { // khi khởi tạo chủ yếu dùng hàm này
+        maNV = id; //set manv
+        initComponents(); // khởi tạo giao diện
         setIcon();
-        DanhSachHoaDon = daoQuanLyHoaDon.getInstance().getListHoaDon();
-        DuLieuMau = DanhSachHoaDon;
-        btnXemChiTiet.setEnabled(false);
-        build();
+        DanhSachHoaDon = daoQuanLyHoaDon.getInstance().getListHoaDon(); //danh sách data hóa đơn
+        DuLieuMau = DanhSachHoaDon; // set dữ liệu 
+        btnXemChiTiet.setEnabled(false); // disabled button xem chi tiết (mặc định khi vào màn)
+        build(); // khởi tạo data khi vào màn
     }
 
     private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png"))); 
     }
 
     /**
@@ -468,17 +469,17 @@ public class fHoaDon extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNhoMaxActionPerformed
 
     private void jButtonNhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoActionPerformed
-        if (Trang > 1) {
+        if (Trang > 1) { //button chuyển trang (lùi)
             Trang--;
             ArrayList<HoaDon> table = model.DAO.daoQuanLyHoaDon.getInstance().get20HoaDon(DanhSachHoaDon, Trang);
             listDanhSachHoaDon(table);
             jLabelTrang.setText("" + Trang);
-            jLabelSoTrang.setText(Trang + "/" + SoTrang); // do thằng này custom code
-        } // đẩy lên đi, sau t đẩy code t viết cũng được
+            jLabelSoTrang.setText(Trang + "/" + SoTrang); 
+        }
     }//GEN-LAST:event_jButtonNhoActionPerformed
 
     private void jButtonLonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonActionPerformed
-        if (Trang < SoTrang) {
+        if (Trang < SoTrang) { //chuyển trang (lùi)
             Trang++;
             ArrayList<HoaDon> table = model.DAO.daoQuanLyHoaDon.getInstance().get20HoaDon(DanhSachHoaDon, Trang);
             listDanhSachHoaDon(table);
@@ -488,7 +489,7 @@ public class fHoaDon extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLonActionPerformed
 
     private void jButtonLonMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonMaxActionPerformed
-        Trang = SoTrang;
+        Trang = SoTrang; //button cuối trang
         ArrayList<HoaDon> table = model.DAO.daoQuanLyHoaDon.getInstance().get20HoaDon(DanhSachHoaDon, Trang);
         listDanhSachHoaDon(table);
         jLabelTrang.setText("" + SoTrang);
@@ -496,18 +497,18 @@ public class fHoaDon extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLonMaxActionPerformed
 
     private void jButtonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFActionPerformed
-        int selectedRowIndex = jTableHoaDon.getSelectedRow();
+        int selectedRowIndex = jTableHoaDon.getSelectedRow(); //button in pdf
         String id = jTableHoaDon.getValueAt(selectedRowIndex, 1).toString();
-        if(selectedRowIndex>=0){
-         new WritePDF().writeHoaDon(id);
-        } else {
+        if(selectedRowIndex>=0){ //nếu click vào một hóa đơn
+         new WritePDF().writeHoaDon(id); //thực hiện in
+        } else { // nếu k chọn hóa đơn nào
             JOptionPane.showMessageDialog(this, "Chọn một hóa đơn để in");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonPDFActionPerformed
 
     private void jButtonLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLamMoiActionPerformed
-        invalidate();
+        invalidate(); //load lại data vòa table
         validate();
         repaint();
         DuLieuMau = daoQuanLyHoaDon.getInstance().getListHoaDon();
@@ -515,13 +516,16 @@ public class fHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLamMoiActionPerformed
 
+    //hàm tìm kiếm
     private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
-        DanhSachHoaDon = DuLieuMau;
+        DanhSachHoaDon = DuLieuMau; 
         FindList();
         jButtonPDF.setEnabled(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
+    
+    //xuất file excel
     private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
         try {
             boolean result = daoQuanLyHoaDon.getInstance().XuatExcel(DuLieuMau);
@@ -541,7 +545,7 @@ public class fHoaDon extends javax.swing.JFrame {
             build();
         }
     }//GEN-LAST:event_jTextFieldTimKiemKeyReleased
-
+//khi thực hện tìm kiếm trong input
     private void jTextFieldTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             DanhSachHoaDon = DuLieuMau;
@@ -568,6 +572,7 @@ public class fHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableHoaDonMouseClicked
 
+    //button xem chi tiết hóa đơn
     private void btnXemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemChiTietActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTableHoaDon.getModel();
         int selectedRowIndex = jTableHoaDon.getSelectedRow();
@@ -590,6 +595,7 @@ public class fHoaDon extends javax.swing.JFrame {
         });
     }
 
+    // hàm set data vào table
     public void build() {
         jButtonPDF.setEnabled(false);
         DanhSachHoaDon = DuLieuMau;
@@ -606,6 +612,8 @@ public class fHoaDon extends javax.swing.JFrame {
         listDanhSachHoaDon(table);
     }
 
+    
+    //hàm tìm kiếm 
     public void FindList() {
         this.DanhSachHoaDon = model.DAO.daoQuanLyHoaDon.getInstance().FindListHoaDon(DuLieuMau, jTextFieldTimKiem.getText());
         if (DanhSachHoaDon.isEmpty()) {
@@ -629,6 +637,7 @@ public class fHoaDon extends javax.swing.JFrame {
         }
     }
 
+    //Đổ data vào table
     public void listDanhSachHoaDon(ArrayList<HoaDon> arr) {
         DefaultTableModel model = (DefaultTableModel) jTableHoaDon.getModel();
         while (jTableHoaDon.getRowCount() > 0) {

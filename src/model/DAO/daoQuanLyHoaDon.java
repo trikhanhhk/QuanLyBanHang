@@ -30,7 +30,7 @@ public class daoQuanLyHoaDon {
     private ArrayList<HoaDon> dshd;
     private static daoQuanLyHoaDon instance;
     private ArrayList<HoaDon> listHD;
-    public static daoQuanLyHoaDon getInstance() {
+    public static daoQuanLyHoaDon getInstance() {  //lấy đối tược instance
         if (instance == null) {
             instance = new daoQuanLyHoaDon();
         }
@@ -42,7 +42,7 @@ public class daoQuanLyHoaDon {
     }
 
     //Lấy ra danh sách thông tin từ bảng hóa đơn
-    public ArrayList<HoaDon> getListHoaDon() {
+    public ArrayList<HoaDon> getListHoaDon() { 
         ArrayList<HoaDon> result = new ArrayList<>();
         String query = "select * from hoadon";
         ArrayList<Object> arr = new ArrayList<>();
@@ -71,11 +71,12 @@ public class daoQuanLyHoaDon {
         return result;
     }
     
+    //cập nhật tổng tiền
     public Boolean updateTongTien(String _mahd,float _tongTien){
         String query = "UPDATE hoadon SET TongTien='" + _tongTien + "' WHERE MaHD='" +_mahd + "';";
-        ConnectDB.getIntance().open();
-        int result = ConnectDB.getIntance().excuteQueryUpdate(query);
-        ConnectDB.getIntance().close();
+        ConnectDB.getIntance().open(); //mở kết nối tới db
+        int result = ConnectDB.getIntance().excuteQueryUpdate(query); // query
+        ConnectDB.getIntance().close(); // đống kết nối
         return result > 0;
     }
 

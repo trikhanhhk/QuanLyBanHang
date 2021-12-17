@@ -31,35 +31,7 @@ public class fHome extends javax.swing.JFrame {
      * Creates new form fHome
      */
     public String maNV;
-    public ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
-    public Thread running;
-    public int TocDoLoading = 10;
-    public Thread loading = new Thread() {
-//        public synchronized void run() {
-//            for (int i = 0; i <= 100; i++) {
-//                final int percent = i;
-//                SwingUtilities.invokeLater(new Runnable() {
-//                    public synchronized void run() {
-//                        //System.out.println(percent);
-////                        jProgressBar1.setValue(percent);
-//                    }
-//                });
-//
-//                try {
-//                    Thread.sleep(TocDoLoading);
-//                } catch (InterruptedException e) {
-//                }
-//                if (jProgressBar1.getValue() == 100) {
-//                    //System.out.println("Dừng thread");
-//                    synchronized (running) {
-//                        running.notify();
-//                    }
-//                    Thread.interrupted();
-//                }
-//            }
-//
-//        }
-    };
+   
 
     public fHome() {
 
@@ -69,16 +41,12 @@ public class fHome extends javax.swing.JFrame {
         this.maNV = maNV;
         //this.PanelBaoCaoMau = DataBaoCao;
         initComponents();
-        this.setSize(1100, 800);
+        this.setSize(1100, 800); //kích thức home
         setIcon();
-        exec.scheduleAtFixedRate(new Runnable() {
-            public void run() {
-            }
-        }, 0, 5, TimeUnit.SECONDS);
         build();
     }
 
-    private void setIcon() {
+    private void setIcon() {  //set giá trị các icon
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
         btnBanHang.setIcon(getIcon("banhang.png"));
         btnNhapHang.setIcon(getIcon("nhapHang.png"));
@@ -801,13 +769,13 @@ public class fHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoaiSpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoaiSpActionPerformed
-        JFrame loaiSp = new fLoaiSanPham(maNV);
+        JFrame loaiSp = new fLoaiSanPham(maNV); // click vào button  loại sp thì hiển thị form sản phẩm
         loaiSp.setVisible(true);
     }//GEN-LAST:event_btnLoaiSpActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
-        JFrame sp = new fSanPham(maNV);
-        sp.setVisible(true);
+        JFrame sp = new fSanPham(maNV); // cllick vào button sản phẩm
+        sp.setVisible(true); //hiển thị form sản phẩm
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapHangActionPerformed
@@ -922,7 +890,7 @@ public class fHome extends javax.swing.JFrame {
 
     void build() {
         //Timer();
-        NhanVienDangNhap();
+        NhanVienDangNhap(); //kiểm tra đăng nhập
 
     }//1212MDDEL50DE
 
@@ -935,7 +903,7 @@ public class fHome extends javax.swing.JFrame {
             jComboBoxNhanVien.addItem("Thông tin");
             jComboBoxNhanVien.addItem("Đổi mật khẩu");
             jComboBoxNhanVien.addItem("Thoát");
-            if(!tk.getMaQuyen().equals("Q2")) {
+            if(!tk.getMaQuyen().equals("Q2")) { // kiểm tra quyền
                 panelTaiKhoan.setVisible(false);
                 panelThongKe.setVisible(false);
                 panelKhuyenMai.setVisible(false);

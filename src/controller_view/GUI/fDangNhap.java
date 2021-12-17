@@ -243,19 +243,20 @@ public class fDangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTenDangNhapActionPerformed
     public void DangNhap() {
-        String taikhoan = jTextFieldTenDangNhap.getText();
-        String matkhau = jPasswordFieldMatKhau.getText();
-        if (model.DAO.daoTaiKhoan.getInstance().KiemTraDangNhap(taikhoan, matkhau)) {
+        String taikhoan = jTextFieldTenDangNhap.getText(); //lấy password
+        String matkhau = jPasswordFieldMatKhau.getText(); //lấy mật khẩu
+        if (model.DAO.daoTaiKhoan.getInstance().KiemTraDangNhap(taikhoan, matkhau)) { // lấy tài khoản kiểm tra 
             TaiKhoan tk = model.DAO.daoTaiKhoan.getInstance().getTaiKhoan(taikhoan, matkhau);
             NhanVien nv = model.DAO.daoTaiKhoan.getInstance().getNhanVien(tk.getMaNV());
-            if (nv.getTrangThai() != 0) {
+            if (nv.getTrangThai() != 0) { // nếu trạng thái khác 0 tức bị khóa
                 JOptionPane.showMessageDialog(rootPane,
                         "Tài khoản đã bị khóa.",
                         "Lỗi đăng nhập",
                         JOptionPane.ERROR_MESSAGE);
+                return; //thoát luôn
             }
-            JFrame TrangChu = new fHome(tk.getMaNV());
-            TrangChu.setVisible(true);
+            JFrame TrangChu = new fHome(tk.getMaNV()); //khởi tạo trang chủ
+            TrangChu.setVisible(true); //hiện trang chủ
             this.setVisible(false);
             dispose();
         } else {
