@@ -18,24 +18,28 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import javax.swing.table.DefaultTableModel;
+import model.DAO.daoTaiKhoan;
+import model.DTO.TaiKhoan;
 
 
 public class fSanPham extends javax.swing.JFrame {
    
     public String id_nv;
+    public TaiKhoan tkNv;
     
     public fSanPham() {
         initComponents();
         setIcon();
         LoadThongTinSanPham();
-//        showComboboxLoaiSanPham();
+        jButtonHuy.setVisible(false);
     }
     public fSanPham(String idnv) { 
         initComponents();
         setIcon();
         LoadThongTinSanPham();
-        //showComboboxLoaiSanPham();
+        jButtonHuy.setVisible(false);
         this.id_nv = idnv;
+        tkNv = daoTaiKhoan.getInstance().getTaiKhoan(idnv);
     }
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
@@ -388,7 +392,7 @@ public class fSanPham extends javax.swing.JFrame {
         jButtonLamMoi.setText("Tải lại");
 
         jButtonHuy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonHuy.setText("Hủy");
+        jButtonHuy.setText("Ngừng kinh doanh");
         ImageIcon imgHuy = new ImageIcon(getClass().getResource("/icon/icons8-waste-48.png"));
         ImageIcon ImgHuy = new ImageIcon(imgHuy.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
         jButtonHuy.setIcon(ImgHuy);
@@ -463,16 +467,19 @@ public class fSanPham extends javax.swing.JFrame {
        jLabelLoadLoaiSanPham.setText(model.getValueAt(row, 3).toString());
        labelDonGia.setText(model.getValueAt(row, 4).toString());
        labelSoluong.setText(model.getValueAt(row, 5).toString());
-       //ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPhamTheoID(jLabelLoadIDSanPham.getText().toString());        
+       int trangThai = model.getValueAt(row, 7).toString().equals("hiện") ? 0 : 1;
+       jButtonHuy.setText(trangThai==1 ? "Tiếp tục kinh doanh" : "Ngừng kinh doanh");
+       if(tkNv.getMaQuyen() == "Q1") {
+           jButtonHuy.setVisible(true);
+       }else {
+           jButtonHuy.setVisible(false);
+       }
        String id = (model.getValueAt(row,0).toString());
        SanPham sp = daoSanPham.getInstance().getSanPham(id);
        ImageIcon img = new ImageIcon(getClass().getResource("/Image/ProductImages/" + model.getValueAt(row, 6).toString()));
-//       ImageIcon imageIcon = new ImageIcon(
-//                new ImageIcon(sp.getFileNameHinhAnh()).getImage().getScaledInstance(
-//                        jLabelLoadhinhAnh.getWidth(), jLabelLoadhinhAnh.getHeight(), Image.SCALE_DEFAULT));
-        Image imgScaled = img.getImage().getScaledInstance(jLabelLoadhinhAnh.getWidth(), jLabelLoadhinhAnh.getHeight(), Image.SCALE_DEFAULT);
-        jLabelLoadhinhAnh.setText("");
-        jLabelLoadhinhAnh.setIcon(new ImageIcon(imgScaled));
+       Image imgScaled = img.getImage().getScaledInstance(jLabelLoadhinhAnh.getWidth(), jLabelLoadhinhAnh.getHeight(), Image.SCALE_DEFAULT);
+       jLabelLoadhinhAnh.setText("");
+       jLabelLoadhinhAnh.setIcon(new ImageIcon(imgScaled));
     }//GEN-LAST:event_jTableThongTinSanPhamMouseClicked
 
     private void jButtonThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonThemMouseClicked
@@ -509,7 +516,7 @@ public class fSanPham extends javax.swing.JFrame {
                         PriceFormatter.format(sp.getDonGia()),
                         String.valueOf(sp.getSoLuong()),
                         sp.getFileNameHinhAnh(),
-                        (sp.getTrangThai() == 0 ? "Hiện" : "Ẩn")
+                        (sp.getTrangThai() == 0 ? "Đăng kin doanh" : "Ngừng kinh doanh")
                     });
                     stt++;
     //            }

@@ -903,7 +903,7 @@ public class fHome extends javax.swing.JFrame {
             jComboBoxNhanVien.addItem("Thông tin");
             jComboBoxNhanVien.addItem("Đổi mật khẩu");
             jComboBoxNhanVien.addItem("Thoát");
-            if(!tk.getMaQuyen().equals("Q2")) { // kiểm tra quyền
+            if(!tk.getMaQuyen().equals("Q1")) { // kiểm tra quyền
                 panelTaiKhoan.setVisible(false);
                 panelThongKe.setVisible(false);
                 panelKhuyenMai.setVisible(false);
