@@ -24,6 +24,7 @@ public class daoSanPham {
 
     private static daoSanPham instance;
     private ArrayList<SanPham> listSP;
+
     public static daoSanPham getInstance() {
         if (instance == null) {
             instance = new daoSanPham();
@@ -49,8 +50,8 @@ public class daoSanPham {
                         rs.getString("MaSP"),
                         rs.getString("MaLSP"),
                         rs.getString("TenSP"),
-                        rs.getFloat("DonGia"), 
-                        rs.getInt("SoLuong"), 
+                        rs.getFloat("DonGia"),
+                        rs.getInt("SoLuong"),
                         rs.getString("HinhAnh"),
                         rs.getInt("TrangThai")
                 ));
@@ -79,8 +80,8 @@ public class daoSanPham {
                         rs.getString("MaSP"),
                         rs.getString("MaLSP"),
                         rs.getString("TenSP"),
-                        rs.getFloat("DonGia"), 
-                        rs.getInt("SoLuong"), 
+                        rs.getFloat("DonGia"),
+                        rs.getInt("SoLuong"),
                         rs.getString("HinhAnh"),
                         rs.getInt("TrangThai")
                 );
@@ -109,8 +110,8 @@ public class daoSanPham {
                         rs.getString("MaSP"),
                         rs.getString("MaLSP"),
                         rs.getString("TenSP"),
-                        rs.getFloat("DonGia"), 
-                        rs.getInt("SoLuong"), 
+                        rs.getFloat("DonGia"),
+                        rs.getInt("SoLuong"),
                         rs.getString("HinhAnh"),
                         rs.getInt("TrangThai")
                 );
@@ -139,8 +140,8 @@ public class daoSanPham {
                         rs.getString("MaSP"),
                         rs.getString("MaLSP"),
                         rs.getString("TenSP"),
-                        rs.getFloat("DonGia"), 
-                        rs.getInt("SoLuong"), 
+                        rs.getFloat("DonGia"),
+                        rs.getInt("SoLuong"),
                         rs.getString("HinhAnh"),
                         rs.getInt("TrangThai")
                 );
@@ -153,7 +154,7 @@ public class daoSanPham {
 
         return sanphamList;
     }
-    
+
     public String getNextID() {
         return "SP" + String.valueOf(this.listSP.size() + 1);
     }
@@ -186,18 +187,14 @@ public class daoSanPham {
     }
 
     //Sửa thông tin sản phẩm
-    public boolean updateSanPham(int MaSP, String TenSP, byte[] hinh_anh, int id_exist, int MaLSP) {
-        String query = "Call USP_updateNhanVien(?,?,?,?,?,?,?)";
+    public boolean updateSanPham(String MaSP, String MaLSP, String TenSP, float DonGia, int SoLuong, String HinhAnh, int TrangThai) {
+        String query = "UPDATE `sanpham` SET `MaLSP`='" + MaLSP + "',`TenSP`='" + TenSP + "',`DonGia`=" + DonGia + ",`SoLuong`=" + SoLuong + ",`HinhAnh`='" + HinhAnh + "',`TrangThai`=" + TrangThai + " WHERE `MaSP`='" + MaSP + "'";
+        System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
-        arr.add(MaSP);
-        arr.add(TenSP);
-        arr.add(hinh_anh);
-        arr.add(id_exist);
-        arr.add(MaLSP);
         ConnectDB.getIntance().open();
-        int result = ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().excuteUpdate(query, arr);
         ConnectDB.getIntance().close();
-        return result > 0;
+        return true;
     }
 
     //Lấy 1 sản phẩm từ id sản phẩm
@@ -213,8 +210,8 @@ public class daoSanPham {
                         rs.getString("MaSP"),
                         rs.getString("MaLSP"),
                         rs.getString("TenSP"),
-                        rs.getFloat("DonGia"), 
-                        rs.getInt("SoLuong"), 
+                        rs.getFloat("DonGia"),
+                        rs.getInt("SoLuong"),
                         rs.getString("HinhAnh"),
                         rs.getInt("TrangThai")
                 );

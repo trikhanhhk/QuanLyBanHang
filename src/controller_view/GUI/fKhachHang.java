@@ -506,7 +506,7 @@ public class fKhachHang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableKhachHangMouseClicked
 
-    
+
     private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonExcelActionPerformed
@@ -586,11 +586,10 @@ public class fKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
-         int selectedRowIndex = jTableKhachHang.getSelectedRow();
-            int id = jTableKhachHang.getValueAt(selectedRowIndex, 0).hashCode();
-//        JFrame ThongBao = new fThongBaoHuy("KhachHang",id,maNV);
-//        ThongBao.setVisible(true);
-        // TODO add your handling code here:
+        int selectedRowIndex = jTableKhachHang.getSelectedRow();
+        String id = jTableKhachHang.getValueAt(selectedRowIndex, 1).toString();
+        daoKhachHang.getInstance().deleteKhachHang(id);
+        build();
     }//GEN-LAST:event_jButtonHuyActionPerformed
     //
 
@@ -604,14 +603,14 @@ public class fKhachHang extends javax.swing.JFrame {
             public void run() {
                 JFrame kh = new fKhachHang("NV1");
                 kh.setVisible(true);
-            } 
+            }
         });
     }
 
     public void build() {
         jButtonSua.setEnabled(false);
         jButtonHuy.setEnabled(false);
-        DanhSachKhachHang = DuLieuMau;
+        DanhSachKhachHang = daoKhachHang.getInstance().getListKhachHang();
         this.count = this.DanhSachKhachHang.size();
         jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
         if (count % 20 == 0) {
@@ -653,18 +652,19 @@ public class fKhachHang extends javax.swing.JFrame {
         while (jTableKhachHang.getRowCount() > 0) {
             model.removeRow(0);
         }
-        if(arr.isEmpty()==false)
-        {
+        if (arr.isEmpty() == false) {
             int i = 0;
             for (KhachHang item : arr) {
-            model.addRow(new String[]{
-                String.valueOf(i),
-                item.getMaKH(),
-                item.getTenKH(),
-                item.getDiaChi(),
-                item.getSDT(),
-                item.getTrangThai() == 1 ? "Ẩn" : "Hiện"});
-            i++;
+                if (item.getTrangThai() == 0) {
+                    model.addRow(new String[]{
+                        String.valueOf(i),
+                        item.getMaKH(),
+                        item.getTenKH(),
+                        item.getDiaChi(),
+                        item.getSDT(),
+                        item.getTrangThai() == 1 ? "Ẩn" : "Hiện"});
+                    i++;
+                }
             }
         }
     }

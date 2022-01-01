@@ -13,6 +13,7 @@ import java.lang.*;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.DTO.SanPham;
 
 /**
  *
@@ -43,12 +44,12 @@ public class daoChiTietPhieuNhap {
             ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             while (rs.next()) {
                 String ma = rs.getString(1);
-                    String maSP = rs.getString(2);
-                    Integer soLuong = rs.getInt(3);
-                    Float donGia = rs.getFloat(4);
+                String maSP = rs.getString(2);
+                Integer soLuong = rs.getInt(3);
+                Float donGia = rs.getFloat(4);
 
-                    ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(ma, maSP, soLuong, donGia);
-                    result.add(ctpn);
+                ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(ma, maSP, soLuong, donGia);
+                result.add(ctpn);
             }
 
             ConnectDB.getIntance().close();
@@ -60,11 +61,13 @@ public class daoChiTietPhieuNhap {
     }
 
     //Thêm chi tiết phiếu nhập mới
-        public int insertChiTietPhieuNhap(String MaPN, String MaSP, int SoLuong, float DonGia) {
+    public int insertChiTietPhieuNhap(String MaPN, String MaSP, int SoLuong, float DonGia) {
         int a = -100;
         try {
             model.DAO.ConnectDB.getIntance().open();
             PreparedStatement ps = model.DAO.ConnectDB.getIntance().getconn().prepareStatement("INSERT INTO `chitietphieunhap` (`MaPN`, `MaSP`, `SoLuong`, `DonGia`) VALUES (?,?,?,?)");
+            SanPham sp = daoSanPham.getInstance().getSanPham(MaSP);
+            daoSanPham.getInstance().updateSanPham(MaSP, sp.getMaLSP(), sp.getTenSP(), sp.getDonGia(), SoLuong + sp.getSoLuong(), sp.getFileNameHinhAnh(), sp.getTrangThai()); //update lại số lượng trong db
             ps.setString(1, MaPN);
             ps.setString(2, MaSP);
             ps.setInt(3, SoLuong);
@@ -72,13 +75,12 @@ public class daoChiTietPhieuNhap {
             a = ps.executeUpdate();
             System.out.println("Result " + a);
             model.DAO.ConnectDB.getIntance().close();
-            //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getQuanLyChiTietHoaDon(maNV).getTenNV() + " đã thêm loại sản phẩm mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         } catch (Exception e) {
-               System.err.println(e);
+            System.err.println(e);
         }
         return a;
     }
-    
+
     public void updateQuanLyChiTietHoaDon(String MaPN, String MaSP, int SoLuong, float DonGia) {
         try {
             String query = "UPDATE chitietphieunhap set SoLuong= ?, DonGia= ? WHERE MaPN= ? AND MaSP= ?";
@@ -93,7 +95,6 @@ public class daoChiTietPhieuNhap {
             Logger.getLogger(daoQuanLyChiTietHoaDon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     // Lấy một chi tiết phiếu nhập từ id
     public ChiTietPhieuNhap getChiTietPhieuNhap(String maPn, String maSp) {
@@ -105,13 +106,13 @@ public class daoChiTietPhieuNhap {
             ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
             if (rs.next()) {
 
-                 String ma = rs.getString("MaPN");
-                    String maSP = rs.getString("MaSP");
-                    Integer soLuong = rs.getInt("SoLuong");
-                    Float donGia = rs.getFloat("DonGia");
+                String ma = rs.getString("MaPN");
+                String maSP = rs.getString("MaSP");
+                Integer soLuong = rs.getInt("SoLuong");
+                Float donGia = rs.getFloat("DonGia");
 
-                    ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(ma, maSP, soLuong, donGia);
-                    result = ctpn;
+                ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(ma, maSP, soLuong, donGia);
+                result = ctpn;
 
             } else {
                 result = null;
@@ -122,7 +123,7 @@ public class daoChiTietPhieuNhap {
         }
         return result;
     }
-    
+
     public ArrayList<ChiTietPhieuNhap> getAllChiTiet(String mapn) {
         ArrayList<ChiTietPhieuNhap> result = new ArrayList<>();
         dsctpn = daoChiTietPhieuNhap.getInstance().getListChiTietPhieuNhap();

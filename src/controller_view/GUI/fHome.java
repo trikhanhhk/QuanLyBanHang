@@ -61,10 +61,6 @@ public class fHome extends javax.swing.JFrame {
         btnTaiKhoan.setIcon(getIcon("taikhoan.png"));
         btnThongKe.setIcon(getIcon("thongke.png"));
         btnQuyen.setIcon(getIcon("quyen.png"));
-
-//        btnSp.setIcon(getIcon("icons8_google_mobile_100px.png"));
-//        btnHoaDon.setIcon(getIcon("icons8-purchase-order-40.png"));
-//        btnKhuyenMai.setIcon(getIcon("sale-icon100-100.png"));
     }
 
     private ImageIcon getIcon(String filename) {
@@ -829,8 +825,8 @@ public class fHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnPhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuNhapActionPerformed
-//        JFrame pn = new (maNV);
-//        kh.setVisible(true);
+        JFrame pn = new fPhieuNhap(maNV);
+        pn.setVisible(true);
     }//GEN-LAST:event_btnPhieuNhapActionPerformed
 
     private void jComboBoxNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNhanVienActionPerformed

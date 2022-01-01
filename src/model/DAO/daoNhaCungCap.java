@@ -175,7 +175,6 @@ public class daoNhaCungCap {
                 "Sửa thông tin nhà cung cấp thành công",
                 "Thông báo",
                 JOptionPane.INFORMATION_MESSAGE);
-        //DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(IdNhanVien).getTenNV() + " đã sửa thông tin của nhà cung cấp vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         return true;
     }
     public boolean HuyNhaCungCap(int maNCC, int maNV)

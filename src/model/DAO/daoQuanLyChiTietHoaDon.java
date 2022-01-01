@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.DTO.SanPham;
 
 /**
  *
@@ -104,6 +105,8 @@ public class daoQuanLyChiTietHoaDon {
         try {
             model.DAO.ConnectDB.getIntance().open();
             PreparedStatement ps = model.DAO.ConnectDB.getIntance().getconn().prepareStatement("INSERT INTO `chitiethoadon` (`MaHD`, `MaSP`, `SoLuong`, `DonGia`) VALUES (?,?,?,?)");
+            SanPham sp = daoSanPham.getInstance().getSanPham(MaSP);
+            daoSanPham.getInstance().updateSanPham(MaSP, sp.getMaLSP(), sp.getTenSP(), sp.getDonGia(), sp.getSoLuong() - SoLuong, sp.getFileNameHinhAnh(), sp.getTrangThai());
             ps.setString(1, MaHD);
             ps.setString(2, MaSP);
             ps.setInt(3, SoLuong);

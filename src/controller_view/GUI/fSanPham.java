@@ -16,24 +16,25 @@ import java.lang.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 import model.DAO.daoTaiKhoan;
 import model.DTO.TaiKhoan;
 
-
 public class fSanPham extends javax.swing.JFrame {
-   
+
     public String id_nv;
     public TaiKhoan tkNv;
-    
+
     public fSanPham() {
         initComponents();
         setIcon();
         LoadThongTinSanPham();
         jButtonHuy.setVisible(false);
     }
-    public fSanPham(String idnv) { 
+
+    public fSanPham(String idnv) {
         initComponents();
         setIcon();
         LoadThongTinSanPham();
@@ -41,84 +42,83 @@ public class fSanPham extends javax.swing.JFrame {
         this.id_nv = idnv;
         tkNv = daoTaiKhoan.getInstance().getTaiKhoan(idnv);
     }
+
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }
-    public void LoadThongTinSanPham()
-    {   
+
+    public void LoadThongTinSanPham() {
         int stt = 1;
         DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
         while (jTableThongTinSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
         ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
-        if(arr.isEmpty()==false)
-        {
-//            Boolean hienSanPhamAn = LoginForm.quyenLogin.getChiTietQuyen().contains("qlSanPham");
+        if (arr.isEmpty() == false) {
             for (SanPham sp : arr) {
-    //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
-                    model.addRow(new String[]{
-                        String.valueOf(stt),
-                        sp.getMaSP(),
-                        sp.getMaLSP(),
-                        sp.getTenSP(),
-                        PriceFormatter.format(sp.getDonGia()),
-                        String.valueOf(sp.getSoLuong()),
-                        sp.getFileNameHinhAnh(),
-                        (sp.getTrangThai() == 0 ? "Hiện" : "Ẩn")
-                    });
-                    stt++;
-    //            }
+                model.addRow(new String[]{
+                    String.valueOf(stt),
+                    sp.getMaSP(),
+                    sp.getMaLSP(),
+                    sp.getTenSP(),
+                    PriceFormatter.format(sp.getDonGia()),
+                    String.valueOf(sp.getSoLuong()),
+                    sp.getFileNameHinhAnh(),
+                    (sp.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh")
+                });
+                stt++;
+                //            }
             }
         }
-        
-    }
-//    public void showComboboxLoaiSanPham(){
-//        jComboBoxLoaiSanPham.removeAllItems();
-//        jComboBoxLoaiSanPham.addItem("Tất cả");
-//        ArrayList<LoaiSanPham> arr = daoLoaiSanPham.getInstance().getListLoaiSanPham();
-//        for(int i=0;i< arr.size();i++){
-//            jComboBoxLoaiSanPhamTK.addItem(arr.get(i).ten_loai_sp);
-//        }
-//    }
 
-    public void listDanhSachSanPhamTheoLoai(String ten_loai_sp){
-  
-        if ("Tất cả".equals(ten_loai_sp)){
+    }
+
+    public void listDanhSachSanPhamTheoLoai(String ten_loai_sp) {
+
+        if ("Tất cả".equals(ten_loai_sp)) {
             listDanhSachSanPham();
-        }
-        else
-        {
+        } else {
             DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
             while (jTableThongTinSanPham.getRowCount() > 0) {
                 model.removeRow(0);
             }
             //int id_loai = daoLoaiSanPham.getInstance().getIDLoaiSanPham(ten_loai_sp).id_loai_sp;
             ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
-            for(int i = 0 ;i<arr.size();i++)
-            {
-                if(arr.get(i).getMaLSP() == daoLoaiSanPham.getInstance().getIDLoaiSanPham(ten_loai_sp).getMaLSP()){
+            for (int i = 0; i < arr.size(); i++) {
+                if (arr.get(i).getMaLSP() == daoLoaiSanPham.getInstance().getIDLoaiSanPham(ten_loai_sp).getMaLSP()) {
                     String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).getMaLSP()).getTenLSP();
-                    model.addRow(new Object[]{arr.get(i).getMaSP(),arr.get(i).getTenSP(),Loai_sp});
-                
+                    model.addRow(new Object[]{arr.get(i).getMaSP(), arr.get(i).getTenSP(), Loai_sp});
+
                 }
             }
             //System.out.println("Khac");
         }
     }
-    public void listDanhSachSanPham(){
+
+    public void listDanhSachSanPham() {
         DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
         while (jTableThongTinSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
+        int stt = 1;
         ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
-         for(int i = 0 ;i<arr.size();i++)
-         {
-            String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).getMaLSP()).getTenLSP();
-            model.addRow(new Object[]{arr.get(i).getMaSP(),arr.get(i).getTenSP(),Loai_sp});
-         }
+        for (SanPham sp : arr) {
+            //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
+            model.addRow(new String[]{
+                String.valueOf(stt),
+                sp.getMaSP(),
+                sp.getMaLSP(),
+                sp.getTenSP(),
+                PriceFormatter.format(sp.getDonGia()),
+                String.valueOf(sp.getSoLuong()),
+                sp.getFileNameHinhAnh(),
+                (sp.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh")
+            });
+            stt++;
+            //            }
+        }
     }
-   
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -390,6 +390,11 @@ public class fSanPham extends javax.swing.JFrame {
         ImageIcon ImgLamMoi = new ImageIcon(imgLamMoi.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
         jButtonLamMoi.setIcon(ImgLamMoi);
         jButtonLamMoi.setText("Tải lại");
+        jButtonLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLamMoiActionPerformed(evt);
+            }
+        });
 
         jButtonHuy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonHuy.setText("Ngừng kinh doanh");
@@ -448,45 +453,37 @@ public class fSanPham extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     //Methods
-    
-    
-
-
-
-
-
-    
     //Events
     private void jTableThongTinSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableThongTinSanPhamMouseClicked
-       DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
-       int row = jTableThongTinSanPham.getSelectedRow();
-       jLabelLoadIDSanPham.setText(model.getValueAt(row,1).toString());
-       jLabelLoadTenSanPham.setText(model.getValueAt(row, 2).toString());
-       jLabelLoadLoaiSanPham.setText(model.getValueAt(row, 3).toString());
-       labelDonGia.setText(model.getValueAt(row, 4).toString());
-       labelSoluong.setText(model.getValueAt(row, 5).toString());
-       int trangThai = model.getValueAt(row, 7).toString().equals("hiện") ? 0 : 1;
-       jButtonHuy.setText(trangThai==1 ? "Tiếp tục kinh doanh" : "Ngừng kinh doanh");
-       if(tkNv.getMaQuyen() == "Q1") {
-           jButtonHuy.setVisible(true);
-       }else {
-           jButtonHuy.setVisible(false);
-       }
-       String id = (model.getValueAt(row,0).toString());
-       SanPham sp = daoSanPham.getInstance().getSanPham(id);
-       ImageIcon img = new ImageIcon(getClass().getResource("/Image/ProductImages/" + model.getValueAt(row, 6).toString()));
-       Image imgScaled = img.getImage().getScaledInstance(jLabelLoadhinhAnh.getWidth(), jLabelLoadhinhAnh.getHeight(), Image.SCALE_DEFAULT);
-       jLabelLoadhinhAnh.setText("");
-       jLabelLoadhinhAnh.setIcon(new ImageIcon(imgScaled));
+        DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
+        int row = jTableThongTinSanPham.getSelectedRow();
+        jLabelLoadIDSanPham.setText(model.getValueAt(row, 1).toString());
+        jLabelLoadTenSanPham.setText(model.getValueAt(row, 2).toString());
+        jLabelLoadLoaiSanPham.setText(model.getValueAt(row, 3).toString());
+        labelDonGia.setText(model.getValueAt(row, 4).toString());
+        labelSoluong.setText(model.getValueAt(row, 5).toString());
+        int trangThai = model.getValueAt(row, 7).toString().equals("Đang kinh doanh") ? 0 : 1;
+        jButtonHuy.setText(trangThai == 1 ? "Tiếp tục kinh doanh" : "Ngừng kinh doanh");
+        if (tkNv.getMaQuyen().equals("Q1")) {
+            jButtonHuy.setVisible(true);
+        } else {
+            jButtonHuy.setVisible(false);
+        }
+        String id = (model.getValueAt(row, 0).toString());
+        SanPham sp = daoSanPham.getInstance().getSanPham(id);
+        ImageIcon img = new ImageIcon(getClass().getResource("/Image/ProductImages/" + model.getValueAt(row, 6).toString()));
+        Image imgScaled = img.getImage().getScaledInstance(jLabelLoadhinhAnh.getWidth(), jLabelLoadhinhAnh.getHeight(), Image.SCALE_DEFAULT);
+        jLabelLoadhinhAnh.setText("");
+        jLabelLoadhinhAnh.setIcon(new ImageIcon(imgScaled));
     }//GEN-LAST:event_jTableThongTinSanPhamMouseClicked
 
     private void jButtonThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonThemMouseClicked
         fThemSanPham TSP = new fThemSanPham();
         TSP.setVisible(true);
-        
-       
+
+
     }//GEN-LAST:event_jButtonThemMouseClicked
 
     private void jButtonSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSuaMouseClicked
@@ -496,60 +493,56 @@ public class fSanPham extends javax.swing.JFrame {
 
     private void jButtonTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTimKiemMouseClicked
         DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
-        while (jTableThongTinSanPham.getRowCount() > 0)
-        {
+        while (jTableThongTinSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
         String timkiem = jTextFieldTimKiem.getText().toString();
         ArrayList<SanPham> arr = daoSanPham.getInstance().FindListSanPham(timkiem);
-        if(arr.isEmpty()==false)
-        {
+        if (arr.isEmpty() == false) {
             int stt = 1;
 //            Boolean hienSanPhamAn = LoginForm.quyenLogin.getChiTietQuyen().contains("qlSanPham");
             for (SanPham sp : arr) {
-    //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
-                    model.addRow(new String[]{
-                        String.valueOf(stt),
-                        sp.getMaSP(),
-                        sp.getMaLSP(),
-                        sp.getTenSP(),
-                        PriceFormatter.format(sp.getDonGia()),
-                        String.valueOf(sp.getSoLuong()),
-                        sp.getFileNameHinhAnh(),
-                        (sp.getTrangThai() == 0 ? "Đăng kin doanh" : "Ngừng kinh doanh")
-                    });
-                    stt++;
-    //            }
+                //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
+                model.addRow(new String[]{
+                    String.valueOf(stt),
+                    sp.getMaSP(),
+                    sp.getMaLSP(),
+                    sp.getTenSP(),
+                    PriceFormatter.format(sp.getDonGia()),
+                    String.valueOf(sp.getSoLuong()),
+                    sp.getFileNameHinhAnh(),
+                    (sp.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh")
+                });
+                stt++;
+                //            }
             }
         }
     }//GEN-LAST:event_jButtonTimKiemMouseClicked
 
     private void jTextFieldTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyReleased
         DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
-        while (jTableThongTinSanPham.getRowCount() > 0)
-        {
+        while (jTableThongTinSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
         String timkiem = jTextFieldTimKiem.getText().toString();
         ArrayList<SanPham> arr = daoSanPham.getInstance().FindListSanPham(timkiem);
-         if(arr.isEmpty()==false)
-        {
+        if (arr.isEmpty() == false) {
 //            Boolean hienSanPhamAn = LoginForm.quyenLogin.getChiTietQuyen().contains("qlSanPham");
             int stt = 1;
             for (SanPham sp : arr) {
-    //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
-                    model.addRow(new String[]{
-                        String.valueOf(stt),
-                        sp.getMaSP(),
-                        sp.getMaLSP(),
-                        sp.getTenSP(),
-                        PriceFormatter.format(sp.getDonGia()),
-                        String.valueOf(sp.getSoLuong()),
-                        sp.getFileNameHinhAnh(),
-                        (sp.getTrangThai() == 0 ? "Hiện" : "Ẩn")
-                    });
-                    stt++;
-    //            }
+                //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
+                model.addRow(new String[]{
+                    String.valueOf(stt),
+                    sp.getMaSP(),
+                    sp.getMaLSP(),
+                    sp.getTenSP(),
+                    PriceFormatter.format(sp.getDonGia()),
+                    String.valueOf(sp.getSoLuong()),
+                    sp.getFileNameHinhAnh(),
+                    (sp.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh")
+                });
+                stt++;
+                //            }
             }
         }
     }//GEN-LAST:event_jTextFieldTimKiemKeyReleased
@@ -560,17 +553,27 @@ public class fSanPham extends javax.swing.JFrame {
 
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
         int selectedRowIndex = jTableThongTinSanPham.getSelectedRow();
-        int id = jTableThongTinSanPham.getValueAt(selectedRowIndex, 0).hashCode();
-//        JFrame ThongBao = new fThongBaoHuy("NhaCungCap", id, id_nv);
-//        ThongBao.setVisible(true);
-        // TODO add your handling code here:
+        String id = jTableThongTinSanPham.getValueAt(selectedRowIndex, 1).toString();
+        SanPham sp = daoSanPham.getInstance().getSanPham(id);
+        int reply = JOptionPane.showConfirmDialog(getRootPane(),
+                "Bạn có muốn ngừng kinh doanh sản phẩm: " + sp.getTenSP() + " ?", "Cảnh báo",
+                JOptionPane.YES_NO_OPTION);
+
+        if (reply == JOptionPane.OK_OPTION) {
+            daoSanPham.getInstance().updateSanPham(id, sp.getMaLSP(), sp.getTenSP(), sp.getDonGia(), sp.getSoLuong(), sp.getFileNameHinhAnh(), sp.getTrangThai() == 0 ? 1 : 0);
+            listDanhSachSanPham();
+        }
     }//GEN-LAST:event_jButtonHuyActionPerformed
 
     private void jButtonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButtonThemActionPerformed
-    
+
+    private void jButtonLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLamMoiActionPerformed
+        listDanhSachSanPham();
+    }//GEN-LAST:event_jButtonLamMoiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -597,7 +600,7 @@ public class fSanPham extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(fSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -605,9 +608,8 @@ public class fSanPham extends javax.swing.JFrame {
             }
         });
     }
-    
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonHuy;
     private javax.swing.JButton jButtonLamMoi;

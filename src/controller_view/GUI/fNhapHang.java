@@ -283,6 +283,11 @@ public class fNhapHang extends javax.swing.JFrame {
         ImageIcon ImgLamMoi = new ImageIcon(imgLamMoi.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
         jButtonLamMoi.setIcon(ImgLamMoi);
         jButtonLamMoi.setText("Tải lại");
+        jButtonLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLamMoiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -606,7 +611,6 @@ public class fNhapHang extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -798,20 +802,23 @@ public class fNhapHang extends javax.swing.JFrame {
                 LocalDate.parse(txtNgayLap.getText()).toString(),
                 LocalTime.parse(txtGioLap.getText()).toString(),
                 Float.parseFloat(txtTongtien.getText()));
-
+        int a = -1;
         for (ChiTietPhieuNhap ct : dsctpn) {
-            int a = daoChiTietPhieuNhap.getInstance().insertChiTietPhieuNhap(ct.getMa(), ct.getMaSP(), ct.getSoLuong(), ct.getDonGia());
+            a = daoChiTietPhieuNhap.getInstance().insertChiTietPhieuNhap(ct.getMa(), ct.getMaSP(), ct.getSoLuong(), ct.getDonGia());
             System.out.println("result " + a);
         }
-
+        if(a>=0){
         int reply = JOptionPane.showConfirmDialog(getRootPane(),
                 "Thanh toán thành công, bạn có muốn IN phiếu nhập?", "Thành công",
                 JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.OK_OPTION) {
-            new WritePDF().writeHoaDon(txtMaPN.getText());
+            new WritePDF().writePhieuNhap(txtMaPN.getText());
         }
         txtMaPN.setText(daoPhieuNhap.getInstance().getNextID());
         clear();
+        } else {
+            return;
+        }
 //        this.target.refreshAll();
     }//GEN-LAST:event_btnNhapHangActionPerformed
 
@@ -830,6 +837,10 @@ public class fNhapHang extends javax.swing.JFrame {
         clear();
 
     }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void jButtonLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLamMoiActionPerformed
+        LoadThongTinSanPham();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLamMoiActionPerformed
 
     public void refreshAll() {
 //        refreshTable();

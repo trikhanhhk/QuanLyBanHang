@@ -462,7 +462,7 @@ public class fPhieuNhap extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void jButtonNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoMaxActionPerformed
         Trang = 1;
         ArrayList<PhieuNhap> table = model.DAO.daoPhieuNhap.getInstance().get20PhieuNhap(dspn, Trang);
@@ -502,8 +502,9 @@ public class fPhieuNhap extends javax.swing.JFrame {
     private void jButtonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFActionPerformed
         int selectedRowIndex = jTablePhieuNhap.getSelectedRow();
         String id = jTablePhieuNhap.getValueAt(selectedRowIndex, 1).toString();
-        if(selectedRowIndex>=0){
-//         new WritePDF().writePhieuNhap(id);
+        if (selectedRowIndex >= 0) {
+            new WritePDF().writePhieuNhap(id);
+            
         } else {
             JOptionPane.showMessageDialog(this, "Chọn một hóa đơn để in");
         }
@@ -527,17 +528,17 @@ public class fPhieuNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
-//        try {
-//            boolean result = busQuanLyPhieuNhap.getInstance().XuatExcel(DuLieuMau);
-//            if(result) {
-//                JOptionPane.showMessageDialog(this, "File Excel đã được lưu tại C:\\demo");
-//            }else {
-//                JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra khi xuất file Excel");
-//            }
-//        } catch (IOException ex) {
-//            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra khi xuất file Excel");
-//            Logger.getLogger(fPhieuNhap.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            boolean result = daoPhieuNhap.getInstance().XuatExcel(DuLieuMau);
+            if (result) {
+                JOptionPane.showMessageDialog(this, "File Excel đã được lưu tại C:\\demo");
+            } else {
+                JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra khi xuất file Excel");
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra khi xuất file Excel");
+            Logger.getLogger(fPhieuNhap.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonExcelActionPerformed
 
     private void jTextFieldTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemKeyReleased
@@ -576,11 +577,9 @@ public class fPhieuNhap extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTablePhieuNhap.getModel();
         int selectedRowIndex = jTablePhieuNhap.getSelectedRow();
         String id = jTablePhieuNhap.getValueAt(selectedRowIndex, 1).toString();
-        
-//        JFrame CtPhieuNhap = new fChiTietPhieuNhap(maNV, id);
-//        CtPhieuNhap.setVisible(true);
+        JFrame CtPhieuNhap = new fChiPhieuNhap(maNV, id);
+        CtPhieuNhap.setVisible(true);
     }//GEN-LAST:event_btnXemChiTietActionPerformed
-
 
     /**
      * @param args the command line arguments
@@ -591,9 +590,7 @@ public class fPhieuNhap extends javax.swing.JFrame {
             public void run() {
                 JFrame kh = new fPhieuNhap("NV4"); //đây là hàm để chạy
                 kh.setVisible(true);
-            } // vì đang lấy lại form của nhà cung cấp nên nó hiển thị dât của nhà cung cấp
-            // có project ban đầu nữa k
-            // có 2 project luôn đấy// ok nhé  1 cột r
+            } 
         });
     }
 
@@ -641,8 +638,7 @@ public class fPhieuNhap extends javax.swing.JFrame {
         while (jTablePhieuNhap.getRowCount() > 0) {
             model.removeRow(0);
         }
-        if(arr.isEmpty()==false)
-        {
+        if (arr.isEmpty() == false) {
             int stt = 1;
             for (PhieuNhap pn : arr) {
                 model.addRow(new String[]{

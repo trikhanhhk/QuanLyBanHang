@@ -64,7 +64,6 @@ public class fLoaiSanPham extends javax.swing.JFrame {
         jLabelTrang.setText("1");
         ArrayList<LoaiSanPham> table = daoLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
         ShowListLoaiSanPham(table);
-        NhanVienDangNhap();
     }
     public void ShowListLoaiSanPham(ArrayList<LoaiSanPham> arr)
     {
@@ -469,17 +468,6 @@ public class fLoaiSanPham extends javax.swing.JFrame {
             jLabelTrang.setText("1");
             ArrayList<LoaiSanPham> table = daoLoaiSanPham.getInstance().get20LoaiSanPham(DanhSachLoaiSanPham, 1);
             ShowListLoaiSanPham(table);
-        }
-    }
-     public void NhanVienDangNhap() {
-        if (maNV.length()>0) {
-            TaiKhoan tk = model.DAO.daoTaiKhoan.getInstance().getTaiKhoan(maNV);
-            NhanVien nv = model.DAO.daoTaiKhoan.getInstance().getNhanVien(tk.getMaNV());
-            jComboBoxNhanVien.addItem(nv.getTenNV());
-            jComboBoxNhanVien.addItem("Thông tin");
-            jComboBoxNhanVien.addItem("Thoát");
-        } else {
-            jComboBoxNhanVien.addItem("Chưa đăng nhập");
         }
     }
     

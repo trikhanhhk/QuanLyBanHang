@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/model/DAO/daoQuanLyHoaDon.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/controller_view/GUI/fHoaDon.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/model/DAO/daoNhanVien.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/controller_view/GUI/fThemLoaiSp.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/model/DAO/daoChiTietPhieuNhap.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/controller_view/GUI/fCreateKhachHang.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/controller_view/GUI/fBanHang.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/controller_view/GUI/fDangNhap.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/model/DAO/daoKhachHang.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/controller_view/GUI/fQuanLyQuyen.java</file>
-            <file>file:/C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/controller_view/GUI/fNhanVien.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -287,6 +287,11 @@ public class fBanHang extends javax.swing.JFrame {
         ImageIcon ImgLamMoi = new ImageIcon(imgLamMoi.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
         jButtonLamMoi.setIcon(ImgLamMoi);
         jButtonLamMoi.setText("Tải lại");
+        jButtonLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLamMoiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -677,7 +682,7 @@ public class fBanHang extends javax.swing.JFrame {
                     PriceFormatter.format(sp.getDonGia()),
                     String.valueOf(sp.getSoLuong()),
                     sp.getFileNameHinhAnh(),
-                    (sp.getTrangThai() == 0 ? "Hiện" : "Ẩn")
+                    (sp.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh")
                 });
                 stt++;
                 //            }
@@ -892,6 +897,10 @@ public class fBanHang extends javax.swing.JFrame {
     private void comboboxKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxKhachHangActionPerformed
 //        showComboboxKhachHang();
     }//GEN-LAST:event_comboboxKhachHangActionPerformed
+
+    private void jButtonLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLamMoiActionPerformed
+        LoadThongTinSanPham();
+    }//GEN-LAST:event_jButtonLamMoiActionPerformed
 
     public void refreshAll() {
 //        refreshTable();

@@ -233,6 +233,20 @@ public class daoKhachHang {
 
         return result;
     }
+     
+     public void deleteKhachHang(String id) {
+         System.out.println("makh" + id);
+         KhachHang kh = this.getKhachHangByID(id);
+         int trangThai = 0;
+         if(kh.getTrangThai() == 0) {
+             trangThai=1;
+         }
+         String query = "Update khachhang Set  TrangThai= "+ trangThai +" where MaKH='" + id+"'";
+         ConnectDB.getIntance().open();
+         ConnectDB.getIntance().excuteQuery(query);
+         ConnectDB.getIntance().close();
+     }
+     
     //Lấy danh sách 20 nhân viên, để làm phân trang
 
     public ArrayList<KhachHang> get20KhachHang(ArrayList<KhachHang> arr, long Trang) {

@@ -5,6 +5,10 @@
  */
 package model.DAO;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import model.DTO.PhieuNhap;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +18,13 @@ import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.swing.JOptionPane;
+import model.DTO.HoaDon;
+import model.DTO.NhaCungCap;
+import model.DTO.NhanVien;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  *
@@ -170,4 +181,99 @@ public class daoPhieuNhap {
 
         return result;
     }
+    
+    public PhieuNhap getPhieuNhapByID(String maPn) {
+        String query = "select *from phieunhap where MaPN='" + maPn + "'";
+        ArrayList<Object> arr = new ArrayList<>();
+        PhieuNhap pn = null;
+        try {
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
+            while (rs.next()) {
+                pn = new PhieuNhap();
+                pn.setMaPN(rs.getString(1));
+                pn.setMaNCC(rs.getString(2));
+                pn.setMaNV(rs.getString(3));
+                pn.setNgayNhap(rs.getDate(4).toLocalDate());
+                pn.setGioNhap(rs.getTime(5).toLocalTime());
+                pn.setTongTien(rs.getFloat(6));
+            }
+
+            ConnectDB.getIntance().close();
+        } catch (SQLException ex) {
+            ConnectDB.getIntance().displayError(ex);
+        }
+
+        return pn;
+    }
+    
+     public boolean XuatExcel(ArrayList<PhieuNhap> DuLieuMau) throws IOException {
+                HSSFWorkbook workbook = new HSSFWorkbook();
+                HSSFSheet sheet = workbook.createSheet("Phiếu nh");
+                int rownum = 0;
+                Cell cell;
+                Row row;
+        
+                row = sheet.createRow(rownum);
+                cell = row.createCell(0);
+                cell.setCellValue("Mã Phiếu nhập");
+        
+                cell = row.createCell(1);
+                cell.setCellValue("Nhà cung cấp");
+        
+                cell = row.createCell(2);
+                cell.setCellValue("Người nhập");
+        
+                cell = row.createCell(3);
+                cell.setCellValue("Ngày nhập");
+        
+                cell = row.createCell(4);
+                cell.setCellValue("Giờ nhập");
+                
+                cell = row.createCell(5);
+                cell.setCellValue("Tổng tiền");
+        
+                for (int i = 0; i < DuLieuMau.size(); i++) {
+                        rownum++;
+                        row = sheet.createRow(rownum);
+                        //
+                        cell = row.createCell(0);
+                        cell.setCellValue(DuLieuMau.get(i).getMaPN());
+                        //
+                        NhaCungCap ncc = daoNhaCungCap.getInstance().getNhaCungCap(DuLieuMau.get(i).getMaNCC());
+                        cell = row.createCell(1);
+                        cell.setCellValue(ncc.getMaNCC() + " " + ncc.getTenNCC());
+                        //
+                        String nv = daoNhanVien.getInstance().getNameNVByID(DuLieuMau.get(i).getMaNV());
+                        cell = row.createCell(2);
+                        cell.setCellValue(DuLieuMau.get(i).getMaNV() + " " + nv);
+                        //
+                        cell = row.createCell(3);
+                        cell.setCellValue(DuLieuMau.get(i).getGioNhap().toString());
+                        //
+                        cell = row.createCell(4);
+                        cell.setCellValue(DuLieuMau.get(i).getNgayNhap().toString());
+                        
+                        //
+                        cell = row.createCell(5);
+                        cell.setCellValue(DuLieuMau.get(i).getTongTien());
+            
+                    }
+                File file = new File("C:/demo/PhieuNhap.xls");
+                file.getParentFile().mkdirs();
+        
+                FileOutputStream outFile;
+                try {
+                        outFile = new FileOutputStream(file);
+                        workbook.write(outFile);
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                        return false;
+                    } catch (IOException ex) {
+                        return false;
+                    }
+
+                return  true;
+    }
+
 }

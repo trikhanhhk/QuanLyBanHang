@@ -5,12 +5,6 @@
  */
 package model.DAO;
 
-import model.DAO.daoKhachHang;
-import model.DAO.daoKhuyenMai;
-import model.DAO.daoNhanVien;
-import model.DAO.daoQuanLyChiTietHoaDon;
-import model.DAO.daoQuanLyHoaDon;
-import model.DAO.daoSanPham;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -35,6 +29,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import model.DTO.ChiTietPhieuNhap;
+import model.DTO.PhieuNhap;
 
 /**
  *
@@ -226,6 +222,85 @@ public class WritePDF {
         } catch (DocumentException | FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Lỗi khi ghi file " + url);
         }
+    }
+    
+    public void writePhieuNhap(String mapn) {
+        String url = "";
+        try {
+            fd.setTitle("In phiếu nhập");
+            url = getFile();
+            if (url == null) {
+                return;
+            }
+            file = new FileOutputStream(url);
+            document = new Document();
+            PdfWriter writer = PdfWriter.getInstance(document, file);
+            document.open();
+            
+            setTitle("Thông tin phiếu nhập");
+
+            PhieuNhap pn = daoPhieuNhap.getInstance().getPhieuNhapByID(mapn);
+
+            Chunk glue = new Chunk(new VerticalPositionMark());// Khoang trong giua hang
+            Paragraph paraMaHoaDon = new Paragraph(new Phrase("Phiếu nhập: " + String.valueOf(pn.getMaPN()), fontData));
+            Paragraph para1 = new Paragraph();
+            para1.setFont(fontData);
+            para1.add(String.valueOf("Nhà cung cấp: " + daoNhaCungCap.getInstance().getNhaCungCap(pn.getMaNCC()).getTenNCC() + "  -  " + pn.getMaNCC()));
+            para1.add(glue);
+            para1.add("Ngày lập: " + String.valueOf(pn.getNgayNhap()));
+
+            Paragraph para2 = new Paragraph();
+            para2.setPaddingTop(30);
+            para2.setFont(fontData);
+            para2.add(String.valueOf("Nhân viên: " + daoNhanVien.getInstance().getNameNVByID(pn.getMaNV())+ "  -  " + pn.getMaNV()));
+            para2.add(glue);
+            para2.add("Giờ lập: " + String.valueOf(pn.getGioNhap()));
+
+            document.add(paraMaHoaDon);
+            document.add(para1);
+            document.add(para2);
+//            document.add(paraKhuyenMai);
+            document.add(Chunk.NEWLINE);//add hang trong de tao khoang cach
+
+            //Tao table cho cac chi tiet cua hoa don
+            PdfPTable pdfTable = new PdfPTable(5);
+            PdfPCell cell;
+
+            //Set headers cho table chi tiet
+            pdfTable.addCell(new PdfPCell(new Phrase("Mã sản phẩm", fontHeader)));
+            pdfTable.addCell(new PdfPCell(new Phrase("Tên sản phẩm", fontHeader)));
+            pdfTable.addCell(new PdfPCell(new Phrase("Đơn giá", fontHeader)));
+            pdfTable.addCell(new PdfPCell(new Phrase("Số lượng", fontHeader)));
+            pdfTable.addCell(new PdfPCell(new Phrase("Tổng tiền", fontHeader)));
+
+            for (int i = 0; i < 5; i++) {
+                cell = new PdfPCell(new Phrase(""));
+                pdfTable.addCell(cell);
+            }
+
+            //Truyen thong tin tung chi tiet vao table
+            for (ChiTietPhieuNhap ctpn : daoChiTietPhieuNhap.getInstance().getAllChiTiet(mapn)) {
+                pdfTable.addCell(new PdfPCell(new Phrase(ctpn.getMaSP(), fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(daoSanPham.getInstance().getSanPham(ctpn.getMaSP()).getTenSP(), fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(PriceFormatter.format(ctpn.getDonGia()), fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(String.valueOf(ctpn.getSoLuong()), fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(PriceFormatter.format(ctpn.getDonGia() * ctpn.getSoLuong()), fontData)));
+            }
+
+            document.add(pdfTable);
+            document.add(Chunk.NEWLINE);
+
+            Paragraph paraTongThanhToan = new Paragraph(new Phrase("Tổng thanh toán: " + PriceFormatter.format(pn.getTongTien()), fontData));
+            paraTongThanhToan.setIndentationLeft(300);
+            document.add(paraTongThanhToan);
+            document.close();
+            
+            JOptionPane.showMessageDialog(null, "Ghi file thành công: " + url);
+
+        } catch (DocumentException | FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Lỗi khi ghi file " + url);
+        }
+
     }
     public void closeFile() {
         document.close();
