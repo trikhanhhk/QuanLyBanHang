@@ -30,41 +30,60 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.table.DefaultTableModel;
-public class fThemSanPham extends javax.swing.JFrame {
-    String pathImg;
-    String maNV;
+import model.DTO.SanPham;
+
+public class fSuaSP extends javax.swing.JFrame {
     
+    String nameImg;
+    String maSp;
+
     /**
      * Creates new form fThemSanPham
      */
-
-    public fThemSanPham(String id){
-        this.maNV=id;
+    public fSuaSP(String id) {
+        this.maSp = id;
         initComponents();
         this.txtMaSP.setText(model.DAO.daoSanPham.getInstance().getNextID());
         setIcon();
+        setData();
         showComboboxLoaiSanPham();
         showComboboxTrangThai();
         this.txtMaSP.setEditable(false);
     }
-    public fThemSanPham() {
+    
+    public fSuaSP() {
         initComponents();
-        this.txtMaSP.setText(model.DAO.daoSanPham.getInstance().getNextID());
         setIcon();
+        setData();
         showComboboxLoaiSanPham();
         showComboboxTrangThai();
         this.txtMaSP.setEditable(false);
     }
+    
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }
+    
+    private ImageIcon getIcon(String filename) {
+        return new ImageIcon(getClass().getResource(filename));
+    }
+
     // Methods
-    public void showComboboxLoaiSanPham(){
+    public void showComboboxLoaiSanPham() {
         jComboBoxLoaiSanPham.removeAllItems();
         ArrayList<LoaiSanPham> arr = daoLoaiSanPham.getInstance().getListLoaiSanPham();
-        for(int i=0;i< arr.size();i++){
+        for (int i = 0; i < arr.size(); i++) {
             jComboBoxLoaiSanPham.addItem(arr.get(i).getTenLSP());
         }
+    }
+    
+    private void setData() {
+        SanPham sp = daoSanPham.getInstance().getSanPham(this.maSp);
+//        String nameImage = sp.getFileNameHinhAnh();
+//        jLabelHinhAnh.setIcon(getIcon(nameImage));
+        txtDonGia.setText(String.valueOf(sp.getDonGia()));
+        txtMaSP.setText(this.maSp);
+        txtTenSP.setText(sp.getTenSP());
     }
     
     public void showComboboxTrangThai() {
@@ -72,8 +91,6 @@ public class fThemSanPham extends javax.swing.JFrame {
         comboboxTrangThai.addItem("Hiện");
         comboboxTrangThai.addItem("Ẩn");
     }
-    
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -177,6 +194,12 @@ public class fThemSanPham extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Tên Sản Phẩm  :");
 
+        txtMaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaSPActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Mã Sản Phẩm:");
 
         jLabel5.setText("Đơn giá:");
@@ -272,7 +295,7 @@ public class fThemSanPham extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 697, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButtonThemAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -297,25 +320,23 @@ public class fThemSanPham extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    String nameImg;
+String pathImg;
     private void jButtonThemAnhMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonThemAnhMousePressed
-       JFileChooser file = new JFileChooser();
-       FileNameExtensionFilter filter = new FileNameExtensionFilter("Image File", "jpg","png","gif");
-       file.setFileFilter(filter);
-       //file.setMultiSelectionEnabled(false);
-       int action = file.showOpenDialog(this);
-       if(action == JFileChooser.APPROVE_OPTION)
-       {
-           File imgFile = file.getSelectedFile();
-           pathImg = imgFile.getAbsolutePath();// lưu đường dẫn để lưu vào database
-           nameImg = imgFile.getName();
-           try {
-               BufferedImage img = ImageIO.read(imgFile);
-               ImageIcon icn = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(jLabelHinhAnh.getWidth(), jLabelHinhAnh.getHeight(), Image.SCALE_SMOOTH));
-               jLabelHinhAnh.setIcon(icn);
-           } catch (Exception e) {
-           }
+        JFileChooser file = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image File", "jpg", "png", "gif");
+        file.setFileFilter(filter);
+        //file.setMultiSelectionEnabled(false);
+        int action = file.showOpenDialog(this);
+        if (action == JFileChooser.APPROVE_OPTION) {
+            File imgFile = file.getSelectedFile();
+            pathImg = imgFile.getAbsolutePath();// lưu đường dẫn để lưu vào database
+            nameImg = imgFile.getName();
+            try {
+                BufferedImage img = ImageIO.read(imgFile);
+                ImageIcon icn = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(jLabelHinhAnh.getWidth(), jLabelHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+                jLabelHinhAnh.setIcon(icn);
+            } catch (Exception e) {
+            }
 
 //           
         }
@@ -326,6 +347,7 @@ public class fThemSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonHuyMouseClicked
 
     private void jButtonThemSPmoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonThemSPmoiMouseClicked
+        FileInputStream in = null;
         FileOutputStream ou = null;
         try {
             String MaSP = txtMaSP.getText();
@@ -334,8 +356,9 @@ public class fThemSanPham extends javax.swing.JFrame {
             String TenSP = txtTenSP.getText();
             float DonGia = Float.parseFloat(txtDonGia.getText());
             String HinhAnh = System.currentTimeMillis()+ "_" + ((Math.random()*9+1)*100000) +"_" + this.nameImg;
-            FileInputStream in = new FileInputStream(this.pathImg.replace("\\", "/"));
-            ou = new FileOutputStream("C:\\Users\\trikh\\OneDrive\\Documents\\Project\\ManagerStore\\QuanLyBanHang\\src\\Image\\ProductImages\\"+ HinhAnh);
+            in = new FileInputStream(this.pathImg.replace("\\", "/"));
+//            System.out.println(System.currentTimeMillis());
+            ou = new FileOutputStream("C:\\Users\\trikh\\OneDrive\\Documents\\Project\\ManagerStore\\QuanLyBanHang\\src\\Image\\ProductImages\\" + HinhAnh);
             BufferedInputStream bin = new BufferedInputStream(in);
             BufferedOutputStream bou = new BufferedOutputStream(ou);
             int b = 0;
@@ -347,21 +370,21 @@ public class fThemSanPham extends javax.swing.JFrame {
             bou.close();
             String nameTrangThai = comboboxTrangThai.getSelectedItem().toString();
             int TrangThai = 0;
-            if(nameTrangThai.equals("Hiện")) {
-                TrangThai=0;
-            }else {
-                TrangThai=1;
+            if (nameTrangThai.equals("Hiện")) {
+                TrangThai = 0;
+            } else {
+                TrangThai = 1;
             }   //        String MaSP, String MaLSP, String TenSP, float DonGia, int SoLuong, String HinhAnh, int TrangThai
-            daoSanPham.getInstance().insertSanPham(MaSP, MaLSP, TenSP, DonGia, 0, HinhAnh, TrangThai);
+            daoSanPham.getInstance().updateSanPham(MaSP, MaLSP, TenSP, DonGia, 0, HinhAnh, TrangThai);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(fThemSanPham.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(fSuaSP.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(fThemSanPham.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(fSuaSP.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                ou.close();
+                in.close();
             } catch (IOException ex) {
-                Logger.getLogger(fThemSanPham.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(fSuaSP.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonThemSPmoiMouseClicked
@@ -377,6 +400,10 @@ public class fThemSanPham extends javax.swing.JFrame {
     private void jButtonThemSPmoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemSPmoiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonThemSPmoiActionPerformed
+
+    private void txtMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaSPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,20 +422,21 @@ public class fThemSanPham extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fThemSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fThemSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fThemSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fThemSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fThemSanPham("NV12").setVisible(true);
+                new fSuaSP("NV12").setVisible(true);
             }
         });
     }

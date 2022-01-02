@@ -487,8 +487,10 @@ public class fSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonThemMouseClicked
 
     private void jButtonSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSuaMouseClicked
-//        fSuaThongTinSanPham STT = new fSuaThongTinSanPham();
-//        STT.setVisible(true);
+        DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
+        int row = jTableThongTinSanPham.getSelectedRow();
+        JFrame fsuaSp = new fSuaSP(model.getValueAt(row, 1).toString());
+        fsuaSp.setVisible(true);
     }//GEN-LAST:event_jButtonSuaMouseClicked
 
     private void jButtonTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTimKiemMouseClicked
@@ -527,10 +529,8 @@ public class fSanPham extends javax.swing.JFrame {
         String timkiem = jTextFieldTimKiem.getText().toString();
         ArrayList<SanPham> arr = daoSanPham.getInstance().FindListSanPham(timkiem);
         if (arr.isEmpty() == false) {
-//            Boolean hienSanPhamAn = LoginForm.quyenLogin.getChiTietQuyen().contains("qlSanPham");
             int stt = 1;
             for (SanPham sp : arr) {
-                //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
                 model.addRow(new String[]{
                     String.valueOf(stt),
                     sp.getMaSP(),
@@ -548,7 +548,10 @@ public class fSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldTimKiemKeyReleased
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
+        int row = jTableThongTinSanPham.getSelectedRow();
+        JFrame fsuaSp = new fSuaSP(model.getValueAt(row, 1).toString());
+        fsuaSp.setVisible(true);
     }//GEN-LAST:event_jButtonSuaActionPerformed
 
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
