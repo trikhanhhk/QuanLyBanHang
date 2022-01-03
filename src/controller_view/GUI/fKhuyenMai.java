@@ -127,7 +127,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
         jButtonLamMoi = new javax.swing.JButton();
         jLabelKetQua = new javax.swing.JLabel();
         jButtonSua = new javax.swing.JButton();
-        jButtonHuy = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButtonNhoMax = new javax.swing.JButton();
         jButtonNho = new javax.swing.JButton();
@@ -278,17 +277,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
             }
         });
 
-        jButtonHuy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonHuy.setText("Hủy");
-        ImageIcon imgHuy = new ImageIcon(getClass().getResource("/icon/icons8-waste-48.png"));
-        ImageIcon ImgHuy = new ImageIcon(imgHuy.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
-        jButtonHuy.setIcon(ImgHuy);
-        jButtonHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonHuyActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -304,10 +292,8 @@ public class fKhuyenMai extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonHuy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonExcel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonTimKiem)
@@ -317,7 +303,7 @@ public class fKhuyenMai extends javax.swing.JFrame {
             .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1011, Short.MAX_VALUE)
         );
 
-        jPanel13Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonExcel, jButtonHuy, jButtonSua, jButtonThem});
+        jPanel13Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonExcel, jButtonSua, jButtonThem});
 
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,7 +313,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonThem)
                         .addComponent(jButtonSua)
-                        .addComponent(jButtonHuy)
                         .addComponent(jButtonExcel))
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -422,7 +407,7 @@ public class fKhuyenMai extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(329, 329, 329)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,7 +483,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
             //System.out.print("Nhap dup chuot");
         }
         jButtonSua.setEnabled(true);
-        jButtonHuy.setEnabled(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableKhuyenMaiMouseClicked
@@ -634,7 +618,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
             DanhSachKhuyenMai = DuLieuMau;
             FindList();
             jButtonSua.setEnabled(false);
-            jButtonHuy.setEnabled(false);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTimKiemKeyPressed
 
@@ -642,23 +625,16 @@ public class fKhuyenMai extends javax.swing.JFrame {
         DanhSachKhuyenMai = DuLieuMau;
         FindList();
         jButtonSua.setEnabled(false);
-        jButtonHuy.setEnabled(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
-        int selectedRowIndex = jTableKhuyenMai.getSelectedRow();
-            int id = jTableKhuyenMai.getValueAt(selectedRowIndex, 0).hashCode();
-//            JFrame Xem = new fViewKhuyenMai(maNV, id,true);
-//            Xem.setVisible(true);
+            int selectedRowIndex = jTableKhuyenMai.getSelectedRow();
+            String id = jTableKhuyenMai.getValueAt(selectedRowIndex, 1).toString();
+            JFrame Xem = new fSuaKM(id);
+            Xem.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSuaActionPerformed
-
-    private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
-         int selectedRowIndex = jTableKhuyenMai.getSelectedRow();
-            int id = jTableKhuyenMai.getValueAt(selectedRowIndex, 0).hashCode();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonHuyActionPerformed
 
 
     /**
@@ -677,7 +653,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
 
     public void build() {
         jButtonSua.setEnabled(false);
-        jButtonHuy.setEnabled(false);
         DanhSachKhuyenMai = DuLieuMau;
         this.count = this.DanhSachKhuyenMai.size();
         jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
@@ -730,7 +705,6 @@ public class fKhuyenMai extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonExcel;
-    private javax.swing.JButton jButtonHuy;
     private javax.swing.JButton jButtonLamMoi;
     private javax.swing.JButton jButtonLon;
     private javax.swing.JButton jButtonLonMax;

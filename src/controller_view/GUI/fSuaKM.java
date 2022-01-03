@@ -21,32 +21,49 @@ import java.lang.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import static java.time.temporal.TemporalQueries.localDate;
 import java.util.Date;
 
 import javax.swing.table.DefaultTableModel;
-public class fCreateKhuyenMai extends javax.swing.JFrame {
-    String maNV;
+import model.DTO.KhuyenMai;
+public class fSuaKM extends javax.swing.JFrame {
+    String idKM;
     
     /**
      * Creates new form fThemSanPham
      */
 
-    public fCreateKhuyenMai(String id){
+    public fSuaKM(String id){
         initComponents();
-        this.maNV=id;
-        this.txtMaKM.setText(model.DAO.daoKhuyenMai.getInstance().getNextID());
+        this.idKM=id;
         setIcon();
         this.txtMaKM.setEditable(false);
+        setData();
     }
-    public fCreateKhuyenMai() {
+    public fSuaKM() {
         initComponents();
-        this.txtMaKM.setText(model.DAO.daoKhuyenMai.getInstance().getNextID());
         setIcon();
         this.txtMaKM.setEditable(false);
+        setData();
     }
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
-    }    
+    }   
+    
+    private void setData() {
+        KhuyenMai km = daoKhuyenMai.getInstance().getKhuyenMai(idKM);
+        txtMaKM.setText(idKM);
+        txtMaKM.setEditable(false);
+        txtTenKM.setText(km.getTenKM());
+        dkKm.setText(String.valueOf(km.getDieuKienKM()));
+        phantramkm.setText(String.valueOf(km.getPhanTramKM()));
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        LocalDate localDate = km.getNgayBD();
+        dateBD.setDate(Date.from(localDate.atStartOfDay(defaultZoneId).toInstant()));
+        localDate = km.getNgayKT();
+        dateKT.setDate(Date.from(localDate.atStartOfDay(defaultZoneId).toInstant()));
+    }
     
     
     @SuppressWarnings("unchecked")
@@ -106,7 +123,7 @@ public class fCreateKhuyenMai extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Thêm khuyến mãi");
+        jLabel7.setText("Sửa khuyến mãi");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,7 +131,7 @@ public class fCreateKhuyenMai extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(142, 142, 142)
-                .addComponent(jLabel7)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -166,9 +183,9 @@ public class fCreateKhuyenMai extends javax.swing.JFrame {
             }
         });
 
-        dateBD.setFormats(new String[]{"yyyy-MM-dd"});
+        dateKT.setFormats(new String[]{"yyyy-MM-dd"});
         Date date = new Date();
-        dateKT.setDate(date);
+        dateBD.setDate(date);
         dateKT.setBackground(new java.awt.Color(255, 255, 255));
         dateKT.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -288,7 +305,7 @@ public class fCreateKhuyenMai extends javax.swing.JFrame {
         String ngaybd = oDateFormat.format(dateBD.getDate()).toString();
         String ngaykt = oDateFormat.format(dateKT.getDate()).toString();
         //String makm, String tenkm, float dkkm, float phantramkm, String ngaybd, String ngaykt, String maNV
-        daoKhuyenMai.getInstance().insertKhuyenMai(MaKM, tenKM, dieukienKM, phantramKM, ngaybd, ngaykt, maNV);
+        daoKhuyenMai.getInstance().UpdateKhuyenMai(MaKM, tenKM, dieukienKM, phantramKM, ngaybd, ngaykt);
     }//GEN-LAST:event_jButtonThemNVmoiMouseClicked
 
     private void txtMaKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaKMActionPerformed
@@ -329,27 +346,21 @@ public class fCreateKhuyenMai extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fCreateKhuyenMai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaKM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fCreateKhuyenMai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaKM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fCreateKhuyenMai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaKM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fCreateKhuyenMai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fSuaKM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fCreateKhuyenMai("NV12").setVisible(true);
+                new fSuaKM().setVisible(true);
             }
         });
     }

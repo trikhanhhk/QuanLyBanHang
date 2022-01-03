@@ -29,6 +29,7 @@ import org.apache.poi.ss.usermodel.Row;
  * @author tatho
  */
 public class daoKhuyenMai {
+
     private static daoKhuyenMai instance;
     private ArrayList<KhuyenMai> listKM;
 
@@ -42,7 +43,7 @@ public class daoKhuyenMai {
     public daoKhuyenMai() {
         this.listKM = this.getListKhuyenMai();
     }
-    
+
     public String getNextID() {
         return "KM" + String.valueOf(this.listKM.size() + 1);
     }
@@ -98,7 +99,6 @@ public class daoKhuyenMai {
                     "Thông báo",
                     JOptionPane.INFORMATION_MESSAGE);
 
-           // DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).getTenNV() + " đã thêm khuyến mãi mới vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -133,7 +133,7 @@ public class daoKhuyenMai {
     }
 
     //Update thông tin nguồn cung cấp
-    public boolean UpdateKhuyenMai(String makm, String tenkm, float dkkm, float phantramkm, String ngaybd, String ngaykt, String maNV) {
+    public boolean UpdateKhuyenMai(String makm, String tenkm, float dkkm, float phantramkm, String ngaybd, String ngaykt) {
         if ("".equals(tenkm) || "".equals(dkkm) || "".equals(phantramkm) || "".equals(ngaybd) || "".equals(ngaykt)) {
             JOptionPane.showMessageDialog(null,
                     "Chưa điền đầy đủ thông tin",
@@ -141,8 +141,8 @@ public class daoKhuyenMai {
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        String query = "UPDATE `khuyenmai` SET `MaKM`='" + makm + "',`DieuKienKM`=" + dkkm + ",`phantramkm`=" + phantramkm + ",`NgayBD`='" + ngaybd + ",`NgayKT`='"+ ngaykt + "' WHERE `MaKM`='" + makm + "'";
-        //System.out.println(query);
+        String query = "UPDATE `khuyenmai` SET TenKM ='" + tenkm + "', DieuKienKM ="+dkkm+", PhanTramKM=" + phantramkm + ", NgayBD='" +ngaybd+ "', NgayKT='" + ngaykt + "' where MaKM='" + makm + "'";
+        System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
         ConnectDB.getIntance().open();
         ConnectDB.getIntance().excuteUpdate(query, arr);
@@ -151,24 +151,9 @@ public class daoKhuyenMai {
                 "Sửa thông tin khuyến mãi thành công",
                 "Thông báo",
                 JOptionPane.INFORMATION_MESSAGE);
-        //DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(IdNhanVien).getTenNV() + " đã sửa thông tin của khuyến mãi vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         return true;
     }
-//    public boolean HuyKhuyenMai(int makm, int maNV)
-//    {
-//        String query = "UPDATE `khuyenmai` SET `id_exist`=0 WHERE `MaNCC`=" + makm;
-//        //System.out.println(query);
-//        ArrayList<Object> arr = new ArrayList<>();
-//        ConnectDB.getIntance().open();
-//        ConnectDB.getIntance().excuteUpdate(query, arr);
-//        ConnectDB.getIntance().close();
-//        JOptionPane.showMessageDialog(null,
-//                "Xóa thông tin khuyến mãi thành công",
-//                "Thông báo",
-//                JOptionPane.INFORMATION_MESSAGE);
-//        //DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).ten_nv + " đã xóa thông tin của khuyến mãi vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
-//        return true;
-//    }
+
     //Tìm kiếm trong bảng nguồn cung cấp (mới)
     public ArrayList<KhuyenMai> FindListKhuyenMai(ArrayList<KhuyenMai> arr, String ValToSearch) {
         ArrayList<KhuyenMai> result = new ArrayList<>();
@@ -222,10 +207,10 @@ public class daoKhuyenMai {
 
         cell = row.createCell(4);
         cell.setCellValue("Ngày bắt đầu");
-        
+
         cell = row.createCell(5);
         cell.setCellValue("Ngày kết thúc");
-        
+
         cell = row.createCell(6);
         cell.setCellValue("Trạng thái");
 
@@ -247,10 +232,10 @@ public class daoKhuyenMai {
             //
             cell = row.createCell(4);
             cell.setCellValue(arr.get(i).getNgayBD().toString());
-            
+
             cell = row.createCell(5);
             cell.setCellValue(arr.get(i).getNgayKT().toString());
-            
+
             cell = row.createCell(6);
             cell.setCellValue(arr.get(i).getTrangThai());
             //
@@ -271,5 +256,5 @@ public class daoKhuyenMai {
 
         System.out.println("Created file: " + file.getAbsolutePath());
     }
-    
+
 }
