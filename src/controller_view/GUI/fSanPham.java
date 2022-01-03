@@ -29,6 +29,7 @@ public class fSanPham extends javax.swing.JFrame {
 
     public fSanPham() {
         initComponents();
+        showComboboxLoaiSanPham();
         setIcon();
         LoadThongTinSanPham();
         jButtonHuy.setVisible(false);
@@ -36,11 +37,13 @@ public class fSanPham extends javax.swing.JFrame {
 
     public fSanPham(String idnv) {
         initComponents();
+        showComboboxLoaiSanPham();
         setIcon();
         LoadThongTinSanPham();
         jButtonHuy.setVisible(false);
         this.id_nv = idnv;
         tkNv = daoTaiKhoan.getInstance().getTaiKhoan(idnv);
+
     }
 
     private void setIcon() {
@@ -73,6 +76,14 @@ public class fSanPham extends javax.swing.JFrame {
 
     }
 
+    public void showComboboxLoaiSanPham() {
+        comboboxPhanLoai.removeAllItems();
+        comboboxPhanLoai.addItem("Tất cả");
+        comboboxPhanLoai.addItem("Đang kinh doanh");
+        comboboxPhanLoai.addItem("Ngừng kinh doanh");
+
+    }
+
     public void listDanhSachSanPhamTheoLoai(String ten_loai_sp) {
 
         if ("Tất cả".equals(ten_loai_sp)) {
@@ -96,12 +107,26 @@ public class fSanPham extends javax.swing.JFrame {
     }
 
     public void listDanhSachSanPham() {
+        String value = "";
+        if (comboboxPhanLoai != null) {
+            value = comboboxPhanLoai!=null && comboboxPhanLoai.getSelectedItem() != null ? comboboxPhanLoai.getSelectedItem().toString() : "";
+        } else {
+            value = "Tất cả";
+        }
         DefaultTableModel model = (DefaultTableModel) jTableThongTinSanPham.getModel();
         while (jTableThongTinSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
         int stt = 1;
         ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
+        if ("Tất cả".equals(value)) {
+            arr = daoSanPham.getInstance().getListSanPham();
+        } else if ("Đang kinh doanh".equals(value)) {
+            arr = daoSanPham.getInstance().getListSanPhamByStatus(0);
+        } else if ("Ngừng kinh doanh".equals(value)) {
+            arr = daoSanPham.getInstance().getListSanPhamByStatus(1);
+        }
+//        ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
         for (SanPham sp : arr) {
             //            if (hienSanPhamAn || sp.getTrangThai() == 0) {
             model.addRow(new String[]{
@@ -149,6 +174,7 @@ public class fSanPham extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jButtonLamMoi = new javax.swing.JButton();
         jButtonHuy = new javax.swing.JButton();
+        comboboxPhanLoai = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Danh Sách Thông Tin Sản Phẩm");
@@ -407,6 +433,23 @@ public class fSanPham extends javax.swing.JFrame {
             }
         });
 
+        comboboxPhanLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboboxPhanLoai.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboboxPhanLoaiItemStateChanged(evt);
+            }
+        });
+        comboboxPhanLoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxPhanLoaiActionPerformed(evt);
+            }
+        });
+        comboboxPhanLoai.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                comboboxPhanLoaiPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -423,6 +466,8 @@ public class fSanPham extends javax.swing.JFrame {
                         .addComponent(jButtonSua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonHuy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboboxPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -444,7 +489,8 @@ public class fSanPham extends javax.swing.JFrame {
                     .addComponent(jButtonThem)
                     .addComponent(jButtonSua)
                     .addComponent(jButtonLamMoi)
-                    .addComponent(jButtonHuy))
+                    .addComponent(jButtonHuy)
+                    .addComponent(comboboxPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
@@ -577,6 +623,18 @@ public class fSanPham extends javax.swing.JFrame {
         listDanhSachSanPham();
     }//GEN-LAST:event_jButtonLamMoiActionPerformed
 
+    private void comboboxPhanLoaiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboboxPhanLoaiPropertyChange
+//        LoadThongTinSanPham();
+    }//GEN-LAST:event_comboboxPhanLoaiPropertyChange
+
+    private void comboboxPhanLoaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboboxPhanLoaiItemStateChanged
+//        LoadThongTinSanPham();
+    }//GEN-LAST:event_comboboxPhanLoaiItemStateChanged
+
+    private void comboboxPhanLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxPhanLoaiActionPerformed
+        listDanhSachSanPham();
+    }//GEN-LAST:event_comboboxPhanLoaiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -614,6 +672,7 @@ public class fSanPham extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboboxPhanLoai;
     private javax.swing.JButton jButtonHuy;
     private javax.swing.JButton jButtonLamMoi;
     private javax.swing.JButton jButtonSua;

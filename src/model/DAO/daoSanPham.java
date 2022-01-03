@@ -94,6 +94,35 @@ public class daoSanPham {
 
         return sanphamList;
     }
+    
+    public ArrayList<SanPham> getListSanPhamByStatus(int status) {
+        ArrayList<SanPham> sanphamList = new ArrayList<>();
+        ArrayList<Object> arr = new ArrayList<>();
+        String searchQuery = "SELECT * FROM `sanpham` WHERE TrangThai =" + status;
+        try {
+            ConnectDB.getIntance().open();
+            ResultSet rs = ConnectDB.getIntance().excuteQuery(searchQuery, arr);
+            SanPham sanpham;
+
+            while (rs.next()) {
+                sanpham = new SanPham(
+                        rs.getString("MaSP"),
+                        rs.getString("MaLSP"),
+                        rs.getString("TenSP"),
+                        rs.getFloat("DonGia"),
+                        rs.getInt("SoLuong"),
+                        rs.getString("HinhAnh"),
+                        rs.getInt("TrangThai")
+                );
+                sanphamList.add(sanpham);
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return sanphamList;
+    }
 
     //Lấy ra danh sách thông tin sản phẩm có cùng loại
     public ArrayList<SanPham> getListSanPhamTheoLoai(int MaLSP) {

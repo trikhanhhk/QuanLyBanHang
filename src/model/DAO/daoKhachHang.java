@@ -68,7 +68,8 @@ public class daoKhachHang {
     }
     
     public String getNextID() {
-        return "KH" + String.valueOf(this.listKH.size() + 1);
+        int size = this.getListKhachHang().size();
+        return "KH" + String.valueOf(size + 1);
     }
     public boolean UpdateKhachHang(
             String MaKH,

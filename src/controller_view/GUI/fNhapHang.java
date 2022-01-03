@@ -99,7 +99,7 @@ public class fNhapHang extends javax.swing.JFrame {
         while (jTableThongTinSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
-        ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
+        ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPhamByStatus(0);
         if (arr.isEmpty() == false) {
 //            Boolean hienSanPhamAn = LoginForm.quyenLogin.getChiTietQuyen().contains("qlSanPham");
             for (SanPham sp : arr) {
@@ -127,7 +127,7 @@ public class fNhapHang extends javax.swing.JFrame {
                 model.removeRow(0);
             }
             //int id_loai = daoLoaiSanPham.getInstance().getIDLoaiSanPham(ten_loai_sp).id_loai_sp;
-            ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
+            ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPhamByStatus(0);
             for (int i = 0; i < arr.size(); i++) {
                 if (arr.get(i).getMaLSP() == daoLoaiSanPham.getInstance().getIDLoaiSanPham(ten_loai_sp).getMaLSP()) {
                     String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).getMaLSP()).getTenLSP();
@@ -144,7 +144,7 @@ public class fNhapHang extends javax.swing.JFrame {
         while (jTableThongTinSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
-        ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPham();
+        ArrayList<SanPham> arr = daoSanPham.getInstance().getListSanPhamByStatus(0);
         for (int i = 0; i < arr.size(); i++) {
             String Loai_sp = daoLoaiSanPham.getInstance().getLoaiSanPham(arr.get(i).getMaLSP()).getTenLSP();
             model.addRow(new Object[]{arr.get(i).getMaSP(), arr.get(i).getTenSP(), Loai_sp,});
