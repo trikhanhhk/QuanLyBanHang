@@ -33,26 +33,27 @@ public class fTaiKhoan extends javax.swing.JFrame {
     public ArrayList<TaiKhoan> DuLieuMau;
     public ArrayList<TaiKhoan> dstk;
     public long count, SoTrang, Trang = 1;
-    
-    public fTaiKhoan(){
+
+    public fTaiKhoan() {
         initComponents();
         setIcon();
     }
-     public fTaiKhoan(String maNV)
-    {
-        this.maNV=maNV;
+
+    public fTaiKhoan(String maNV) {
+        this.maNV = maNV;
         dstk = model.DAO.daoTaiKhoan.getInstance().getListTaiKhoan();
         DuLieuMau = dstk;
         initComponents();
         setIcon();
         build();
-        
+        this.setTitle("Danh sách tài khoản");
+
     }
-     private void setIcon() {
+
+    private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }
-    
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +70,7 @@ public class fTaiKhoan extends javax.swing.JFrame {
         jLabelKetQua = new javax.swing.JLabel();
         jButtonThemTK = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -123,6 +125,13 @@ public class fTaiKhoan extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Làm mới");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -130,19 +139,24 @@ public class fTaiKhoan extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButtonThemTK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelKetQua)))
+                        .addComponent(jLabelKetQua))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabelKetQua)
@@ -215,7 +229,7 @@ public class fTaiKhoan extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
 
         pack();
@@ -226,17 +240,22 @@ public class fTaiKhoan extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableTaiKhoanMouseClicked
 
     private void jButtonThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemTKActionPerformed
-        JFrame them = new fThemNhanVien(maNV);
+        JFrame them = new fThemTaiKhoan();
         them.setVisible(true);
     }//GEN-LAST:event_jButtonThemTKActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTableTaiKhoan.getModel();
         int row = jTableTaiKhoan.getSelectedRow();
-        
-        JFrame sua = new fSuaTaiKhoan(model.getValueAt(row,1).toString(), model.getValueAt(row,2).toString());
+
+        JFrame sua = new fSuaTaiKhoan(model.getValueAt(row, 1).toString(), model.getValueAt(row, 2).toString());
         sua.setVisible(true);
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        build();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,38 +290,42 @@ public class fTaiKhoan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fTaiKhoan("NV12").setVisible(true);
+                new fTaiKhoan().setVisible(true);
             }
         });
     }
-     public void build()
-    {
-        dstk = DuLieuMau;
+
+    public void build() {
+        dstk = model.DAO.daoTaiKhoan.getInstance().getListTaiKhoan();
         this.count = this.dstk.size();
         jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
         ArrayList<TaiKhoan> table = model.DAO.daoTaiKhoan.getInstance().getListTaiKhoan();
         listDanhSachNhanVien(table);
-        
+
     }
-    public void listDanhSachNhanVien(ArrayList<TaiKhoan> arr){
+
+    public void listDanhSachNhanVien(ArrayList<TaiKhoan> arr) {
         DefaultTableModel model = (DefaultTableModel) jTableTaiKhoan.getModel();
         while (jTableTaiKhoan.getRowCount() > 0) {
             model.removeRow(0);
         }
-        int i=1;
+        int i = 1;
         for (TaiKhoan item : arr) {
-            model.addRow(new String[] {
-                String.valueOf(i), item.getUsername(),item.getPassword(),item.getMaNV(), item.getMaQuyen() 
-            });
-            i++;
-            
-        }        
+            NhanVien nv = daoNhanVien.getInstance().getNVByID(item.getMaNV());
+            if (nv.getTrangThai() == 0) {
+                model.addRow(new String[]{
+                    String.valueOf(i), item.getUsername(), item.getPassword(), item.getMaNV(), item.getMaQuyen()
+                });
+                i++;
+            }
+
+        }
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonThemTK;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

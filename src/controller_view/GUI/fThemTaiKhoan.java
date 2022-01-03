@@ -6,6 +6,7 @@
 package controller_view.GUI;
 
 import model.DTO.NhanVien;
+import model.DTO.TaiKhoan;
 import model.DTO.Quyen;
 import model.DAO.daoTaiKhoan;
 import model.DAO.daoQuyen;
@@ -28,49 +29,42 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import javax.swing.table.DefaultTableModel;
+
 public class fThemTaiKhoan extends javax.swing.JFrame {
+
     String nameImg;
-    String maNV;
-    
+    String username, pass;
+
     /**
      * Creates new form fThemSanPham
      */
-
-    public fThemTaiKhoan(String id){
-        initComponents();
-        this.maNV=id;
-        setIcon();
-        showComboboxQuyen();
-        showComboboxNhanVien();
-    }
     public fThemTaiKhoan() {
         initComponents();
-        this.txtTenTk.setText(model.DAO.daoNhanVien.getInstance().getNextID());
         setIcon();
         showComboboxQuyen();
         showComboboxNhanVien();
     }
+
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }
-    
+
     public void showComboboxQuyen() {
         ArrayList<Quyen> dsq = daoQuyen.getInstance().getListQuyen();
         comboboxQuyen.removeAllItems();
-        for(Quyen q : dsq) {
+        for (Quyen q : dsq) {
             comboboxQuyen.addItem(q.getMaQuyen() + " " + q.getTenQuyen());
         }
     }
-    
-     public void showComboboxNhanVien() {
+
+    public void showComboboxNhanVien() {
         ArrayList<NhanVien> dsnv = daoNhanVien.getInstance().getListNhanVien();
         comboboxNv.removeAllItems();
-        for(NhanVien nv : dsnv) {
+        for (NhanVien nv : dsnv) {
             comboboxNv.addItem(nv.getMaNV() + " " + nv.getTenNV());
         }
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -138,7 +132,7 @@ public class fThemTaiKhoan extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Thêm nhân viên");
+        jLabel7.setText("Thêm tài khoản");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,7 +140,7 @@ public class fThemTaiKhoan extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -204,9 +198,8 @@ public class fThemTaiKhoan extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                             .addComponent(txtTenTk)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(comboboxQuyen, javax.swing.GroupLayout.Alignment.LEADING, 0, 172, Short.MAX_VALUE)
-                                .addComponent(comboboxNv, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(comboboxQuyen, 0, 172, Short.MAX_VALUE)
+                            .addComponent(comboboxNv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -278,7 +271,7 @@ public class fThemTaiKhoan extends javax.swing.JFrame {
         String matKhau = txtMatKhau.getText();
         String maNv = comboboxNv.getSelectedItem().toString().split(" ")[0];
         String quyen = comboboxQuyen.getSelectedItem().toString().split(" ")[0];
-        daoTaiKhoan.getInstance().insertTaiKhoan(tenTk, matKhau, maNv,  quyen);
+        daoTaiKhoan.getInstance().insertTaiKhoan(tenTk, matKhau, maNv, quyen);
     }//GEN-LAST:event_jButtonThemNVmoiMouseClicked
 
     private void jButtonThemNVmoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemNVmoiActionPerformed
@@ -286,7 +279,7 @@ public class fThemTaiKhoan extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonThemNVmoiActionPerformed
 
     private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButtonHuyActionPerformed
 
     private void txtTenTkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenTkActionPerformed
@@ -297,38 +290,7 @@ public class fThemTaiKhoan extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fThemTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fThemTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fThemTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fThemTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new fThemTaiKhoan("NV12").setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

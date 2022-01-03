@@ -255,7 +255,7 @@ public class fDangNhap extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
                 return; //thoát luôn
             }
-            JFrame TrangChu = new fHome(tk.getMaNV()); //khởi tạo trang chủ
+            JFrame TrangChu = new fHome(tk.getMaNV(), tk); //khởi tạo trang chủ
             TrangChu.setVisible(true); //hiện trang chủ
             this.setVisible(false);
             dispose();

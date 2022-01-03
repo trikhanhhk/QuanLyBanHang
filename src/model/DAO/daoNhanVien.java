@@ -91,6 +91,26 @@ public class daoNhanVien {
         }
     }
     
+    public void updateNV (String MaNV, String TenNV, String NgaySinh, String DiaChi, String SDT) {
+        String query = "UPDATE `nhanvien` SET TenNV ='" + TenNV + "', NgaySinh ='"+NgaySinh+"', DiaChi='" + DiaChi + "', SDT='" +SDT+ "' where MaNV='" + MaNV + "'";
+        System.out.println(query);
+        ArrayList<Object> arr = new ArrayList<>();
+        ConnectDB.getIntance().open();
+        int check = ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
+        if(check==1) {
+        JOptionPane.showMessageDialog(null,
+                "Sửa thông tin nhân viên thành công",
+                "Thông báo",
+                JOptionPane.INFORMATION_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(null,
+                "Đã có lỗi xảy ra",
+                "Lỗi",
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
     public NhanVien getNVByID(String ID) {
         NhanVien result = null;
         String query = "select * from nhanvien where MaNV = '" + ID + "'";

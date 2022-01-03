@@ -133,16 +133,10 @@ public class daoTaiKhoan {
         public void update(String username, String pass, String maNV, String maQuyen) {
         String query = "Update taikhoan Set MatKhau='" + pass + "',MaNV='" + maNV
                 + "',MaQuyen='" + maQuyen + "' where TenTaiKhoan='" + username + "'";
-        if(this.getTaiKhoan(username, pass)!=null) {
-            JOptionPane.showMessageDialog(null,
-                    "Tài khoản đã tồn tại",
-                    "Lỗi",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         ArrayList<Object> arr = new ArrayList<>();
         ConnectDB.getIntance().open();
-        ConnectDB.getIntance().excuteQuery(query, arr);
+        ConnectDB.getIntance().excuteUpdate(query, arr);
+        ConnectDB.getIntance().close();
         JOptionPane.showMessageDialog(null, "Đã sửa tài khoản " + username + " thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
 

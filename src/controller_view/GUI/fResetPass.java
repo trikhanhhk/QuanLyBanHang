@@ -6,6 +6,7 @@
 package controller_view.GUI;
 import java.awt.Toolkit;
 import java.lang.*;
+import model.DTO.TaiKhoan;
 
 /**
  *
@@ -16,16 +17,18 @@ public class fResetPass extends javax.swing.JFrame {
     /**
      * Creates new form fResetPass
      */
-    public String maNV;
+    public TaiKhoan tk;
     public fResetPass() {
         initComponents();
         setIcon();
     }
-    public fResetPass(String maNV)
+    public fResetPass(TaiKhoan taiKhoan)
     {
-        this.maNV=maNV;
+        this.tk=taiKhoan;
         initComponents();
         setIcon();
+        jTextFieldTaiKhoan.setText(taiKhoan.getUsername());
+        jTextFieldTaiKhoan.setEditable(false);
     }
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
@@ -205,7 +208,7 @@ public class fResetPass extends javax.swing.JFrame {
         String matkhau = jPasswordFieldMatKhauCu.getText();
         String matkhaumoi=jPasswordFieldMatKhauMoi.getText();
         String nhaplaimk=jPasswordFieldNhaplaiMK.getText();
-        int flag = model.DAO.daoTaiKhoan.getInstance().KiemTraTaiKhoan(taikhoan, matkhau,matkhaumoi,nhaplaimk, this.maNV);
+        int flag = model.DAO.daoTaiKhoan.getInstance().KiemTraTaiKhoan(taikhoan, matkhau,matkhaumoi,nhaplaimk, this.tk.getMaNV());
         if(flag==1)//Kiem tra neu tk bằng null thì retrun 1
         {
             jTextFieldTaiKhoan.setText("");
@@ -289,7 +292,7 @@ public class fResetPass extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fResetPass("1").setVisible(true);
+//                new fResetPass("1").setVisible(true);
                 //tienxd
                 
             }

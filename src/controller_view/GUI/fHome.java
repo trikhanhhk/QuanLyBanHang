@@ -31,14 +31,16 @@ public class fHome extends javax.swing.JFrame {
      * Creates new form fHome
      */
     public String maNV;
+    public TaiKhoan tk;
    
 
     public fHome() {
 
     }
 
-    public fHome(String maNV) {
+    public fHome(String maNV, TaiKhoan tk) {
         this.maNV = maNV;
+        this.tk = tk;
         //this.PanelBaoCaoMau = DataBaoCao;
         initComponents();
         this.setSize(1100, 800); //kích thức home
@@ -843,7 +845,7 @@ public class fHome extends javax.swing.JFrame {
         }
         
         if("Đổi mật khẩu".equals(item)) {
-            JFrame doipass = new fResetPass(this.maNV);
+            JFrame doipass = new fResetPass(this.tk);
             doipass.setVisible(true);
         }
     }//GEN-LAST:event_jComboBoxNhanVienActionPerformed
@@ -878,7 +880,7 @@ public class fHome extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fHome("NV4").setVisible(true);
+//                new fHome("NV4").setVisible(true);
 
             }
         });
@@ -893,13 +895,14 @@ public class fHome extends javax.swing.JFrame {
     public void NhanVienDangNhap() {
         jComboBoxNhanVien.removeAllItems();
         if (!maNV.equals("")) {
-            TaiKhoan tk = model.DAO.daoTaiKhoan.getInstance().getTaiKhoan(maNV);
-            NhanVien nv = model.DAO.daoTaiKhoan.getInstance().getNhanVien(tk.getMaNV());
+//            TaiKhoan tk = model.DAO.daoTaiKhoan.getInstance().getTaiKhoan(maNV);
+         
+            NhanVien nv = model.DAO.daoTaiKhoan.getInstance().getNhanVien(this.tk.getMaNV());
             jComboBoxNhanVien.addItem(nv.getTenNV());
             jComboBoxNhanVien.addItem("Thông tin");
             jComboBoxNhanVien.addItem("Đổi mật khẩu");
             jComboBoxNhanVien.addItem("Thoát");
-            if(!tk.getMaQuyen().equals("Q1")) { // kiểm tra quyền
+            if(!this.tk.getMaQuyen().equals("Q1")) { // kiểm tra quyền
                 panelTaiKhoan.setVisible(false);
                 panelThongKe.setVisible(false);
                 panelKhuyenMai.setVisible(false);

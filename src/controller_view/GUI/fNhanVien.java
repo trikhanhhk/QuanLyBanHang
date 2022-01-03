@@ -182,6 +182,11 @@ public class fNhanVien extends javax.swing.JFrame {
         });
 
         jButton2.setText("Sửa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Làm mới");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -458,9 +463,25 @@ public class fNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+        int selectedRowIndex = jTableNhanVien.getSelectedRow();
+        String id = jTableNhanVien.getValueAt(selectedRowIndex, 0).toString();
         listDanhSachNhanVien(daoNhanVien.getInstance().get20NhanVien(daoNhanVien.getInstance().getListNhanVien(), Trang));
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int selectedRowIndex = jTableNhanVien.getSelectedRow();
+        if(selectedRowIndex >=0) {
+            String id = jTableNhanVien.getValueAt(selectedRowIndex, 0).toString();
+            JFrame suaNv = new fSuaNhanVien(id);
+            suaNv.setVisible(true);
+        } else {
+             JOptionPane.showMessageDialog(this,
+                "Vui lòng chọn một nhân viên",
+                "Thông báo",
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -520,7 +541,7 @@ public class fNhanVien extends javax.swing.JFrame {
         }
         arr.stream().forEach((item) -> {
             
-            model.addRow(new Object[]{item.getMaNV(),item.getTenNV(),item.getSDT(), item.getNgaySinh(), item.getTrangThai()});
+            model.addRow(new Object[]{item.getMaNV(),item.getTenNV(),item.getSDT(), item.getNgaySinh(), item.getTrangThai()==1 ? "Cấm" : "Hoạt động"});
         });
         
     }

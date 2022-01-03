@@ -33,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
 import model.DTO.SanPham;
 
 public class fSuaSP extends javax.swing.JFrame {
-    
+
     String nameImg;
     String maSp;
 
@@ -50,7 +50,7 @@ public class fSuaSP extends javax.swing.JFrame {
         showComboboxTrangThai();
         this.txtMaSP.setEditable(false);
     }
-    
+
     public fSuaSP() {
         initComponents();
         setIcon();
@@ -59,13 +59,13 @@ public class fSuaSP extends javax.swing.JFrame {
         showComboboxTrangThai();
         this.txtMaSP.setEditable(false);
     }
-    
+
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon/Logo2.png")));
     }
-    
+
     private ImageIcon getIcon(String filename) {
-        return new ImageIcon(getClass().getResource(filename));
+        return new ImageIcon(getClass().getResource("/Image/ProductImages/" + filename));
     }
 
     // Methods
@@ -76,22 +76,32 @@ public class fSuaSP extends javax.swing.JFrame {
             jComboBoxLoaiSanPham.addItem(arr.get(i).getTenLSP());
         }
     }
-    
+
     private void setData() {
-        SanPham sp = daoSanPham.getInstance().getSanPham(this.maSp);
-//        String nameImage = sp.getFileNameHinhAnh();
-//        jLabelHinhAnh.setIcon(getIcon(nameImage));
-        txtDonGia.setText(String.valueOf(sp.getDonGia()));
-        txtMaSP.setText(this.maSp);
-        txtTenSP.setText(sp.getTenSP());
+        try {
+            SanPham sp = daoSanPham.getInstance().getSanPham(this.maSp);
+            String nameImage = sp.getFileNameHinhAnh();
+            int width = jLabelHinhAnh.getWidth();
+            int height = jLabelHinhAnh.getHeight();
+            File imgFile = new File("C:/Users/trikh/OneDrive/Documents/Project/ManagerStore/QuanLyBanHang/src/Image/ProductImages/" + nameImage);
+            BufferedImage img = ImageIO.read(imgFile);
+            ImageIcon icn = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(jLabelHinhAnh.getWidth(), jLabelHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+            jLabelHinhAnh.setIcon(icn);
+            
+            txtDonGia.setText(String.valueOf(sp.getDonGia()));
+            txtMaSP.setText(this.maSp);
+            txtTenSP.setText(sp.getTenSP());
+        } catch (IOException ex) {
+            Logger.getLogger(fSuaSP.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     public void showComboboxTrangThai() {
         comboboxTrangThai.removeAllItems();
         comboboxTrangThai.addItem("Hiện");
         comboboxTrangThai.addItem("Ẩn");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -355,7 +365,7 @@ String pathImg;
             String MaLSP = daoLoaiSanPham.getInstance().getIDLoaiSanPham(TenLoaiSP).getMaLSP();
             String TenSP = txtTenSP.getText();
             float DonGia = Float.parseFloat(txtDonGia.getText());
-            String HinhAnh = System.currentTimeMillis()+ "_" + ((Math.random()*9+1)*100000) +"_" + this.nameImg;
+            String HinhAnh = System.currentTimeMillis() + "_" + ((Math.random() * 9 + 1) * 100000) + "_" + this.nameImg;
             in = new FileInputStream(this.pathImg.replace("\\", "/"));
 //            System.out.println(System.currentTimeMillis());
             ou = new FileOutputStream("C:\\Users\\trikh\\OneDrive\\Documents\\Project\\ManagerStore\\QuanLyBanHang\\src\\Image\\ProductImages\\" + HinhAnh);
