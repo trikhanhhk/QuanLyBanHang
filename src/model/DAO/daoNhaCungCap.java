@@ -157,7 +157,7 @@ public class daoNhaCungCap {
     }
 
     //Update thông tin nguồn cung cấp
-    public boolean UpdateNhaCungCap(String maNCC, String tenNCC, String diaChi, String SDT, String Fax, String maNV) {
+    public boolean UpdateNhaCungCap(String maNCC, String tenNCC, String diaChi, String SDT, String Fax) {
         if ("".equals(tenNCC) || "".equals(diaChi) || "".equals(SDT) || "".equals(Fax)) {
             JOptionPane.showMessageDialog(null,
                     "Chưa điền đầy đủ thông tin",
@@ -166,6 +166,7 @@ public class daoNhaCungCap {
             return false;
         }
         String query = "UPDATE `nhacungcap` SET `TenNCC`='" + tenNCC + "',`DiaChi`='" + diaChi + "',`SDT`='" + SDT + "',`FAX`='" + Fax + "' WHERE `MaNCC`='" + maNCC + "'";
+        System.out.println(query);
         //System.out.println(query);
         ArrayList<Object> arr = new ArrayList<>();
         ConnectDB.getIntance().open();
@@ -177,154 +178,6 @@ public class daoNhaCungCap {
                 JOptionPane.INFORMATION_MESSAGE);
         return true;
     }
-    public boolean HuyNhaCungCap(int maNCC, int maNV)
-    {
-        String query = "UPDATE `nhacungcap` SET `id_exist`=0 WHERE `MaNCC`=" + maNCC;
-        //System.out.println(query);
-        ArrayList<Object> arr = new ArrayList<>();
-        ConnectDB.getIntance().open();
-        ConnectDB.getIntance().excuteUpdate(query, arr);
-        ConnectDB.getIntance().close();
-        JOptionPane.showMessageDialog(null,
-                "Xóa thông tin nhà cung cấp thành công",
-                "Thông báo",
-                JOptionPane.INFORMATION_MESSAGE);
-        //DAO.daoThongBao.getInstance().insertThongBao("[Nhà cung cấp] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).ten_nv + " đã xóa thông tin của nhà cung cấp vào lúc " + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
-        return true;
-    }
-
-    //Tìm số lần nhập kho của 1 nhà cung cấp
-    public int GetSoLanNhapKho(int maNCC) {
-        int SoLanNhapKho = 0;
-        String query = "SELECT * FROM `Chi_tiet_phieu_nhap` WHERE MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            ConnectDB.getIntance().open();
-            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                SoLanNhapKho++;
-            }
-            ConnectDB.getIntance().close();
-        } catch (SQLException ex) {
-            ConnectDB.getIntance().displayError(ex);
-        }
-        return SoLanNhapKho;
-
-    }
-
-    //Tìm số lần xuất kho của một nhà cung cấp
-    public int GetSoLanXuatKho(int maNCC) {
-        int SoLanXuatKho = 0;
-        String query = "SELECT `phieu_xuat_kho`.`id_xuat_kho`, `lo_san_pham`.`id_phieu_nhap`,`chi_tiet_phieu_nhap`.`MaNCC` "
-                + "FROM `phieu_xuat_kho`,`lo_san_pham`,`chi_tiet_phieu_nhap` "
-                + "WHERE `phieu_xuat_kho`.`id_lo_sp`=`lo_san_pham`.`id_lo_sp` and `chi_tiet_phieu_nhap`.`id_phieu_nhap`=`lo_san_pham`.`id_phieu_nhap` and MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            ConnectDB.getIntance().open();
-            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                ++SoLanXuatKho;
-            }
-            ConnectDB.getIntance().close();
-        } catch (SQLException ex) {
-            ConnectDB.getIntance().displayError(ex);
-        }
-
-        return SoLanXuatKho;
-
-    }
-    public int GetSoLanTraKho(int maNCC)
-    {
-        int SoLanTraKho = 0;
-        String query = "SELECT `phieu_tra_kho`.`id_phieu_tra_kho`, `lo_san_pham`.`id_phieu_nhap`,`chi_tiet_phieu_nhap`.`MaNCC` "
-                + "FROM `phieu_tra_kho`,`lo_san_pham`,`chi_tiet_phieu_nhap` "
-                + "WHERE `phieu_tra_kho`.`id_lo_sp`=`lo_san_pham`.`id_lo_sp` and `chi_tiet_phieu_nhap`.`id_phieu_nhap`=`lo_san_pham`.`id_phieu_nhap` and MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            ConnectDB.getIntance().open();
-            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                ++SoLanTraKho;
-            }
-            ConnectDB.getIntance().close();
-        } catch (SQLException ex) {
-            ConnectDB.getIntance().displayError(ex);
-        }
-
-        return SoLanTraKho;
-    }
-    //Tìm số lượng lô nhập kho của một nhà cung cấp
-    public int GetSoLuongTraKho(int maNCC)
-    {
-        int SoLuongXuatKho = 0;
-        String query = "SELECT * "
-                + "FROM `phieu_tra_kho`,`lo_san_pham`,`chi_tiet_phieu_nhap` "
-                + "WHERE `phieu_tra_kho`.`id_lo_sp`=`lo_san_pham`.`id_lo_sp` and `chi_tiet_phieu_nhap`.`id_phieu_nhap`=`lo_san_pham`.`id_phieu_nhap` and MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            ConnectDB.getIntance().open();
-            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                SoLuongXuatKho = SoLuongXuatKho + rs.getInt("sl_san_pham");
-            }
-            ConnectDB.getIntance().close();
-        } catch (SQLException ex) {
-            ConnectDB.getIntance().displayError(ex);
-        }
-
-        return SoLuongXuatKho;
-    }
-    public int GetSoLuongNhapKho(int maNCC) {
-        int SoLuongNhapKho = 0;
-        String query = "SELECT * FROM `Chi_tiet_phieu_nhap` WHERE MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            ConnectDB.getIntance().open();
-            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                SoLuongNhapKho = SoLuongNhapKho + rs.getInt("so_luong_lo");
-            }
-            ConnectDB.getIntance().close();
-        } catch (SQLException ex) {
-            ConnectDB.getIntance().displayError(ex);
-        }
-        return SoLuongNhapKho;
-    }
-
-    //Tìm số lượng lô xuất kho của một nhà cung cấp
-    public int GetSoLuongXuatKho(int maNCC) {
-        int SoLuongXuatKho = 0;
-        String query = "SELECT * "
-                + "FROM `phieu_xuat_kho`,`lo_san_pham`,`chi_tiet_phieu_nhap` "
-                + "WHERE `phieu_xuat_kho`.`id_lo_sp`=`lo_san_pham`.`id_lo_sp` and `chi_tiet_phieu_nhap`.`id_phieu_nhap`=`lo_san_pham`.`id_phieu_nhap` and MaNCC='" + maNCC + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-
-        try {
-            ConnectDB.getIntance().open();
-            ResultSet rs = ConnectDB.getIntance().excuteQuery(query, arr);
-
-            while (rs.next()) {
-                SoLuongXuatKho = SoLuongXuatKho + rs.getInt("sl_san_pham");
-            }
-            ConnectDB.getIntance().close();
-        } catch (SQLException ex) {
-            ConnectDB.getIntance().displayError(ex);
-        }
-
-        return SoLuongXuatKho;
-
-    }
-
     //Tìm kiếm trong bảng nguồn cung cấp (mới)
     public ArrayList<NhaCungCap> FindListNhaCungCap(ArrayList<NhaCungCap> DuLieuMau, String ValToSearch) {
         ArrayList<NhaCungCap> result = new ArrayList<>();

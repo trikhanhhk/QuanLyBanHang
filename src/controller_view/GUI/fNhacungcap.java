@@ -127,14 +127,6 @@ public class fNhacungcap extends javax.swing.JFrame {
         jButtonLamMoi = new javax.swing.JButton();
         jLabelKetQua = new javax.swing.JLabel();
         jButtonSua = new javax.swing.JButton();
-        jButtonHuy = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jButtonNhoMax = new javax.swing.JButton();
-        jButtonNho = new javax.swing.JButton();
-        jLabelTrang = new javax.swing.JLabel();
-        jButtonLon = new javax.swing.JButton();
-        jButtonLonMax = new javax.swing.JButton();
-        jLabelSoTrang = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -280,17 +272,6 @@ public class fNhacungcap extends javax.swing.JFrame {
             }
         });
 
-        jButtonHuy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonHuy.setText("Hủy");
-        ImageIcon imgHuy = new ImageIcon(getClass().getResource("/icon/icons8-waste-48.png"));
-        ImageIcon ImgHuy = new ImageIcon(imgHuy.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
-        jButtonHuy.setIcon(ImgHuy);
-        jButtonHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonHuyActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -307,8 +288,6 @@ public class fNhacungcap extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonHuy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonExcel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,7 +298,7 @@ public class fNhacungcap extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel13Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonExcel, jButtonHuy, jButtonSua, jButtonThem});
+        jPanel13Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonExcel, jButtonSua, jButtonThem});
 
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,7 +308,6 @@ public class fNhacungcap extends javax.swing.JFrame {
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonThem)
                         .addComponent(jButtonSua)
-                        .addComponent(jButtonHuy)
                         .addComponent(jButtonExcel))
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -342,77 +320,6 @@ public class fNhacungcap extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-
-        jButtonNhoMax.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonNhoMax.setText("<<");
-        jButtonNhoMax.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNhoMaxActionPerformed(evt);
-            }
-        });
-
-        jButtonNho.setText("<");
-        jButtonNho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNhoActionPerformed(evt);
-            }
-        });
-
-        jLabelTrang.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabelTrang.setText("jLabel2");
-
-        jButtonLon.setText(">");
-        jButtonLon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLonActionPerformed(evt);
-            }
-        });
-
-        jButtonLonMax.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButtonLonMax.setText(">>");
-        jButtonLonMax.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLonMaxActionPerformed(evt);
-            }
-        });
-
-        jLabelSoTrang.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabelSoTrang.setText("jLabel1");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonNhoMax, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonNho)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelTrang)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonLon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonLonMax)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelSoTrang)
-                .addGap(10, 10, 10))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonNhoMax)
-                    .addComponent(jButtonNho)
-                    .addComponent(jButtonLon)
-                    .addComponent(jButtonLonMax)
-                    .addComponent(jLabelSoTrang)
-                    .addComponent(jLabelTrang))
-                .addGap(10, 10, 10))
-        );
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -421,18 +328,12 @@ public class fNhacungcap extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(329, 329, 329)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -500,12 +401,11 @@ public class fNhacungcap extends javax.swing.JFrame {
             //System.out.print("Nhap dup chuot");
         }
         jButtonSua.setEnabled(true);
-        jButtonHuy.setEnabled(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableNhaCungCapMouseClicked
 
-    
+
     private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
         // TODO add your handling code here:
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -574,48 +474,9 @@ public class fNhacungcap extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTimKiemActionPerformed
 
-    private void jButtonNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoMaxActionPerformed
-        Trang = 1;
-        ArrayList<NhaCungCap> table = model.DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-        listDanhSachNhaCungCap(table);
-        jLabelTrang.setText("1");
-        jLabelSoTrang.setText("1/" + SoTrang);
-    }//GEN-LAST:event_jButtonNhoMaxActionPerformed
-
-    private void jButtonNhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNhoActionPerformed
-        if (Trang > 1) {
-            Trang--;
-            ArrayList<NhaCungCap> table = model.DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-            listDanhSachNhaCungCap(table);
-            jLabelTrang.setText("" + Trang);
-            jLabelSoTrang.setText(Trang + "/" + SoTrang);
-        }
-    }//GEN-LAST:event_jButtonNhoActionPerformed
-
-    private void jButtonLonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonActionPerformed
-        if (Trang < SoTrang) {
-            Trang++;
-            ArrayList<NhaCungCap> table = model.DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-            listDanhSachNhaCungCap(table);
-            jLabelTrang.setText("" + Trang);
-            jLabelSoTrang.setText(Trang + "/" + SoTrang);
-        }
-    }//GEN-LAST:event_jButtonLonActionPerformed
-
-    private void jButtonLonMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLonMaxActionPerformed
-        Trang = SoTrang;
-        ArrayList<NhaCungCap> table = model.DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, Trang);
-        listDanhSachNhaCungCap(table);
-        jLabelTrang.setText("" + SoTrang);
-        jLabelSoTrang.setText(SoTrang + "/" + SoTrang);
-    }//GEN-LAST:event_jButtonLonMaxActionPerformed
-
     private void jButtonLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLamMoiActionPerformed
-        invalidate();
-        validate();
-        repaint();
         DuLieuMau = daoNhaCungCap.getInstance().getListNhaCungCap();
-        build();
+        listDanhSachNhaCungCap(DuLieuMau);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLamMoiActionPerformed
 
@@ -624,7 +485,6 @@ public class fNhacungcap extends javax.swing.JFrame {
             DanhSachNhaCungCap = DuLieuMau;
             FindList();
             jButtonSua.setEnabled(false);
-            jButtonHuy.setEnabled(false);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTimKiemKeyPressed
 
@@ -632,22 +492,15 @@ public class fNhacungcap extends javax.swing.JFrame {
         DanhSachNhaCungCap = DuLieuMau;
         FindList();
         jButtonSua.setEnabled(false);
-        jButtonHuy.setEnabled(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
     private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
         int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
-            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-        // TODO add your handling code here:
+        String id = jTableNhaCungCap.getValueAt(selectedRowIndex, 1).toString();
+        JFrame ncc = new fSuaNCC(id);
+        ncc.setVisible(true);
     }//GEN-LAST:event_jButtonSuaActionPerformed
-
-    private void jButtonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHuyActionPerformed
-         int selectedRowIndex = jTableNhaCungCap.getSelectedRow();
-            int id = jTableNhaCungCap.getValueAt(selectedRowIndex, 0).hashCode();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonHuyActionPerformed
-
 
     /**
      * @param args the command line arguments
@@ -666,7 +519,6 @@ public class fNhacungcap extends javax.swing.JFrame {
 
     public void build() {
         jButtonSua.setEnabled(false);
-        jButtonHuy.setEnabled(false);
         DanhSachNhaCungCap = DuLieuMau;
         this.count = this.DanhSachNhaCungCap.size();
         jLabelKetQua.setText("Có tổng cộng " + count + " kết quả");
@@ -675,8 +527,6 @@ public class fNhacungcap extends javax.swing.JFrame {
         } else {
             SoTrang = count / 20 + 1;
         }
-        jLabelSoTrang.setText("1/" + SoTrang);
-        jLabelTrang.setText("1");
         ArrayList<NhaCungCap> table = model.DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, 1);
         listDanhSachNhaCungCap(table);
     }
@@ -697,8 +547,6 @@ public class fNhacungcap extends javax.swing.JFrame {
             } else {
                 SoTrang = count / 20 + 1;
             }
-            jLabelSoTrang.setText("1/" + SoTrang);
-            jLabelTrang.setText("1");
             ArrayList<NhaCungCap> table = model.DAO.daoNhaCungCap.getInstance().get20NhaCungCap(DanhSachNhaCungCap, 1);
             listDanhSachNhaCungCap(table);
         }
@@ -709,32 +557,34 @@ public class fNhacungcap extends javax.swing.JFrame {
         while (jTableNhaCungCap.getRowCount() > 0) {
             model.removeRow(0);
         }
-        arr.stream().forEach((item) -> {
-//            ImageIcon icon = new ImageIcon(item.hinh_anh);
-            model.addRow(new Object[]{item.getMaNCC(), item.getTenNCC(), item.getDiaChi(), item.getSDT(), item.getFax()});
-        });
+        if (arr.isEmpty() == false) {
+            int stt = 1;
+            for (NhaCungCap ncc : arr) {
+                model.addRow(new String[]{
+                    String.valueOf(stt),
+                    ncc.getMaNCC(),
+                    ncc.getTenNCC(),
+                    ncc.getDiaChi(),
+                    ncc.getSDT(),
+                    ncc.getFax(),}
+                );
+                stt++;
+            }
+        }
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonExcel;
-    private javax.swing.JButton jButtonHuy;
     private javax.swing.JButton jButtonLamMoi;
-    private javax.swing.JButton jButtonLon;
-    private javax.swing.JButton jButtonLonMax;
-    private javax.swing.JButton jButtonNho;
-    private javax.swing.JButton jButtonNhoMax;
     private javax.swing.JButton jButtonSua;
     private javax.swing.JButton jButtonThem;
     private javax.swing.JButton jButtonTimKiem;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelKetQua;
-    private javax.swing.JLabel jLabelSoTrang;
-    private javax.swing.JLabel jLabelTrang;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTableNhaCungCap;
     private javax.swing.JTextField jTextFieldTimKiem;
