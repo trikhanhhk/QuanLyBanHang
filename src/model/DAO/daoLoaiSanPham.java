@@ -134,10 +134,6 @@ public class daoLoaiSanPham {
         ConnectDB.getIntance().open();
         ConnectDB.getIntance().excuteUpdate(query, arr);
         ConnectDB.getIntance().close();
-        JOptionPane.showMessageDialog(null,
-                "Sửa thông tin loại sản phẩm thành công",
-                "Thông báo",
-                JOptionPane.INFORMATION_MESSAGE);
         //DAO.daoThongBao.getInstance().insertThongBao("[Loại sản phẩm] Nhân viên " + DAO.daoTaiKhoan.getInstance().getNhanVien(maNV).getTenNV() + " đã sửa thông tin loại sản phẩm vào lúc" + DAO.DateTimeNow.getIntance().Now, DAO.DateTimeNow.getIntance().Now, 6);
         return true;
     }

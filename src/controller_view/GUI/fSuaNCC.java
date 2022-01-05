@@ -274,6 +274,7 @@ public class fSuaNCC extends javax.swing.JFrame {
         String FAX = jTextFieldFax.getText();
         //String maNCC,String tenNCC, String diaChi, String SDT, String Fax
         model.DAO.daoNhaCungCap.getInstance().UpdateNhaCungCap(maNCC, tenNCC, diaChi, SDT, FAX);
+        this.setVisible(false);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLuuActionPerformed
