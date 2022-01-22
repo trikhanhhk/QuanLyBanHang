@@ -463,8 +463,7 @@ public class fNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int selectedRowIndex = jTableNhanVien.getSelectedRow();
-        String id = jTableNhanVien.getValueAt(selectedRowIndex, 0).toString();
+
         listDanhSachNhanVien(daoNhanVien.getInstance().get20NhanVien(daoNhanVien.getInstance().getListNhanVien(), Trang));
     }//GEN-LAST:event_jButton3ActionPerformed
 

@@ -8,6 +8,7 @@ import model.DTO.KhachHang;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import model.DAO.daoKhachHang;
 
 /**
  *
@@ -188,7 +189,7 @@ txDiaChi.setText(this.KHSua.getDiaChi());
             String tenKH = txTenKH.getText();
             String SDT = txSDT.getText();
             String DiaChi = txDiaChi.getText();
-//            busKhachHang.getInstance().UpdateKhachHang(maKH, tenKH, DiaChi,SDT); khi lam xong chuwcs nang update
+            daoKhachHang.getInstance().UpdateKhachHang(maKH, tenKH, DiaChi,SDT);
 
             JOptionPane.showMessageDialog(this, "Sửa" + maKH + " thành công!");
         }

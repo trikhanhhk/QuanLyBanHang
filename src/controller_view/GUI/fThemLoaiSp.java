@@ -43,6 +43,7 @@ public class fThemLoaiSp extends javax.swing.JFrame {
         initComponents();
         setIcon();
         this.maNV = maNV;
+        this.setTitle("Thêm loại sản phẩm");
     }
 
     private void setIcon() {
