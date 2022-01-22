@@ -124,8 +124,6 @@
                                   <Component id="jButtonSua" linkSize="2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButtonHuy" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButtonExcel" linkSize="2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jTextFieldTimKiem" min="-2" pref="260" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -147,7 +145,6 @@
                                   <Component id="jButtonThem" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonSua" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonHuy" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jTextFieldTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -269,17 +266,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldTimKiemActionPerformed"/>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldTimKiemKeyPressed"/>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldTimKiemKeyReleased"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="jButtonExcel">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="ImageIcon img = new ImageIcon(getClass().getResource(&quot;/icon/icons8-microsoft-excel-40.png&quot;));&#xa;ImageIcon Img = new ImageIcon(img.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));&#xa;jButtonExcel.setIcon(Img);">
-                      <Font name="Tahoma" size="14" style="0"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Excel"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcelActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonTimKiem">

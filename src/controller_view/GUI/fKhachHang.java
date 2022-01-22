@@ -122,7 +122,6 @@ public class fKhachHang extends javax.swing.JFrame {
         jTableKhachHang = new javax.swing.JTable(model);
         jButtonThem = new javax.swing.JButton();
         jTextFieldTimKiem = new javax.swing.JTextField();
-        jButtonExcel = new javax.swing.JButton();
         jButtonTimKiem = new javax.swing.JButton();
         jButtonLamMoi = new javax.swing.JButton();
         jLabelKetQua = new javax.swing.JLabel();
@@ -234,17 +233,6 @@ public class fKhachHang extends javax.swing.JFrame {
             }
         });
 
-        jButtonExcel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ImageIcon img = new ImageIcon(getClass().getResource("/icon/icons8-microsoft-excel-40.png"));
-        ImageIcon Img = new ImageIcon(img.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
-        jButtonExcel.setIcon(Img);
-        jButtonExcel.setText("Excel");
-        jButtonExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcelActionPerformed(evt);
-            }
-        });
-
         jButtonTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ImageIcon imgTimKiem = new ImageIcon(getClass().getResource("/icon/icons8-search.png"));
         ImageIcon ImgTimKiem = new ImageIcon(imgTimKiem.getImage().getScaledInstance(19, 19, Image.SCALE_SMOOTH));
@@ -309,8 +297,6 @@ public class fKhachHang extends javax.swing.JFrame {
                         .addComponent(jButtonSua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonHuy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonExcel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,7 +306,7 @@ public class fKhachHang extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel13Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonExcel, jButtonHuy, jButtonSua, jButtonThem});
+        jPanel13Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonHuy, jButtonSua, jButtonThem});
 
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,8 +316,7 @@ public class fKhachHang extends javax.swing.JFrame {
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonThem)
                         .addComponent(jButtonSua)
-                        .addComponent(jButtonHuy)
-                        .addComponent(jButtonExcel))
+                        .addComponent(jButtonHuy))
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonLamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -507,10 +492,6 @@ public class fKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableKhachHangMouseClicked
 
 
-    private void jButtonExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonExcelActionPerformed
-
     private void jTextFieldTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTimKiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTimKiemActionPerformed
@@ -671,7 +652,6 @@ public class fKhachHang extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonExcel;
     private javax.swing.JButton jButtonHuy;
     private javax.swing.JButton jButtonLamMoi;
     private javax.swing.JButton jButtonLon;
